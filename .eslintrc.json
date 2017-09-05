@@ -7,7 +7,6 @@
       "node": true,
       "mocha": true
     },
-    "consistent-return": 0,
     "rules": {
       "no-param-reassign": 0,
       "max-len": 0,
