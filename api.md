@@ -1,6 +1,7 @@
 # AWESOME DOCUMENTATION AND TESTING FOR AN AMAZING SERVER
 ## REST API v1
 > a simple RESTful API for a database with collections of your choosing.
+- Starting with the basic Food database example which Ben demonstrated in his [lecture](https://youtu.be/otSW2ZpBa2U).
 
 ## ROUTES
 > routes that use the following HTTP verbs: GET, PUT, POST, and DELETE.
