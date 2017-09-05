@@ -1,13 +1,14 @@
 # AWESOME DOCUMENTATION AND TESTING FOR AN AMAZING SERVER
-## REST API v1
+## REST API v1 OVERVIEW
 > a simple RESTful API for a database with collections of your choosing.
+
 - Starting with the basic Food database example which Ben demonstrated in his [lecture](https://youtu.be/otSW2ZpBa2U).
 
 ## ROUTES
 > routes that use the following HTTP verbs: GET, PUT, POST, and DELETE.
 
 1. GET - example route
-  - ROUTE `GET /someStuff`
+  - ROUTE `GET /something/from/:theDatabaseCollection`
   - RESPONSE `STATUS 200 OK`
   ```json
   {
@@ -35,11 +36,11 @@
 
 2. PUT - example route and JSON data structure
 3. POST - example route and JSON data structure
-  - ROUTE: `POST /someStuff`
+  - ROUTE: `POST /something/to/:theDatabaseCollection`
   - PARAMETERS:
   - OPTIONAL PARAMETERS
   - EXAMPLE INPUT
-  - REPONSE
+  - REPONSE STATUS 201 Created
 
 
 4. DELETE - example route (authentication?) and JSON data structure
