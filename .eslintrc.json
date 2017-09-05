@@ -4,6 +4,7 @@
         "import"
     ],
     "env": {
+      "node": true,
       "mocha": true
     },
     "consistent-return": 0,
