@@ -1,16 +1,46 @@
-# STUFF
+# AWESOME DOCUMENTATION AND TESTING FOR AN AMAZING SERVER
+## REST API v1
 > a simple RESTful API for a database with collections of your choosing.
 
-1. Amazing
-2. Awesome
-3. Fantastic
-
-## Amazing
+## ROUTES
 > routes that use the following HTTP verbs: GET, PUT, POST, and DELETE.
 
 1. GET - example route
+  - ROUTE `GET /someStuff`
+  - RESPONSE `STATUS 200 OK`
+  ```json
+  {
+    "Key1": "Value",
+    "Key2": "Value",
+    "KeyObject1": {
+      "Key": "Value",
+      "Key": "Value",
+      "Key": "Value"
+    },
+    "KeyObject2": {
+      "Key": "Value",
+      "Key": "Value",
+      "Key": "Value"
+    },
+    "KeyArray": [
+      {
+      "Key": "Value",
+      "Key": "Value",
+      "Key": "Value"
+      }
+    ]
+  }
+  ```
+
 2. PUT - example route and JSON data structure
 3. POST - example route and JSON data structure
+  - ROUTE: `POST /someStuff`
+  - PARAMETERS:
+  - OPTIONAL PARAMETERS
+  - EXAMPLE INPUT
+  - REPONSE
+
+
 4. DELETE - example route (authentication?) and JSON data structure
 
 ## Awesome
