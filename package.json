@@ -1,0 +1,19 @@
+{
+  "name": "server-testing",
+  "version": "1.0.0",
+  "description": "TDD",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha *.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mixelpixel/Server-Testing.git"
+  },
+  "author": "Patrick Kennedy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mixelpixel/Server-Testing/issues"
+  },
+  "homepage": "https://github.com/mixelpixel/Server-Testing#readme"
+}
