@@ -11,6 +11,8 @@ mongoose.connect('mongodb://localhost/test', { useMongoClient: true }, (err) => 
   console.log('DUDE! You are like totally connected to the TEST DataBase, man!');
 });
 
+mongoose.models = {};
+mongoose.modelSchemas = {};
 
 // const chai, { expect } = require('chai'); // ~~~> Linter unhappy ?
 const expect = chai.expect;
