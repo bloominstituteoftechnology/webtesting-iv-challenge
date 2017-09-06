@@ -9,7 +9,9 @@
 1. Starting with the basic Food database example which Ben demonstrated in his [lecture](https://youtu.be/otSW2ZpBa2U).
 
 ## TESTING
-> at least one test written for each route.  Write your tests BEFORE you write the actual routes.
+> at least one test written for each route.
+
+> Write your tests BEFORE you write the actual routes.
 
 1. mocha, chai sinon
   - set up for `npm run watch`
@@ -17,6 +19,10 @@
   ```js
   mongoose.models = {};
   mongoose.modelSchemas = {};
+  ```
+  - also configured for mongoose vs. Promises
+  ```js
+  mongoose.Promise = global.Promise;
   ```
 
 2. configure with jest?
@@ -29,20 +35,35 @@
 ## ROUTES
 > routes that use the following HTTP verbs: GET, PUT, POST, and DELETE.
 
-### GET /food
+***
+# /food
+
+### GET - example route and returned data structure
 - `curl http://localhost:8080/food`
-- RESPONSE `STATUS 200 OK`
-```json
-[]
+- RESPONSE `STATUS 200 OK` https://http.cat/200
+- RETURNs an Array of foods
+```js
+[
+  {
+    "_id":"59b073a6d33f9f7d3d49fb9f",
+    "name":"Hot Dog",
+    "__v":0
+  },
+  {
+    "_id":"59b07931df08da801d606731",
+    "name":"Pizza",
+    "__v":0}
+]
 ```
 
 ### PUT - example route and JSON data structure
-### POST - example route and JSON data structure
+### POST /food
+  - `curl -X POST -H "Content-Type: application/json" -d '{"name":"Hot Dog"}' localhost:8080/food`
   - ROUTE: `POST /something/to/:theDatabaseCollection`
-  - PARAMETERS:
-  - OPTIONAL PARAMETERS
-  - EXAMPLE INPUT
-  - REPONSE `STATUS 201 Created`
+  - PARAMETERS: {name: "food item"}
+  - OPTIONAL PARAMETERS: none
+  - EXAMPLE INPUT: {"name":"Hot Dog"}
+  - REPONSE `STATUS 201 Created` https://http.cat/201
 
 
 ### DELETE - example route (authentication?) and JSON data structure

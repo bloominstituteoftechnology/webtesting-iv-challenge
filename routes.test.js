@@ -54,7 +54,7 @@ describe('/food', () => {
         .send(food)
         .end((err, res) => {
           if (err) return console.log('Like your head POST-Hume\'s Guillotine\n', err.response.error);
-          expect(res.status).to.equal(200);
+          expect(res.status).to.equal(201); // https://http.cat/201
           expect(res.body.name).to.equal('Pizza');
           done();
         });
