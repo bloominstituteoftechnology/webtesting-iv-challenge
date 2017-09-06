@@ -4,7 +4,8 @@
   "description": "TDD",
   "main": "app.js",
   "scripts": {
-    "test": "eslint *.js && mocha -R nyan *.test.js"
+    "test": "eslint *.js && mocha -R nyan *.test.js",
+    "watch": "npm test -- --watch"
   },
   "repository": {
     "type": "git",
