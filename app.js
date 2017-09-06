@@ -8,6 +8,7 @@ const server = require('./server');
 use `openUri()` instead, or set the `useMongoClient` option if using `connect()`
 or `createConnection()`.
 See http://mongoosejs.com/docs/connections.html#use-mongo-client
+                                             vvvvvvvvvvvvvvvvvvvvvvvv
 */
 mongoose.connect('mongodb://localhost/food', { useMongoClient: true }, (err) => {
   if (err) return console.log('\nyoYOyo-yo!!! WTF, yo??????\n', err);
