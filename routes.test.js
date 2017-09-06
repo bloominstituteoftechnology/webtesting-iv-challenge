@@ -32,7 +32,7 @@ describe('/food', () => {
       chai.request(server)
         .get('/food')
         .end((err, res) => {
-          if (err) return console.log('Ummm, Hume\'s Guillotine?\n', err.response.error);
+          if (err) return console.log('Ummm, go GET Hume\'s Guillotine?\n', err.response.error);
           expect(res.status).to.equal(200);
           expect(Array.isArray(res.body)).to.equal(true);
           expect(res.body.length).to.equal(0);
@@ -51,7 +51,7 @@ describe('/food', () => {
         .post('/food')
         .send(food)
         .end((err, res) => {
-          if (err) return console.log('Ummm, Hume\'s Guillotine?\n', err.response.error);
+          if (err) return console.log('Like your head POST-Hume\'s Guillotine\n', err.response.error);
           expect(res.status).to.equal(200);
           expect(res.body.name).to.equal('Pizza');
           done();
