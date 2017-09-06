@@ -14,4 +14,12 @@ server.get('/food', (request, response) => {
   });
 });
 
+server.post('/food', (request, response) => {
+  const food = new Food(request.body);
+  food.save((err, newFood) => {
+    if (err) return response.send(err);
+    response.send(newFood);
+  });
+});
+
 module.exports = server;
