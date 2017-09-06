@@ -1,0 +1,29 @@
+{
+  "name": "server-testing",
+  "version": "1.0.0",
+  "description": "## Topics",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha *.test.js",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huck51/Server-Testing.git"
+  },
+  "author": "Evan and Lois",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huck51/Server-Testing/issues"
+  },
+  "homepage": "https://github.com/huck51/Server-Testing#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "express": "^4.15.4",
+    "mocha": "^3.5.0",
+    "mongoose": "^4.11.10",
+    "sinon": "^3.2.1"
+  }
+}
