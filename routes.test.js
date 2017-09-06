@@ -40,4 +40,22 @@ describe('/food', () => {
         });
     });
   });
+
+  describe('[POST] /food', () => {
+    it('should ADD a new Food', (done) => {
+      const food = {
+        name: 'Pizza'
+      };
+
+      chai.request(server)
+        .post('/food')
+        .send(food)
+        .end((err, res) => {
+          if (err) return console.log('Ummm, Hume\'s Guillotine?\n', err.response.error);
+          expect(res.status).to.equal(200);
+          expect(res.body.name).to.equal('Pizza');
+          done();
+        });
+    });
+  });
 });
