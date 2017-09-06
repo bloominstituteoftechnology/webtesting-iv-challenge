@@ -25,9 +25,17 @@ server.post('/food', (request, response) => {
   });
 });
 
-// server.put('/food', (request, response) => {
-//   //
-// });
+server.put('/food', (request, response) => {
+  const { newName, oldName } = request.body;
+  console.log(request.body);
+  Food.find({ oldName }, (err, food) => {
+    if (err) return response.send(err);
+    food.name = newName;
+    console.log(food, 'XXXXXXX');
+    response.status(202); // https://http.cat/202
+    response.send(food);
+  });
+});
 //
 // server.delete('/food', (request, response) => {
 //   //
