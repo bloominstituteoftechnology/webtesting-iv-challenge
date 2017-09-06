@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test-db', { useMongoClient: true});
+mongoose.connect('mongodb://localhost/test', { useMongoClient: true});
 const Team = require('./TeamModel');
 
 const chai = require('chai');
@@ -9,17 +9,17 @@ const assert = chai.assert;
 
 describe('Team', () => {
   describe('#getTeamName()', () => {
-    it.skip('should return the name of the team', () => {
+    it('should return the name of the team', () => {
       const team = new Team({ name: 'Oakland Raiders' });
       assert.equal(team.getTeamName(), 'Oakland Raiders')
     });
-    it.skip('should return a string', () => {
+    it('should return a string', () => {
       const team = new Team({ name: 'Houston Rockets' });
       assert.isString(team.getTeamName());
     });
   });
   describe('#getAllTeams()', () => {
-    it.skip('should return all the teams in the database', () => {
+    it('should return all the teams in the database', () => {
       sinon.stub(Team , 'find');
       Team.find.yields([{ name: 'LA Lakers'}, { name: 'GS Warriors' }]);
       Team.getAllTeams((teams) => {
