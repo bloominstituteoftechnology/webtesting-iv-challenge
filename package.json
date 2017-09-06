@@ -1,0 +1,35 @@
+{
+  "name": "server-testing",
+  "version": "1.0.0",
+  "description": "## Topics",
+  "main": "server.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "express": "^4.15.4",
+    "http": "0.0.0",
+    "mongoose": "^4.11.10",
+    "sinon": "^3.2.1"
+  },
+  "devDependencies": {
+    "mocha": "^3.5.0"
+  },
+  "scripts": {
+    "test": "mocha -R nyan tests",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manishavi/Server-Testing.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manishavi/Server-Testing/issues"
+  },
+  "homepage": "https://github.com/manishavi/Server-Testing#readme"
+}
