@@ -13,14 +13,14 @@ describe('Animals', () => {
     it('should return a string', () => {
       const animal = new Animals({
         name: 'Giraffe',
-        Continent: 'Africa'
+        continent: 'Africa'
       });
       expect(typeof animal.getName()).to.equal('string');
     });
     it('should return the name of the animal', () => {
       const animal = new Animals({
         name: 'Giraffe',
-        Continent: 'Africa'
+        continent: 'Africa'
       });
       expect(animal.getName()).to.equal('Giraffe');
     });

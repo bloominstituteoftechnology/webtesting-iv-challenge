@@ -12,13 +12,13 @@ Status: 200
 Example Input:
 {
 "name": "elephant",
-"Continent": "Africa"
+"continent": "Africa"
 }
 
 Example Response:
 {
 "name": "elephant",
-"Continent": "Africa"
+"continent": "Africa"
 }
 
 PUT /animals/:name
@@ -27,13 +27,13 @@ Example Input:
 localhost:3030/animals/bear
 {
 "name": "bear",
-"Continent": "North America"
+"continent": "North America"
 }
 
 Example Response:
 {
 "name": "bear",
-"Continent": "North America"
+"continent": "North America"
 }
 
 
