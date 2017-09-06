@@ -7,6 +7,7 @@ server.use(bodyParser.json());
 
 // curl http://localhost:8080/food
 server.get('/food', (request, response) => {
+  // Model.find will always return an array
   Food.find({}, (err, food) => {
     if (err) return response.send(err);
     response.send(food);
