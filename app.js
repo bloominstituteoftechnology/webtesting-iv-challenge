@@ -9,7 +9,7 @@ use `openUri()` instead, or set the `useMongoClient` option if using `connect()`
 or `createConnection()`.
 See http://mongoosejs.com/docs/connections.html#use-mongo-client
 */
-mongoose.connect('mongodb://localhost/food', {}, (err) => {
+mongoose.connect('mongodb://localhost/food', { useMongoClient: true }, (err) => {
   if (err) return console.log('\nyoYOyo-yo!!! WTF, yo??????\n', err);
   console.log('DUDE! You are like totally connected to the food DataBase, man!\
   \nLike, all your chakras are, like, totally... cool...\
