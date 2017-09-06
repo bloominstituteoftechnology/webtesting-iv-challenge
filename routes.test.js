@@ -10,13 +10,11 @@ mongoose.connect('mongodb://localhost/test', { useMongoClient: true }, (err) => 
   if (err) return console.log(err);
   console.log('DUDE! You are like totally connected to the TEST DataBase, man!');
 });
-
+// added to use npm run watch, not sure if this is the best practice?
 mongoose.models = {};
 mongoose.modelSchemas = {};
 
-// const chai, { expect } = require('chai'); // ~~~> Linter unhappy ?
 const expect = chai.expect;
-
 chai.use(chaiHTTP);
 
 describe('/food', () => {
