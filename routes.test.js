@@ -13,7 +13,6 @@ mongoose.connect('mongodb://localhost/test', { useMongoClient: true }, (err) => 
 // added to use npm run watch, not sure if this is the best practice?
 mongoose.models = {};
 mongoose.modelSchemas = {};
-
 // Promises & mongoose: http://mongoosejs.com/docs/promises.html
 mongoose.Promise = global.Promise;
 
