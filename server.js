@@ -16,6 +16,7 @@ server.get('/food', (request, response) => {
 
 server.post('/food', (request, response) => {
   const food = new Food(request.body);
+  // Promises & mongoose: http://mongoosejs.com/docs/promises.html
   food.save((err, newFood) => {
     if (err) return response.send(err);
     response.send(newFood);

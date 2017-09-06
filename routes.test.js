@@ -14,6 +14,9 @@ mongoose.connect('mongodb://localhost/test', { useMongoClient: true }, (err) => 
 mongoose.models = {};
 mongoose.modelSchemas = {};
 
+// Promises & mongoose: http://mongoosejs.com/docs/promises.html
+mongoose.Promise = global.Promise;
+
 const expect = chai.expect;
 chai.use(chaiHTTP);
 
