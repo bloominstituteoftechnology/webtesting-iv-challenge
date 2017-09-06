@@ -12,41 +12,28 @@
 > at least one test written for each route.  Write your tests BEFORE you write the actual routes.
 
 1. mocha, chai sinon
-2. jest?
+  - set up for `npm run watch`
+  - not sure if this will cause problems for future test scenarios where db needs to be persistent?
+  ```js
+  mongoose.models = {};
+  mongoose.modelSchemas = {};
+  ```
+
+2. configure with jest?
+
+> need to have tests for your routes and for your models.
 
 ## SCHEMA
 > models should have some methods/statics that are tested.
 
-> need to have tests for your routes and for your models.
-
 ## ROUTES
 > routes that use the following HTTP verbs: GET, PUT, POST, and DELETE.
 
-### GET - example route
-- ROUTE `GET /something/from/:theDatabaseCollection`
+### GET /food
+- `curl http://localhost:8080/food`
 - RESPONSE `STATUS 200 OK`
 ```json
-{
-  "Key1": "Value",
-  "Key2": "Value",
-  "KeyObject1": {
-    "Key": "Value",
-    "Key": "Value",
-    "Key": "Value"
-  },
-  "KeyObject2": {
-    "Key": "Value",
-    "Key": "Value",
-    "Key": "Value"
-  },
-  "KeyArray": [
-    {
-    "Key": "Value",
-    "Key": "Value",
-    "Key": "Value"
-    }
-  ]
-}
+[]
 ```
 
 ### PUT - example route and JSON data structure
