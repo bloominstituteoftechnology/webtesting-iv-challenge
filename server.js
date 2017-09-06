@@ -14,6 +14,7 @@ server.get('/food', (request, response) => {
   });
 });
 
+// curl -X POST -H "Content-Type: application/json" -d '{"name":"Hot Dog"}' localhost:8080/food
 server.post('/food', (request, response) => {
   const food = new Food(request.body);
   // Promises & mongoose: http://mongoosejs.com/docs/promises.html
