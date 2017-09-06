@@ -11,23 +11,24 @@ const AnimalSchema = new Schema({
         type: String,
         required: true
     },
-    region: {
+    region: [{
         type: String,
         required: true
-    }
+    }]
 });
-
-AnimalSchema.methods.getRegion = function() {
-    return this.region;
-};
-
-AnimalSchema.statics.getAllAnimals = function(cb){
-    Animal.find({}, (err, animal) => {
-        if (err) return cb(err);
-        cb(animal);
-    });
-};
 
 const Animal = mongoose.model('Animal', AnimalSchema);
 
-module.exports = Animal;
+AnimalSchema.methods.getRegion = function() {
+    return this.region;
+}
+
+AnimalSchema.statics.getAllAnimals = function(){
+    // Animal.find({}, (err, animal) => {
+    //     if (err) return (err);
+    //     return animal;
+    // });
+};
+
+
+module.export = Animal;
