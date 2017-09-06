@@ -67,4 +67,30 @@ describe('/animals', () => {
       });
     });
   });
+  describe('[DELETE] /animals/:name', () => {
+    it('should delete a single animal', (done) => {
+      chai.request(server)
+        .delete('/animals/Penguin')
+        .end((err, res) => {
+        if (err) return console.log(err);
+        expect(res.status).to.equal(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.deep.equal({ success: true });
+        done();
+      });
+    });
+  });
+  describe('[GET] /animals', () => {
+    it('should get all of the animals', (done) => {
+      chai.request(server)
+        .get('/animals')
+        .end((err, res) => {
+          if (err) return console.log(err);
+        expect(res.status).to.equal(200);
+        expect(Array.isArray(res.body)).to.equal(true);
+        expect(res.body.length).to.equal(0);
+        done();
+      });
+    });
+  });
 });

@@ -17,6 +17,13 @@ AnimalSchema.methods.getName = function() {
   return this.name;
 };
 
+AnimalSchema.statics.getAllAnimals = function(cb) {
+  Animals.find({}, (err, animals) => {
+    if (err) return cb(err);
+    cb(animals);
+  });
+};
+
 const Animals = mongoose.model('Animals', AnimalSchema);
 
 module.exports = Animals;

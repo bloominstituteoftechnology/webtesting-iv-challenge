@@ -50,7 +50,6 @@ server.post('/animals', (req, res) => {
 
 server.put('/animals/:name', (req, res) => {
   const name = req.params.name;
-  // console.log(name);
   const newContinent = req.body.continent;
   if (!name) {
     sendUserError('Must include a name', res);
@@ -60,13 +59,29 @@ server.put('/animals/:name', (req, res) => {
     sendUserError('Must include a continent', res);
     return;
   }
-  Animals.find({ name }, (err, animal) => {
+  Animals.findOne({ name }, (err, animal) => {
     if (err) {
       sendUserError(err, res);
       return;
     }
-    animal[0].continent = newContinent;
-    res.json(animal[0]);
+    animal.continent = newContinent;
+    res.json(animal);
+  });
+});
+
+server.delete('/animals/:name', (req, res) => {
+  const name = req.params.name;
+  if (!name) {
+    sendUserError('Must include a name', res);
+    return;
+  } 
+  Animals.findOne({ name }, (err, animal) => {
+    if (err) {
+      sendUserError(err, res);
+      return;
+    }
+    animal.remove();
+    res.json({ success: true });
   });
 });
 
