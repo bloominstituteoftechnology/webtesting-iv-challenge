@@ -23,13 +23,13 @@ server.post('/food', (request, response) => {
   });
 });
 
-server.put('/food', (request, response) => {
-  //
-});
-
-server.delete('/food', (request, response) => {
-  //
-});
+// server.put('/food', (request, response) => {
+//   //
+// });
+//
+// server.delete('/food', (request, response) => {
+//   //
+// });
 
 
 module.exports = server;
