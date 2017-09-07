@@ -5,6 +5,9 @@ const Food = require('./food');
 const server = express();
 server.use(bodyParser.json());
 
+// HTTP Method returns:
+// https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
+
 // $ curl http://localhost:8080/food
 server.get('/food', (request, response) => {
   // Model.find will always return an array
@@ -42,7 +45,7 @@ server.post('/food', (request, response) => {
 // });
 
 // https://docs.mongodb.com/manual/reference/method/db.collection.findOneAndUpdate/
-server.put('/food/reaction', (request, response) => {
+server.put('/food', (request, response) => {
   const { name, reaction } = request.body;
   const update = reaction;
   Food.findOneAndUpdate(
@@ -52,7 +55,7 @@ server.put('/food/reaction', (request, response) => {
       if (err) return response.send('Post.find()', err);
       food.reaction = update;
       response.status(200); // https://http.cat/200
-      response.send(food.reaction);
+      response.send(food);
     });
 });
 

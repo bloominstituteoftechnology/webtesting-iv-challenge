@@ -44,7 +44,7 @@ describe('/food', () => {
   });
 
   describe('[POST] /food', () => {
-    it('should ADD a new Food', (done) => {
+    it('should ADD a new Food and a default reaction', (done) => {
       const food = {
         name: 'Pizza'
       };
@@ -55,39 +55,41 @@ describe('/food', () => {
           if (err) return console.log('Like your head POST-Hume\'s Guillotine\n', err.response.error);
           expect(res.status).to.equal(201); // https://http.cat/201
           expect(res.body.name).to.equal('Pizza');
+          expect(res.body.reaction).to.equal('yum');
           done();
         });
     });
   });
 
-  // describe('[PUT] /food', () => {
-  //   it('should MODIFY an existing Food item', (done) => {
-  //     const food = {
-  //       name: 'Pizza'
-  //     };
-  //     const update = {
-  //       newName: 'Hot Dog',
-  //       oldName: 'Pizza'
-  //     };
-  //     chai.request(server)
-  //       .post('/food')
-  //       .send(food)
-  //       .end((err, res) => {
-  //         if (err) return console.log('PUTs POST setup: like your head POST-Hume\'s Guillotine\n', err.response.error);
-  //         // expect(res.status).to.equal(201); // https://http.cat/201
-  //         // expect(res.body.name).to.equal('Pizza');
-  //         // done();
-  //       });
-  //     chai.request(server)
-  //       .put('/food')
-  //       .send(update)
-  //       .end((err, res) => {
-  //         console.log('From Test', res.body);
-  //         if (err) return console.log('PUT action: like your head POST-Hume\'s Guillotine\n', err.response.error);
-  //         expect(res.status).to.equal(202); // https://http.cat/202
-  //         expect(res.body.name).to.equal('Hot Dog');
-  //         done();
-  //       });
-  //   });
+  describe('[PUT] /food', () => {
+    it('should MODIFY an existing Food item', (done) => {
+      const food = {
+        name: 'Pizza',
+        reaction: 'yuck'
+      };
+      const update = {
+        name: 'Pizza',
+        reaction: 'yum'
+      };
+      chai.request(server)
+        .post('/food')
+        .send(food)
+        .end((err, res) => {
+          if (err) return console.log('PUT route test POST setup: like your head POST-Hume\'s Guillotine\n', err.response.error);
+        });
+      chai.request(server)
+        .put('/food')
+        .send(update)
+        .end((err, res) => {
+          if (err) return console.log('PUT action: like your head POST-Hume\'s Guillotine\n', err.response.error);
+          expect(res.status).to.equal(200); // https://http.cat/200
+          expect(res.body.reaction).to.equal('yum');
+          done();
+        });
+    });
+  });
+
+  // describe('[DELETE] /food', () => {
+  //
   // });
 });
