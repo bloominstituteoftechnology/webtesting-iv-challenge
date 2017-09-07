@@ -62,7 +62,7 @@ describe('/food', () => {
   });
 
   describe('[PUT] /food', () => {
-    it('should MODIFY an existing Food item', (done) => {
+    it('should MODIFY the reaction to an existing Food item', (done) => {
       const food = {
         name: 'Pizza',
         reaction: 'yuck'

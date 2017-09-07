@@ -47,13 +47,13 @@ server.post('/food', (request, response) => {
 // https://docs.mongodb.com/manual/reference/method/db.collection.findOneAndUpdate/
 server.put('/food', (request, response) => {
   const { name, reaction } = request.body;
-  const update = reaction;
+  // const update = reaction;
   Food.findOneAndUpdate(
     { name },
-    { $set: { reaction } },
+    { $set: { reaction } }, // It took me FOREVER to figure out this setting. MngoDB Docs are not, ah... terribly clear :_(
     (err, food) => {
       if (err) return response.send('Post.find()', err);
-      food.reaction = update;
+      food.reaction = reaction;
       response.status(200); // https://http.cat/200
       response.send(food);
     });
