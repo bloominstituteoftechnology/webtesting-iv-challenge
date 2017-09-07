@@ -1,9 +1,10 @@
-# AWESOME DOCUMENTATION AND TESTING FOR AN AMAZING API & SERVER
+# AWESOME DOCUMENTATION AND TESTING FOR AN AMAZING C.R.U.D. API & SERVER
 ## REST API v1 OVERVIEW
 > a simple RESTful API for a database with collections of your choosing.
 
-- REST = REpresentational State Transfer
-- A.P.I. = Application Programming Interface
+- C.R.U.D. = Create Read Update Destroy
+- RE.S.T.  = REpresentational State Transfer
+- A.P.I.   = Application Programming Interface
 
 
 1. Starting with the basic Food database example which Ben demonstrated in his [lecture](https://youtu.be/otSW2ZpBa2U).
