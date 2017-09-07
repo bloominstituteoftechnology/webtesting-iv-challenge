@@ -90,7 +90,30 @@ describe('/food', () => {
     });
   });
 
-  // describe('[DELETE] /food', () => {
-  //
-  // });
+  describe('[DELETE] /food', () => {
+    it('should DELETE an existing Food item', (done) => {
+      const food = {
+        name: 'Pizza',
+        reaction: 'yuck'
+      };
+      const toDelete = {
+        name: 'Pizza'
+      };
+      chai.request(server)
+        .post('/food')
+        .send(food)
+        .end((err, res) => {
+          if (err) return console.log('DELETE route test POST setup: like your head POST-Hume\'s Guillotine\n', err.response.error);
+        });
+      chai.request(server)
+        .delete('/food')
+        .send(toDelete)
+        .end((err, res) => {
+          if (err) return console.log('DELETE action: like your head POST-Hume\'s Guillotine\n', err.response.error);
+          expect(res.status).to.equal(200); // https://http.cat/200
+          // expect(res.body.reaction).to.NOTINCLUDE????('Pizza');
+          done();
+        });
+    });
+  });
 });
