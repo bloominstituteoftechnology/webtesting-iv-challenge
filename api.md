@@ -51,12 +51,13 @@
   - http://chaijs.com/plugins/chai-http/
 4. TBD: configure with jest?
 
-> need to have tests for your routes and for your models. - OKAY √
+> need to have tests for your routes and for your models. - DONE √
 
 ### SCHEMA
-> models should have some methods/statics that are tested. - OKAY √
+> models should have some methods/statics that are tested. - DONE √
 
 http://mongoosejs.com/docs/guide.html#methods
+http://sinonjs.org/releases/v3.2.1/stubs/
 
 ### ROUTES
 > routes that use the following HTTP verbs: GET, PUT, POST, and DELETE. - DONE √
