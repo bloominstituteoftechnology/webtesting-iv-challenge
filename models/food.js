@@ -26,10 +26,10 @@ FoodSchema.methods.getName = function getName() {
   return this.name;
 };
 
-// Function hoisting? Async tests with stubs? mongoose mpromises?????????????????
 // const Food = mongoose.model('Food', FoodSchema); <~~~~ LINTER WANTS THIS HERE BUT THIS BREAKS TESTS - WHY???????
+// Function hoisting? Async tests with stubs? mongoose mpromises?????????????????
 
-/* eslint no-use-before-define: 0 */
+/* eslint no-use-before-define: 0 */ // <~~~~~~~~~~~~~~~~~ Take that, Linter!!!
 FoodSchema.statics.getAllFoods = function getAllFoods(cb) {
   Food.find({}, (err, food) => {
     if (err) return cb(err);

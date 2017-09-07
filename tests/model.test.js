@@ -4,7 +4,7 @@ const server = require('../src/server');
 const chai = require('chai');
 const sinon = require('sinon'); // <~~~~~~~~~~~~~~~ STUBBING
 
-// mongoose.connect('mongodb://localhost/test'); // ~~~> , { useMongoClient: true }, (err) => {...} ???
+// mongoose.connect('mongodb://localhost/test'); // ~~~> , { useMongoClient: true }, (err) => {...}
 /* eslint no-console: 0 */
 mongoose.connect('mongodb://localhost/test', { useMongoClient: true }, (err) => {
   if (err) return console.log(err);
@@ -30,26 +30,26 @@ describe('Food', () => {
 
   // getName is ONLY on the instance "food" (from class "Food")
   describe('#getName()', () => {
-    // const food = new Food({ // <~~~~~~~ Is this okay or is it better to make declarations within the it('should... ?
-    //   name: 'Ban Chan'
-    // });
+    const food = new Food({ // <~~~~~~~ Is this okay or is it better to make declarations within the it('should... ?
+      name: 'Ban Chan'
+    });
     it('should be a function', () => {
-      const food = new Food({
-        name: 'Ban Chan'
-      });
+      // const food = new Food({
+      //   name: 'Ban Chan'
+      // });
       expect(food.getName).to.be.a('function');
     });
     it('should return a String', () => {
-      const food = new Food({
-        name: 'Ban Chan'
-      });
+      // const food = new Food({
+      //   name: 'Ban Chan'
+      // });
       expect(typeof food.getName()).to.equal('string');
     });
     it('should return the name of the food', () => {
-      const food = new Food({
+      const goodFood = new Food({
         name: 'Anything from Ruth\'s Chris Steak House'
       });
-      expect(food.getName()).to.equal('Anything from Ruth\'s Chris Steak House');
+      expect(goodFood.getName()).to.equal('Anything from Ruth\'s Chris Steak House');
     });
   });
 
@@ -62,7 +62,7 @@ describe('Food', () => {
       // sinon.stub(Food, 'find');
       Food.find.yields(null, [{ name: 'chicken pot pie', reaction: 'yum' }]);
       Food.getAllFoods((foods) => { // <~~~~~~~~~~~~ NOT A FUNCTION??? WHY, WHY - WHY?????????????
-        // expect(foods).to.be.an('array');
+        expect(foods).to.be.an('array');
         expect(foods.length).to.equal(1);
         expect(foods[0].name).to.equal('chicken pot pie');
         expect(foods[0].reaction).to.equal('yum');

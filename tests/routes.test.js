@@ -4,7 +4,7 @@ const server = require('../src/server');
 const chai = require('chai');
 const chaiHTTP = require('chai-http');
 
-// mongoose.connect('mongodb://localhost/test'); // ~~~> , { useMongoClient: true }, (err) => {...} ???
+// mongoose.connect('mongodb://localhost/test'); // ~~~> , { useMongoClient: true }, (err) => {...}
 /* eslint no-console: 0 */
 mongoose.connect('mongodb://localhost/test', { useMongoClient: true }, (err) => {
   if (err) return console.log(err);
