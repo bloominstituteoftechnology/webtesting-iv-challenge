@@ -1,3 +1,5 @@
+# LS-Server-Testing
+
 [Jump to the /food Route's HTTP Methods](#food)
 - [GET](#get-all-database-entries)
 - [POST](#post-a-new-entry-into-the-database)
@@ -108,6 +110,8 @@ HTTP METHODS: https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
 ]
 ```
 
+[Back to the TOP](#LS-Server-Testing)
+
 ## POST a new entry into the database
 - `curl -X POST -H "Content-Type: application/json" -d '{"name":"Hot Dog"}' localhost:8080/food`
 - ROUTE: **POST /food**
@@ -136,6 +140,8 @@ HTTP METHODS: https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
 }
 ```
 
+[Back to the TOP](#LS-Server-Testing)
+
 ## PUT a modification into one database record
 - `curl -X PUT -H "Content-Type: application/json" -d '{"name":"Brussel Sprouts","reaction":"yuck"}' localhost:8080/food`
 - ROUTE: **PUT /food**
@@ -157,6 +163,8 @@ HTTP METHODS: https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
   "reaction":"yuck"
 }
 ```
+
+[Back to the TOP](#LS-Server-Testing)
 
 ## DELETE a single database record by unique name
 - `curl -X DELETE -H "Content-Type: application/json" -d '{"name":"Hot Dog"}' localhost:8080/food`
@@ -184,3 +192,5 @@ HTTP METHODS: https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
   "ok":1
 }
 ```
+
+[Back to the TOP](#LS-Server-Testing)
