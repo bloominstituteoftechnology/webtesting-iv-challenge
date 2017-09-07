@@ -75,13 +75,13 @@
 - PARAMETERS: {name: "food item"}
 
 | NAME | TYPE | DESCRIPTION | UNIQUE | REQUIRED | DEFAULT |
-| ----:| ----:| -----------:| ------:| --------:| -------:|
+|:----:|:----:|:-----------:|:------:|:--------:|:-------:|
 | name | String | kind of food | yes | yes | none |
 
 - OPTIONAL PARAMETERS: {reaction: "yum"}
 
 | NAME | TYPE | DESCRIPTION | UNIQUE | REQUIRED | DEFAULT |
-| ----:| ----:| -----------:| ------:| --------:| -------:|
+|:----:|:----:|:-----------:|:------:|:--------:|:-------:|
 | reaction | String | "yum" or "yuck" | no | no | "yum" |
 
 - EXAMPLE INPUT: {"name":"Brussel Sprouts",reaction:"yuck"}
