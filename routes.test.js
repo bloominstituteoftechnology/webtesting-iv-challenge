@@ -111,7 +111,9 @@ describe('/food', () => {
         .end((err, res) => {
           if (err) return console.log('DELETE action: like your head POST-Hume\'s Guillotine\n', err.response.error);
           expect(res.status).to.equal(200); // https://http.cat/200
-          // expect(res.body.reaction).to.NOTINCLUDE????('Pizza');
+          // expect(res.body).to.equal({ n: 1, ok: 1 }); // <~~~ O good lard - why doesn't this match????????
+          expect(res.body.n).to.equal(1);
+          expect(res.body.ok).to.equal(1);
           done();
         });
     });

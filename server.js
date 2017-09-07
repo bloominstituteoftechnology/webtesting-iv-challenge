@@ -36,7 +36,7 @@ server.post('/food', (request, response) => {
 //     { name },
 //     { $set: reaction }, // https://stackoverflow.com/a/24648693/5225057
 //     (err, food) => {
-//       if (err) return response.send('Post.find()', err);
+//       if (err) return response.send('POST Food.find()', err);
 //       food.reaction = reaction;
 //       response.status(200); // https://http.cat/200
 //       response.send(food);
@@ -50,7 +50,7 @@ server.put('/food', (request, response) => {
     { name },
     { $set: { reaction } }, // It took me FOREVER to figure out this setting. MngoDB Docs are not, ah... terribly clear :_(
     (err, food) => {
-      if (err) return response.send('Post.find()', err);
+      if (err) return response.send('POST Food.findOneAndUpdate()', err);
       food.reaction = reaction;
       response.status(200); // https://http.cat/200
       response.send(food);
@@ -58,10 +58,16 @@ server.put('/food', (request, response) => {
 });
 
 
-// $ curl -X DELETE -H "Content-Type: application/json" -d '{"name":"Brussel Sprouts"}' localhost:8080/food/reaction
-// server.delete('/food', (request, response) => {
-//   //
-// });
+// $ curl -X DELETE -H "Content-Type: application/json" -d '{"name":"Hot Dog"}' localhost:8080/food/
+// https://docs.mongodb.com/manual/reference/method/db.collection.remove/
+server.delete('/food', (request, response) => {
+  const { name } = request.body;
+  Food.remove({ name }, (err, removedStatus) => { // "The remove() returns an object that contains the status of the operation."
+    if (err) return response.send('DELETE Food.remove()', err);
+    response.status(200);
+    response.send(removedStatus);
+  });
+});
 
 
 module.exports = server;
