@@ -26,7 +26,8 @@ FoodSchema.methods.getName = function getName() {
   return this.name;
 };
 
-const Food = mongoose.model('Food', FoodSchema);
+// Function hoisting? Async tests with stubs? mongoose mpromises?????????????????
+// const Food = mongoose.model('Food', FoodSchema); <~~~~ LINTER WANTS THIS HERE BUT THIS BREAKS TESTS - WHY???????
 
 FoodSchema.statics.getAllFoods = function getAllFoods(cb) {
   Food.find({}, (err, food) => {
@@ -34,5 +35,7 @@ FoodSchema.statics.getAllFoods = function getAllFoods(cb) {
     cb(food);
   });
 };
+
+const Food = mongoose.model('Food', FoodSchema);
 
 module.exports = Food;
