@@ -76,7 +76,7 @@
 
 | NAME | TYPE | DESCRIPTION | UNIQUE | REQUIRED | DEFAULT |
 |:---:|:---:|:---:|:---:|:---:|:---:|
-| name | `String` | *kind of food* | **yes** | **yes** | none |
+| name | `String` | *kind of food* | **YES** | **YES** | none |
 
 - OPTIONAL PARAMETERS: {reaction: "yum"}
 
