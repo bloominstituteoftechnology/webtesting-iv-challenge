@@ -65,6 +65,7 @@ describe('Food', () => {
         // expect(foods).to.be.an('array');
         expect(foods.length).to.equal(1);
         expect(foods[0].name).to.equal('chicken pot pie');
+        expect(foods[0].reaction).to.equal('yum');
         // Food.find.restore();
       });
     });
