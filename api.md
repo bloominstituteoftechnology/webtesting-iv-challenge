@@ -44,7 +44,7 @@
   ```
   &
   ```js
-  mongoose.connect('mongodb://localhost/test', { useMongoClient: true }, (err) => {
+  mongoose.connect('mongodb://localhost/test', { useMongoClient: true }, (err) => {...});
   ```
 
 3. TBD: configure with jest?
@@ -56,6 +56,8 @@
 
 ### ROUTES
 > routes that use the following HTTP verbs: GET, PUT, POST, and DELETE. - OKAY √
+
+HTTP METHODS: https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
 
 ### TODO:
 1. Input exception handling
@@ -70,6 +72,7 @@
 
 ## GET all database entries
 - `curl http://localhost:8080/food`
+- ROUTE: **GET /food**
 - RESPONSE: `STATUS 200 OK` https://http.cat/200
 - RETURN: `Array` of food items and reactions
 - RETURN EXAMPLE:
@@ -98,7 +101,8 @@
 
 ## POST a new entry into the database
 - `curl -X POST -H "Content-Type: application/json" -d '{"name":"Hot Dog"}' localhost:8080/food`
-- PARAMETERS: {name: "food item"}
+- ROUTE: **POST /food**
+- PARAMETERS: {name:"food item"}
 
 | NAME | TYPE | DESCRIPTION | UNIQUE | REQUIRED | DEFAULT |
 |:---:|:---:|:---:|:---:|:---:|:---:|
@@ -124,16 +128,15 @@
 ```
 
 ## PUT a modification into one database record
-- `curl -X PUT -H "Content-Type: application/json" -d '{"name":"Brussel Sprouts","reaction":"yuck"}' localhost:8080/food/reaction`
-- PARAMETERS: {name: "food item","reaction":"yuck"}
+- `curl -X PUT -H "Content-Type: application/json" -d '{"name":"Brussel Sprouts","reaction":"yuck"}' localhost:8080/food`
+- ROUTE: **PUT /food**
+- PARAMETERS: {name:"food item","reaction":"yuck"}
 
 | NAME | TYPE | DESCRIPTION | UNIQUE | REQUIRED | DEFAULT |
 |:---:|:---:|:---:|:---:|:---:|:---:|
 | name | `String` | *kind of food* | **YES** | **YES** | none |
 | reaction | `String` | *"yum"* or *"yuck"* | no | no | *"yum"* |
 
-
-- ROUTE: **PUT /food**
 - RESPONSE: `STATUS 200 OK` https://http.cat/200
 - RETURN: Modified `Object` of food items and reactions
 - RETURN EXAMPLE:
@@ -146,4 +149,15 @@
 }
 ```
 
-## DELETE a database record
+## DELETE a single database record by unique name
+- `curl -X DELETE -H "Content-Type: application/json" -d '{"name":"Hot Dog"}' localhost:8080/food`
+- ROUTE: **DELETE /food**
+- PARAMETERS: {name:"food item"}
+
+| NAME | TYPE | DESCRIPTION | UNIQUE | REQUIRED |
+|:---:|:---:|:---:|:---:|:---:|
+| name | `String` | *kind of food* | **YES** | **YES** |
+
+- RESPONSE: `STATUS 200 OK` https://http.cat/200
+- RETURN:
+- RETURN EXAMPLE:
