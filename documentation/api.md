@@ -1,5 +1,5 @@
 [Jump to the /food Route's HTTP Methods](#food)
-- [GET](#GET)
+- [GET](#GETalldatabaseentries)
 - [POST](#POST)
 - [PUT](#PUT)
 - [DELETE](#DELETE)
