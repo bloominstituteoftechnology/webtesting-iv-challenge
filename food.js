@@ -9,6 +9,11 @@ const FoodSchema = new Schema({
     required: true,
     unique: true,
   },
+  reaction: {
+    type: String,
+    required: false,
+    default: 'yum',
+  }
 });
 
 const Food = mongoose.model('Food', FoodSchema);
