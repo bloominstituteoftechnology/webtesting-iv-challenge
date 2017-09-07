@@ -2,7 +2,9 @@
 ## REST API v1 OVERVIEW
 > a simple RESTful API for a database with collections of your choosing.
 
-[Jump to Route](#/food)
+[Jump to /food Routes HTTP Methods](#food)
+
+## NOTES:
 
 | ACRONYM | EXPANSION |
 |:--- |:---:|
