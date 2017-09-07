@@ -8,7 +8,7 @@ const chaiHTTP = require('chai-http');
 /* eslint no-console: 0 */
 mongoose.connect('mongodb://localhost/test', { useMongoClient: true }, (err) => {
   if (err) return console.log(err);
-  console.log('DUDE! You are like totally connected to the ROUTES TEST DataBase, man!');
+  console.log('DUDE! You are like totally connected to the TEST DataBase From the ROUTES tests, man!');
 });
 // added to use npm run watch, not sure if this is the best practice?
 // Wish I had better documentatin than this: https://groups.google.com/forum/?fromgroups=#!topic/mongoose-orm/PXTjqqpaDFk
@@ -21,15 +21,21 @@ const expect = chai.expect;
 chai.use(chaiHTTP);
 
 describe('/food', () => {
+  // https://mochajs.org/#describing-hooks
+  // beforeEach "hook" clears out db prior to each test, asynchronously with "done"
   beforeEach((done) => {
-    // https://mochajs.org/#describing-hooks
-    // beforeEach "hook" clears out db prior to each test, asynchronously with "done"
     // "Food.remove(...)" is asynchronous
     Food.remove({}, (err) => {
-      if (err) console.log('Something went wrong!', err);
+      if (err) console.log('Something went wrong in ROUTE tests BEFORE!', err);
       done();
     });
   });
+  // afterEach((done) => {
+  //   Food.remove({}, (err) => {
+  //     if (err) console.log('Something went wrong in ROUTE tests AFTER!', err);
+  //     done();
+  //   });
+  // });
 
   describe('[GET] /food', () => {
     it('should GET all the Food', (done) => {

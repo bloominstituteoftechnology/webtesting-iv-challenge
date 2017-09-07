@@ -26,7 +26,13 @@ FoodSchema.methods.getName = function getName() {
   return this.name;
 };
 
-
 const Food = mongoose.model('Food', FoodSchema);
+
+FoodSchema.statics.getAllFoods = function getAllFoods(cb) {
+  Food.find({}, (err, food) => {
+    if (err) return cb(err);
+    cb(food);
+  });
+};
 
 module.exports = Food;
