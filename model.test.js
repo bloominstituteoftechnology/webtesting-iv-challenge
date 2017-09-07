@@ -23,9 +23,11 @@ chai.use(chaiHTTP);
 
 describe('Food', () => {
   describe('#getName()', () => {
-    const food = new Food({
-      name: 'Rib Steak'
+    it('should return the name of the food', () => {
+      const food = new Food({
+        name: 'Rib Steak'
+      });
+      expect(food.getName()).to.equal('Rib Steak');
     });
-    expect(food.getName()).to.equal('Rib Steak');
   });
 });
