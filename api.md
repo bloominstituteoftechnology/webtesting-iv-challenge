@@ -56,7 +56,7 @@
 ***
 # /food
 
-## GET - example route and returned data structure
+## GET all database entries
 - `curl http://localhost:8080/food`
 - RESPONSE: `STATUS 200 OK` https://http.cat/200
 - RETURN: `Array` of food items and reactions
@@ -84,7 +84,7 @@
 ]
 ```
 
-## POST
+## POST a new entry into the database
 - `curl -X POST -H "Content-Type: application/json" -d '{"name":"Hot Dog"}' localhost:8080/food`
 - PARAMETERS: {name: "food item"}
 
@@ -111,7 +111,7 @@
 }
 ```
 
-## PUT
+## PUT a modification into one database record
 - `curl -X PUT -H "Content-Type: application/json" -d '{"name":"Brussel Sprouts","reaction":"yuck"}' localhost:8080/food/reaction`
 - PARAMETERS: {name: "food item","reaction":"yuck"}
 
@@ -134,4 +134,4 @@
 }
 ```
 
-## DELETE
+## DELETE a database record
