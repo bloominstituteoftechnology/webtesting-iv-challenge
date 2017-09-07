@@ -76,6 +76,8 @@ HTTP METHODS: https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
 3. params and query routes
 4. PUT modification in all records?
 
+[Back to the TOP](#ls-server-testing)
+
 </p></details>
 
 ***
@@ -110,7 +112,7 @@ HTTP METHODS: https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
 ]
 ```
 
-[Back to the TOP](#LS-Server-Testing)
+[Back to the TOP](#ls-server-testing)
 
 ## POST a new entry into the database
 - `curl -X POST -H "Content-Type: application/json" -d '{"name":"Hot Dog"}' localhost:8080/food`
@@ -140,7 +142,7 @@ HTTP METHODS: https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
 }
 ```
 
-[Back to the TOP](#LS-Server-Testing)
+[Back to the TOP](#ls-server-testing)
 
 ## PUT a modification into one database record
 - `curl -X PUT -H "Content-Type: application/json" -d '{"name":"Brussel Sprouts","reaction":"yuck"}' localhost:8080/food`
@@ -164,7 +166,7 @@ HTTP METHODS: https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
 }
 ```
 
-[Back to the TOP](#LS-Server-Testing)
+[Back to the TOP](#ls-server-testing)
 
 ## DELETE a single database record by unique name
 - `curl -X DELETE -H "Content-Type: application/json" -d '{"name":"Hot Dog"}' localhost:8080/food`
@@ -193,4 +195,4 @@ HTTP METHODS: https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
 }
 ```
 
-[Back to the TOP](#LS-Server-Testing)
+[Back to the TOP](#ls-server-testing)
