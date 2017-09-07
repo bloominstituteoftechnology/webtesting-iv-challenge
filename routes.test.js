@@ -60,34 +60,34 @@ describe('/food', () => {
     });
   });
 
-  describe('[PUT] /food', () => {
-    it('should MODIFY an existing Food item', (done) => {
-      const food = {
-        name: 'Pizza'
-      };
-      const update = {
-        newName: 'Hot Dog',
-        oldName: 'Pizza'
-      };
-      chai.request(server)
-        .post('/food')
-        .send(food)
-        .end((err, res) => {
-          if (err) return console.log('PUTs POST setup: like your head POST-Hume\'s Guillotine\n', err.response.error);
-          // expect(res.status).to.equal(201); // https://http.cat/201
-          // expect(res.body.name).to.equal('Pizza');
-          // done();
-        });
-      chai.request(server)
-        .put('/food')
-        .send(update)
-        .end((err, res) => {
-          console.log('From Test', res.body);
-          if (err) return console.log('PUT action: like your head POST-Hume\'s Guillotine\n', err.response.error);
-          expect(res.status).to.equal(202); // https://http.cat/202
-          expect(res.body.name).to.equal('Hot Dog');
-          done();
-        });
-    });
-  });
+  // describe('[PUT] /food', () => {
+  //   it('should MODIFY an existing Food item', (done) => {
+  //     const food = {
+  //       name: 'Pizza'
+  //     };
+  //     const update = {
+  //       newName: 'Hot Dog',
+  //       oldName: 'Pizza'
+  //     };
+  //     chai.request(server)
+  //       .post('/food')
+  //       .send(food)
+  //       .end((err, res) => {
+  //         if (err) return console.log('PUTs POST setup: like your head POST-Hume\'s Guillotine\n', err.response.error);
+  //         // expect(res.status).to.equal(201); // https://http.cat/201
+  //         // expect(res.body.name).to.equal('Pizza');
+  //         // done();
+  //       });
+  //     chai.request(server)
+  //       .put('/food')
+  //       .send(update)
+  //       .end((err, res) => {
+  //         console.log('From Test', res.body);
+  //         if (err) return console.log('PUT action: like your head POST-Hume\'s Guillotine\n', err.response.error);
+  //         expect(res.status).to.equal(202); // https://http.cat/202
+  //         expect(res.body.name).to.equal('Hot Dog');
+  //         done();
+  //       });
+  //   });
+  // });
 });

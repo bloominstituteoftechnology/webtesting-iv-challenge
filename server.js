@@ -5,7 +5,7 @@ const Food = require('./food');
 const server = express();
 server.use(bodyParser.json());
 
-// curl http://localhost:8080/food
+// $ curl http://localhost:8080/food
 server.get('/food', (request, response) => {
   // Model.find will always return an array
   Food.find({}, (err, food) => {
@@ -25,18 +25,21 @@ server.post('/food', (request, response) => {
   });
 });
 
-server.put('/food', (request, response) => {
-  const { newName, oldName } = request.body;
-  console.log(request.body);
-  Food.find({ oldName }, (err, food) => {
-    if (err) return response.send(err);
-    food.name = newName;
-    console.log(food, 'XXXXXXX');
-    response.status(202); // https://http.cat/202
-    response.send(food);
-  });
+// $ curl -X PUT -H "Content-Type: application/json" -d '{"name":"Brussel Sprouts","reaction":"yuck"}' localhost:8080/food/reaction
+server.put('/food/reaction', (request, response) => {
+  const { name, reaction } = request.body;
+  Food.findAndModify(
+    { query: name },
+    { new: true },
+    (err, food) => {
+      if (err) return response.send('Post.find()', err);
+      food.reaction = reaction;
+      response.status(200); // https://http.cat/200
+      response.send(food);
+    });
 });
-//
+
+// $ curl -X DELETE -H "Content-Type: application/json" -d '{"name":"Brussel Sprouts"}' localhost:8080/food/reaction
 // server.delete('/food', (request, response) => {
 //   //
 // });
