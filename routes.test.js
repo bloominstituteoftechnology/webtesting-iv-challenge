@@ -94,7 +94,6 @@ describe('/food', () => {
     it('should DELETE an existing Food item', (done) => {
       const food = {
         name: 'Pizza',
-        reaction: 'yuck'
       };
       const toDelete = {
         name: 'Pizza'
@@ -113,6 +112,24 @@ describe('/food', () => {
           expect(res.status).to.equal(200); // https://http.cat/200
           // expect(res.body).to.equal({ n: 1, ok: 1 }); // <~~~ O good lard - why doesn't this match????????
           expect(res.body.n).to.equal(1);
+          expect(res.body.ok).to.equal(1);
+          done();
+        });
+    });
+  });
+
+  describe('[DELETE] /food', () => {
+    it('should not DELETE a non-existing Food item and return 0 for number of items deleted', (done) => {
+      const toDelete = {
+        name: 'Balut'
+      };
+      chai.request(server)
+        .delete('/food')
+        .send(toDelete)
+        .end((err, res) => {
+          if (err) return console.log('non-existent DELETE action: like your head POST-Hume\'s Guillotine\n', err.response.error);
+          expect(res.status).to.equal(200);
+          expect(res.body.n).to.equal(0);
           expect(res.body.ok).to.equal(1);
           done();
         });
