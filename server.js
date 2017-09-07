@@ -42,7 +42,6 @@ server.post('/food', (request, response) => {
 //       response.send(food);
 //     });
 // });
-
 // https://docs.mongodb.com/manual/reference/method/db.collection.findOneAndUpdate/
 server.put('/food', (request, response) => {
   const { name, reaction } = request.body;

@@ -55,7 +55,7 @@
 > models should have some methods/statics that are tested. - OKAY √
 
 ### ROUTES
-> routes that use the following HTTP verbs: GET, PUT, POST, and DELETE. - OKAY √
+> routes that use the following HTTP verbs: GET, PUT, POST, and DELETE. - DONE √
 
 HTTP METHODS: https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
 
@@ -160,10 +160,18 @@ HTTP METHODS: https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
 
 - RESPONSE: `STATUS 200 OK` https://http.cat/200
 - RETURN: Confirmation `Object`
-- RETURN EXAMPLE:
+- RETURN EXAMPLE, DELETING ONE UNIQUE RECORD:
 ```json
 {
   "n":1,
+  "ok":1
+}
+```
+
+- RETURN EXAMPLE, NO RECORDS FOUND:
+```json
+{
+  "n":0,
   "ok":1
 }
 ```
