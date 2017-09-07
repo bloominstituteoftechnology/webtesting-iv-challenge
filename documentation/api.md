@@ -1,8 +1,8 @@
 [Jump to the /food Route's HTTP Methods](#food)
-- [GET](#GETalldatabaseentries)
-- [POST](#POST)
-- [PUT](#PUT)
-- [DELETE](#DELETE)
+- [GET](#get-all-database-entries)
+- [POST](#post-a-new-entry-into-the-database)
+- [PUT](#put-a-modification-into-one-database-record)
+- [DELETE](#delete-a-single-database-record-by-unique-name)
 
 <details><summary>CLICK THE TRIANGLE FOR AN EXPANDED NOTES SECTION</summary><p>
 
