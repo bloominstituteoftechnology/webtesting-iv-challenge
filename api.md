@@ -1,6 +1,6 @@
 [Jump to the /food Route's HTTP Methods](#food)
 
-<details><summary>CLICK THE TRIANGLE TO EXPAND NOTES SECTION</summary><p>
+<details><summary>CLICK THE TRIANGLE FOR AN EXPANDED NOTES SECTION</summary><p>
 
 # AWESOME DOCUMENTATION AND TESTING FOR AN AMAZING C.R.U.D. API & SERVER
 ## REST API v1 OVERVIEW
