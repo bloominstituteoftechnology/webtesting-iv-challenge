@@ -38,7 +38,7 @@
   mongoose.Promise = global.Promise;
   ```
 
-  - and per: See http://mongoosejs.com/docs/connections.html#use-mongo-client
+  - and `{ useMongoClient: true }` per: See http://mongoosejs.com/docs/connections.html#use-mongo-client
   ```js
   mongoose.connect('mongodb://localhost/food', { useMongoClient: true }, (err) => {...});
   ```
