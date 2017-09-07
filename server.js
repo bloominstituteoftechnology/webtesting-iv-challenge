@@ -30,12 +30,11 @@ server.post('/food', (request, response) => {
 
 // $ curl -X PUT -H "Content-Type: application/json" -d '{"name":"Brussel Sprouts","reaction":"yuck"}' localhost:8080/food/reaction
 // https://docs.mongodb.com/manual/reference/method/db.collection.findAndModify/
-// server.put('/food/reaction', (request, response) => {
+// server.put('/food', (request, response) => {
 //   const { name, reaction } = request.body;
 //   Food.findAndModify( // ~~~> NOT A FUNCTION ??????? WHY, WHY - WHY?????????????
 //     { name },
-//     { $set: { reaction } },
-//     { new: true },
+//     { $set: reaction }, // https://stackoverflow.com/a/24648693/5225057
 //     (err, food) => {
 //       if (err) return response.send('Post.find()', err);
 //       food.reaction = reaction;
@@ -47,7 +46,6 @@ server.post('/food', (request, response) => {
 // https://docs.mongodb.com/manual/reference/method/db.collection.findOneAndUpdate/
 server.put('/food', (request, response) => {
   const { name, reaction } = request.body;
-  // const update = reaction;
   Food.findOneAndUpdate(
     { name },
     { $set: { reaction } }, // It took me FOREVER to figure out this setting. MngoDB Docs are not, ah... terribly clear :_(

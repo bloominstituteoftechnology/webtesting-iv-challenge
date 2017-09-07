@@ -15,28 +15,39 @@
 | **A.P.I.** | Application Programming Interface |
 
 1. Starting with the basic Food database example which Ben demonstrated in his [lecture](https://youtu.be/otSW2ZpBa2U).
-2. Add a "reaction"
+2. Added a "reaction" field...
 
 ### TESTING
 > at least one test written for each route. DONE √
 
 > Write your tests BEFORE you write the actual routes. OKAY √
 
-1. NOTE: mocha, chai sinon
+1. Babel & ESLinter AirBnB is ACTIVE
+2. NOTE: mocha, chai, ~sinon~
   - Some adjustments per deprecation warnings.
   - set up for `npm run watch` and NYAN CAT!
   - not sure if this will cause problems for future test scenarios where db needs to be persistent?
+  - per: https://groups.google.com/forum/?fromgroups=#!topic/mongoose-orm/PXTjqqpaDFk
   ```js
   mongoose.models = {};
   mongoose.modelSchemas = {};
   ```
 
-  - also configured for mongoose vs. Promises.
+  - also configured for mongoose vs. Promises per http://mongoosejs.com/docs/promises.html
   ```js
   mongoose.Promise = global.Promise;
   ```
 
-2. TBD: configure with jest?
+  - and per: See http://mongoosejs.com/docs/connections.html#use-mongo-client
+  ```js
+  mongoose.connect('mongodb://localhost/food', { useMongoClient: true }, (err) => {...});
+  ```
+  &
+  ```js
+  mongoose.connect('mongodb://localhost/test', { useMongoClient: true }, (err) => {
+  ```
+
+3. TBD: configure with jest?
 
 > need to have tests for your routes and for your models. - OKAY √
 

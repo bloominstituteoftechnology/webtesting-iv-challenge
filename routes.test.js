@@ -11,6 +11,7 @@ mongoose.connect('mongodb://localhost/test', { useMongoClient: true }, (err) => 
   console.log('DUDE! You are like totally connected to the TEST DataBase, man!');
 });
 // added to use npm run watch, not sure if this is the best practice?
+// Wish I had better documentatin than this: https://groups.google.com/forum/?fromgroups=#!topic/mongoose-orm/PXTjqqpaDFk
 mongoose.models = {};
 mongoose.modelSchemas = {};
 // Promises & mongoose: http://mongoosejs.com/docs/promises.html
