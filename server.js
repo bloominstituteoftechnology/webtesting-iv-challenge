@@ -26,18 +26,36 @@ server.post('/food', (request, response) => {
 });
 
 // $ curl -X PUT -H "Content-Type: application/json" -d '{"name":"Brussel Sprouts","reaction":"yuck"}' localhost:8080/food/reaction
+// https://docs.mongodb.com/manual/reference/method/db.collection.findAndModify/
+// server.put('/food/reaction', (request, response) => {
+//   const { name, reaction } = request.body;
+//   Food.findAndModify( // ~~~> NOT A FUNCTION ??????? WHY, WHY - WHY?????????????
+//     { name },
+//     { $set: { reaction } },
+//     { new: true },
+//     (err, food) => {
+//       if (err) return response.send('Post.find()', err);
+//       food.reaction = reaction;
+//       response.status(200); // https://http.cat/200
+//       response.send(food);
+//     });
+// });
+
+// https://docs.mongodb.com/manual/reference/method/db.collection.findOneAndUpdate/
 server.put('/food/reaction', (request, response) => {
   const { name, reaction } = request.body;
-  Food.findAndModify(
-    { query: name },
-    { new: true },
+  const update = reaction;
+  Food.findOneAndUpdate(
+    { name },
+    { $set: { reaction } },
     (err, food) => {
       if (err) return response.send('Post.find()', err);
-      food.reaction = reaction;
+      food.reaction = update;
       response.status(200); // https://http.cat/200
-      response.send(food);
+      response.send(food.reaction);
     });
 });
+
 
 // $ curl -X DELETE -H "Content-Type: application/json" -d '{"name":"Brussel Sprouts"}' localhost:8080/food/reaction
 // server.delete('/food', (request, response) => {
