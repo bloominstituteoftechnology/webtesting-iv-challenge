@@ -82,7 +82,7 @@ describe('/food', () => {
         .put('/food')
         .send(update)
         .end((err, res) => {
-          console.log('From Test', res);
+          console.log('From Test', res.body);
           if (err) return console.log('PUT action: like your head POST-Hume\'s Guillotine\n', err.response.error);
           expect(res.status).to.equal(202); // https://http.cat/202
           expect(res.body.name).to.equal('Hot Dog');
