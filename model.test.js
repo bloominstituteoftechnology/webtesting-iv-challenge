@@ -31,17 +31,17 @@ describe('Food', () => {
   // getName is ONLY on the instance "food" (from class "Food")
   describe('#getName()', () => {
     // const food = new Food({ // <~~~~~~~ Is this okay or is it better to make declarations within the it('should... ?
-    //   name: 'Anything from Ruth\'s Chris Steak House'
+    //   name: 'Ban Chan'
     // });
     it('should be a function', () => {
       const food = new Food({
-        name: 'Anything from Ruth\'s Chris Steak House'
+        name: 'Ban Chan'
       });
       expect(food.getName).to.be.a('function');
     });
     it('should return a String', () => {
       const food = new Food({
-        name: 'Anything from Ruth\'s Chris Steak House'
+        name: 'Ban Chan'
       });
       expect(typeof food.getName()).to.equal('string');
     });
