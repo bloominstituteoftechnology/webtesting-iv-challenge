@@ -67,6 +67,10 @@ server.put('/food', (request, response) => {
     { $set: { reaction } }, // It took me FOREVER to figure out this setting. MngoDB Docs are not, ah... terribly clear :_(
     (err, food) => {
       if (err) return response.send('POST Food.findOneAndUpdate()', err);
+      if (!food) {
+        sendUserError(`There ain't no "${name}" in the Food database, fool!`, response);
+        return;
+      }
       food.reaction = reaction;
       response.status(STATUS_USER_OK); // https://http.cat/200
       response.send(food);
