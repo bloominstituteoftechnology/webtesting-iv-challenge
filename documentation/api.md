@@ -1,4 +1,8 @@
 [Jump to the /food Route's HTTP Methods](#food)
+- [GET](##GET)
+- [POST](##POST)
+- [PUT](##PUT)
+- [DELETE](##DELETE)
 
 <details><summary>CLICK THE TRIANGLE FOR AN EXPANDED NOTES SECTION</summary><p>
 
