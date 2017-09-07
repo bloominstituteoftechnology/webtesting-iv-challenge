@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const Food = require('./food');
-const server = require('./server');
+const Food = require('../models/food');
+const server = require('../src/server');
 const chai = require('chai');
 const sinon = require('sinon'); // <~~~~~~~~~~~~~~~ STUBBING
 
@@ -60,7 +60,7 @@ describe('Food', () => {
     });
     it('should return all the foods', () => {
       // sinon.stub(Food, 'find');
-      Food.find.yields(null, [{ name: 'chicken pot pie' }]);
+      Food.find.yields(null, [{ name: 'chicken pot pie', reaction: 'yum' }]);
       Food.getAllFoods((foods) => {
         // expect(foods).to.be.an('array');
         expect(foods.length).to.equal(1);

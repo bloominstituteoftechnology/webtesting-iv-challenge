@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const Food = require('./food');
+const Food = require('../models/food');
 
 const server = express();
 server.use(bodyParser.json());

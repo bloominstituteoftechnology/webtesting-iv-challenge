@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const Food = require('./food');
-const server = require('./server');
+const Food = require('../models/food');
+const server = require('../src/server');
 const chai = require('chai');
 const chaiHTTP = require('chai-http');
 
