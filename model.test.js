@@ -8,7 +8,7 @@ const sinon = require('sinon'); // <~~~~~~~~~~~~~~~ STUBBING
 /* eslint no-console: 0 */
 mongoose.connect('mongodb://localhost/test', { useMongoClient: true }, (err) => {
   if (err) return console.log(err);
-  console.log('DUDE! You are like totally connected to the TEST DataBase from MODELS tests, man!');
+  console.log('DUDE! You are like totally connected to the TEST DataBase from the MODELS tests, man!');
 });
 // added to use npm run watch, not sure if this is the best practice?
 // Wish I had better documentatin than this: https://groups.google.com/forum/?fromgroups=#!topic/mongoose-orm/PXTjqqpaDFk
@@ -53,7 +53,7 @@ describe('Food', () => {
     });
   });
 
-  // getAllFoods is a method on the Class Food
+  // getAllFoods is a method on the Class Food (not the instance of "food")
   describe('#getAllFoods()', () => {
     it('should be a function', () => {
       expect(Food.getAllFoods).to.be.a('function');
