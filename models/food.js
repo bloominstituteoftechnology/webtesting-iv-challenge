@@ -38,6 +38,6 @@ FoodSchema.statics.getAllFoods = function getAllFoods(cb) {
   });
 };
 
-const Food = mongoose.model('Food', FoodSchema); // <~~~~ See Q line 29-30
+const Food = mongoose.model('Food', FoodSchema); // <~~~~ See Q lines 18 and 30-31
 
 module.exports = Food;
