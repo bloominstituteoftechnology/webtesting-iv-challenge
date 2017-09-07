@@ -23,10 +23,16 @@ chai.use(chaiHTTP);
 
 describe('Food', () => {
   describe('#getName()', () => {
+    const food = new Food({ // <~~~~~~~ Is this okay or is it better to make declarations within the it('should... ?
+      name: 'Rib Steak'
+    });
+    it('should be a function', () => {
+      expect(food.getName).to.be.a('function');
+    });
+    it('should return a String', () => {
+      expect(typeof food.getName()).to.equal('string');
+    });
     it('should return the name of the food', () => {
-      const food = new Food({
-        name: 'Rib Steak'
-      });
       expect(food.getName()).to.equal('Rib Steak');
     });
   });
