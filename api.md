@@ -23,7 +23,7 @@
 > Write your tests BEFORE you write the actual routes. OKAY √
 
 1. Babel & ESLinter AirBnB is ACTIVE
-2. NOTE: mocha, chai, ~sinon~
+2. NOTE: mongoose
   - Some adjustments per deprecation warnings.
   - set up for `npm run watch` and NYAN CAT!
   - not sure if this will cause problems for future test scenarios where db needs to be persistent?
@@ -47,12 +47,16 @@
   mongoose.connect('mongodb://localhost/test', { useMongoClient: true }, (err) => {...});
   ```
 
-3. TBD: configure with jest?
+3. mocha, chai ~sinon~
+  - http://chaijs.com/plugins/chai-http/
+4. TBD: configure with jest?
 
 > need to have tests for your routes and for your models. - OKAY √
 
 ### SCHEMA
 > models should have some methods/statics that are tested. - OKAY √
+
+http://mongoosejs.com/docs/guide.html#methods
 
 ### ROUTES
 > routes that use the following HTTP verbs: GET, PUT, POST, and DELETE. - DONE √
