@@ -1,14 +1,10 @@
 # LS-Server-Testing
 
-<style type="text/css">
-    ol { list-style-type: lower-alpha; }
-</style>
-
-#### [Jump to the /food Route's HTTP Methods](#food)
-1. [GET](#ge`t-all-database-entries)
-2. [POST](#post-a-new-entry-into-the-database)
-3. [PUT](#put-a-modification-into-one-database-record)
-4. [DELETE](#delete-a-single-database-record-by-unique-name)
+### [Jump to the /food Route's HTTP Methods](#food)
+  i. [GET](#ge`t-all-database-entries)
+ ii. [POST](#post-a-new-entry-into-the-database)
+iii. [PUT](#put-a-modification-into-one-database-record)
+ iv. [DELETE](#delete-a-single-database-record-by-unique-name)
 
 <details><summary>CLICK THE TRIANGLE FOR AN EXPANDED NOTES SECTION</summary><p>
 
