@@ -22,6 +22,7 @@ chai.use(chaiHTTP);
 
 describe('/food', () => {
   beforeEach((done) => {
+    // https://mochajs.org/#describing-hooks
     // beforeEach "hook" clears out db prior to each test, asynchronously with "done"
     // "Food.remove(...)" is asynchronous
     Food.remove({}, (err) => {
