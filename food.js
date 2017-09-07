@@ -16,6 +16,17 @@ const FoodSchema = new Schema({
   }
 });
 
+// http://mongoosejs.com/docs/guide.html#methods
+
+// // Linter unhappy: https://eslint.org/docs/rules/func-names
+// FoodSchema.methods.getName = function() {
+//   return this.name;
+// };
+FoodSchema.methods.getName = function getName() {
+  return this.name;
+};
+
+
 const Food = mongoose.model('Food', FoodSchema);
 
 module.exports = Food;
