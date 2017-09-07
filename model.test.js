@@ -55,10 +55,14 @@ describe('Food', () => {
 
   // getAllFoods is a method on the Class Food
   describe('#getAllFoods()', () => {
+    it('should be a function', () => {
+      expect(Food.getAllFoods).to.be.a('function');
+    });
     it('should return all the foods', () => {
       // sinon.stub(Food, 'find');
       Food.find.yields(null, [{ name: 'chicken pot pie' }]);
       Food.getAllFoods((foods) => {
+        // expect(foods).to.be.an('array');
         expect(foods.length).to.equal(1);
         expect(foods[0].name).to.equal('chicken pot pie');
         // Food.find.restore();
