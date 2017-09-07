@@ -1,9 +1,6 @@
 [Jump to the /food Route's HTTP Methods](#food)
 
-
 <details><summary>CLICK THE TRIANGLE TO EXPAND NOTES SECTION</summary><p>
-
-
 
 # AWESOME DOCUMENTATION AND TESTING FOR AN AMAZING C.R.U.D. API & SERVER
 ## REST API v1 OVERVIEW
@@ -49,9 +46,13 @@
 ### ROUTES
 > routes that use the following HTTP verbs: GET, PUT, POST, and DELETE. - OKAY √
 
+### TODO:
+1. Input exception handling
+2. GET single DB entry by name
+3. params and query routes
+4. PUT modification in all records?
 
 </p></details>
-
 
 ***
 # /food
