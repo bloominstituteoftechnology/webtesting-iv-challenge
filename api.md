@@ -1,8 +1,13 @@
+[Jump to the /food Route's HTTP Methods](#food)
+
+
+<details><summary>CLICK THE TRIANGLE TO EXPAND NOTES SECTION</summary><p>
+
+
+
 # AWESOME DOCUMENTATION AND TESTING FOR AN AMAZING C.R.U.D. API & SERVER
 ## REST API v1 OVERVIEW
 > a simple RESTful API for a database with collections of your choosing.
-
-[Jump to /food Routes HTTP Methods](#food)
 
 ## NOTES:
 
@@ -43,6 +48,10 @@
 
 ### ROUTES
 > routes that use the following HTTP verbs: GET, PUT, POST, and DELETE. - OKAY √
+
+
+</p></details>
+
 
 ***
 # /food
@@ -102,7 +111,7 @@
 }
 ```
 
-### PUT
+## PUT
 - `curl -X PUT -H "Content-Type: application/json" -d '{"name":"Brussel Sprouts","reaction":"yuck"}' localhost:8080/food/reaction`
 - PARAMETERS: {name: "food item","reaction":"yuck"}
 
@@ -125,4 +134,4 @@
 }
 ```
 
-### DELETE
+## DELETE
