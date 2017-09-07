@@ -15,6 +15,7 @@ const FoodSchema = new Schema({
     default: 'yum',
   }
 });
+// const Food = mongoose.model('Food', FoodSchema); // <~~~~ Placing this here makes all the models tests fail ????
 
 // http://mongoosejs.com/docs/guide.html#methods
 
@@ -26,7 +27,7 @@ FoodSchema.methods.getName = function getName() {
   return this.name;
 };
 
-// const Food = mongoose.model('Food', FoodSchema); <~~~~ LINTER WANTS THIS HERE BUT THIS BREAKS TESTS - WHY???????
+// const Food = mongoose.model('Food', FoodSchema); // <~~~~ LINTER WANTS THIS HERE BUT THIS BREAKS TESTS - WHY???????
 // Function hoisting? Async tests with stubs? mongoose mpromises?????????????????
 
 /* eslint no-use-before-define: 0 */ // <~~~~~~~~~~~~~~~~~ Take that, Linter!!!
