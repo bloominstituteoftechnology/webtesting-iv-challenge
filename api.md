@@ -42,7 +42,8 @@ HTTP Code | Name                  | Description
 400       | Bad Request, Bad!           | There was something wrong with the request, probably due to a missing resource.
 404       | Not found             | There's nothing at the endpoint requested.
 422       | Unprocessable Entity          | The request could not be authorized, probably due to invalid or missing validation.
-500       | Internal Server Error | It's not your fault. There was a problem at the server with fulfilling the request. My bad.
+500       | Internal Server Error | It's not your fault. There was a problem at the server with fulfilling the request. My bad.  
+
 [↑](#0)
 ***
 ## <a name="3"></a>Endpoints →
