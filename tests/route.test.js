@@ -23,7 +23,7 @@ describe('/books', () => {
   describe('GET /books', () => {
     it('should get a list of all books', async () => {
       const res = await chai.request(server).get('/books');
-      expect(res.status).to.equal(200);
+      expect(res).to.have.status(200);
       expect(res.body).to.be.an('Array');
       expect(res.body.length).to.equal(0);
     });
@@ -44,7 +44,7 @@ describe('/books', () => {
                   .post('/books')
                   .send(book);
       
-      expect(res.status).to.equal(200);
+      expect(res).to.have.status(200);
       expect(res.body.title).to.equal(book.title);
     });
   });
@@ -69,7 +69,7 @@ describe('/books', () => {
                   .request(server)
                   .get(`/books/${addedBook.body._id}`);
 
-      expect(res.status).to.equal(200);
+      expect(res).to.have.status(200);
       expect(res.body.author).to.equal(book.author);
     });
 
@@ -105,7 +105,7 @@ describe('/books', () => {
                   .put(`/books/${addedBook.body._id}`)
                   .send(update);
       
-      expect(res.status).to.equal(200);
+      expect(res).to.have.status(200);
       expect(res.body.author).to.equal(update.author);
     });
 
@@ -116,7 +116,7 @@ describe('/books', () => {
                   .send({title: "Hello"});
       
       expect(res.status).to.equal(404);
-      expect(res.body).to.equal({"error": "Book not found"});
+      expect(res.body).to.eql({"error": "Book not found"});
     });
   });
 
@@ -136,9 +136,9 @@ describe('/books', () => {
                         .post('/books')
                         .send(book);
                 
-      const res = await chai.request(server).del(`/books/${addedBook.body._id}`);
+      const res = await chai.request(server).delete(`/books/${addedBook.body._id}`);
 
-      expect(res.status).to.equal(200);
+      expect(res).to.have.status(200);
       
       const books = await Book.find();
       expect(books.length).to.equal(0);
@@ -149,8 +149,8 @@ describe('/books', () => {
                         .request(server)
                         .del('/books/123');
       
-      expect(res.status).to.equal(404);
-      expect(res.body).to.equal({"error": "Book not found"});
+      expect(res).to.have.status(404);
+      expect(res.body).to.eql({"error": "Book not found"});
     });
   });
 });

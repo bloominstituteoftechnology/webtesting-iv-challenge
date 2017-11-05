@@ -5,12 +5,17 @@
   "repository": "https://github.com/JPRoland/Server-Testing.git",
   "author": "Joseph Roland <joroland@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "mocha -R nyan tests",
+    "watch": "npm test -- --watch"
+  },
   "dependencies": {
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
-    "chai-http": "^3.0.0",
+    "chai-http": "git+https://github.com/chaijs/chai-http.git",
     "express": "^4.16.2",
     "mocha": "^4.0.1",
+    "mocha-steps": "^1.1.0",
     "mongoose": "^4.12.6",
     "sinon": "^4.1.0",
     "sinon-mongoose": "^2.0.2"

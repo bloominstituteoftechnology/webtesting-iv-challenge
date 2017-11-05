@@ -19,7 +19,7 @@ Represents book details.
 
 ### Get All Books
 
-`GET /api/books`
+`GET /books`
 
 ### Response
 
@@ -51,7 +51,7 @@ Status: 200
 
 ### Create a Book
 
-`POST /api/books`
+`POST /books`
 
 ### Request
 
@@ -90,7 +90,7 @@ A single a Book object
 
 ### Get a Single Book
 
-`GET /api/books/:id`
+`GET /books/:id`
 
 ### Parameters
 
@@ -123,7 +123,7 @@ Status: 404
 
 ### Update a Book
 
-`PUT /api/books/:id`
+`PUT /books/:id`
 
 ### Parameters
 
@@ -167,7 +167,7 @@ Status: 404
 
 ### Delete a Book
 
-`DELETE /api/books/:id`
+`DELETE /books/:id`
 
 ### Parameters
 
