@@ -1,0 +1,20 @@
+{
+  "name": "server-testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha *.test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "express": "^4.16.2",
+    "mocha": "^4.0.1",
+    "mongoose": "^4.12.6",
+    "sinon": "^4.0.2"
+  }
+}
