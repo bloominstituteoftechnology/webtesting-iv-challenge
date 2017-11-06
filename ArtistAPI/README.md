@@ -21,7 +21,7 @@ npm i -g nodemon
 
 Start ``` mongo ``` form the project root directory
 
- - ``` windows``` 
+ ``` windows``` 
 
 
 ```
@@ -44,7 +44,7 @@ Add a new Artist by sending a resquest ```body``` with the properties: ```name``
 ```
 POST /add-artist
 ```
-```
+```javascript
 {
   name: 'Artist Name',
   age: 27,
@@ -64,7 +64,7 @@ Update the Artist information in the database by sending a request ```body``` wi
 ```
 PUT /update-artist/:id
 ```
-```
+```javascript
 //Before
 {
   name: 'Artist Name',
@@ -105,7 +105,7 @@ Changes the current Artist's ```name```
 ```
 artist.changeName('Changed Name');
 ```
-```
+```javascript
 //Before
 {
   name: 'ArtistName',
@@ -123,17 +123,17 @@ artist.changeName('Changed Name');
 
 ### **Artist Info**
 Returns back the Artist ```info```
-```
+```javascript
 artist.info();
 ```
 ### **Add To Rank**
 Adds Points to the Artist ```rank```
-```
+```javascript
 artist.addToRank('20');
 ```
 ### **Add Client**
 Adds A Client to the Artist
-```
+```javascript
 artist.addClient('Client Name', (UpdatedArtist) => {
   return UpdatedArtist.clients; // [...clientID, (New Client ID)]
 });
@@ -141,7 +141,7 @@ artist.addClient('Client Name', (UpdatedArtist) => {
 ``` STATICS ```
 ### **Find Artist**
 Finds Artist by ```name```
-```
+```javascript
 ArtistSchema.findArtist('Artist Name', (artist) => {
   return artist; 
   // {
@@ -153,7 +153,7 @@ ArtistSchema.findArtist('Artist Name', (artist) => {
 ```
 ### **Find All**
 Finds all Artists in database
-```
+```javascript
 ArtistSchema.findAll((artists) => {
   return artists;
   // [{
