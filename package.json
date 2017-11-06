@@ -1,0 +1,22 @@
+{
+  "name": "server-testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "mocha -R nyan tests/*.test.js",
+    "watch": "npm test -- --watch"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "cors": "^2.8.4",
+    "express": "^4.15.4",
+    "mocha": "^4.0.1",
+    "mongoose": "^4.11.7",
+    "sinon": "^4.1.0"
+  }
+}
