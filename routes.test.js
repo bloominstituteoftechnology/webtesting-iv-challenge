@@ -1,56 +1,48 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test'); 
-
-const Food = require('./food');
-const server = require('./server');
 const chai = require('chai');
 const chaiHTTP = require('chai-http');
 const expect = chai.expect;
+chai.use(chaiHTTP);
+mongoose.connect('mongodb://localhost/food-test', { useMongoClient: true });
 
-chai.user(chaiHTTP); // allows us to mock these requests below
+const server = require('./server');
+// require your models
 
-// We want tests to be descriptive as possible
-// This function will run before every test we do, that way each test has a clean canvas to start on.
+describe(`food api`, () => {
+  // beforeEach(() => {
+  //   const newFood = new Food('Spaghetti');
+  //   newFood.save();
+  // })
+  // afterEach(() => {
+  //   deleting data in your test db.
+  //   Food.remove({}, (err) => {
+  //   done();
+  // });
+  // })
 
-describe('/food', () => {
-	beforeEach((done) => { // hook -> before each test runs
-		Food.remove({}, (err) => { // clean canvas. - where we start interactin with the db
-			if (err) console.log(err); // db is on another server so we need to make a request wihich is asynchronous and so done means to not run the other test until it is finished.
-			done(); // a callback function provided by mocha - knows that if the ufnciton is not invoked, it wil not move on.
-		});
-	});
-	
-	describe('[GET] /food', () => {
-		it('should get all of the food', () => {
-			chai // This is making a request
-				.request(server)
-				.get('/food')
-				.end((err, res) => {
-					if (err) return console.log(err);
-					expect(res.status).to.equal(200);
-					expect(Array.isArray(res.body)).to.equal(true);
-					expect(res.body.length).to.equal(0);
-					done();
-				});
-		});
-	});
+  describe(`[GET] '/food'`, () => {});
+  it('should return an string hello world', done => {
+    chai
+      .request(server)
+      .get('/food')
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body.text).to.be.a('string');
+        expect(res.body.text).to.equal('hello world');
+        done();
+      });
+  });
 
-	describe('[POST] /food', () => {
-		it('should add a new food', () => {
-			const food = {
-				name: 'Hot Dog'
-			};
-
-			chai // This is making a request
-				.request(server)
-				.post('/food')
-				.send(food)
-				.end((err, res) => {
-					if (err) return console.log(err);
-					expect(res.status).to.equal(200);
-					expect(res.body.name).to.equal('Hot Dog');
-					done();
-				});
-		});
-	});
+  describe(`[GET] '/monsters'`, () => {
+    it('should return an array of monsters', done => {
+      chai
+        .request(server)
+        .get('/monsters')
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(Array.isArray(res.body)).to.equal(true);
+          done();
+        });
+    });
+  });
 });
