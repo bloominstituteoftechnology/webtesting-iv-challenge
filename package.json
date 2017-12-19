@@ -1,0 +1,23 @@
+{
+  "name": "Server-Testing-Mini",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha *.test.js --exit",
+    "start": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "Thomas Dillard",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "express": "^4.16.2",
+    "mocha": "^4.0.1",
+    "mongoose": "^4.13.7",
+    "morgan": "^1.9.0",
+    "sinon": "^4.1.3"
+  }
+}
