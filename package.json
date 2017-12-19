@@ -1,0 +1,30 @@
+{
+  "name": "server-testing",
+  "version": "1.0.0",
+  "description": "* TDD\r * `sinon`\r * `chai`\r * `mocha`\r * `chai-http`\r * `done()`\r * statics vs methods\r * documentation",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha *.test.js",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rbaheti/Server-Testing.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rbaheti/Server-Testing/issues"
+  },
+  "homepage": "https://github.com/rbaheti/Server-Testing#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "express": "^4.16.2",
+    "mocha": "^4.0.1",
+    "mongoose": "^4.13.7",
+    "morgan": "^1.9.0",
+    "sinon": "^4.1.3"
+  }
+}
