@@ -5,3 +5,5 @@ If you're a food lover like me, then this API is for you! The following will tea
 | Command | Description      | Return Type |
 | -----   | -----            | -----       |
 | `GET`   | 'Hello World'    | String      |
+
+## `[GET] '/food`

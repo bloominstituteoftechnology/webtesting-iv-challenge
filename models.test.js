@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 const chai = require('chai');
 const sinon = require('sinon');
@@ -10,12 +9,12 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/test', { useMongoClient: true });
 
 describe('Food', () => {
-  describe('getName()', () => {
+  describe('getTitle()', () => {
     it(`should return 'the title of the given food'`, () => {
       const food = new Food({
-        foo: 'Chicken Nuggets'
+        title: 'Chicken Nuggets'
       });
-      expect(food.getName()).to.equal('Chicken Nuggets');
+      expect(food.getTitle()).to.equal('Chicken Nuggets');
     });
   });
 
@@ -24,8 +23,7 @@ describe('Food', () => {
       sinon.stub(Food, 'find');
       Food.find.yields(null, [{ title: 'French Fries' }, { title: 'Pizza' }]);
       Food.getAllFood(foods => {
-        console.log('FOOOODS: ', foods);
-
+        expect(foods.length).to.equal(2);
         Food.find.restore();
       });
     });
