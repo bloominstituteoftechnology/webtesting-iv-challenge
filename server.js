@@ -42,7 +42,7 @@ server
     const updateObj = {};
     if (username) updateObj.username = username;
     if (password) updateObj.password = password;
-    
+
     User.findByIdAndUpdate(id, updateObj, { new: true }, (err, update) => {
       if (err) res.status(422).json(err);
       res.json(update);

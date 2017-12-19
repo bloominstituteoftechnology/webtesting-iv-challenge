@@ -190,9 +190,6 @@ describe('server-test API', () => {
         });
     });
     it('should properly update users', (done) => {
-      User.findById(id, (err, users) => {
-        console.log('users by ID: ', users);
-      });
       chai
         .request(server)
         .put(`/users/${id}`)
@@ -200,9 +197,6 @@ describe('server-test API', () => {
         .end((err, res) => {
           // console.log(res);
           expect(res.body).to.have.property('username', 'ryan@nyanCat.com');
-          User.find({}, (err, users) => {
-            console.log('all users: ', users);
-          })
           User
             .findById(id)
             .then((fUser) => {
@@ -223,7 +217,6 @@ describe('server-test API', () => {
     };
     beforeEach((done) => {
       const newUser = new User(myUser);
-
       newUser
         .save()
         .then((nUser) => {
@@ -234,12 +227,10 @@ describe('server-test API', () => {
     afterEach((done) => {
       User.remove({}, (err) => {
         if (err) console.error(err);
-        // User.find({}).then(users => console.log(users));
       });
       done();
     });
     it('should successfully delete a user', (done) => {
-      // console.log('id: ', id);
       chai
         .request(server)
         .delete(`/users/${id}`)
