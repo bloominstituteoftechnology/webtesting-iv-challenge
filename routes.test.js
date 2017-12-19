@@ -174,7 +174,7 @@ describe('server-test API', () => {
     });
     it('should reject it doesn\'t username or password', (done) => {
       chai
-        .request(server)
+        .request(server);
     });
   });
 });
