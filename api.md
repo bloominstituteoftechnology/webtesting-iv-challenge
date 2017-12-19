@@ -33,6 +33,15 @@
 ### Add a new item
 `POST /items`
 
+##### POST parameters
+Name         | Type          | Description
+------------ | ------------- | -------------
+Name         | String        | Required, Unique
+salePrice    | Number        | Required
+brandName    | String        | Default: null
+color        | String        | Default: null
+stock        | String        | Default: "Available"
+
 ##### Response
 `Status: 201 Created`
 ```
