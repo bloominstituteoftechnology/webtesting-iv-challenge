@@ -150,12 +150,19 @@ describe('server-test API', () => {
   });
 
   describe('[PUT] "/user/:id"', () => {
-    beforeEach((done) => {
-      const newUser = new User({});
-      newUser.save();
+    const myUser = {
+      username: 'ivan@wow.com',
+      password: 'myOtherJobIsA_MOBA',
+    };
+    let id;
+    before((done) => {
+      const newUser = new User(myUser);
+      newUser
+        .save()
+        .then((nUser) => { id = nUser._id; });
       done();
     });
-    afterEach((done) => {
+    after((done) => {
       User.remove({}, (err) => {
         if (err) console.error(err.message);
         done();
@@ -174,7 +181,75 @@ describe('server-test API', () => {
     });
     it('should reject it doesn\'t username or password', (done) => {
       chai
-        .request(server);
+        .request(server)
+        .put(`/users/${id}`)
+        .send({})
+        .end((err) => {
+          expect(err.status).to.equal(422);
+          done();
+        });
+    });
+    it('should properly update users', (done) => {
+      User.findById(id, (err, users) => {
+        console.log('users by ID: ', users);
+      });
+      chai
+        .request(server)
+        .put(`/users/${id}`)
+        .send({ username: 'ryan@nyanCat.com' })
+        .end((err, res) => {
+          // console.log(res);
+          expect(res.body).to.have.property('username', 'ryan@nyanCat.com');
+          User.find({}, (err, users) => {
+            console.log('all users: ', users);
+          })
+          User
+            .findById(id)
+            .then((fUser) => {
+              expect(fUser.username).to.not.equal(myUser.username);
+              expect(fUser.username).to.equal('ryan@nyanCat.com');
+              expect(fUser.password).to.equal(myUser.password);
+              done();
+            })
+            .catch(error => console.error(error));
+        });
+    });
+  });
+  describe('[DELETE] "/users/:id"', () => {
+    let id;
+    const myUser = {
+      username: 'Luis@theOneRing.com',
+      password: 'myPr3c10u5',
+    };
+    beforeEach((done) => {
+      const newUser = new User(myUser);
+
+      newUser
+        .save()
+        .then((nUser) => {
+          id = nUser._id;
+          done();
+        });
+    });
+    afterEach((done) => {
+      User.remove({}, (err) => {
+        if (err) console.error(err);
+        // User.find({}).then(users => console.log(users));
+      });
+      done();
+    });
+    it('should successfully delete a user', (done) => {
+      // console.log('id: ', id);
+      chai
+        .request(server)
+        .delete(`/users/${id}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          User.findById(id, (error, user) => {
+            expect(!user).to.equal(true);
+          });
+        });
+      done();
     });
   });
 });
