@@ -1,0 +1,23 @@
+{
+  "name": "movies-app",
+  "version": "1.0.0",
+  "description": "Serverside testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha *.test.js --exit",
+    "start": "nodemon app.js"
+  },
+  "author": "Mikias Hundie",
+  "license": "LIS",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "express": "^4.16.2",
+    "jshint": "^2.9.5",
+    "mocha": "^4.0.1",
+    "mongoose": "^4.13.7",
+    "morgan": "^1.9.0",
+    "sinon": "^4.1.3"
+  }
+}
