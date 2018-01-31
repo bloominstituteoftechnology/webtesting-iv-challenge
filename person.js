@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const db = require('./db');
 const PersonSchema = new mongoose.Schema({
   firstName: {
     type: String,
@@ -15,10 +15,14 @@ PersonSchema.methods.getFullName = function() {
   return this.firstName + " " + this.lastName;
 }
 
-PersonSchema.statics.findByFirstName = function(cb) {
-  return this.findOne({ firstName }).exec(cb);
+PersonSchema.statics.findByFirstName = function(firstName) {
+  return this.findOne({ firstName }).exec();
 }
 
-const Person = mongoose.model('Person', PersonSchema);
-
+let Person;
+try {
+  Person = db.model('Person', PersonSchema);
+} catch(err) {
+  Person = db.model('Person');
+}
 module.exports = Person;
