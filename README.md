@@ -1,10 +1,3 @@
-# Server-Testing-Mini
-
-## A follow along practice for teaching TDD
-
-## The purpose of this guided demo is to get you to set up your environment for building out your CRUD API with Documentation, tests and of course, your endpoints.
-
----
 
 # Rate the Sodas
 ## Api Documentation 
