@@ -6,54 +6,31 @@
 
 ---
 
-## Step 1. Project Initialization
+# Rate the Sodas
+## Api Documentation 
+This API allows your to add and compare your favourite sodas and their ratings.
 
-* Create an empty directory and name it whatever you'd like.
-* Initialize your project with an `npm init` command (This will create a `package.json` file that you can run `npm` commands to in order to save your `node_modules`).
-* The packages that we need for this project are:
-  * express
-  * body-parser
-  * mongoose
-  * mocha
-  * chai-http
-  * morgan --> this is new we'll chat about it.
-  * sinon
+## Port - Location for all endpoints to interface with our Sodas App is 
+`http://localhost:3333`
 
-## Step 2. Project Initialization Round II
+## [POST] `/api/sodas/ceate`
+|Endpoint   |Type   |data  |
+| --------- | ----- | ---- |
+|/api/sodas/|post   |json  |  
 
-* Create the following files in your project.
 
-  * server.js
-  * app.js
-  * documentation.md
-  * .gitignore
-  * routes.test.js
-  * models.test.js
+## [GET] `/api/sodas`
+|Endpoint   |Type   |data  |
+| --------- | ----- | ---- |
+|/api/sodas/|get    |      | 
 
-## Step 3. Build a server, and a testing environment
+#### Example
 
-* in your `package.json` file, under `scripts` add the test command:
-
+* To post a soda pass data in form of a json object with rating as a number and name as a string.
 ```
-"scripts": {
-  "test": "mocha *.test.js"
-},
+{
+  "name":"coke",
+  "rating":9
+}
 ```
-
-* This command will allow you to run your tests.
-
-* Next, head over to your `server.js` file that we created and build out the boilerplate code for your node server.
-* Finally, we're going to set up our testing environment, head over to your `routes.test.js` file and require in `mongoose`, `chai`, and `chai-http`.
-* You'll also pass `chaiHTTP` into your `chai` as `middlware`
-
-```
-chai.use(chaiHTTP);
-```
-
-* and of course, you'll want to pull in your server as it will be used to mock calls to your api. And call `mongoose.connect` to link up with a testing `mongo` instance.
-
-```
-mongoose.connect('mongodb://localhost/test');
-```
-
-* This should be all you need to get started on this project. This mini-project will actually be just the starter pack for your Server Testing Sprint.
+* To get names of all sodas in the database simply send a request to `/api/sodas`
