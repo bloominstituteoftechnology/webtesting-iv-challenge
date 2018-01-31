@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/');
+mongoose.connect('mongodb://localhost/test');
 const Routes = require('./')
 
 const chai = require('chai');
