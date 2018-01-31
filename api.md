@@ -55,10 +55,51 @@ Here is the documentation for the API. It will provide information for interfaci
 
 + Error Response: 
     + Code: 404 NOT FOUND
-    + Content: ``` { error: 'Area doesn't exist' } ```
+    + Content: ``` { error: 'Record not found' } ```
 + OR
     + Code: 401 UNAUTHORIZED
     + Content: ``` { error: 'You are not authorized to make this request' } ```
 
 + Sample Call:
 ``` Sample call will go here ```
+
+### [GET] /api/climbs/specific
+| Endpoint | Type | Data |
+|----|----|----|
+| /api/climbs/zipCode | get | json |
+
+*Example:*
++ Zip Code is required, will return record with Zip Code that matches what is entere
+
++ Success Response: provided Zip code  62446 
+    + Code: 200
+    + Content: ``` { climbingArea: 'Mt. Erie', zipCode: 62446, climbingType: 'trad' } ``` 
+
++ Error Response: 
+    + Code: 404 NOT FOUND
+    + Content: ``` { error: 'Record not found' } ```
++ OR
+    + Code: 401 UNAUTHORIZED
+    + Content: ``` { error: 'You are not authorized to make this request' } ```
+
++ Sample Call:
+``` Sample call will go here ```
+
+### [DELETE] /api/climbs/delete
+| Endpoint | Type | Data |
+|----|----|----|
+| /api/climbs/zipCode | put | json |
+
+*Example:*
++ Providing zipCode as input is required, will delete instance with zipCode that matches what is entered
+
++ Success Response: 
+    + Code: 200
+    + Content: ``` { message: 'Record successfully removed' } ``` 
+
++ Error Response: 
+    + Code: 404 NOT FOUND
+    + Content: ``` { error: 'Record not found' } ```
++ OR
+    + Code: 401 UNAUTHORIZED
+    + Content: ``` { error: 'You are not authorized to make this request' } ```
