@@ -5,9 +5,9 @@ This api's permits acess to a database of Users and perform the following functi
 1. Ensure MongoDB is installed in your system
     * mongod should be acessible from your %path
         * follow this tutorial if you have questions: https://www.youtube.com/watch?v=KLdHHa2XS8M
-    * Run this command from the root directory:
-        * npm run dbstart
-        * if all executed well it will have an instance of mongodb running on that terminal.
+2. Run this command from the root directory:
+    * npm run dbstart
+    * if all executed well it will have an instance of mongodb running on that terminal.
 
 # Api Endpoints
 #### All api calls should be directed to:
@@ -61,5 +61,5 @@ This api's permits acess to a database of Users and perform the following functi
 
 | Endpoint | Type | Data | Result |
 |:---------|:--:|:--:|:-:|
-|/users|Post|Json|Returns a list of users|
+|/users|Get|Json|Returns a list of users|
 
