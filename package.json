@@ -4,7 +4,7 @@
   "description": "## Topics",
   "main": "api.js",
   "scripts": {
-    "test": "mocha *.test.js",
+    "test": "mocha ./tests/*.test.js",
     "start": "nodemon app.js",
     "dbstart": "mongod --dbpath data"
   },
