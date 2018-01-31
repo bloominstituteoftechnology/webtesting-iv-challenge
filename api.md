@@ -1,7 +1,7 @@
 ## API Documentation ##
 Here is the documentation for the API. It will provide information for interfacing with the API. This API has information for climbing areas and the type of climbing that is most popular there.
 
-### Port/Location for all endpoints to interface with the HEX API :  http://localhost:3000
+### Port/Location for all endpoints to interface with the Climbs API :  http://localhost:3000
 
 ### Allowed HTTPs requests: ###
 + POST - to create a resource
