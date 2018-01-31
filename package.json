@@ -1,0 +1,29 @@
+{
+  "name": "Server-Testing-Mini",
+  "version": "1.0.0",
+  "description": "---",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha *.test.js -R nyan"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atiffany/Server-Testing-Mini.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atiffany/Server-Testing-Mini/issues"
+  },
+  "homepage": "https://github.com/atiffany/Server-Testing-Mini#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai-http": "^3.0.0",
+    "express": "^4.16.2",
+    "mocha": "^5.0.0",
+    "mongoose": "^5.0.2",
+    "morgan": "^1.9.0",
+    "sinon": "^4.2.2"
+  }
+}
