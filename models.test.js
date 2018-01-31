@@ -64,6 +64,17 @@ describe('Models', () => {
         done(err);
       });
     });
-    it.skip('Should delete a person')
+    it('Should delete a person', (done) => {
+      Person.findOne().then((person) => {
+        return person.remove();
+      }).then(() => {
+        return Person.count();
+      }).then((count) => {
+        expect(count).to.equal(0);
+        done();
+      }).catch((err) => {
+        done(err);
+      });
+    });
   });
 });
