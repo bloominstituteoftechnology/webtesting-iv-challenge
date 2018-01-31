@@ -9,7 +9,7 @@ Here is the documentation for the API. It will provide information for interfaci
 + GET - to get a resource or list of resources
 + DELETE - to delete a resource
 
-### [POST] /api/climbs/add
+### [POST]
 | Endpoint | Type | Data |
 |----|----|----|
 | /api/climbs/ | post | json |
@@ -25,7 +25,7 @@ Here is the documentation for the API. It will provide information for interfaci
 } 
 ```
 
-### [PUT] /api/climbs/update
+### [PUT]
 | Endpoint | Type | Data |
 |----|----|----|
 | /api/climbs/zipCode | put | json |
@@ -41,7 +41,7 @@ Here is the documentation for the API. It will provide information for interfaci
 } 
 ```
 
-### [GET] /api/climbs/all
+### [GET]
 | Endpoint | Type | Data |
 |----|----|----|
 | /api/climbs/ | get | json |
@@ -63,7 +63,7 @@ Here is the documentation for the API. It will provide information for interfaci
 + Sample Call:
 ``` Sample call will go here ```
 
-### [GET] /api/climbs/specific
+### [GET]
 | Endpoint | Type | Data |
 |----|----|----|
 | /api/climbs/zipCode | get | json |
@@ -85,7 +85,7 @@ Here is the documentation for the API. It will provide information for interfaci
 + Sample Call:
 ``` Sample call will go here ```
 
-### [DELETE] /api/climbs/delete
+### [DELETE]
 | Endpoint | Type | Data |
 |----|----|----|
 | /api/climbs/zipCode | put | json |
