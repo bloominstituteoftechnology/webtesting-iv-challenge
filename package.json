@@ -18,6 +18,7 @@
     "url": "https://github.com/yshuman1/Server-Testing/issues"
   },
   "homepage": "https://github.com/yshuman1/Server-Testing#readme",
+  "readme": "https://github.com/yshuman1/Server-Testing/blob/master/api.md",
   "dependencies": {
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
