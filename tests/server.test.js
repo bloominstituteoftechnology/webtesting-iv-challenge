@@ -95,4 +95,21 @@ describe('Users Server Routes Test', () => {
                 });
         });
     });
+
+    describe(`[GET] /users`, () => {
+        it('Should retrieve a list of users', (done) => {
+            chai.request(app)
+                .get('/api/users')
+                .end((err, res) => {
+                    if (err) {
+                        console.log(err);
+                        done();
+                    }
+                    expect(res.status).to.equal(200);
+                    expect(typeof res.body).to.equal('object');
+                    expect(res.body).to.have.length.above(0);
+                    return done();
+                });
+        });
+    });
 });

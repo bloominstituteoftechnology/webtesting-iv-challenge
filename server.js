@@ -9,7 +9,7 @@ server.use(morgan('tiny'));
 server.use(bp.json());
 
 // Write your Routes Here! 
-
+// DUMMY SERVER FOR TESTING
 server.post('/api/register', (req, res) => {
     res.status(200).json({ id: 1 });
 });
@@ -36,4 +36,8 @@ server.delete('/api/delete/:id', (req, res) => {
     });
 });
 
+server.get('/api/users', (req, res) => {
+    res.status(200).json([{}, {}, {}]);
+});
+// DUMMY SERVER FOR TESTING
 module.exports = server;
