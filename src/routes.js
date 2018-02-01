@@ -19,7 +19,7 @@ module.exports = (server) => {
         });
       })
       .catch((error) => {
-        res.status(500).json({
+        res.status(422).json({
           success: false,
           error,
         });
@@ -37,7 +37,7 @@ module.exports = (server) => {
         });
       })
       .catch((error) => {
-        res.status(500).json({
+        res.status(422).json({
           success: false,
           error,
         });
@@ -58,7 +58,7 @@ module.exports = (server) => {
         });
       })
       .catch((error) => {
-        res.status(500).json({
+        res.status(422).json({
           success: false,
           error,
         });
@@ -78,7 +78,7 @@ module.exports = (server) => {
         });
       })
       .catch((error) => {
-        res.status(500).json({
+        res.status(422).json({
           success: false,
           error,
         });
