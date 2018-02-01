@@ -7,6 +7,8 @@ const chai = require('chai');
 const chaiHTTP = require('chai-http');
 chai.use(chaiHTTP);
 
+const sinon = require('sinon');
+
 describe('Routes', () => {
     describe('POST /climbs', () => {
         it('add a new item to the database (get request to check it)', () => {});
