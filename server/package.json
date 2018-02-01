@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js",
-    "test": "mocha models.test.js",
-    "watch": "mocha -R nyan --watch"
+    "test": "mocha *.test.js"
   },
   "author": "",
   "license": "ISC",
