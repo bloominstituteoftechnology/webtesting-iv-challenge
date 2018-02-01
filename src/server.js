@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const port = 3333;
+const Country = require('./models');
 
 const server = express();
 server.use(morgan('combined'));  // global middleware
@@ -13,7 +14,7 @@ server.use(bodyParser.json()); // global middleware
 server.post('/api/countries', (req, res) => {
     const countryInformation = req.body;
     if (!countryInformation.name) { // if no country name given, throw error
-        re.status(400).json({ errorMessage: 'Please provide country name' });
+        res.status(400).json({ errorMessage: 'Please provide country name' });
     } else {
         const country = new Country(countryInformation);
         country

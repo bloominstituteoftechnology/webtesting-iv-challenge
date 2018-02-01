@@ -10,7 +10,7 @@ const CountrySchema = new Schema({
         required: true,
         type: String,
     },
-    currency: {
+    capital: {
         required: true,
         type: String,
     }
@@ -22,10 +22,18 @@ CountrySchema.methods.getCountryName = function () {
     return this.name;
 };
 
+CountrySchema.methods.getCountryContinent = function () {
+    return this.continent;
+};
+
+CountrySchema.methods.getCountryCapital = function () {
+    return this.capital;
+};
+
 CountrySchema.statics.getAllCountries = function (cb) {
-    Country.find({}, (err) => {
+    Country.find({}, (err, countries) => {
         if (err) return cb(err);
-        cb(bands);
+        cb(countries);
     });
 };
 

@@ -1,9 +1,9 @@
 
 # Users API
 
-This documentation for interfacing with the Cities API. 
+This documentation is for interfacing with the Countries API. 
 
-### Port/Location to interface with all sushi. 
+### Port/Location to interface with all Countries API. 
 `http://localhost:3000/api`
 
 
@@ -14,16 +14,8 @@ This documentation for interfacing with the Cities API.
 
 |Endpoint       | Type      | Data    |
 |---------------|:---------:|--------:|
-|/api/countries/create | post      | json    |
+|/api/countries/ | post      | json    |
 
-### Example:
-```
-{
-    name: 'USA' 
-    continent: 'North America',
-    currency: Dollar
-}
-```
 
 
 ## [GET]
@@ -40,7 +32,7 @@ This documentation for interfacing with the Cities API.
 
 |Endpoint       | Type      | Data    |
 |---------------|:---------:|--------:|
-|/api/sushipost | post      | json    |
+|/api/countries | post      | json    |
 
 
 
