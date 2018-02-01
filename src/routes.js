@@ -13,33 +13,33 @@ module.exports = (server) => {
 
     newUser.save()
       .then((response) => {
-        res.status(201).json({ 
-          success: true, 
-          response 
+        res.status(201).json({
+          success: true,
+          response,
         });
       })
       .catch((error) => {
         res.status(500).json({
           success: false,
-          error
+          error,
         });
       });
 
   });
 
   server.get('/api/users', (req, res) => {
-    
+
     User.find({})
       .then((response) => {
         res.status(200).json({
           success: true,
-          response
+          response,
         });
       })
       .catch((error) => {
         res.status(500).json({
           success: false,
-          error
+          error,
         });
       });
 
@@ -49,18 +49,18 @@ module.exports = (server) => {
 
     const { id } = req.params;
     const userData = req.body;
-    
+
     User.findByIdAndUpdate(id, userData)
       .then((response) => {
         res.status(200).json({
           success: true,
-          response
+          response,
         });
       })
       .catch((error) => {
         res.status(500).json({
           success: false,
-          error
+          error,
         });
       });
 
@@ -74,13 +74,13 @@ module.exports = (server) => {
       .then((response) => {
         res.status(200).json({
           success: true,
-          response
+          response,
         });
       })
       .catch((error) => {
         res.status(500).json({
           success: false,
-          error
+          error,
         });
       });
 
