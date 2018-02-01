@@ -185,7 +185,7 @@ __Success 200 Response__:
 |  Field  | Type  | Description
 |---------|-------|----------------------------------------|
 |success  |Boolean|true (the person was updated.)          |
-|person   |Person |The updated person.
+|person   |Person |The updated person.                     |
 
 __Response example__:
 ```
