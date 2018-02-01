@@ -27,7 +27,7 @@ This is a the user api. It's going to provide you with basic access to CRUD func
 
 **Parameters:**
 
-|    Name     |   Type   |                Description                 |
+|    Field    |   Type   |                Description                 |
 | :---------: | :------: | :----------------------------------------: |
 | `userEmail` | `String` | **Required.** The new users email address. |
 | `password`  | `String` |   **Required.** The new users password.    |
@@ -70,7 +70,7 @@ This is a the user api. It's going to provide you with basic access to CRUD func
 
 `PUT /api/user/update`
 
-|    Name     |   Type   |              Description               |
+|    Field    |   Type   |              Description               |
 | :---------: | :------: | :------------------------------------: |
 | `userEmail` | `String` | **Required.** The users email address. |
 | `password`  | `String` |   **Required.** The users password.    |
@@ -92,7 +92,7 @@ This is a the user api. It's going to provide you with basic access to CRUD func
 
 `Delete /api/user/delete`
 
-|    Name     |   Type   |              Description               |
+|    Field    |   Type   |              Description               |
 | :---------: | :------: | :------------------------------------: |
 | `userEmail` | `String` | **Required.** The users email address. |
 | `password`  | `String` |   **Required.** The users password.    |
