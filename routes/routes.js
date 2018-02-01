@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const Todo = require('../models/todo.model');
+const Todo = require('../models/TodoModel');
 const { GetAllTodo, 
         CreateTodo,
         UpdateTodo,
-        DeleteTodo }  = require('../controllers/Todo.Controller';
+        DeleteTodo }  = require('../controllers/Todo.Controller');
 
 // Get all Todo
 router.get('api/todo', GetAllTodo);

@@ -1,4 +1,4 @@
-const Todo = require('../models/todo.model');
+const Todo = require('../models/TodoModel');
 
 
     // Get all todos from the Database

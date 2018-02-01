@@ -1,12 +1,12 @@
-const server = require('./server');
+const server = require('../server');
 const chai = require('chai');
 const chaiHTTP = require('chai-http');
 const { expect } = chai;
 const sinon = require('sinon');
 const mongoose = require('mongoose');
 require('sinon-mongoose');
-const Todo =  require('./models');
-const assert = reqquire('assert');
+const Todo =  require('../models');
+const assert = require('assert');
 chai.use(chaiHTTP);
 
 //  this first block can be commented out since using sinon-mongoose
@@ -70,12 +70,12 @@ describe('Create a new todo', () => {
     const todo = mock.object;
     const expected = {status: true};
     mock.expects('save').yields(expected, null);
-    todo.save = (err, result) => {
+    todo.save = ((err, result) => {
       mock.verify();
       mock.restore();
       expect(err.status).to.be.true;
       done();
-    };
+    });
   });
 
 
@@ -85,7 +85,7 @@ it("should return error, if todo not saved", (done) => {
     { todo: 'Save new todo from mock'}));
   const todo = mock.object;
   const expected = {status: false};
-  mock.expects('save').yields(expected, null);
+  mock.expects('save').yields(null, expected);
   todo.save((err, result) => {
     mock.verify();
     mock.restore();
@@ -101,7 +101,7 @@ it("should return error, if todo not saved", (done) => {
       var todo = mock.object;
       var expected = { status: true };
       mock.expects('save').withArgs({_id: 123456789}).yields(null, expected);
-      todo.save(function (err, result) {
+      todo.save((err, result) => {
        mock.verify();
         mock.restore();
         expect(result.status).to.be.true;
@@ -114,7 +114,7 @@ it("should return error, if todo not saved", (done) => {
       var todo = mock.object;
       var expectedResult = { status: false };
       mock.expects('save').withArgs({_id: 123456789}).yields(expected, null);
-      todo.save(function (err, result) {
+      todo.save((err, result) => {
         mock.verify();
         mock.restore();
         expect(err.status).to.not.be.true;
@@ -129,7 +129,7 @@ it("should return error, if todo not saved", (done) => {
       var todo = mock.object;
       var expected = { status: true };
       mock.expects('remove').withArgs({_id: 123456789}).yields(null, expected);
-      todo.save(function (err, result) {
+      todo.save((err, result) =>{
        mock.verify();
         mock.restore();
         expect(result.status).to.be.true;
@@ -142,7 +142,7 @@ it("should return error, if todo not saved", (done) => {
       var todo = mock.object;
       var expectedResult = { status: false };
       mock.expects('remove').withArgs({_id: 123456789}).yields(expected, null);
-      todo.save(function (err, result) {
+      todo.save((err, result) => {
         mock.verify();
         mock.restore();
         expect(err.status).to.not.be.true;
