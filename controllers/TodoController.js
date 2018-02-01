@@ -1,11 +1,8 @@
-const express = require('express');
-const router = express.Router();
-
 const Todo = require('../models/todo.model');
 
 
     // Get all todos from the Database
-    Todo.GetAllTodo(function(req, res) {
+    exports.Todo.GetAllTodo(function(req, res) {
           if(err) {
             res.json({status: false, error: "Something went wrong"});
             return;
