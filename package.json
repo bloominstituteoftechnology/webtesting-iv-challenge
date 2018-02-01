@@ -1,0 +1,30 @@
+{
+  "name": "server-testing",
+  "version": "1.0.0",
+  "description": "* TDD\r * `sinon`\r * `chai`\r * `mocha`\r * `chai-http`\r * `done()`\r * statics vs methods\r * documentation",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha *.test.js --exit",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/metten0/Server-Testing.git"
+  },
+  "author": "metten",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/metten0/Server-Testing/issues"
+  },
+  "homepage": "https://github.com/metten0/Server-Testing#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "express": "^4.16.2",
+    "mocha": "^5.0.0",
+    "mongoose": "^5.0.2",
+    "morgan": "^1.9.0",
+    "sinon": "^4.2.2"
+  }
+}
