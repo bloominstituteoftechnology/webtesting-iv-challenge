@@ -29,6 +29,7 @@ describe('Users Server Routes Test', () => {
                 });
         });
     });
+
     describe(`[POST] /api/login`, () => {
         it('Should login a user and return it', (done) => {
             const user = {
@@ -45,6 +46,51 @@ describe('Users Server Routes Test', () => {
                     }
                     expect(res.status).to.equal(200);
                     expect(typeof res.body.aboutme).to.equal('string');
+                    return done();
+                });
+        });
+    });
+
+    describe(`[PUT] /api/update/:id`, () => {
+        it('Should returns the updated user object', (done) => {
+            const user = {
+                aboutme: "I do great stuff to code"
+            };
+            chai.request(app)
+                .put('/api/update/1')
+                .send(user)
+                .end((err, res) => {
+                    if (err) {
+                        console.log(err);
+                        done();
+                    }
+                    expect(res.status).to.equal(200);
+                    expect(typeof res.body.id).to.equal('number');
+                    expect(res.body.aboutme).to.equal(user.aboutme);
+                    expect(typeof res.body.email).to.equal('string');
+                    expect(typeof res.body.password).to.equal('string');
+                    return done();
+                });
+        });
+    });
+
+    describe(`[DELETE] /api/delete/:id`, () => {
+        it('Should sucessfully delete the user', (done) => {
+            const msg = { msg: 'user has been deleted!' };
+            const user = {
+                email: "test2@test2.com",
+                password: "asdf"
+            };
+            chai.request(app)
+                .delete('/api/delete/1')
+                .send(user)
+                .end((err, res) => {
+                    if (err) {
+                        console.log(err);
+                        done();
+                    }
+                    expect(res.status).to.equal(200);
+                    expect(typeof res.body.msg).to.equal('string');
                     return done();
                 });
         });

@@ -18,4 +18,22 @@ server.post('/api/login', (req, res) => {
     res.status(200).json({ aboutme: 'Test' });
 });
 
+server.put('/api/update/:id', (req, res) => {
+    const id = Number(req.params.id);
+    const { aboutme } = req.body;
+    res.status(200).json({
+        id,
+        email: 'email@email.com',
+        password: 'asdf',
+        aboutme,
+    });
+});
+
+server.delete('/api/delete/:id', (req, res) => {
+    const id = Number(req.params.id);
+    res.status(200).json({
+        msg: 'user has been deleted!'
+    });
+});
+
 module.exports = server;
