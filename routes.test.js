@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/test');
-const Routes = require('./')
+const Routes = require('./routes')
 
 const chai = require('chai');
 const chaiHTTP = require('chai-http');
@@ -11,7 +11,9 @@ const sinon = require('sinon');
 
 describe('Routes', () => {
     describe('POST /climbs', () => {
-        it('add a new item to the database (get request to check it)', () => {});
+        it('add a new item to the database (get request to check it)', () => {
+            expect(1+1).to.equal(2);
+        });
         it('returns a 200 code when an item is added to the db', () => {});
         it('returns a failure message/code when POST request fails with incorrect/insufficient data', () => {});
 

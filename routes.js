@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-route.post('/', (req, res) => {});
+router.post('/', (req, res) => {});
 
-route.put('/', (req, res) => {});
+router.put('/', (req, res) => {});
 
-route.get('/', (req, res) => {});
+router.get('/', (req, res) => {});
 
-route.delete('/:zipCode', (req, res) => {});
+router.delete('/:zipCode', (req, res) => {});
 
 module.exports = router;
