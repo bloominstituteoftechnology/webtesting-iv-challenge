@@ -258,6 +258,7 @@ __Response example__:
 ```
 
 __Error 500 Response__:
+
 |  Field  | Type | Description
 |---------|-------|---|
 |success  |Boolean|false|
