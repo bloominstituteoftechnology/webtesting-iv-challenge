@@ -2,3 +2,4 @@
 ::1 - - [01/Feb/2018:03:41:08 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36"
 ::1 - - [01/Feb/2018:03:45:44 +0000] "GET / HTTP/1.1" 200 34 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36"
 ::1 - - [01/Feb/2018:04:10:37 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36"
+::ffff:127.0.0.1 - - [01/Feb/2018:06:29:59 +0000] "POST /api/user/create HTTP/1.1" 200 56 "-" "node-superagent/2.3.0"
