@@ -39,9 +39,19 @@ UserSchema.statics.getOneUser = (cb, user) => {
     });
 };
 
-UserSchema.methods.updateUser = (cb, id) => {
+UserSchema.methods.updateUser = (cb, id, update) => {
+    User.update(id, update, (err, result) => {
+        if (err) return cb(err);
+        cb(result);
+    });
+};
 
-}
+UserSchema.methods.deleteUser = (cb, id) => {
+    User.findByIdAndRemove(id, (err, result) => {
+        if (err) return cb(err);
+        cb(result);
+    });
+};
 
 UserSchema.methods.getUserPw = (cb, id) => {
     User.findById(id, (err, result) => {
@@ -49,8 +59,5 @@ UserSchema.methods.getUserPw = (cb, id) => {
         cb(result);
     });
 };
-
-
-
 
 module.exports = mongoose.model('User', UserSchema);
