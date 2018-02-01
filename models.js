@@ -29,7 +29,7 @@ TodoSchema.statics.getAllTodo = function(cb) {
   cb(todos);
  });
 };
-//Exporting our model
+
 const Todo = mongoose.model('Todo', TodoSchema);
 
-module.exports = TodoModel;
+module.exports = Todo;
