@@ -1,12 +1,12 @@
- MAGAZINE STAND
-====================
-###### :books: *A TEST DRIVEN DEVELOPMENT API* :books:
+ TODO LIST
+==========
+###### :scroll: *A TEST DRIVEN DEVELOPMENT API* :clipboard:
 
 
 
 
-This api will allow you to test server methods using chai, mocha, and sinon modules.  It uses a basic Node RESTful API.
-You can test CRUD operations on a magazine stand.
+This api will allow you to unit test server endpoint  methods using chai, mocha, and sinon modules.  It uses a basic Node RESTful API.
+You can test CRUD operations on a Todo List.
 ## :heavy_check_mark: <b>You will need to have:</b>
 ####  *Node.js*
 <ul>
@@ -20,11 +20,9 @@ You can test CRUD operations on a magazine stand.
 </ul>
 <pre><code>
     {
-        "magazine": "TIME",
-        "author": "Some Author",
-        "title": "Title of Article",
-        "publicationYear": "Year of publication",
-        "pageRef": "pages in the magazine",
+        "todo": "something todo",
+        "completed": "true/false"
+        "user": "name of person who made this todo",
         "createdAt": "date of listing", (not required/automatically generated)
     }
     </pre></code>
@@ -49,11 +47,11 @@ This API allows you to perform POST, PUT, GET, and DELETE requests.
 
 | ENDPOINT          | TYPE   | DATA | ACTION                                   |
 |-------------------|--------|------|------------------------------------------|
-| /api/magazine     | GET    | json | displays list of magazines from the database |
-| /api/magazine     | POST   | json | adds a magazine to the database          |
-| /api/magazine/:id | GET    | json | gets a single magazine <br>              |
-| /api/magazine/:id | PUT    | json | updates a single magazine                |
-| /api/magazine/:id | DELETE | json | deletes a single magazine                 |
+| /api/todo     | GET    | json | displays list of all todos from the database |
+| /api/todo     | POST   | json | creates a new todo         |
+| /api/todo/:id | GET    | json | gets a single todo<br>              |
+| /api/todo:id | PUT    | json | updates a single todo                |
+| /api/todo/:id | DELETE | json | deletes a single todo                 |
 
 
 
