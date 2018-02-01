@@ -15,8 +15,20 @@ You can test CRUD operations on a magazine stand.
 
 #### *POSTMAN*
 <ul>
-    <li>a very powerful API debugger for making fast HTTP requests</li>
+    <li>a very powerful API debugger for making fast HTTP requests.</li>
+    <li>all postman requests must be sent in json format. See the example below. All fields are required except where noted.</li>
 </ul>
+<pre><code>
+    {
+        "magazine": "TIME",
+        "author": "Some Author",
+        "title": "Title of Article",
+        "publicationYear": "Year of publication",
+        "pageRef": "pages in the magazine",
+        "createdAt": "date of listing", (not required/automatically generated)
+    }
+    </pre></code>
+
 
 #### *MongoDB*
 <ul>
@@ -42,6 +54,8 @@ This API allows you to perform POST, PUT, GET, and DELETE requests.
 | /api/magazine/:id | GET    | json | gets a single magazine <br>              |
 | /api/magazine/:id | PUT    | json | updates a single magazine                |
 | /api/magazine/:id | DELETE | json | deletes a single magazine                 |
+
+
 
 
 

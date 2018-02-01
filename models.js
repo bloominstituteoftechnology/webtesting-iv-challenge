@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 const MagazineSchema = new Schema(
   {
+    magazine: {
+      type: String,
+      required: true
+    },
     title: {
       type: String,
       required: true
@@ -11,7 +15,7 @@ const MagazineSchema = new Schema(
       type: String,
       required: true
     },
-    publication: {
+    publicationYear: {
       type: Number,
       required: true
     },
