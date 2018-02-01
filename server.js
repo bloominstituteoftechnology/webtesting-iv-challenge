@@ -19,6 +19,7 @@ server.get('/people', (req, res) => {
     });
     res.status(200).json({success: true, people});
   }).catch((err) => {
+    console.log(err);
     res.status(500).json({ success: false, message: 'An unexpected error occurred.'});
   });
 });
@@ -31,6 +32,7 @@ server.get('/people/:id', (req, res) => {
     }
     res.status(200).json({success: true, person});
   }).catch((err) => {
+    console.log(err);
     res.status(500).json({ success: false, message: 'An unexpected error occurred.'});
   })
 });
@@ -45,6 +47,7 @@ server.post('/people', (req, res) => {
   person.save().then((savedPerson) => {
     res.status(201).json({ success: true, person: savedPerson });
   }).catch((err) => {
+    console.log(err);
     res.status(500).json({ success: false, message: 'An unexpected error occurred.'});
   });
 });
@@ -61,6 +64,7 @@ server.put('/people/:id', (req, res) => {
       res.status(200).json({success: true, person: updatedPerson});
     });
   }).catch((err) => {
+    //console.log(err);
     res.status(500).json({ success: false, message: 'An unexpected error occurred.'});
   });
 });
@@ -73,6 +77,7 @@ server.delete('/people/:id', (req, res) => {
     }
     return res.status(200).json({success: true});
   }).catch((err) => {
+    console.log(err);
     res.status(500).json({ success: false, message: 'An unexpected error occurred.'});
   });
 });
