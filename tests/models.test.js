@@ -18,7 +18,7 @@ describe('Models', () => {
     const db = mongoose.connection;
 
     db.on('error', () => {
-      console.log('Connection Error');
+      done(new Error('Connection Error'));
     });
 
     db.once('open', () => {

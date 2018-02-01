@@ -19,7 +19,7 @@ describe('HTTP Routes', () => {
     const db = mongoose.connection;
 
     db.on('error', () => {
-      console.log('Connection Error');
+      done(new Error('Connection Error'));
     });
 
     db.once('open', () => {
@@ -57,6 +57,7 @@ describe('HTTP Routes', () => {
           const newUser = res.body.response;
 
           expect(res.status).to.equal(201);
+          expect(res.body.success).to.be.true;
           expect(newUser.name).to.equal('John Doe');
           expect(newUser.email).to.equal('john@doe.com');
 
@@ -90,33 +91,86 @@ describe('HTTP Routes', () => {
 
   });
 
-  // describe(`[PUT] /api/users`, () => {
+  describe(`[PUT] /api/users`, () => {
+    
+    it('should update user by :id', done => {
 
-  //   it('should update user by :id', done => {
+      User.findOne()
+        .then((res) => {
 
-  //     const user = {
-  //       name: "Jane Joe",
-  //       email: "jane@doe.com",
-  //     };
+          const thisUser = res;
 
-  //     chai
-  //       .request(server)
-  //       .put('/api/users/:id')
-  //       .send(user)
-  //       .then((res) => {
+          const user = {
+            name: "Jane Doe",
+            email: "jane@doe.com",
+          };
 
-  //         const newUser = res.body.response;
+          chai
+          .request(server)
+          .put(`/api/users/${ thisUser._id }`)
+          .send(user)
+          .then((res) => {
 
-  //         expect(res.status).to.equal(200);
-  //         expect(newUser.name).to.equal('Jane Doe');
-  //         expect(newUser.email).to.equal('jane@doe.com');
-  //         done();
+            const newUser = res.body.response;
 
-  //       })
-  //       .catch((error) => done(error));
+            expect(res.status).to.equal(200);
+            expect(res.body.success).to.be.true;
+            expect(newUser.name).to.equal('Jane Doe');
+            expect(newUser.email).to.equal('jane@doe.com');
+            done();
 
-  //   });
+          })
+          .catch((error) => done(error));
 
-  // });
+        })
+        .catch((error) => {
+          done(error);
+        })
+
+    });
+
+  });
+
+  describe(`[DELETE] /api/users`, () => {
+    
+    it('should remove user by :id', done => {
+
+      User.findOne()
+        .then((res) => {
+
+          const thisUser = res;
+
+          chai
+          .request(server)
+          .delete(`/api/users/${ thisUser._id }`)
+          .then((res) => {
+
+            const newUser = res.body.response;
+
+            expect(res.status).to.equal(202);
+            expect(res.body.success).to.be.true;
+
+            User.findById(newUser._id)
+              .then((response) => {
+                
+                if (response === null) done();
+                else done(new Error("Failed to remove user"));
+
+              })
+              .catch((error) => {
+                done(error);
+              })
+
+          })
+          .catch((error) => done(error));
+
+        })
+        .catch((error) => {
+          done(error);
+        })
+
+    });
+
+  });
 
 });

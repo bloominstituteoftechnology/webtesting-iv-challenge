@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/app.js",
-    "test": "eslint src/*.js; mocha -R nyan tests/*.test.js",
+    "test": "eslint src/*.js; mocha -R nyan tests/*.test.js --exit",
     "watch": "mocha -R nyan tests/*.test.js --watch",
     "lint": "eslint --fix src/*.js"
   },

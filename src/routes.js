@@ -50,7 +50,7 @@ module.exports = (server) => {
     const { id } = req.params;
     const userData = req.body;
 
-    User.findByIdAndUpdate(id, userData)
+    User.findByIdAndUpdate(id, userData, { new: true })
       .then((response) => {
         res.status(200).json({
           success: true,
@@ -72,7 +72,7 @@ module.exports = (server) => {
 
     User.findByIdAndRemove(id)
       .then((response) => {
-        res.status(200).json({
+        res.status(202).json({
           success: true,
           response,
         });
