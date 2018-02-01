@@ -16,5 +16,15 @@
   "bugs": {
     "url": "https://github.com/yshuman1/Server-Testing/issues"
   },
-  "homepage": "https://github.com/yshuman1/Server-Testing#readme"
+  "homepage": "https://github.com/yshuman1/Server-Testing#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "express": "^4.16.2",
+    "mocha": "^5.0.0",
+    "mongoose": "^5.0.2",
+    "morgan": "^1.9.0",
+    "sinon": "^4.2.2"
+  }
 }
