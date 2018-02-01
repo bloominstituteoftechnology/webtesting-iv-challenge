@@ -1,0 +1,30 @@
+{
+  "name": "Server-Testing-Mini",
+  "version": "1.0.0",
+  "description": "## A follow along practice for teaching TDD",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha *.test.js",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snehathadani/Server-Testing-Mini.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/snehathadani/Server-Testing-Mini/issues"
+  },P
+  "homepage": "https://github.com/snehathadani/Server-Testing-Mini#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai-http": "^3.0.0",
+    "express": "^4.16.2",
+    "mocha": "^4.1.0",
+    "mongoose": "^4.13.10",
+    "morgan": "^1.9.0",
+    "sinon": "^4.2.2"
+  }
+}
