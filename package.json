@@ -1,0 +1,32 @@
+{
+  "name": "Server-Testing",
+  "version": "1.0.0",
+  "description": "## Topics",
+  "main": "api.js",
+  "scripts": {
+    "test": "mocha ./tests/*.test.js",
+    "start": "nodemon app.js",
+    "dbstart": "mongod --dbpath data"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sarikaricky/Server-Testing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sarikaricky/Server-Testing/issues"
+  },
+  "homepage": "https://github.com/sarikaricky/Server-Testing#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "express": "^4.16.2",
+    "mocha": "^5.0.0",
+    "mongoose": "^5.0.2",
+    "morgan": "^1.9.0",
+    "sinon": "^4.2.2"
+  }
+}
