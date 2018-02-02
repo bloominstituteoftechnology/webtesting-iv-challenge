@@ -11,7 +11,7 @@ server.use(bodyParser.json()); // global middleware
 
 
 // create new country
-server.post('/api/countries', (req, res) => {
+server.post('/api/country', (req, res) => {
     const countryInformation = req.body;
     if (!countryInformation.name) { // if no country name given, throw error
         res.status(400).json({ errorMessage: 'Please provide country name' });
@@ -57,8 +57,8 @@ server.get('/api/countries/:id', (req, res) => { // run for every request
 
 // update based on id
 server.put('/api/countries/:id', (req, res) => {
-    const { id } = req.params;
-    Country.findByID(id)
+    const { name, continent, capital, id } = req.params;
+    Country.findById(id)
         .then(function (country) {
             res.status(200).json(country);
         })
