@@ -13,6 +13,31 @@ chai.use(chaiHTTP);
 
 describe('Country Server', () => {
 
+    let countryId = null;
+    beforeEach(() => { // populate database with data
+        const testCountry = new Country({ // test object
+            name: 'Spain',
+            continent: 'Europe',
+            capital: 'Madrid'
+        });
+        testCountry // save to database
+            .save()
+            .then(country => {
+                testCountry = country;
+                countryId = country._id;
+                done();
+            })
+            .catch(err => {
+                console.error(err);
+                done();
+            });
+    });
+    afterEach(() => { // clean out test database
+        Country.remove({}, (err));
+        if (err) console.error(err);
+        done();
+    });
+
     describe(`[POST]/api/countries`, () => {
         it('should add a new country', (done) => {
             const testCountry = { // expected response 
@@ -33,103 +58,52 @@ describe('Country Server', () => {
                     return done();
                 });
         });
-        it('should send back 422 upon bad data', (done) => {
-            const testCountry = { // expected response 
+    });
+
+    describe(`[GET]/api/countries`, () => {
+
+        it('should get all countries', done => {
+            chai.request(server)
+                .get('/api/countries')
+                .end((err, res) => {
+                    if (err) return console.log(err);
+                    expect(res.status).to.equal(200);
+                    expect(Array.isArray(res.body)).to.equal(true);
+                    expect(res.body.length).to.equal(1);
+                    done();
+                })
+        });
+    });
+
+    describe(`[GET]/api/countries/:id`, () => {
+        it('should get country based on id', () => {
+            const newCountry = {
+                id: countryId,
                 name: 'England',
                 continent: 'Europe',
                 capital: 'London'
             };
-            chai
-                .request(server)
-                .post('/api/countries')
-                .send(testCountry) // send expected response to server
-                .end((err, res) => { // get response back from server
-                    if (err) {
-                        expect(re.status).to.equal(422);
-                        const { error } = res.response.body;
-                        expect(error).to.eql('There was an error while saving the User to the Database');
-                        done(); // handle error
-                    }
-                });
-        });
-    });
-
-    describe(`[GET]/api/countries`, () => {
-        let countryId = null;
-        beforeEach(() => { // populate database with data
-            const testCountry = new Country({ // test object
-                name: 'Spain',
-                continent: 'Europe',
-                capital: 'Madrid'
+            newCountry.save(function (err, data) {
+                chai.request(server)
+                    .get('/blob/' + data.id)
+                    .end(function (err, res) {
+                        expect(res.status).to.equal(200);
+                        expect(res.status).to.equal(200);
+                        expect(res.body.name).to.equal('England');
+                        expect(res.body.continent).to.equal('Europe');
+                        expect(res.body.capital).to.equal('London');
+                        done();
+                    });
             });
-            testCountry // save to database
-                .save()
-                .then(country => {
-                    testCountry = country;
-                    countryId = country._id;
-                    done();
-                })
-                .catch(err => {
-                    console.error(err);
-                    done();
-                });
-        });
-        afterEach(() => { // clean out test database
-            Country.remove({}, (err));
-            if (err) console.error(err);
-            done();
         });
     });
-    it('should get all countries', done => {
-        chai.request(server)
-            .get('/api/countries')
-            .end((err, res) => {
-                if (err) {
-                    throw new Error();
-                    done()
-                }
-                done();
-            })
-    });
-    //         const japan = {
-    //             name: 'Japan',
-    //             continent: 'Asia',
-    //             capital: 'Tokyo'
-    //         };
-    //         chai.request(server)
-    //             .post('/api/countries')
-    //             .send()
-    //             .end((err, res) => {
-    //                 if (err) console.error(err)// handle error
-    //                 expect(res.status).to.equal(200);
-    //                 console.log('resbody', res.body);
-    //                 expect(res.body.name).to.equal('none');
-    //             });
-    //     });
-    // });
 
-    // describe(`[GET]/api/countries/:id`, () => {
-    //     it('should get country based on id', () => {
-    //         const myCountry = {
-    //             name: 'England',
-    //             continent: 'Europe'
-    //         };
-    //         chai.request(server)
-    //             .post('/api/country')
-    //             .send(myCountry)
-    //             .end((err, res) => {
-    //                 if (err) console.error(err)// handle error
-    //                 expect(res.status).to.equal(200);
-    //                 expect(res.body.name).to.equal('England');
-    //             });
-    //     });
-    // });
 
     describe(`[PUT]/api/countries/:id`, () => {
         it('should update country based on id', () => {
             const countryUpdate = {
+                id: countryId,
                 name: 'England',
-                continent: 'Europe'
             };
             chai.request(server)
                 .post('/api/country')
@@ -137,6 +111,8 @@ describe('Country Server', () => {
                 .end((err, res) => {
                     if (err) {
                         throw new Error(err)
+                        expect(res.body.name).to.equal('England');
+                        expect(res.body.name).to.equal('England');
                         done();
                     }
 
@@ -144,20 +120,25 @@ describe('Country Server', () => {
         });
     });
 
-    // describe(`[DELETE]/api/countries/:id`, () => {
-    //     it('should delete country based on id', () => {
-    //         const myCountry = {
-    //             name: 'England',
-    //             continent: 'Europe'
-    //         };
-    //         chai.request(server)
-    //             .post('/api/country')
-    //             .send(myCountry)
-    //             .end((err, res) => {
-    //                 if (err) console.error(err)// handle error
-    //                 expect(res.status).to.equal(200);
-    //                 expect(res.body.name).to.equal('England');
-    //             });
-    //     });
-    // });
+    describe(`[DELETE]/api/countries/:id`, () => {
+        it('should delete country based on id', (done) => {
+            chai.request(server)
+                .delete(`/api/countries/${countryId}`)
+                .end((err, res) => {
+                    if (err) {
+                        console.log(err);
+                        return done();
+                    }
+                    expect(res.text).to.equal('success');
+                    Country.findById(countryId, (err, deletedCountry) => {
+                        if (err) {
+                            console.log(err);
+                            return done();
+                        }
+                        expect(deletedCountry).to.equal(null);
+                        done();
+                    });
+                });
+        });
+    });
 });
