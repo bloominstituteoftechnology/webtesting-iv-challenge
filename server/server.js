@@ -2,9 +2,17 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const server = express();
 const Soda = require('./SodaModel')
+const fs = require('fs');
+const path = require('path')
+const morgan = require('morgan')
 
 server.use(bodyParser.json());
-
+server.use(morgan('combined'))
+const accessLogStream = fs.createWriteStream(
+  path.join(__dirname, "access.log"),
+  { flags: "a" }
+);
+server.use(morgan("combined", { stream: accessLogStream }));
 
 server.get('/api/sodas', (req, res) => {
     Soda.find({}, (err, sodas) => {
