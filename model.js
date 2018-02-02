@@ -20,7 +20,7 @@ ClimbSchema.methods.getClimbingType = function() {
     return this.climbingType;
 };
 
-ClimbSchema.statics.getAllClimbingLocations = function(cb) {
+ClimbSchema.statics.getAllClimbingEntries = function(cb) {
     Climbs.find({}, (err, climbs) => {
         if(err) return cb(err);
         cb(climbs);
