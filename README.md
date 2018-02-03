@@ -1,26 +1,29 @@
-# Server-Testing
 
-## Topics
+# Rate the Sodas
+## Api Documentation 
+This API allows your to add and compare your favourite sodas and their ratings.
 
-* TDD
-* `sinon`
-* `chai`
-* `mocha`
-* `chai-http`
-* `done()`
-* statics vs methods
-* documentation
+## Port - Location for all endpoints to interface with our Sodas App is 
+`http://localhost:3333`
 
-## Project
+## [POST] `/api/sodas/ceate`
+|Endpoint   |Type   |data  |
+| --------- | ----- | ---- |
+|/api/sodas/|post   |json  |  
 
-For this project you will be creating an API using a test driven development approach as well as writing documentation.  As an example of good documentation you can reference GitHub's API docs: https://developer.github.com/v3/git/commits/
 
-For this project you will be building a simple restful API for a database with collections of your choosing.
+## [GET] `/api/sodas`
+|Endpoint   |Type   |data  |
+| --------- | ----- | ---- |
+|/api/sodas/|get    |      | 
 
-## Requirements
+#### Example
 
-Your API must have routes that use the following HTTP verbs: GET, PUT, POST, and DELETE.  
-You must have documentation for each route.  Write your documentation in a file called `api.md`.  
-You must have at least one test written for each route.  Write your tests BEFORE you write the actual routes.  
-Your models should have some methods/statics that are tested.  
-You will need to have tests for your routes and for your models.  
+* To post a soda pass data in form of a json object with rating as a number and name as a string.
+```
+{
+  "name":"coke",
+  "rating":9
+}
+```
+* To get names of all sodas in the database simply send a request to `/api/sodas`
