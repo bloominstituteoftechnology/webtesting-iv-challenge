@@ -10,4 +10,7 @@ module.exports = {
   getId: id => {
     return Ama.findOne({ _id: id });
   },
+  update: (id, ama) => {
+    return Ama.findByIdAndUpdate(id, ama, { new: true });
+  },
 };

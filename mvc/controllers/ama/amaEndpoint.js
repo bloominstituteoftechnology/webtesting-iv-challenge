@@ -39,11 +39,6 @@ module.exports = {
   requestId: (req, res) => {
     const { id } = req.params;
 
-    if (!id) {
-      res.status(422).json({ message: 'Please provide an id.' });
-      return;
-    }
-
     amaController
       .getId(id)
       .then(ama => {
@@ -59,5 +54,35 @@ module.exports = {
       .catch(err => {
         res.status(500).json({ message: `Error requesting ama with id ${id}` });
       });
+  },
+  update: (req, res) => {
+    const { id } = req.params;
+    const ama = req.body;
+
+    if (!ama.question && !ama.answer) {
+      res
+        .status(422)
+        .json({ message: 'Please ensure a question or answer is specified.' });
+
+      return;
+    }
+
+    if (ama.answer) ama.answered = true;
+
+    amaController
+      .update(id, ama)
+      .then(updatedAma => {
+        if (!updatedAma) {
+          res.status(404).json({ message: `No ama with id (${id}) found.` });
+          return;
+        }
+
+        res.json(updatedAma);
+      })
+      .catch(err =>
+        res
+          .status(500)
+          .json({ message: `Ama with id (${id}) could not be updated.`, err }),
+      );
   },
 };
