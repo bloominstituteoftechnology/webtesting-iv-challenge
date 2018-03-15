@@ -24,14 +24,14 @@ describe('Marsupial Server', () => {
             mongoose.connection.close(done);
         });
     });
-    beforeEach(() => {
+    beforeEach((done) => {
         new Marsupial({
 
             name: 'Wombat',
             latinName: 'Vombatus ursinus',
             region: 'Southeastern Australia'
 
-        }).save((err, savedUser) => {
+        }).save((err, savedMarsupial) => {
             if (err) {
                 console.log(err);
                 return done();
@@ -94,11 +94,11 @@ describe('Marsupial Server', () => {
     });
     describe('[PUT] /api/marsupials/:id', () => {
         it('Should update a marsupial by a given id', done => {
-            const updateMarsupial = { name: 'Crest-tailed mulgara', latinName: 'Dasycercus cristicauda', region: 'South Australia' };
+            const updateMarsupials = { name: 'Crest-tailed mulgara', latinName: 'Dasycercus cristicauda', region: 'South Australia' };
             chai
                 .request(server)
-                .put(`/api/users/${marsupialId}`)
-                .send(update)
+                .put(`/api/marsupials/${marsupialId}`)
+                .send(updateMarsupials)
                 .then(res => {
                     expect(res.status).to.equal(200);
                     expect(res.body.name).to.equal('Crest-tailed mulgara');
