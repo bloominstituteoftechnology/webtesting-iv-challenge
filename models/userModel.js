@@ -21,7 +21,7 @@ const UserSchema = new Schema({
 });
 
 UserSchema.methods.getFirstName = function() {
-    return this.body;
+    return this.firstName;
 };
 
 UserSchema.statics.getAllUsers = function(cb) {
