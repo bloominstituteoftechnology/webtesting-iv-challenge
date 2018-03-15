@@ -44,7 +44,7 @@ describe('Amas', () => {
 
     db.on('error', _ => console.log('Error connecting to db.'));
     db.once('open', _ => {
-      console.log('db connected');
+      // console.log('db connected');
       done();
     });
   });

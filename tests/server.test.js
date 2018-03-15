@@ -30,18 +30,30 @@ describe('Server', () => {
 
     db.on('error', _ => console.log('Error connecting to db.'));
     db.once('open', _ => {
-      populateServerTestDb()
-        .then(_ => {
-          console.log('db populated');
-          done();
-        })
-        .catch(reason => console.log(reason));
+      done();
     });
   });
 
   after(done => {
     mongoose.connection.db.dropDatabase(_ => {
       mongoose.connection.close(done);
+    });
+  });
+
+  beforeEach(done => {
+    Ama.remove(_ => {
+      populateServerTestDb()
+        .then(_ => {
+          // console.log('db populated');
+          done();
+        })
+        .catch(reason => console.log(reason));
+    });
+  });
+
+  afterEach(done => {
+    Ama.remove(_ => {
+      done();
     });
   });
 
@@ -52,8 +64,7 @@ describe('Server', () => {
         .get(`/`)
         .end((err, res) => {
           if (err) {
-            done(err);
-            return;
+            console.log(err);
           }
 
           expect(res.status).to.equal(200);
@@ -71,8 +82,7 @@ describe('Server', () => {
           .get('/api')
           .end((err, res) => {
             if (err) {
-              done(err);
-              return;
+              console.log(err);
             }
 
             expect(res.status).to.equal(200);
@@ -84,18 +94,88 @@ describe('Server', () => {
   });
 
   describe('AMA', () => {
+    describe(`[POST] /api/ama/question`, () => {
+      it('should correctly save a question', done => {
+        const question =
+          'Why should I choose Lambda School over other CS programs?';
+        const ama = { question };
+
+        chai
+          .request(server)
+          .post('/api/ama/question')
+          .send(ama)
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+            }
+
+            expect(res).to.have.status(201);
+            expect(res.body.question).to.equal(question);
+            expect(res.body.answered).to.equal(false);
+            expect(res.body.answer).to.equal(undefined);
+            done();
+          });
+      });
+
+      it('should return 422 when the request body is malformed', done => {
+        const ama = { question1: 'question1 should be question' };
+
+        chai
+          .request(server)
+          .post('/api/ama/question')
+          .send(ama)
+          .end((err, res) => {
+            if (err) {
+              // console.log(err);
+            }
+
+            expect(res).to.have.status(422);
+            done();
+          });
+      });
+
+      it('should return some kind of message when the request body is malformed', done => {
+        const ama = { question1: 'question1 should be question' };
+
+        chai
+          .request(server)
+          .post('/api/ama/question')
+          .send(ama)
+          .end((err, res) => {
+            if (err) {
+              // console.log(err);
+            }
+
+            expect(Object.keys(res.body)).to.have.lengthOf.above(0);
+            done();
+          });
+      });
+    });
+
     describe(`[GET] /api/ama`, () => {
+      it('should return a status code of 200', done => {
+        chai
+          .request(server)
+          .get('/api/ama')
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+            }
+
+            expect(res).to.have.status(200);
+            done();
+          });
+      });
+
       it('should return all amas', done => {
         chai
           .request(server)
           .get('/api/ama')
           .end((err, res) => {
             if (err) {
-              done(err);
-              return;
+              console.log(err);
             }
 
-            expect(res).to.have.status(200);
             expect(res.body.length).to.equal(getTestAmasLength());
 
             expect(res.body[0].question).to.equal(serverTestAmas[0].question);
@@ -110,99 +190,8 @@ describe('Server', () => {
       });
     });
 
-    describe(`[POST] /api/ama/question`, () => {
-      it('should correctly save a question', done => {
-        const question =
-          'Why should I choose Lambda School over other CS programs?';
-        const ama = { question };
-
-        chai
-          .request(server)
-          .post('/api/ama/question')
-          .send(ama)
-          .end((err, res) => {
-            if (err) {
-              done(err);
-              return;
-            }
-
-            expect(res).to.have.status(201);
-            expect(res.body.question).to.equal(question);
-            expect(res.body.answered).to.equal(false);
-            expect(res.body.answer).to.equal(undefined);
-            done();
-          });
-      });
+    describe(`[PUT] /api/ama/id`, () => {
+      //
     });
-
-    //   describe(`[GET] /api/ama`, () => {
-    //     it('should return all the amas`', done => {
-    //       chai
-    //         .request(server)
-    //         .get(`/amas`)
-    //         .then(res => {
-    //           console.log(';res');
-    //           expect(res.status).to.equal(150);
-    //           done();
-    //         })
-    //         .catch(err => {
-    //           console.log(err);
-    //           done(err);
-    //         });
-    //       // })
-    //       // .end(function(err, res) {
-    //       //   // if (err) console.log(err);
-
-    //       //   // expect(res.body).to.deep.equal({
-    //       //   //   message: `Error requesting ama with id ${id}`,
-    //       //   // });
-    //       // });
-    //       // console.log('done');
-    //       // setTimeout(_ => {
-    //       //   done();
-    //       // }, 1500);
-    //     });
-    //   });
-
-    //   // describe(`[GET] /api/ama/id`, () => {
-    //   //   it('should return an error message when ama is not found`', done => {
-    //   //     const id = -1;
-
-    //   //     chai
-    //   //       .request(server)
-    //   //       .get(`/api/ama/${id}`)
-    //   //       .end((err, res) => {
-    //   //         if (err) done(err);
-
-    //   //         expect(res.status).to.equal(500);
-    //   //         expect(res.body).to.deep.equal({
-    //   //           message: `Error requesting ama with id ${id}`,
-    //   //         });
-    //   //         done();
-    //   //       });
-    //   //     // console.log('done');
-    //   //   });
-    //   // });
-
-    //   // describe(`[POST] /api/ama/question`, () => {
-    //   //   it('should add a new ama', done => {
-    //   //     const newAma = {
-    //   //       question: 'How do you succeed at Lambda School?',
-    //   //     };
-
-    //   //     chai
-    //   //       .request(server)
-    //   //       .post(`/api/ama/question`)
-    //   //       // .type('body')
-    //   //       .send(newAma)
-    //   //       .end((err, res) => {
-    //   //         if (err) done(err);
-
-    //   //         expect(res).to.have.status(199);
-    //   //         // expect(res.body.name).to.equal('Radiohead');
-    //   //         done();
-    //   //       });
-    //   //   });
-    //   // });
   });
 });

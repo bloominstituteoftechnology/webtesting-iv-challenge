@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const apiRouter = require('./api/apiRouter');
 
 const server = express();
-const debug = true;
+const debug = false;
 
 debug ? server.use(morgan('combined')) : null;
 
