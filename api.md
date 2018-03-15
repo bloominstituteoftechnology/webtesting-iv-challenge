@@ -1,12 +1,16 @@
 # API Documentation
 
-Documentation for all the apis, which include `/ama`, `/...`.
+Documentation for all APIs.
 
 ### All endpoints: `http://localhost:3333`
 
 ### All API endpoints: `http://localhost:3333/api`
 
+---
+
 ## `/ama`
+
+**Description**: an API for creating AMAs (ask me anything) with a `question`, `answer`, and `answered` field.
 
 All `/ama` **API** endpoints
 
@@ -22,7 +26,7 @@ All `/ama` **API** endpoints
 
 ### [POST] `/api/ama/question`
 
-**Description**: creates an ama and saves it to the database.
+**Description**: creates an AMA and saves it to the database.
 
 #### Example:
 
@@ -54,7 +58,7 @@ Response: status code `201`
 
 ### [GET] `/api/ama`
 
-**Description**: get all AMAs.
+**Description**: gets all AMAs.
 
 #### Example:
 
@@ -86,7 +90,7 @@ Response: status code `200`
 
 ### [GET] `/api/ama/id`
 
-**Description**: get a specific AMA with `id`.
+**Description**: gets the specific AMA with `id`.
 
 #### Examples:
 
@@ -159,7 +163,7 @@ Response: status code `500`
 
 ### [UPDATE] `/api/ama/id`
 
-**Description**: update a specific AMA's question or answer with `id`.
+**Description**: update the specific AMA's question or answer with `id`.
 
 #### Examples:
 
@@ -216,7 +220,7 @@ Response: status code `200`
 
 ### [DELETE] `/api/ama/id`
 
-**Description**: deletes a specific AMA with `id`.
+**Description**: deletes the specific AMA with `id`.
 
 #### Example:
 
