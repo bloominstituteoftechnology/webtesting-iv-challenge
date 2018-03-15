@@ -4,8 +4,10 @@ const morgan = require('morgan');
 const apiRouter = require('./api/apiRouter');
 
 const server = express();
+const debug = true;
 
-server.use(morgan('combined'));
+debug ? server.use(morgan('combined')) : null;
+
 server.use(express.json());
 server.use('/api', apiRouter);
 
