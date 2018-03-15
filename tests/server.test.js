@@ -11,7 +11,11 @@ const server = require('../server');
 
 const mongodAuth = require('../config').mongodAuth;
 
-const { populateServerTestDb, getTestAmasLength } = require('./populate');
+const {
+  populateServerTestDb,
+  getTestAmasLength,
+  serverTestAmas,
+} = require('./populate');
 
 chai.use(chaihttp);
 
@@ -47,7 +51,10 @@ describe('Server', () => {
         .request(server)
         .get(`/`)
         .end((err, res) => {
-          if (err) console.log(err);
+          if (err) {
+            done(err);
+            return;
+          }
 
           expect(res.status).to.equal(200);
           expect(res.body).to.deep.equal({ api: 'r u n n i n g . . .' });
@@ -63,7 +70,10 @@ describe('Server', () => {
           .request(server)
           .get('/api')
           .end((err, res) => {
-            if (err) done(err);
+            if (err) {
+              done(err);
+              return;
+            }
 
             expect(res.status).to.equal(200);
             expect(res.body.api).to.equal('route GET');
@@ -80,18 +90,48 @@ describe('Server', () => {
           .request(server)
           .get('/api/ama')
           .end((err, res) => {
-            if (err) console.log('error', err);
+            if (err) {
+              done(err);
+              return;
+            }
 
-            expect(res.status).to.equal(200);
+            expect(res).to.have.status(200);
             expect(res.body.length).to.equal(getTestAmasLength());
-            expect(res.body[0].question).to.equal(
-              'Are you in love with Lambda School?',
-            );
+
+            expect(res.body[0].question).to.equal(serverTestAmas[0].question);
             expect(res.body[0].answered).to.equal(false);
             expect(res.body[0].answer).to.equal(undefined);
-          });
 
-        done();
+            expect(res.body[1].question).to.equal(serverTestAmas[1].question);
+            expect(res.body[1].answered).to.equal(serverTestAmas[1].answered);
+            expect(res.body[1].answer).to.equal(serverTestAmas[1].answer);
+            done();
+          });
+      });
+    });
+
+    describe(`[POST] /api/ama/question`, () => {
+      it('should correctly save a question', done => {
+        const question =
+          'Why should I choose Lambda School over other CS programs?';
+        const ama = { question };
+
+        chai
+          .request(server)
+          .post('/api/ama/question')
+          .send(ama)
+          .end((err, res) => {
+            if (err) {
+              done(err);
+              return;
+            }
+
+            expect(res).to.have.status(201);
+            expect(res.body.question).to.equal(question);
+            expect(res.body.answered).to.equal(false);
+            expect(res.body.answer).to.equal(undefined);
+            done();
+          });
       });
     });
 
