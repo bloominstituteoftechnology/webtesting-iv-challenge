@@ -4,13 +4,13 @@ module.exports = {
   create: (req, res) => {
     const ama = req.body;
 
-    if (!ama.question) {
-      res
-        .status(422)
-        .json({ message: 'Please ensure a question is specified.' });
+    // if (!ama.question) {
+    //   res
+    //     .status(422)
+    //     .json({ message: 'Please ensure a question is specified.' });
 
-      return;
-    }
+    //   return;
+    // }
 
     if (ama.answered) {
       res.status(422).json({
@@ -29,14 +29,17 @@ module.exports = {
     amaController
       .create(ama)
       .then(savedAma => res.status(201).json(savedAma))
-      .catch(err =>
-        res.status(500).json({ message: 'Error creating new ama.', err }),
+      .catch(
+        err =>
+          err.name === 'ValidationError'
+            ? res.status(422).json({ message: err.message })
+            : res.status(500).json({ message: 'Error creating new ama.', err }),
       );
   },
   request: (req, res) => {
     amaController.get(amas => {
       if (amas.length === 0) {
-        res.json({ message: 'No amas in database.', amas });
+        res.status(200).json({ message: 'No amas in database.', amas });
         return;
       }
 

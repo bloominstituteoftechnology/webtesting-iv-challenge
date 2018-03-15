@@ -147,6 +147,7 @@ describe('Server', () => {
               // console.log(err);
             }
 
+            expect(res).to.have.status(422);
             expect(Object.keys(res.body)).to.have.lengthOf.above(0);
             done();
           });
@@ -211,6 +212,24 @@ describe('Server', () => {
     });
 
     describe(`[GET] /api/ama`, () => {
+      it('should return a status code of 200 when there is no content and an object with an empty array with key `amas`', done => {
+        Ama.remove(_ => {
+          chai
+            .request(server)
+            .get('/api/ama')
+            .end((err, res) => {
+              if (err) {
+                console.log(err);
+              }
+
+              expect(res).to.have.status(200);
+              expect(Array.isArray(res.body.amas)).to.equal(true);
+              expect(res.body.amas).to.have.length(0);
+              done();
+            });
+        });
+      });
+
       it('should return a status code of 200', done => {
         chai
           .request(server)
