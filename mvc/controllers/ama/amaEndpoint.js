@@ -75,12 +75,10 @@ module.exports = {
     }
 
     if (ama.question && ama.answer) {
-      res
-        .status(422)
-        .json({
-          message:
-            'Please only provide either an answer or a question, not both.',
-        });
+      res.status(422).json({
+        message:
+          'Please only provide either an answer or a question, not both.',
+      });
 
       return;
     }
@@ -101,6 +99,28 @@ module.exports = {
         res
           .status(500)
           .json({ message: `Ama with id (${id}) could not be updated.`, err }),
+      );
+  },
+  del: (req, res) => {
+    const { id } = req.params;
+
+    amaController
+      .del(id)
+      .then(deletedAma => {
+        if (!deletedAma) {
+          res
+            .status(404)
+            .json({ message: `No ama with id (${id}) found.`, deleted: false });
+
+          return;
+        }
+
+        res.json({ deleted: true });
+      })
+      .catch(err =>
+        res
+          .status(500)
+          .json({ message: `Ama with id (${id}) could not be deleted.`, err }),
       );
   },
 };

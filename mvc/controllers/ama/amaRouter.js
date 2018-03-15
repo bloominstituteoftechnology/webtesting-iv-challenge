@@ -7,7 +7,8 @@ router.route('/').get(endpoint.request);
 router
   .route('/:id')
   .get(endpoint.requestId)
-  .put(endpoint.update);
+  .put(endpoint.update)
+  .delete(endpoint.del);
 
 router.route('/question').post(endpoint.create);
 

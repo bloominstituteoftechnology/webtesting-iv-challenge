@@ -8,15 +8,15 @@ Documentation for all the apis, which include `/ama`, `/...`.
 
 ## `/ama`
 
-All `/ama` API endpoints
+All `/ama` **API** endpoints
 
-| endpoint           | type   | description                                                                    |
-| ------------------ | ------ | ------------------------------------------------------------------------------ |
-| `/ama/question`    | POST   | Creates an AMA and saves it to the database.                                   |
-| `/ama`             | GET    | Requests all AMAs                                                              |
-| `/ama/id`          | GET    | Requests the AMA with `id`                                                     |
-| `/ama/id`          | UPDATE | Updates either the question or answer field (but not both) of an AMA with `id` |
-| `/ama/question/id` | DELETE | Deletes the AMA with `id`                                                      |
+| endpoint        | type   | description                                                                    |
+| --------------- | ------ | ------------------------------------------------------------------------------ |
+| `/ama/question` | POST   | Creates an AMA and saves it to the database.                                   |
+| `/ama`          | GET    | Requests all AMAs                                                              |
+| `/ama/id`       | GET    | Requests the AMA with `id`                                                     |
+| `/ama/id`       | UPDATE | Updates either the question or answer field (but not both) of an AMA with `id` |
+| `/ama/id`       | DELETE | Deletes the AMA with `id`                                                      |
 
 ---
 

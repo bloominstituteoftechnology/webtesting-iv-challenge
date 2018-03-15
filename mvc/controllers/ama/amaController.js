@@ -13,4 +13,7 @@ module.exports = {
   update: (id, ama) => {
     return Ama.findByIdAndUpdate(id, ama, { new: true });
   },
+  del: id => {
+    return Ama.findByIdAndRemove(id);
+  },
 };
