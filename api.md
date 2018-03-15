@@ -24,10 +24,10 @@ For this project, we created an API using a test driven development approach. Wi
 # Endpoints /users 
 | Endpoint | Type | Input (req.body) | Response |
 | :---: | :---: | :---: | :---:|
-| /users | *__POST__* | ```{ name: 'grumpyClara', location: 'America' }``` | ```{ name: 'grumpyClara', location: 'America' }``` | 
-| /users | *__GET__* | ```Not applicable``` | ```[{ name: 'grumpyClara', location: 'America' }]``` |
-| /users | *__PUT__* | ```{ name: 'grumpyClara', location: 'Venus' }``` | ```{ name: 'grumpyClara', location: 'Venus' }``` | 
-| /users | *__DELETE__* | ```{ name: 'grumpyClara' }``` | ```success: true``` |
+| /users | *__POST__* | ```{name: 'Clara', location: 'America'}``` | ```{name: 'Clara', location: 'America'}``` | 
+| /users | *__GET__* | ```Not applicable``` | ```[{name: 'Clara', location: 'America'}]``` |
+| /users | *__PUT__* | ```{name: 'Clara', location: 'Venus'}``` | ```{name: 'Clara', location: 'Venus'}``` | 
+| /users | *__DELETE__* | ```{name: 'Clara'}``` | ```success: true``` |
 
 
 #### __Maintained by:__
