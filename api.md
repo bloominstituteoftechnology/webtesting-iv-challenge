@@ -5,7 +5,8 @@
 
 ### HTTP Requests for the API ###
 * POST - Creates a new Marsupial for the Database
-* GET - Retrives a list of all Marsupials in the Database
+* GET - Retrives a list of all Marsupials in the Database.
+* GET by ID - Retrieves a Marsupial by a given id.
 * PUT - Allows the user to edit a Marsupial by supplied id
 * DELETE - Allows users to delete a Marsupial from the list
 
@@ -29,6 +30,12 @@
 | Endpoint | Type | Data |
 |----|----|----|
 | /api/marsupials/ | get | json |
+
+### [GET] ###
+
+| Endpoint | Type | Data |
+|----|----|----|
+| /api/marsupials/:id | get | json |
 
 ### [PUT] ###
 
