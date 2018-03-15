@@ -21,7 +21,7 @@ module.exports = {
 
     amaController
       .create(ama)
-      .then(savedAma => res.json(savedAma))
+      .then(savedAma => res.status(201).json(savedAma))
       .catch(err =>
         res.status(500).json({ message: 'Error creating new ama.', err }),
       );
@@ -59,8 +59,5 @@ module.exports = {
       .catch(err => {
         res.status(500).json({ message: `Error requesting ama with id ${id}` });
       });
-  },
-  request1: (req, res) => {
-    res.json({ ans: '1111' });
   },
 };
