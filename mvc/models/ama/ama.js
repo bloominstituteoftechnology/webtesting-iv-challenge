@@ -1,12 +1,18 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const mongodAuth = require('../../../config').mongodAuth;
+
+mongoose.connect('mongodb://localhost/server-testing_db', mongodAuth);
 
 const AmaSchema = new Schema({
   question: {
     required: true,
     type: String,
+    unique: true,
   },
-  answer: String,
+  answer: {
+    type: String,
+  },
   answered: {
     required: true,
     type: Boolean,

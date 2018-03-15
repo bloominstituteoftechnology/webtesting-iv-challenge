@@ -2,8 +2,6 @@ const mongoose = require('mongoose');
 const mongodAuth = require('../config').mongodAuth;
 const Ama = require('../mvc/models/ama/ama');
 
-mongoose.connect('mongodb://localhost/test', mongodAuth);
-
 const chai = require('chai');
 const sinon = require('sinon');
 
@@ -36,6 +34,27 @@ const testAmas = [
 const notAnswered = 'Question not answered yet.';
 
 describe('Amas', () => {
+  before(done => {
+    mongoose.connect(
+      'mongodb://localhost/server-testing_model-test_db',
+      mongodAuth,
+    );
+
+    const db = mongoose.connection;
+
+    db.on('error', _ => console.log('Error connecting to db.'));
+    db.once('open', _ => {
+      console.log('db connected');
+      done();
+    });
+  });
+
+  after(done => {
+    mongoose.connection.db.dropDatabase(_ => {
+      mongoose.connection.close(done);
+    });
+  });
+
   describe('getQuestion', () => {
     it('should return the expected question', () => {
       const test = testAmas[0];
