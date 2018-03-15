@@ -97,10 +97,10 @@ describe('Server', () => {
 
   describe('AMA', () => {
     describe(`[POST] /api/ama/question`, () => {
-      it('should return a status code of 201', done => {
+      it('should return a status code of 422 when the request body has an answered field', done => {
         const question =
           'Why should I choose Lambda School over other CS programs?';
-        const ama = { question };
+        const ama = { question, answered: true };
 
         chai
           .request(server)
@@ -108,37 +108,18 @@ describe('Server', () => {
           .send(ama)
           .end((err, res) => {
             if (err) {
-              console.log(err);
+              // console.log(err);
             }
 
-            expect(res).to.have.status(201);
+            expect(res).to.have.status(422);
             done();
           });
       });
 
-      it('should return the correctly created and saved ama', done => {
+      it('should return a status code of 422 when the request body has an answer field', done => {
         const question =
           'Why should I choose Lambda School over other CS programs?';
-        const ama = { question };
-
-        chai
-          .request(server)
-          .post('/api/ama/question')
-          .send(ama)
-          .end((err, res) => {
-            if (err) {
-              console.log(err);
-            }
-
-            expect(res.body.question).to.equal(question);
-            expect(res.body.answered).to.equal(false);
-            expect(res.body.answer).to.equal(undefined);
-            done();
-          });
-      });
-
-      it('should return 422 when the request body is malformed', done => {
-        const ama = { question1: 'question1 should be question' };
+        const ama = { question, answer: 'I should not be here' };
 
         chai
           .request(server)
@@ -171,10 +152,8 @@ describe('Server', () => {
           });
       });
 
-      it('should return a status code of 422 when the request body has an answer field', done => {
-        const question =
-          'Why should I choose Lambda School over other CS programs?';
-        const ama = { question, answer: 'I should not be here' };
+      it('should return 422 when the request body is malformed', done => {
+        const ama = { question1: 'question1 should be question' };
 
         chai
           .request(server)
@@ -190,10 +169,10 @@ describe('Server', () => {
           });
       });
 
-      it('should return a status code of 422 when the request body has an answered field', done => {
+      it('should return the correctly created and saved ama', done => {
         const question =
           'Why should I choose Lambda School over other CS programs?';
-        const ama = { question, answered: true };
+        const ama = { question };
 
         chai
           .request(server)
@@ -201,10 +180,31 @@ describe('Server', () => {
           .send(ama)
           .end((err, res) => {
             if (err) {
-              // console.log(err);
+              console.log(err);
             }
 
-            expect(res).to.have.status(422);
+            expect(res.body.question).to.equal(question);
+            expect(res.body.answered).to.equal(false);
+            expect(res.body.answer).to.equal(undefined);
+            done();
+          });
+      });
+
+      it('should return a status code of 201', done => {
+        const question =
+          'Why should I choose Lambda School over other CS programs?';
+        const ama = { question };
+
+        chai
+          .request(server)
+          .post('/api/ama/question')
+          .send(ama)
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+            }
+
+            expect(res).to.have.status(201);
             done();
           });
       });
@@ -249,6 +249,30 @@ describe('Server', () => {
     });
 
     describe(`[GET] /api/ama/id`, () => {
+      it("should return a status code of 505 with an id that doesn't conform to MongoDB", done => {
+        const id = '-1';
+
+        chai
+          .request(server)
+          .get(`/api/ama/${id}`)
+          .end((err, res) => {
+            expect(res).to.have.status(500);
+            done();
+          });
+      });
+
+      it('should return a status code of 404 with an id not found in the db', done => {
+        const id = '000000000000000000000000';
+
+        chai
+          .request(server)
+          .get(`/api/ama/${id}`)
+          .end((err, res) => {
+            expect(res).to.have.status(404);
+            done();
+          });
+      });
+
       it('should return a status code of 200', done => {
         const question =
           'Why should I choose Lambda School over other CS programs?';
@@ -308,7 +332,141 @@ describe('Server', () => {
     });
 
     describe(`[PUT] /api/ama/id`, () => {
-      //
+      it('should return a status code of 200 when updating an ama with a question', done => {
+        const question =
+          'Why should I choose Lambda School over other CS programs?';
+        const ama = { question };
+
+        let id;
+
+        chai
+          .request(server)
+          .post('/api/ama/question')
+          .send(ama)
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+            }
+
+            id = res.body._id;
+
+            const updatedQuestion =
+              'How much money do full-stack developers make?';
+
+            const updatedAma = { question: updatedQuestion };
+
+            chai
+              .request(server)
+              .put(`/api/ama/${id}`)
+              .send(updatedAma)
+              .end((err, res) => {
+                expect(res).to.have.status(200);
+                done();
+              });
+          });
+      });
+
+      it('should return a status code of 200 when updating an ama with an answer', done => {
+        const question = 'How much money do full-stack developers make?';
+        const ama = { question };
+
+        let id;
+
+        chai
+          .request(server)
+          .post('/api/ama/question')
+          .send(ama)
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+            }
+
+            id = res.body._id;
+
+            const answer = '$$$$ B A N K $$$$';
+
+            const ama = { answer };
+
+            chai
+              .request(server)
+              .put(`/api/ama/${id}`)
+              .send(ama)
+              .end((err, res) => {
+                expect(res).to.have.status(200);
+                done();
+              });
+          });
+      });
+
+      it('should return correctly update the question of an AMA', done => {
+        const question =
+          'Why should I choose Lambda School over other CS programs?';
+        const ama = { question };
+
+        let id;
+
+        chai
+          .request(server)
+          .post('/api/ama/question')
+          .send(ama)
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+            }
+
+            id = res.body._id;
+
+            const updatedQuestion =
+              'How much money do full-stack developers make?';
+
+            const updatedAma = { question: updatedQuestion };
+
+            chai
+              .request(server)
+              .put(`/api/ama/${id}`)
+              .send(updatedAma)
+              .end((err, res) => {
+                expect(res.body.question).to.equal(updatedQuestion);
+                expect(res.body.answered).to.equal(false);
+                expect(res.body.answer).to.equal(undefined);
+                done();
+              });
+          });
+      });
+
+      it('should return correctly update the answer of an AMA', done => {
+        const question = 'How much money do full-stack developers make?';
+        const ama = { question };
+
+        let id;
+
+        chai
+          .request(server)
+          .post('/api/ama/question')
+          .send(ama)
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+            }
+
+            id = res.body._id;
+
+            const answer = '$$$$ B A N K $$$$';
+
+            const ama = { answer };
+
+            chai
+              .request(server)
+              .put(`/api/ama/${id}`)
+              .send(ama)
+              .end((err, res) => {
+                expect(res.body.question).to.equal(question);
+                expect(res.body.answered).to.equal(true);
+                expect(res.body.answer).to.equal(answer);
+                done();
+              });
+          });
+      });
     });
   });
 });
