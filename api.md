@@ -14,7 +14,7 @@ All `/ama` API endpoints
 | ------------------ | ------ | ---------------------------------------------- |
 | `/ama/question`    | POST   | Creates an AMA and saves it to the database.   |
 | `/ama`             | GET    | Requests all AMAs                              |
-| `/ama/id`          | GET    | Requests a single AMA with `id`                |
+| `/ama/id`          | GET    | Requests the AMA with `id`                     |
 | `/ama/question/id` | UPDATE | Updates the question field of an AMA with `id` |
 | `/ama/answer/id`   | UPDATE | Updates the answer field of an AMA with `id`   |
 | `/ama/question/id` | DELETE | Deletes the AMA with `id`                      |
@@ -23,7 +23,7 @@ All `/ama` API endpoints
 
 ### [POST] `/api/ama/question`
 
-Creates an ama and saves it to the database.
+**Description**: creates an ama and saves it to the database.
 
 #### Example:
 
@@ -35,7 +35,7 @@ Request: `[POST] /api/ama/question`
 }
 ```
 
-Response: status `201`
+Response: status code `201`
 
 ```
 {
@@ -49,20 +49,19 @@ Response: status `201`
 
 #### Notes
 
-1. Questions in the database must be unique (no duplicate questions).
-1. Answers do not have to be unique.
+1. Questions in the database must be **unique** (no duplicate questions).
 
 ---
 
 ### [GET] `/api/ama`
 
-Get all amas.
+**Description**: get all AMAs.
 
 #### Example:
 
 Request: `[GET] /api/ama`
 
-Response: status `200`
+Response: status code `200`
 
 ```
 [
@@ -84,34 +83,19 @@ Response: status `200`
 ]
 ```
 
-#### Notes
-
-1. When there are no amas in the database:
-
-Request: `[GET] /api/ama`
-
-Response: status `200`
-
-```
-{
-    "message": "No amas in database.",
-    "amas": []
-}
-```
-
 ---
 
 ### [GET] `/api/ama/id`
 
-Get a specific ama.
+**Description**: get a specific AMA with `id`.
 
 #### Examples:
 
-##### _Unanswered ama_
+#### _Unanswered AMA_:
 
 Request: `[GET] /api/ama/1234567890abcdefghijklmnopqrstuvwxyz`
 
-Response: status `200`
+Response: status code `200`
 
 ```
 {
@@ -123,11 +107,11 @@ Response: status `200`
 }
 ```
 
-##### _Answered ama_
+#### _Answered AMA_:
 
 Request: `[GET] /api/ama/zyxwvutsrqponmlkjihgfedcba0987654321`
 
-Response: status `200`
+Response: status code `200`
 
 ```
 {
@@ -142,7 +126,7 @@ Response: status `200`
 
 #### Notes
 
-1. When there ama with id does not exist:
+1. When the AMA with `id` does not exist:
 
 Request: `[GET] /api/ama/ayxwvutsrqponmlkjihgfedcba0987654321`
 
@@ -151,7 +135,7 @@ incorrect id (starts with a) - ayxwvutsrqponmlkjihgfedcba0987654321
 correct id   (starts with z) - zyxwvutsrqponmlkjihgfedcba0987654321
 ```
 
-Response: status `404`
+Response: status code `404`
 
 ```
 {
@@ -160,11 +144,11 @@ Response: status `404`
 }
 ```
 
-2. When the id is malformed (not the correct format for the database):
+2. When the `id` is malformed (incorrect format for the database to parse):
 
 Request: `[GET] /api/ama/1`
 
-Response: status `500`
+Response: status code `500`
 
 ```
 {
@@ -174,28 +158,57 @@ Response: status `500`
 
 ---
 
-### [UPDATE] `/api/ama/question/id`
+### [UPDATE] `/api/ama/id`
 
-Update a specific ama's question.
+Update a specific AMA's question or answer with `id`.
 
 #### Examples:
+
+#### _Changing the question for an AMA_:
 
 Request: `[UPDATE] /api/ama/1234567890abcdefghijklmnopqrstuvwxyz`
 
 ```
 {
-  question: 'What is Lambda School all about?'
+  question: 'What programs are available at Lambda School?'
 }
 ```
 
-Response: status `200`
+Response: status code `200`
 
 ```
 {
   id: 1234567890abcdefghijklmnopqrstuvwxyz,
-  question: 'What is Lambda School all about?',
+  question: 'What programs are available at Lambda School?',
   answered: false,
   createdOn: 'YYYY-MM-DDT00:00:00.000Z',
   __v: 0
 }
 ```
+
+#### _Answering the question for an AMA_:
+
+Request: `[UPDATE] /api/ama/1234567890abcdefghijklmnopqrstuvwxyz`
+
+```
+{
+  answer: 'There is a full-stack and a machine-learning program.'
+}
+```
+
+Response: status code `200`
+
+```
+{
+  id: 1234567890abcdefghijklmnopqrstuvwxyz,
+  question: 'What programs are available at Lambda School?',
+  answer: 'There is a full-stack and a machine-learning program.'
+  answered: true,
+  createdOn: 'YYYY-MM-DDT00:00:00.000Z',
+  __v: 0
+}
+```
+
+#### Notes
+
+1. The `answered` field is automatically changed to `true` if an answer is provided.

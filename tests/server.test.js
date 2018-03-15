@@ -57,26 +57,28 @@ describe('Server', () => {
     });
   });
 
-  describe(`[GET] /`, () => {
-    it('should return an object with property `api` and value `r u n n i n g . . .` ', done => {
-      chai
-        .request(server)
-        .get(`/`)
-        .end((err, res) => {
-          if (err) {
-            console.log(err);
-          }
+  describe(`ROOT`, () => {
+    describe(`[GET] /`, () => {
+      it("should return { api: 'r u n n i n g . . .' }", done => {
+        chai
+          .request(server)
+          .get(`/`)
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+            }
 
-          expect(res.status).to.equal(200);
-          expect(res.body).to.deep.equal({ api: 'r u n n i n g . . .' });
-          done();
-        });
+            expect(res.status).to.equal(200);
+            expect(res.body).to.deep.equal({ api: 'r u n n i n g . . .' });
+            done();
+          });
+      });
     });
   });
 
   describe('API', () => {
     describe(`[GET] /api`, () => {
-      it('should return `route GET` with key `api`', done => {
+      it("should return { api: 'route GET' }", done => {
         chai
           .request(server)
           .get('/api')
@@ -95,7 +97,7 @@ describe('Server', () => {
 
   describe('AMA', () => {
     describe(`[POST] /api/ama/question`, () => {
-      it('should correctly save a question', done => {
+      it('should return a status code of 201', done => {
         const question =
           'Why should I choose Lambda School over other CS programs?';
         const ama = { question };
@@ -110,6 +112,24 @@ describe('Server', () => {
             }
 
             expect(res).to.have.status(201);
+            done();
+          });
+      });
+
+      it('should return the correctly created and saved ama', done => {
+        const question =
+          'Why should I choose Lambda School over other CS programs?';
+        const ama = { question };
+
+        chai
+          .request(server)
+          .post('/api/ama/question')
+          .send(ama)
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+            }
+
             expect(res.body.question).to.equal(question);
             expect(res.body.answered).to.equal(false);
             expect(res.body.answer).to.equal(undefined);
@@ -150,6 +170,44 @@ describe('Server', () => {
             done();
           });
       });
+
+      it('should return a status code of 422 when the request body has an answer field', done => {
+        const question =
+          'Why should I choose Lambda School over other CS programs?';
+        const ama = { question, answer: 'I should not be here' };
+
+        chai
+          .request(server)
+          .post('/api/ama/question')
+          .send(ama)
+          .end((err, res) => {
+            if (err) {
+              // console.log(err);
+            }
+
+            expect(res).to.have.status(422);
+            done();
+          });
+      });
+
+      it('should return a status code of 422 when the request body has an answered field', done => {
+        const question =
+          'Why should I choose Lambda School over other CS programs?';
+        const ama = { question, answered: true };
+
+        chai
+          .request(server)
+          .post('/api/ama/question')
+          .send(ama)
+          .end((err, res) => {
+            if (err) {
+              // console.log(err);
+            }
+
+            expect(res).to.have.status(422);
+            done();
+          });
+      });
     });
 
     describe(`[GET] /api/ama`, () => {
@@ -186,6 +244,65 @@ describe('Server', () => {
             expect(res.body[1].answered).to.equal(serverTestAmas[1].answered);
             expect(res.body[1].answer).to.equal(serverTestAmas[1].answer);
             done();
+          });
+      });
+    });
+
+    describe(`[GET] /api/ama/id`, () => {
+      it('should return a status code of 200', done => {
+        const question =
+          'Why should I choose Lambda School over other CS programs?';
+        const ama = { question };
+
+        let id;
+
+        chai
+          .request(server)
+          .post('/api/ama/question')
+          .send(ama)
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+            }
+
+            id = res.body._id;
+
+            chai
+              .request(server)
+              .get(`/api/ama/${id}`)
+              .end((err, res) => {
+                expect(res).to.have.status(200);
+                done();
+              });
+          });
+      });
+
+      it('should return the correct ama', done => {
+        const question =
+          'Why should I choose Lambda School over other CS programs?';
+        const ama = { question };
+
+        let id;
+
+        chai
+          .request(server)
+          .post('/api/ama/question')
+          .send(ama)
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+            }
+
+            id = res.body._id;
+
+            chai
+              .request(server)
+              .get(`/api/ama/${id}`)
+              .end((err, res) => {
+                expect(res.body.question).to.equal(question);
+                expect(res.body._id).to.equal(id);
+                done();
+              });
           });
       });
     });

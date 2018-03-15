@@ -19,6 +19,13 @@ module.exports = {
       return;
     }
 
+    if (ama.answer) {
+      res.status(422).json({
+        message: "Please ensure there isn't an answer field in the body. ",
+      });
+      return;
+    }
+
     amaController
       .create(ama)
       .then(savedAma => res.status(201).json(savedAma))
