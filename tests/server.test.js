@@ -332,6 +332,105 @@ describe('Server', () => {
     });
 
     describe(`[PUT] /api/ama/id`, () => {
+      it("should return a status code of 500 with an id that doesn't conform to MongoDB when updating an ama's question", done => {
+        const question =
+          'This should return a 404 and not write the question to db';
+        const ama = { question };
+
+        const id = '-1';
+
+        chai
+          .request(server)
+          .put(`/api/ama/${id}`)
+          .send(ama)
+          .end((err, res) => {
+            expect(res).to.have.status(500);
+            done();
+          });
+      });
+
+      it("should return a status code of 500 with an id that doesn't conform to MongoDB when updating an ama's answer", done => {
+        const question =
+          'This should return a 404 and not write the answer to db';
+        const ama = { question };
+
+        const id = '-1';
+
+        chai
+          .request(server)
+          .put(`/api/ama/${id}`)
+          .send(ama)
+          .end((err, res) => {
+            expect(res).to.have.status(500);
+            done();
+          });
+      });
+
+      it("should return a status code of 404 with an id not found in the db when updating an ama's question", done => {
+        const question =
+          'This should return a 404 and not write the question to db';
+        const ama = { question };
+
+        const id = '000000000000000000000000';
+
+        chai
+          .request(server)
+          .put(`/api/ama/${id}`)
+          .send(ama)
+          .end((err, res) => {
+            expect(res).to.have.status(404);
+            done();
+          });
+      });
+
+      it("should return a status code of 404 with an id not found in the db when updating an ama's answer", done => {
+        const answer =
+          'This should return a 404 and not write the answer to db';
+        const ama = { answer };
+
+        const id = '000000000000000000000000';
+
+        chai
+          .request(server)
+          .put(`/api/ama/${id}`)
+          .send(ama)
+          .end((err, res) => {
+            expect(res).to.have.status(404);
+            done();
+          });
+      });
+
+      it('should return a status code of 422 when updating an ama with nether a question NOR an answer', done => {
+        const question =
+          'Why should I choose Lambda School over other CS programs?';
+        const answer =
+          "You should choose LS over other CS programs because you don't pay a cent until you're hired!";
+        const ama = { question };
+
+        let id;
+
+        chai
+          .request(server)
+          .post('/api/ama/question')
+          .send(ama)
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+            }
+
+            id = res.body._id;
+
+            chai
+              .request(server)
+              .put(`/api/ama/${id}`)
+              .send({})
+              .end((err, res) => {
+                expect(res).to.have.status(422);
+                done();
+              });
+          });
+      });
+
       it('should return a status code of 422 when updating an ama with both a question AND an answer', done => {
         const question =
           'Why should I choose Lambda School over other CS programs?';
@@ -361,37 +460,6 @@ describe('Server', () => {
               .request(server)
               .put(`/api/ama/${id}`)
               .send(updatedAma)
-              .end((err, res) => {
-                expect(res).to.have.status(422);
-                done();
-              });
-          });
-      });
-
-      it('should return a status code of 422 when updating an ama with nether a question NOR an answer', done => {
-        const question =
-          'Why should I choose Lambda School over other CS programs?';
-        const answer =
-          "You should choose LS over other CS programs because you don't pay a cent until you're hired!";
-        const ama = { question };
-
-        let id;
-
-        chai
-          .request(server)
-          .post('/api/ama/question')
-          .send(ama)
-          .end((err, res) => {
-            if (err) {
-              console.log(err);
-            }
-
-            id = res.body._id;
-
-            chai
-              .request(server)
-              .put(`/api/ama/${id}`)
-              .send({})
               .end((err, res) => {
                 expect(res).to.have.status(422);
                 done();
@@ -465,7 +533,7 @@ describe('Server', () => {
           });
       });
 
-      it('should return correctly update the question of an AMA', done => {
+      it('should return correctly updated question of an ama', done => {
         const question =
           'Why should I choose Lambda School over other CS programs?';
         const ama = { question };
@@ -501,7 +569,7 @@ describe('Server', () => {
           });
       });
 
-      it('should return correctly update the answer of an AMA', done => {
+      it('should return correctly updated answer of an ama', done => {
         const question = 'How much money do full-stack developers make?';
         const ama = { question };
 
@@ -530,6 +598,94 @@ describe('Server', () => {
                 expect(res.body.question).to.equal(question);
                 expect(res.body.answered).to.equal(true);
                 expect(res.body.answer).to.equal(answer);
+                done();
+              });
+          });
+      });
+    });
+
+    describe(`[DELETE] /api/ama/id`, () => {
+      it("should return a status code of 500 with an id that doesn't conform to MongoDB when deleting an ama", done => {
+        const id = '-1';
+
+        chai
+          .request(server)
+          .delete(`/api/ama/${id}`)
+          .end((err, res) => {
+            expect(res).to.have.status(500);
+            done();
+          });
+      });
+
+      it('should return a status code of 404 with an id not found in the db when deleting an ama', done => {
+        const id = '000000000000000000000000';
+
+        chai
+          .request(server)
+          .delete(`/api/ama/${id}`)
+          .end((err, res) => {
+            expect(res).to.have.status(404);
+            done();
+          });
+      });
+
+      it('should return a status code of 200 when an ama is deleted successfully', done => {
+        const question = 'How much money do full-stack developers make?';
+        const ama = { question };
+
+        let id;
+
+        chai
+          .request(server)
+          .post('/api/ama/question')
+          .send(ama)
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+            }
+
+            id = res.body._id;
+
+            const answer = '$$$$ B A N K $$$$';
+
+            const ama = { answer };
+
+            chai
+              .request(server)
+              .delete(`/api/ama/${id}`)
+              .end((err, res) => {
+                expect(res).to.have.status(200);
+                done();
+              });
+          });
+      });
+
+      it('should return { deleted: true } when an ama is deleted successfully', done => {
+        const question = 'How much money do full-stack developers make?';
+        const ama = { question };
+
+        let id;
+
+        chai
+          .request(server)
+          .post('/api/ama/question')
+          .send(ama)
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+            }
+
+            id = res.body._id;
+
+            const answer = '$$$$ B A N K $$$$';
+
+            const ama = { answer };
+
+            chai
+              .request(server)
+              .delete(`/api/ama/${id}`)
+              .end((err, res) => {
+                expect(res.body.deleted).to.equal(true);
                 done();
               });
           });
