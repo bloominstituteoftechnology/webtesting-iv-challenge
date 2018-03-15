@@ -2,7 +2,7 @@
 
 Documentation for all APIs.
 
-### All endpoints: `http://localhost:3333`
+### Server endpoint: `http://localhost:3333`
 
 ### All API endpoints: `http://localhost:3333/api`
 
@@ -14,13 +14,13 @@ Documentation for all APIs.
 
 All `/ama` **API** endpoints
 
-| endpoint        | type   | description                                                                    |
-| --------------- | ------ | ------------------------------------------------------------------------------ |
-| `/ama/question` | POST   | Creates an AMA and saves it to the database.                                   |
-| `/ama`          | GET    | Requests all AMAs                                                              |
-| `/ama/id`       | GET    | Requests the AMA with `id`                                                     |
-| `/ama/id`       | UPDATE | Updates either the question or answer field (but not both) of an AMA with `id` |
-| `/ama/id`       | DELETE | Deletes the AMA with `id`                                                      |
+| endpoint        | type   | description                                                                    | output | type   |
+| --------------- | ------ | ------------------------------------------------------------------------------ | ------ | ------ |
+| `/ama/question` | POST   | Creates an AMA and saves it to the database.                                   | JSON   | Object |
+| `/ama`          | GET    | Requests all AMAs                                                              | JSON   | Array  |
+| `/ama/id`       | GET    | Requests the AMA with `id`                                                     | JSON   | Object |
+| `/ama/id`       | UPDATE | Updates either the question or answer field (but not both) of an AMA with `id` | JSON   | Object |
+| `/ama/id`       | DELETE | Deletes the AMA with `id`                                                      | JSON   | Object |
 
 ---
 
@@ -236,4 +236,7 @@ Response: status code `200`
 
 ---
 
-a
+## Notes
+
+1. Don't forget to create pull requests if you see anything.
+1. Enjoy!
