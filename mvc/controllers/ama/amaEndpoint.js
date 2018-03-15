@@ -74,6 +74,17 @@ module.exports = {
       return;
     }
 
+    if (ama.question && ama.answer) {
+      res
+        .status(422)
+        .json({
+          message:
+            'Please only provide either an answer or a question, not both.',
+        });
+
+      return;
+    }
+
     if (ama.answer) ama.answered = true;
 
     amaController

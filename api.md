@@ -10,14 +10,13 @@ Documentation for all the apis, which include `/ama`, `/...`.
 
 All `/ama` API endpoints
 
-| endpoint           | type   | description                                    |
-| ------------------ | ------ | ---------------------------------------------- |
-| `/ama/question`    | POST   | Creates an AMA and saves it to the database.   |
-| `/ama`             | GET    | Requests all AMAs                              |
-| `/ama/id`          | GET    | Requests the AMA with `id`                     |
-| `/ama/question/id` | UPDATE | Updates the question field of an AMA with `id` |
-| `/ama/answer/id`   | UPDATE | Updates the answer field of an AMA with `id`   |
-| `/ama/question/id` | DELETE | Deletes the AMA with `id`                      |
+| endpoint           | type   | description                                                                    |
+| ------------------ | ------ | ------------------------------------------------------------------------------ |
+| `/ama/question`    | POST   | Creates an AMA and saves it to the database.                                   |
+| `/ama`             | GET    | Requests all AMAs                                                              |
+| `/ama/id`          | GET    | Requests the AMA with `id`                                                     |
+| `/ama/id`          | UPDATE | Updates either the question or answer field (but not both) of an AMA with `id` |
+| `/ama/question/id` | DELETE | Deletes the AMA with `id`                                                      |
 
 ---
 
@@ -160,11 +159,11 @@ Response: status code `500`
 
 ### [UPDATE] `/api/ama/id`
 
-Update a specific AMA's question or answer with `id`.
+**Description**: update a specific AMA's question or answer with `id`.
 
 #### Examples:
 
-#### _Changing the question for an AMA_:
+#### _Updating the question for an AMA_:
 
 Request: `[UPDATE] /api/ama/1234567890abcdefghijklmnopqrstuvwxyz`
 
@@ -212,3 +211,25 @@ Response: status code `200`
 #### Notes
 
 1. The `answered` field is automatically changed to `true` if an answer is provided.
+
+---
+
+### [DELETE] `/api/ama/id`
+
+**Description**: deletes a specific AMA with `id`.
+
+#### Example:
+
+Request: `[DELETE] /api/ama/1234567890abcdefghijklmnopqrstuvwxyz`
+
+Response: status code `200`
+
+```
+{
+  deleted: true
+}
+```
+
+---
+
+a

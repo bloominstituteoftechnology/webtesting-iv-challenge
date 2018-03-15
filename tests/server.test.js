@@ -332,6 +332,73 @@ describe('Server', () => {
     });
 
     describe(`[PUT] /api/ama/id`, () => {
+      it('should return a status code of 422 when updating an ama with both a question AND an answer', done => {
+        const question =
+          'Why should I choose Lambda School over other CS programs?';
+        const answer =
+          "You should choose LS over other CS programs because you don't pay a cent until you're hired!";
+        const ama = { question };
+
+        let id;
+
+        chai
+          .request(server)
+          .post('/api/ama/question')
+          .send(ama)
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+            }
+
+            id = res.body._id;
+
+            const updatedQuestion =
+              'How much money do full-stack developers make?';
+
+            const updatedAma = { question: updatedQuestion, answer };
+
+            chai
+              .request(server)
+              .put(`/api/ama/${id}`)
+              .send(updatedAma)
+              .end((err, res) => {
+                expect(res).to.have.status(422);
+                done();
+              });
+          });
+      });
+
+      it('should return a status code of 422 when updating an ama with nether a question NOR an answer', done => {
+        const question =
+          'Why should I choose Lambda School over other CS programs?';
+        const answer =
+          "You should choose LS over other CS programs because you don't pay a cent until you're hired!";
+        const ama = { question };
+
+        let id;
+
+        chai
+          .request(server)
+          .post('/api/ama/question')
+          .send(ama)
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+            }
+
+            id = res.body._id;
+
+            chai
+              .request(server)
+              .put(`/api/ama/${id}`)
+              .send({})
+              .end((err, res) => {
+                expect(res).to.have.status(422);
+                done();
+              });
+          });
+      });
+
       it('should return a status code of 200 when updating an ama with a question', done => {
         const question =
           'Why should I choose Lambda School over other CS programs?';
