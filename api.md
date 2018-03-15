@@ -19,7 +19,7 @@
 
 ``` 
 {
-    marsupial: Wombat,
+    name: Wombat,
     latinName: Vombatus ursinus,
     region: Southeastern Australia
 } 
@@ -40,7 +40,7 @@
 
 ``` 
 {
-    marsupial: Wombat,
+    name: Wombat,
     latinName: Vombatus ursinus,
     region: Southeastern Australia
 } 

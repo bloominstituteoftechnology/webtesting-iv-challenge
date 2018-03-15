@@ -16,12 +16,20 @@ const MarsupialSchema = new Schema({
     }
 });
 
-MarsupialSchema.methods.getName = () => {
-    return this.name
+MarsupialSchema.methods.getName = function () {
+    return this.name;
 };
 
-MarsupialSchema.statics.getAllMarsupials = (cb) => {
-    Mongoose.find({}, (err, marsupials) => {
+MarsupialSchema.methods.getLatinName = function () {
+    return this.latinName;
+};
+
+MarsupialSchema.methods.getRegion = function () {
+    return this.region;
+};
+
+MarsupialSchema.statics.getAllMarsupials =  function(cb) {
+    Marsupial.find({}, (err, marsupials) => {
         if (err) return cb(err);
         cb(marsupials)
     });
