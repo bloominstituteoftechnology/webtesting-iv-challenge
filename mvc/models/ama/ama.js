@@ -3,6 +3,7 @@ const { Schema } = mongoose;
 const mongodAuth = require('../../../config').mongodAuth;
 
 mongoose.connect('mongodb://localhost/server-testing_db', mongodAuth);
+// mongoose.connect('mongodb://localhost/server-testing_db');
 
 const AmaSchema = new Schema({
   question: {
