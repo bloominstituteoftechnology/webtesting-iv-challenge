@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongodAuth = require('../config').mongodAuth;
+// const mongodAuth = require('../config').mongodAuth;
 const Ama = require('../mvc/models/ama/ama');
 
 const chai = require('chai');
@@ -37,7 +37,7 @@ describe('Amas', () => {
   before(done => {
     mongoose.connect(
       'mongodb://localhost/server-testing_model-test_db',
-      mongodAuth,
+      // mongodAuth,
     );
 
     const db = mongoose.connection;
