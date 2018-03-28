@@ -10,21 +10,24 @@ const Weapon = require('../models/WeaponsModel');
 chai.use(chaihttp);
 
 describe('server.js', () => {
+  const dbase = mongoose.connection;
   before(done => {
+    console.log('before');
     mongoose.connect('mongodb://localhost/test');
-    const db = mongoose.connection;
-    db.on('error', () => {
+    dbase.on('error', () => {
       console.error('connection error');
     });
-    db.once('open', () => {
+    dbase.once('open', () => {
       console.log('we are connected');
       done();
     });
   });
 
   after(done => {
-    mongoose.connect.db.dropDatabase(() => {
-      mongoose.connection.close(done);
+    console.log('after');
+    dbase.db.dropDatabase(() => {
+      console.log('inside .dropDatabase()');
+      dbase.close(done);
     });
   });
 
