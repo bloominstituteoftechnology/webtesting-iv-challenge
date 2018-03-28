@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
-const Anime = require('./anime');
+const Anime = require('./model');
 
 const chai = require('chai');
 const { expect } = chai;
