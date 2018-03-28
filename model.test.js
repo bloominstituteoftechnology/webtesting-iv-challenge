@@ -1,10 +1,19 @@
-// TEST
+const mongoose = require('mongoose');
+const chai = require('chai');
+const sinon = require('sinon');
+const { expect } = chai;
+
+const Character = require('./character');
+
+mongoose.connect('mongodb://localhost/characters');
+
+// import things here
 
 describe('Character', () => {
   describe('getCharacter()', () => {
-    it(`should return the cahracter`, () => {
+    it(`should return the character`, () => {
       const character = new Character({
-        title: 'character'
+        name: 'character'
       });
     expect(character.getCharacter()).to.equal('character');
     });
