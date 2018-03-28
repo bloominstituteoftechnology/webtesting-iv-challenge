@@ -10,8 +10,8 @@ server.post('/team', (req, res) => {
 });
 
 server.get('/teams', (req, res) => {
-    console.log('Hello World!');
-    res.json();
+	console.log('get request');
+    res.json(res);
 });
 
 module.exports = server;
