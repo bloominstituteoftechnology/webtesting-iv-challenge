@@ -14,4 +14,8 @@ server.get('/bands', (req,res) => {
     res.status(200).send(req.body);
 })
 
+server.put('/band/:name', (req,res) => {
+  res.status(200).send(req.body);
+})
+
 module.exports = server;

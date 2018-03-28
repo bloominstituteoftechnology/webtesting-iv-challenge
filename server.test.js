@@ -51,4 +51,38 @@ describe('Server', () => {
         });
     });
   });
+  describe('[PUT] /band', () => {
+    it('should update band', () => {
+      const newBands = [
+        {
+          name: 'La Armada',
+          genre: 'Hardcore',
+        },
+        {
+          name: 'Queers',
+          genre: 'Pop Punk',
+        },
+      ];
+      const updatedBand = {
+        name: 'Dinosaur Jr.',
+        genre: 'Alternative Rock',
+      };
+      chai
+        .request(server)
+        .get('/bands')
+        .send(newBands)
+        .end((err, res) => {
+          chai
+            .request(server)
+            .put('/band/' + newBands[0].name)
+            .send(updatedBand)
+            .end((error, response) => {
+              if (error) console.error(error);
+              expect(response.status).to.equal(200);
+              expect(response.body[0].name).to.equal('Dinosaur Jr.');
+              expect(response.body[1].genre).to.equal('Pop Punk');
+            });
+        });
+    });
+  });
 });
