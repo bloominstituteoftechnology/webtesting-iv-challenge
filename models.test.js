@@ -7,6 +7,10 @@ const { expect } = chai;
 const sinon = require('sinon');
 
 describe('Anime', () => {
+  const neo = new Anime({ name : 'Neon Genesis Evangelion' });
+  const trigun = new Anime({ name : 'Trigun' });
+  const hxh = new Anime({ name : 'Hunter x Hunter' });
+
   describe('#getName()', () => {
     it('should return the name of the anime', () => {
       const anime = new Anime({
@@ -24,17 +28,11 @@ describe('Anime', () => {
   });
 
   describe('#getAllAnimes()', () => {
-    it('should return all the animes', async () => {
+    it('should return all the animes', async function() {
       sinon.stub(Anime, 'find');
-      Anime.find.yields(null, [
-        {
-          name: 'Neon Genesis Evangelion',
-          genre: 'Super Robot',
-        }
-      ]);
+      Anime.find.resolves([hxh, trigun, neo]);
       const allAnimes = await Anime.getAllAnimes();
-      expect(allAnimes.length).to.equal(1);
-      Anime.find.restore();
+      expect(allAnimes.length).to.equal(3);
     });
   });
 });
