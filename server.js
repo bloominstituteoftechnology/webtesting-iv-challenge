@@ -3,7 +3,7 @@ const express = require('express');
 const server = express();
 server.use(express.json());
 
-const Band = require('/models');
+const Band = require('./models');
 
 server.get('/bands', (req, res) => {
   Band.find().then((bands) => res.status(200).json(bands));
@@ -26,9 +26,11 @@ server.put('/band/:id', (req, res) => {
   const { id } = req.params;
   const updatedBand = req.body;
 
-  Band.findByIdAndUpdate(id, updatedBand)
+  Band.findByIdAndUpdate(id, updatedBand, {new: true})
     .then(band => {
-      if (band) res.status(200).json(band);
+      if (band) {
+        res.status(200).json(band);
+      }
       else res.status(404).json("Band ID Not Found")
     })
     .catch(error => {
