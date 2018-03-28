@@ -15,6 +15,7 @@ describe('Server', () => {
   describe('POST to /records', () => {
     it('should add a new record', () => {
       const newRecord = {
+        artistName: "The Beatles",
         name: "Sgt. Pepper's Lonely Hearts Club Band",
         type: 'LP',
       };

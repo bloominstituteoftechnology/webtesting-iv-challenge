@@ -2,7 +2,11 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const RecordSchema = new Schema({
-  name: {
+  artistName: {
+    required: true,
+    type: String,
+  },
+  albumName: {
     required: true,
     type: String,
   },
@@ -13,7 +17,7 @@ const RecordSchema = new Schema({
 });
 
 RecordSchema.methods.getRecordByName = function() {
-  return this.name;
+  return this.albumName;
 }
 
 RecordSchema.statics.getAllRecords = (cb) => {
