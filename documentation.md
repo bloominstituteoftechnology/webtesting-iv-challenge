@@ -25,14 +25,25 @@ status: 200 OK
 ----
 
 ```
-[POST]
+[POST] /anime
 ```
 ### Description
-Temp
-### Parameters
+This endpoint allows new anime to be added into the database.
+### Input
+|Name|Type|Description|
+|----|----|-----------|
+|title|string|The title of the anime you want to add to the database.|
+|genre|string|The genre of the anime you want to add to the database.|
+
 ### Example Response
 ```
-Response
+status: 200 OK
+----------------
+{
+  "id": "fj248rh2049t8he09if209e8rh029",
+  "title": "Akira",
+  "genre": "A confusing but cool looking mess."
+}
 ```
 ----
 
