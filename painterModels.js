@@ -18,9 +18,15 @@ PainterSchema.methods.getPainterName = function() {
 };
 
 PainterSchema.statics.getAllPainters = (cb) => {
-  Painter.find()
-    .then(sg => cb(sg))
-    .catch(err => console.error(err));
+  Painter.find((err, ptr) => {
+    if(err) {
+      console.error(err);
+      return;
+    }
+    cb(ptr);
+  })
+    // .then(sg => cb(sg))
+    // .catch(err => console.error(err));
 };
 
 const Painter = mongoose.model('Painter', PainterSchema);

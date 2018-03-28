@@ -10,8 +10,8 @@ describe("Painters", () => {
             const newPainter = Painter({
                 name: "Franz Kline",
                 style: "Abstract-Expressionist"
-            })
-            expect(Painter.getPainterName).to.equal("Franz Kline");
+            }).save();
+            expect(newPainter.getPainterName()).to.equal("Franz Kline");
         });
     });
 
@@ -30,6 +30,7 @@ describe("Painters", () => {
                 }
             ]);
             Painter.getAllPainters(painters => {
+                console.log('test');
                 expect(painters.length).to.equal(2);
                 expect(painters[1].name).to.equal("Franz Kline");
             });
