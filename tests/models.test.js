@@ -13,10 +13,35 @@ describe('Weapons', () => {
       };
       const weapon = new Weapon(newWeapon);
       assert.equal(weapon.getWeaponName(), 'Knife');
-      // expect(weapon.getWeaponName()).to.equal('Knife');
     });
-  })
-
-
-
-})
+  });
+  describe('getWeaponDescription', () => {
+    it('should return the correct weapon description', () => {
+      const newWeapon = {
+        name: 'Knife',
+        description: 'Stabs the flesh',
+      };
+      const weapon = new Weapon(newWeapon);
+      assert.equal(weapon.getWeaponDesc(), 'Stabs the flesh');
+    });
+  });
+  describe('getWeaponDescription', () => {
+    it('should return all weapons', () => {
+      sinon.stub(Weapon, 'find');
+      Weapon.find.yields(null, [
+        {
+          name: 'Knife',
+          description: 'Stabs the flesh',
+        },
+        {
+          name: 'Pencil',
+          description: 'Pokes the flesh',
+        },
+      ]);
+      Weapon.getAllWeapons(weapons => {
+        assert.equal(weapons.length, '2');
+        assert.equal(weapons[0].name, 'Knife');
+      });
+    });
+  });
+});

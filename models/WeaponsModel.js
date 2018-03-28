@@ -21,10 +21,10 @@ WeaponSchema.methods.getWeaponDesc = function() {
   return this.description;
 };
 
-WeaponSchema.statics.getAllWeapons = () => {
+WeaponSchema.statics.getAllWeapons = (cb) => {
   Weapon.find({}, (err, weapons) => {
     if (err) console.error(err);
-    else return weapons;
+    cb(weapons);
   });
 };
 
