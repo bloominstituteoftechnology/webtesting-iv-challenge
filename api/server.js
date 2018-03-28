@@ -14,16 +14,18 @@ const Book = require('./models/BookModel');
 //===============================
 
 server.get('/', function(req, res) {
-  res.status(200).json({ message: "Works..." });
+  res.status(200).json({ message: 'Works...' });
 });
 
 server.get('/books', (req, res) => {
-  res.status(200).json({ message: 'Here are your books', books: ['Slaughterhouse Five'] });
+  res
+    .status(200)
+    .json({ message: 'Here are your books', books: ['Slaughterhouse Five'] });
 });
 
 server.post('/books', (req, res) => {
   const bookInfo = req.body;
-  if(!bookInfo.title || !bookInfo.author) {
+  if (!bookInfo.title || !bookInfo.author) {
     res.status(400).json({ message: 'Must provide a title and author!' });
   } else {
     const book = new Book(bookInfo);
@@ -33,9 +35,9 @@ server.post('/books', (req, res) => {
         res.status(201).json(savedBook);
       })
       .catch(err => {
-        res.status(500).json({ message: "there was an error!" });
+        res.status(500).json({ message: 'there was an error!' });
       });
-  };
+  }
 });
 
 // server.post('/books', (req, res) => {
@@ -45,5 +47,12 @@ server.post('/books', (req, res) => {
 //     res.send(savedBook);
 //   });
 // });
+
+server.delete('/books/:id', (req, res) => {
+  const { id } = req.params;
+  Book.findByIdAndRemove(id).then(book => {
+    res.status(200).json(book);
+  });
+});
 
 module.exports = server;

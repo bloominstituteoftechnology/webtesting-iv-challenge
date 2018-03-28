@@ -11,7 +11,7 @@ chai.use(chaihttp);
 const Book = require('../models/BookModel');
 
 describe('Server', () => {
-  before((done) => {
+  before(done => {
     mongoose.connect('mongodb://localhost/books');
     const db = mongoose.connection;
     db.on('error', () => {
@@ -23,14 +23,14 @@ describe('Server', () => {
     });
   });
 
-  after((done) => {
+  after(done => {
     mongoose.connection.db.dropDatabase(() => {
       mongoose.connection.close(done);
     });
   });
 
   describe('[GET] /books', () => {
-    it('should retrieve the book titles', (done) => {
+    it('should retrieve the book titles', done => {
       chai
         .request(server)
         .get('/books')
@@ -45,22 +45,40 @@ describe('Server', () => {
   });
 
   describe('[POST] /books', () => {
-    it('should save a new book', (done) => {
+    it('should save a new book', done => {
       const book = {
         title: 'A New Earth',
-        author: 'Eckhart Tolle'
-      }
+        author: 'Eckhart Tolle',
+      };
 
-      chai.request(server)
-      .post('/books')
-      .send(book)
-      .end((err, res) => {
-        if (err) return console.error(err);
-        expect(res.status).to.equal(201);
-        expect(res.body.title).to.equal('A New Earth');
-        done();
-      });
+      chai
+        .request(server)
+        .post('/books')
+        .send(book)
+        .end((err, res) => {
+          if (err) return console.error(err);
+          expect(res.status).to.equal(201);
+          expect(res.body.title).to.equal('A New Earth');
+          done();
+        });
     });
   });
 
+  describe('[DELETE] /books/:id', done => {
+    it('should delete the correct book by id', () => {
+      const book = new Book({
+        title: 'Slaughterhouse Five',
+        author: 'Kurt Vonnegut',
+      });
+      book.save((err, book) => {
+        chai
+          .request(server)
+          .delete(`/books/${book.id}`)
+          .end((err, res) => {
+            expect(res.status).to.equal(200);
+            done();
+          });
+      });
+    });
+  });
 });
