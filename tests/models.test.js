@@ -25,10 +25,10 @@ describe('Weapons', () => {
       assert.equal(weapon.getWeaponDesc(), 'Stabs the flesh');
     });
   });
-  describe('getWeaponDescription', () => {
+  describe('getAllWeapons', () => {
     it('should return all weapons', () => {
-      sinon.stub(Weapon, 'find');
-      Weapon.find.yields(null, [
+      const weaponStub = sinon.stub(Weapon, 'find');
+      weaponStub.yields(null, [
         {
           name: 'Knife',
           description: 'Stabs the flesh',
