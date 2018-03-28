@@ -18,8 +18,15 @@ BandSchema.methods.getBandName = function() {
 
 BandSchema.statics.getAllBands = (cb) => {
   Band.find({}, (err, bands) => {
-    if (err) console.log(err);
+    if (err) console.error(err);
     cb(bands);
+  });
+};
+
+BandSchema.statics.getBandByName = (bandName, cb) => {
+  Band.findOne({ name: bandName }, (err, band) => {
+    if (err) console.error(err);
+    cb(band);
   });
 };
 
