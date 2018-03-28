@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/test', {
+  useMongoClient: true,
+});
 const Anime = require('./model');
 
 const chai = require('chai');

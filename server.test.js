@@ -11,7 +11,9 @@ const Anime = require('./model');
 
 describe('Server', () => {
   before((done) => {
-    mongoose.connect('mongodb://localhost/test');
+    mongoose.connect('mongodb://localhost/test', {
+      useMongoClient: true,
+    });
     const db = mongoose.connection;
     db.on('error', () => {
       console.error('connection error');
@@ -48,7 +50,23 @@ describe('Server', () => {
       done();
     });
   });
-  // describe('[GET] /anime', () => {
+  
+  describe('[GET] /anime', () => {
+    it('should return a list of all anime in the database', (done) => {
+      // const getRequest = await chai.request(server).get('/anime');
+      chai.request(server)
+        .get('/anime')
+        .end((err, res) => {
+          if (err) {
+            console.error(err);
+            done();
+          }
+          expect(res.status).to.equal(400);
+          expect(res.body).to.exist();
+        });
+      done();
+    });
+  });
   
   // });
   // describe('[PUT] /anime', () => {
