@@ -76,6 +76,7 @@ describe('Server', () => {
           .delete(`/books/${book.id}`)
           .end((err, res) => {
             expect(res.status).to.equal(200);
+            expect(res.body.title).to.equal('Slaughterhouse Five');
             done();
           });
       });
