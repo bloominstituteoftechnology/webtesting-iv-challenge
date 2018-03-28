@@ -21,10 +21,8 @@ AnimeSchema.methods.getName = function() {
 AnimeSchema.statics.getAllAnimes = async function() {
   try {
     const animes = await Anime.find({});
-    console.log('!!!', animes);
     return animes;
   } catch(err) {
-    console.log("Couldn't get all the animes :(");
     return err;
   }
 };
