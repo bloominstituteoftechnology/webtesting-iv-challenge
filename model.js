@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const ToppingsSchema = new Schema({
+const ToppingSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -13,6 +13,10 @@ const ToppingsSchema = new Schema({
   },
 });
 
-ToppingsSchema.methods.addATopping = function() {
-
+ToppingSchema.methods.addATopping = function() {
+  return this.name;
 };
+
+const Topping = mongoose.model('Topping', ToppingSchema);
+
+module.exports = Topping;
