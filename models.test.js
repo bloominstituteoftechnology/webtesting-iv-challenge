@@ -26,6 +26,7 @@ describe('Cars', () => {
       Car.getAllCars((cars) => {
         expect(cars.length).to.equal(2);
         expect(cars[1].manufacturer).to.equal('Ford');
+        Car.find.restore();
       });
     });
   });
