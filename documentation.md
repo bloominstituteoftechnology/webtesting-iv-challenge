@@ -15,8 +15,8 @@ N/A, a simple `GET` request is all that is needed.
   "body": [
     {
       "id": "fo90ef8h209ufgh0e90f9",
-      "title": "One Piece",
-      "genre": "Action/Adventure?"
+      "name": "One Piece",
+      "genre": "Adventure Fantasy"
     }
   ]
 }
@@ -28,7 +28,7 @@ N/A, a simple `GET` request is all that is needed.
 ### Request Body
 |Name|Type|Description|
 |----|----|-----------|
-|title|string|The title of the anime you want to add to the database.|
+|name|string|The name of the anime you want to add to the database.|
 |genre|string|The genre of the anime you want to add to the database.|
 
 ### Example Response
@@ -36,8 +36,8 @@ N/A, a simple `GET` request is all that is needed.
 ```json
 {
   "id": "fj248rh2049t8he09if209e8rh029",
-  "title": "Akira",
-  "genre": "A confusing but cool looking mess."
+  "name": "Akira",
+  "genre": "Sci-fi Action"
 }
 ```
 
@@ -55,8 +55,8 @@ N/A, a simple `GET` request is all that is needed.
   "body": [
     {
       "id": "fo90ef8h209ufgh0e90f9",
-      "title": "One Piece",
-      "genre": "Action/Adventure?"
+      "name": "One Piece",
+      "genre": "Adventure Fantasy"
     }
   ]
 }
@@ -69,7 +69,7 @@ N/A, a simple `GET` request is all that is needed.
 |Name|Type|Description|
 |----|----|-----------|
 |id|string|The document whose name and genre you want to update.
-|title|string|The new title for the anime.|
+|name|string|The new name for the anime.|
 |genre|string|The new genre for the anime.|
 
 ### Example Response
@@ -78,8 +78,8 @@ N/A, a simple `GET` request is all that is needed.
 {
   "body": {
   	  "id": "f92fh029rughf0923efuh920eifh",
-      "title": "JoJo's Bizarre Adventure",
-      "genre": "???"
+      "name": "Neon Genesis Evangelion",
+      "genre": "Super Robot"
     }
 }
 ```
