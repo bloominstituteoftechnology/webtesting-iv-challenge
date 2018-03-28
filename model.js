@@ -17,6 +17,13 @@ ToppingSchema.methods.addATopping = function() {
   return this.name;
 };
 
+ToppingSchema.statics.getAllTheToppings = (cb) => {
+  Topping.find({}, (err, toppings) => {
+    if (err) console.error(err);
+    cb(toppings);
+  })
+}
+
 const Topping = mongoose.model('Topping', ToppingSchema);
 
 module.exports = Topping;
