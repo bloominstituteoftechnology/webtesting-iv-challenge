@@ -1,7 +1,7 @@
 # API Documentation
 ## Anime!
 
-Welcome to our pretty okay anime database API! To get started, the default port is 3030. Available endpoints are documented below.
+Welcome to our pretty okay anime database API! To get started, the default port is `3030`. Available endpoints are documented below.
 
 ----
 
