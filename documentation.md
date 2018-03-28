@@ -11,7 +11,7 @@
 ```
     {
         name: 'Rush',
-        genre: 'Classic Rock',
+        genre: 'Classic Rock'
     }
 ```
 
@@ -25,16 +25,16 @@
   [
     {
       name: 'Rush',
-      genre: 'Classic Rock',
+      genre: 'Classic Rock'
     },
     {
       name: 'Linkin Park',
-      genre: 'Alt Rock',
+      genre: 'Alt Rock'
     }
   ]
 ```
 
-### [PUT] /api/bands/123, where 123 is the id of the band that you want to modify.
+### [PUT] /api/bands/123, where `123` is the id of the band that you want to modify.
 #### * For this end point to work you need to have id added to URL and atleast one field to update on the Band object.
    
    | Endpoint | Type | Data |
@@ -45,11 +45,11 @@
 ```
     {
         name: 'Rush-more',
-        genre: 'Classic Rock',
+        genre: 'Classic Rock'
     }
 ```
 
-### [DELETE] /api/bands/123, where 123 is the id of the band that you want to remove.
+### [DELETE] /api/bands/123, where `123` is the id of the band that you want to remove.
 #### * For this end point to work you need to have id in the request URL.
 
 #### * If your delete worked, you'll get a success object back.
@@ -66,6 +66,6 @@ output:
         "Band removed": {
             name: 'Rush-more',
             genre: 'Classic Rock',
-            id: 123,
+            id: 123
         }
     }
