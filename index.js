@@ -12,7 +12,7 @@ mongoose.connect('mongoDB://localhost:/painters', () => {
 });
 
 server.post('/painter', (req,res) => {
-  res.send(req.body);
+  res.json(req.body);
   // const painter = new Painter({
   //   name: req.body.name,
   //   style: req.body.style 
@@ -24,9 +24,10 @@ server.post('/painter', (req,res) => {
 
 
 server.get('/allPainters', (req,res) => {
-  painters.find()
-  .then(sG => res.send(sG))
-  .catch(err => res.status(422).json({error: err}))
+  // painters.find()
+  // .then(sG => res.send(sG))
+  // .catch(err => res.status(422).json({error: err}))
+  res.json("test");
 });
 
 

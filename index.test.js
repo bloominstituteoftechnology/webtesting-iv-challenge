@@ -19,10 +19,24 @@ describe('Index', () => {
       .post('/painter')
       .send(newPainter)
       .end((err, res) => {
+        //console.log("first log", res.body);
         if (err) console.error(err);
         expect(res.status).to.equal(200);
         expect(res.body.name).to.equal('van Gogh');
       });
     });
   });
+
+  describe('[GET] /allPainters', () => {
+    it("should return all the painters", () => {
+      chai.request(server)
+      .get("/allPainters")
+      .end((err, res) => {
+        //console.log("log", res.body);
+        if (err) console.error(err);
+        expect(res.status).to.equal(200);
+        expect(res.body).to.equal("test");
+      })
+    })
+  })
 });
