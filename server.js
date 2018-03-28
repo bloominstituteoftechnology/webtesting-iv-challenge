@@ -7,7 +7,7 @@ server.use(express.json());
 
 const User = require('./Users');
 
-erver.get('/users', (req, res) => {
+server.get('/users', (req, res) => {
     User.find({})
       .then(user => res.status(200).json(user))
       .catch(err => res.status(422).json({ err: err }));
