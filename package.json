@@ -1,0 +1,31 @@
+{
+  "name": "server-testing",
+  "version": "1.0.0",
+  "description": "Leon, Dan, and John testing servers",
+  "main": "index.js",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.12",
+    "morgan": "^1.9.0",
+    "sinon": "^4.4.10"
+  },
+  "devDependencies": {
+    "mocha": "^5.0.5"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Smithface/Server-Testing.git"
+  },
+  "author": "Leon, Dan, and John",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Smithface/Server-Testing/issues"
+  },
+  "homepage": "https://github.com/Smithface/Server-Testing#readme"
+}
