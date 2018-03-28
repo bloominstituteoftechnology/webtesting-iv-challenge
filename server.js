@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 
 const server = express();
 
+const PORT = 3030;
+
 server.use(morgan('combined'));
 server.use(express.json());
 
@@ -22,4 +24,9 @@ server.post('/weapons', (req, res) => {
     .catch(err =>
       res.status(500).json({ msg: 'Error saving the weapon', err })
     );
+});
+
+server.listen(PORT, err => {
+  if (err) console.log(err);
+  console.log(`server is listening on port ${PORT}`);
 });
