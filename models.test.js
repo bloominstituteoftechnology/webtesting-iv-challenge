@@ -15,4 +15,20 @@ describe('Bands', () => {
       expect(band.getBandName()).to.equal('Descendents');
     });
   });
+  describe('getAllBands', () => {
+    it('should return all the bands', () => {
+      sinon.stub(Band, 'find');
+      Band.find.yields(
+        null,
+        [
+          { name: 'Linkin Park', genre: 'Garbage' },
+          { name: 'Queers', genre: 'Pop Punk' },
+        ]
+      );
+      Band.getAllBands((bands) => {
+        expect(bands.length).to.equal(2);
+        expect(bands[1].name).to.equal('Queers');
+      });
+    });
+  });
 });
