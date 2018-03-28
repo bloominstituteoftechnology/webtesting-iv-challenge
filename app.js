@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const server = require('./server');
+const server = require('./api/server');
 
 const port = process.env.PORT || 5005;
 
