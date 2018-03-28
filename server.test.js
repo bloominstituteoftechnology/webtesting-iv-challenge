@@ -51,38 +51,76 @@ describe('Server', () => {
         });
     });
   });
-  describe('[PUT] /band', () => {
-    it('should update band', () => {
-      const newBands = [
-        {
-          name: 'La Armada',
-          genre: 'Hardcore',
-        },
-        {
-          name: 'Queers',
-          genre: 'Pop Punk',
-        },
-      ];
-      const updatedBand = {
-        name: 'Dinosaur Jr.',
-        genre: 'Alternative Rock',
-      };
-      chai
-        .request(server)
-        .get('/bands')
-        .send(newBands)
-        .end((err, res) => {
-          chai
-            .request(server)
-            .put('/band/' + newBands[0].name)
-            .send(updatedBand)
-            .end((error, response) => {
-              if (error) console.error(error);
-              expect(response.status).to.equal(200);
-              expect(response.body[0].name).to.equal('Dinosaur Jr.');
-              expect(response.body[1].genre).to.equal('Pop Punk');
-            });
+  describe('[PUT] /band/:name', () => {
+  it('should update the band at :name', function(done) {
+    const newBands = [
+      {
+        name: 'La Armada',
+        genre: 'Hardcore',
+      },
+      {
+        name: 'Queers',
+        genre: 'Pop Punk',
+      },
+    ];
+    const updatedBand = {
+      name: 'Dinosaur Jr.',
+      genre: 'Alternative Rock',
+    };
+    chai.request(server)
+      .get('/bands')
+      .send(newBands)
+      .end(function(err, res){
+        chai.request(server)
+          .put('/band/'+res.body[1]._id)
+          .send(updatedBand)
+          .end(function(error, response){
+            expect(response.body.name).to.equal('Dinosaur Jr.')
+            done();
         });
+      });
     });
   });
+  // describe('[DELETE] /band/:name', () => {
+  //   it('should delete band', () => {
+  //     const newBands = [
+  //       {
+  //         name: 'La Armada',
+  //         genre: 'Hardcore',
+  //       },
+  //       {
+  //         name: 'Queers',
+  //         genre: 'Pop Punk',
+  //       },
+  //     ];
+  //     const bandToDelete = {
+  //       name: 'Queers',
+  //     };
+  //     chai
+  //       .request(server)
+  //       .get('/bands')
+  //       .send(newBands)
+  //       .end((err, res) => {
+  //         chai
+  //           .request(server)
+  //           .delete('/band/' + bandToDelete.name)
+  //           // .send(updatedBand)
+  //           .end((error, response) => {
+  //             chai
+  //               .request(server)
+  //               .get('/bands')
+  //               .end((errer, responze) => {
+  //                 if (error) console.error(error);
+  //                 expect(response.status).to.equal(200);
+  //                 expect(response.body[0].name).to.equal(
+  //                   'Dinosaur Jr.'
+  //                 );
+  //                 expect(response.body[1].genre).to.equal(
+  //                   'undefined'
+  //                 );
+  //               });
+  //           });
+  //       });
+  //   });
+  // });
 });
