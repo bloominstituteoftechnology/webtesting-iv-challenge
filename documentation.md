@@ -2,20 +2,35 @@
 ## Anime!
 
 ```
-[GET]
+[GET] /anime
 ```
+### Description
+This path will obtain a list of all anime in the database.
 ### Parameters
-### Response
+N/A, a simple `GET` request is all that is needed.
+### Example Response
 ```
-Response
+status: 200 OK
+----------------
+{
+  "body": [
+    {
+      "id": "fo90ef8h209ufgh0e90f9",
+      "title": "One Piece",
+      "genre": "Action/Adventure?"
+    }
+  ]
+}
 ```
 ----
 
 ```
 [POST]
 ```
+### Description
+Temp
 ### Parameters
-### Response
+### Example Response
 ```
 Response
 ```
@@ -24,8 +39,10 @@ Response
 ```
 [DELETE]
 ```
+### Description
+Temp
 ### Parameters
-### Response
+### Example Response
 ```
 Response
 ```
@@ -34,8 +51,10 @@ Response
 ```
 [PUT]
 ```
+### Description
+Temp
 ### Parameters
-### Response
+### Example Response
 ```
 Response
 ```
