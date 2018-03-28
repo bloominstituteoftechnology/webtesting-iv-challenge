@@ -17,4 +17,17 @@ describe('Toppings', () => {
             expect(topping.addATopping()).to.equal('pepperoni');
         });
     });
+    describe('getAllTheToppings', () => {
+        it('should return all the toppings', () => {
+            sinon.stub(Topping, 'find');
+            Topping.find.yields(null, [
+                { name: 'anchovies', category: 'yuck' },
+                { name: 'pineapple', category: 'yuck' },
+            ]);
+            Topping.getAllTheToppings((toppings) => {
+                expect(toppings.length).to.equal(2);
+                expect(toppings[1].name).to.equal('pineapple');
+            });
+        });
+    });
 });
