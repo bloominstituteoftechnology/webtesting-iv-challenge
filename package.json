@@ -6,9 +6,9 @@
   "author": "Nate152 <35231160+Nate152@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon server.js",
-    "test": ""
-  }
+    "start": "nodemon index.js",
+    "test": "mocha *.test.js"
+  },
   "dependencies": {
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
