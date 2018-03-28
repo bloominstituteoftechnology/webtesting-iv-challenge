@@ -27,4 +27,28 @@ describe('Server', () => {
         });
     });
   });
+  describe('[GET] /bands', () => {
+    it('should return all bands', () => {
+      const newBands = [
+        {
+          name: 'La Armada',
+          genre: 'Hardcore',
+        },
+        {
+          name: 'Queers',
+          genre: 'Pop Punk',
+        },
+      ];
+      chai
+        .request(server)
+        .get('/bands')
+        .send(newBands)
+        .end((err, res) => {
+          if (err) console.error(err);
+          expect(res.status).to.equal(200);
+          expect(res.body[0].name).to.equal('La Armada');
+          expect(res.body[1].genre).to.equal('Pop Punk');
+        });
+    });
+  });
 });
