@@ -2,9 +2,9 @@
   "name": "server-testing",
   "version": "1.0.0",
   "description": "Lambda Server-Testing",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha *.test.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
     "mocha": "^5.0.5",
     "mongoose": "^5.0.12",
     "morgan": "^1.9.0",
+    "nodemon": "^1.17.2",
     "sinon": "^4.4.10"
   }
 }
