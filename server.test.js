@@ -29,17 +29,17 @@ describe('Server', () => {
     });
   });
 
-  // describe('[GET] /teams', () => {
-  //   it('should return list of teams', () => {
+  describe('[GET] /teams', () => {
+    it('should return list of teams', () => {
   
-  //     chai.request(server)
-  //       .get('/teams')
-  //       .end((err, res) => {
-  //         console.log('res body', res.body);
-  //         if (err) console.error(err);
-  //         expect(res.status).to.equal(200);
-  //         expect(res.body).to.equal('Hello World!');
-  //       });
-  //   });
-  // });
+      chai.request(server)
+        .get('/teams')
+        .end((err, res) => {
+          if (err) console.error(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.length).to.equal(3);
+          expect(res.body[0].name).to.equal('Raiders');
+        });
+    });
+  });
 });

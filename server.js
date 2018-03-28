@@ -5,13 +5,18 @@ const server = express();
 server.use(morgan('combined'));
 server.use(express.json());
 
+// dummy data
+const teams = [
+	{name: 'Raiders', sport: 'Football'},
+	{name: 'Cubs', sport: 'Baseball'},
+	{name: 'Spurs', sport: 'Basketball'}];
+
 server.post('/team', (req, res) => {
   res.send(req.body);
 });
 
 server.get('/teams', (req, res) => {
-	console.log('get request');
-    res.json(res);
+    res.json(teams);
 });
 
 module.exports = server;
