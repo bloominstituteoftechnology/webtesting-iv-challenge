@@ -15,4 +15,8 @@ server.get('/', function(req, res) {
   res.status(200).json({ message: "Works..." });
 });
 
+server.get('/books', (req, res) => {
+  res.status(200).json({ message: 'Here are your books', books: ['Slaughterhouse Five'] });
+});
+
 module.exports = server;
