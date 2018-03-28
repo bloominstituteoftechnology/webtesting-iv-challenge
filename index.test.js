@@ -36,7 +36,7 @@ describe('Index', () => {
         if (err) console.error(err);
         expect(res.status).to.equal(200);
         expect(res.body).to.equal("test");
-      })
-    })
-  })
+      });
+    });
+  });
 });

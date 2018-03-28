@@ -18,6 +18,7 @@ describe("Painters", () => {
     describe("getAllPainters", () => {
         it("should return all painters", () => {
             sinon.stub(Painter, "find");
+            // const cb = () => { return };
             Painter.find.yields(null, [
                 {
                     name: "van Gogh",
