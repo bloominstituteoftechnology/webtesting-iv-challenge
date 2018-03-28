@@ -15,4 +15,18 @@ describe('Books', () => {
       expect(book.getTitle()).to.equal('Slaughterhouse Five');
     });
   });
+  describe('getAllTitles', () => {
+    it('should get all the titles of the books', () => {
+      sinon.stub(Book, 'find');
+      Book.find.yields(null, [
+        { title: 'Slaughterhouse Five', author: 'Kurt Vonnegut' },
+        { title: 'A New Earth', author: 'Eckhart Tolle' },
+      ]);
+      Book.getAllTitles(books => {
+        expect(books.length).to.equal(2);
+        expect(books[0].title).to.equal('Slaughterhouse Five');
+        Book.find.restore();
+      });
+    });
+  });
 });
