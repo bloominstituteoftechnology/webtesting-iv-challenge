@@ -2,9 +2,6 @@
 
 Welcome to our pretty okay anime database API! To get started, the default port is `3030`. Available endpoints are documented below.
 
-----
-
-
 ## `[GET] /anime`
 
 ### Description
@@ -25,7 +22,6 @@ status: 200 OK
   ]
 }
 ```
-----
 
 ## `[POST] /anime`
 
@@ -47,7 +43,6 @@ status: 200 OK
   "genre": "A confusing but cool looking mess."
 }
 ```
-----
 
 ## `[DELETE] /anime/:id`
 
@@ -71,7 +66,6 @@ status: 200 OK
   ]
 }
 ```
-----
 
 ## `[PUT] /anime`
 
