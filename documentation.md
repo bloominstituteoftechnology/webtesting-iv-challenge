@@ -12,4 +12,4 @@
 ```POST- '/api/addtoppings'```
 | Endpoint          | Type          | Data     |
 |-------------------|:-------------:|----------|
-| /api/addtoppings       | POST           |adds a topping to the lists of pizza toppings|
+| /api/topping       | POST           |adds a topping to the lists of pizza toppings|
