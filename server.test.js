@@ -33,7 +33,7 @@ describe('Server', () => {
   });
 
   describe('[POST] /cars', () => {
-    it('should add a new car', (done) => {
+    it('should add a new car', () => {
       const newCar = {
         manufacturer: 'Ferrari',
         name: '458 Speciale'
@@ -44,29 +44,27 @@ describe('Server', () => {
         .end((err, res) => {
           if (err) {
             console.error(err);
-            done();
           }
           carID = res.body['_id'];
           expect(res.status).to.equal(200);
           expect(res.body.name).to.equal('458 Speciale');
         });
-        done();
     });
   });
   describe('[GET] /cars', () => {
-    it('should return all cars', (done) => {
+    it('should return all cars', () => {
       chai.request(server)
         .get('/cars')
         .end((err, res) => {
           if (err) {
             console.error(err);
-            done();
           }
           expect(res.status).to.equal(200);
+          console.log('res.body', res.body);
+          console.log('res.body', res.body[0]);
           expect(res.body.length).to.equal(1);
           expect(res.body[0].manufacturer).to.equal('Ferrari');
         });
-        done();
     });
   });
 
