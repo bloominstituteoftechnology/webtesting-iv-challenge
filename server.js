@@ -5,8 +5,16 @@ const server = express();
 server.use(morgan('combined'));
 server.use(express.json());
 
+const Record = require('./models');
+
 server.post('/records', (req, res) => {
-  res.send(req.body);
+  const record = new Record(req.body);
+  record.save()
+    .then(res => {
+      res.status(200).json(res);
+      res.end();
+    })
+    .catch(err => res.status(500).json(err));
 });
 
 module.exports = server;
