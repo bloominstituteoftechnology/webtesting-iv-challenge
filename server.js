@@ -18,7 +18,10 @@ server.post('/team', (req, res) => {
     newTeam
     .save()
     .then((team) => res.json(team))
-    .catch(err => res.send(err));
+    .catch(err => {
+        // console.log(err);
+        res.send(err)
+    });
 });
 
 server.get('/teams', (req, res) => {

@@ -48,6 +48,22 @@ describe('Server', () => {
           expect(res.body).to.have.own.property('_id');
         });
     });
+    it('should return Validation error', () => {
+      const newTeam = {
+        name: 'L.A Lakers',
+      };
+      chai.request(server)
+        .post('/team')
+        .send(newTeam)
+        .end((err, res) => {
+          // console.log(err);
+          if (err) console.error(err);
+          // expect(res.status).to.equal(200);
+          expect(res.body.name).to.equal('ValidationError');
+          // expect(res.body.sport).to.equal('Basketball');
+          // expect(res.body).to.have.own.property('_id');
+        });
+    });
   });
 
   // describe('[GET] /teams', () => {
