@@ -12,7 +12,7 @@ server.use(express.json());
 //===============================
 
 server.get('/', function(req, res) {
-  res.status(200).json({ status: 'API Running' });
+  res.status(200).json({ message: "Works..." });
 });
 
 module.exports = server;
