@@ -7,9 +7,9 @@ server.use(express.json());
 
 // dummy data
 const teams = [
-	{name: 'Raiders', sport: 'Football'},
-	{name: 'Cubs', sport: 'Baseball'},
-	{name: 'Spurs', sport: 'Basketball'}];
+	{name: 'Oakland Raiders', sport: 'Football'},
+	{name: 'Chicago Cubs', sport: 'Baseball'},
+	{name: 'San Antonio Spurs', sport: 'Basketball'}];
 
 server.post('/team', (req, res) => {
   res.send(req.body);
@@ -17,6 +17,12 @@ server.post('/team', (req, res) => {
 
 server.get('/teams', (req, res) => {
     res.json(teams);
+});
+
+server.put('/team', (req, res) => {
+	console.log('put req body', req.body);
+	teams[0].name = req.body.name;
+   res.json(teams[0]);
 });
 
 module.exports = server;
