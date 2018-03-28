@@ -20,7 +20,6 @@ server.get('/teams', (req, res) => {
 });
 
 server.put('/team', (req, res) => {
-	console.log('put req body', req.body);
 	teams[0].name = req.body.name;
    res.json(teams[0]);
 });
