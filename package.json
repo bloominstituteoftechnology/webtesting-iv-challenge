@@ -1,0 +1,29 @@
+{
+  "name": "server-testing",
+  "version": "1.0.0",
+  "description": "## Topics",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "mocha *.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikemarshal/Server-Testing.git"
+  },
+  "author": "Max D & Mike M",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mikemarshal/Server-Testing/issues"
+  },
+  "homepage": "https://github.com/mikemarshal/Server-Testing#readme",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "express": "^4.16.3",
+    "mocha": "^5.0.5",
+    "mongoose": "^5.0.12",
+    "morgan": "^1.9.0",
+    "sinon": "^4.4.10"
+  }
+}
