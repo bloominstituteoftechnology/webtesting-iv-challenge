@@ -4,7 +4,8 @@
   "description": "Lambda Server-Testing",
   "main": "app.js",
   "scripts": {
-    "test": "mocha *.test.js"
+    "start": "nodemon app.js",
+    "test": "mocha './api/tests/*.test.js'"
   },
   "repository": {
     "type": "git",
