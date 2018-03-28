@@ -5,6 +5,10 @@
   "repository": "https://github.com/Nate152/Server-Testing.git",
   "author": "Nate152 <35231160+Nate152@users.noreply.github.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": ""
+  }
   "dependencies": {
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
