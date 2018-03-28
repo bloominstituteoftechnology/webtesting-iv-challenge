@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/users', { useMongoClient : true })
+mongoose.connect('mongodb://localhost/users');
 
 const UserSchema = new mongoose.Schema({
   name: {
