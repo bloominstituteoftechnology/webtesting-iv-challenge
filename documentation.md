@@ -1,13 +1,12 @@
 # API Documentation
-## Anime!
 
 Welcome to our pretty okay anime database API! To get started, the default port is `3030`. Available endpoints are documented below.
 
 ----
 
-```
-[GET] /anime
-```
+
+## `[GET] /anime`
+
 ### Description
 This path will obtain a list of all anime in the database.
 ### Parameters
@@ -28,9 +27,8 @@ status: 200 OK
 ```
 ----
 
-```
-[POST] /anime
-```
+## `[POST] /anime`
+
 ### Description
 This endpoint allows new anime to be added into the database.
 ### Request Body
@@ -51,9 +49,8 @@ status: 200 OK
 ```
 ----
 
-```
-[DELETE] /anime/:id
-```
+## `[DELETE] /anime/:id`
+
 ### Description
 This endpoint allows the removal of an anime from the database.
 ### Parameters
@@ -76,9 +73,8 @@ status: 200 OK
 ```
 ----
 
-```
-[PUT] /anime
-```
+## `[PUT] /anime`
+
 ### Description
 This endpoint allows the modification of an anime within the database.
 ### Request Body
