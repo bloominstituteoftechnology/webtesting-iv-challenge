@@ -35,8 +35,10 @@ describe('Server', () => {
                 category: 'vegetable'
             };
             chai.request(server)
-            .post('/topping')
-            .send(newTopping)
+            .post('/api/topping')
+            .send(newTopping,
+                console.log(newTopping)
+            )
             .end((err, res) => {
                 if (err) {
                     console.error(err);

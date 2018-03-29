@@ -8,7 +8,7 @@ server.get('/api/toppings', (req, res) => {
 });
 
 server.post('/api/topping', (req, res) => {
-  res.send(req.body);
+  res.json(req.body);
 })
 
 module.exports = server;
