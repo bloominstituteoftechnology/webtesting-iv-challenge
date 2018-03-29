@@ -31,6 +31,7 @@ describe('Server', () => {
             return done();
         }
         fakeId = saved._id;
+        console.log(fakeId);
         done();
         });
     });
@@ -54,6 +55,7 @@ describe('Server', () => {
                     console.error(err);
                     done();
                 }
+                console.log('Post res.body: ', res.body);
                 expect(res.status).to.equal(200);
                 expect(res.body.name).to.equal('banana pepper');
             });
@@ -78,7 +80,7 @@ describe('Server', () => {
     });
 
     describe('[DELETE] /api/delete/:id', () => {
-        console.log(fakeId);
+        console.log('Delete fakeId: ', fakeId);
         it('should delete a topping from the list', (done) => {
             chai.request(server)
             .delete(`/api/delete/${fakeId}`)
@@ -89,6 +91,29 @@ describe('Server', () => {
                 }
                 expect(res.status).to.equal(200);
                 expect(res.body.name).to.equal('test');
+            });
+            done();
+        });
+    });
+
+    describe('[UPDATE] /api/update/:id', () => {
+        console.log(fakeId);
+        it('should update a topping from the list', (done) => {
+            const updatedTopping = {
+                name: 'cheese',
+                category: 'dairy'
+            }
+            chai.request(server)
+            .put(`/api/update/${fakeId}`)
+            .send(updatedTopping)
+            .end((err, res) => {
+                if (err) {
+                    console.error(err);
+                    done();
+                }
+                console.log('Update res.body: ', res.body);
+                expect(res.status).to.equal(200);
+                expect(res.body.name).to.equal('cheese');
             });
             done();
         });

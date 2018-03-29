@@ -21,11 +21,21 @@ server.post('/api/topping', (req, res) => {
 })
 
 server.delete('/api/delete/:id', (req, res) => {
-  // console.log(req.params);
-  // const { id } = req.params;
   Topping.findOneAndRemove(req.params.id, (err, deleted) => {
     if (err) return res.send(err);
     res.status(200).send(deleted);
+  });
+});
+
+server.put('/api/update/:id', (req, res) => {
+  const { name, category } = req.body;
+  Topping.findByIdAndUpdate(
+    { _id: req.params.id }, 
+    { name, category }, 
+    { new: true }, 
+    (err, updatedTopping) => {
+    if (err) return res.send(err);
+    res.status(200).send(updatedTopping);
   });
 });
 
