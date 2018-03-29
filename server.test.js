@@ -28,15 +28,15 @@ describe('Server', () => {
     });
   });
 
-  describe('[POST] /team', () => {
+  describe('[POST] /teams', () => {
     it('should add a new team', done => {
       const newTeam = {
-        name: 'Arsenal',
-        sport: 'soccer',
+        name: 'Giants',
+        sport: 'Football',
       };
       chai
         .request(server)
-        .post('/team')
+        .post('/teams')
         .send(newTeam)
         .end((err, res) => {
           if (err) {
@@ -44,8 +44,7 @@ describe('Server', () => {
             done();
           }
           expect(res.status).to.equal(200);
-          expect(res.body.name).to.equal('Arsenal');
-          expect(res.body.sport).to.equal('soccer');
+          expect(res.body.name).to.equal('Giants');
         });
       done();
     });
@@ -65,43 +64,57 @@ describe('Server', () => {
           expect(res.status).to.equal(200);
           expect(Array.isArray(res.body)).to.equal(true);
           expect(res.body.length).to.equal(3);
+          expect(res.body[0].name).to.equal('Giants');
         });
         done();
     });
   });
 
-  describe('[PUT] /team', () => {
+  describe('[PUT] /teams/:id', () => {
     it('should return updated team', done => {
-      const updateTeam = { name: 'Stupid_Lions', sport: 'Football' };
+      const updateTeam = { name: 'Giants', sport: 'Testing' };
       chai
         .request(server)
-        .put('/team')
-        .send(updateTeam)
+        .get('/teams')
         .end((err, res) => {
-          if (err) {
-            console.error(err);
+          chai
+            .request(server)
+            .put('/teams/' + res.body[0]._id)
+            .send(updateTeam)
+            .end((err, res) => {
+              if (err) {
+                console.error(err);
+                done();
+              }        
+              expect(res.status).to.equal(200);
+              expect(res.body[0].sport).to.equal('Testing');
+            });
             done();
-          }
-          expect(res.status).to.equal(200);
-          expect(res.body[0].name).to.equal('Stupid_Lions');
         });
-      done();
     });
   });
 
-  describe('[DELETE] /team', () => {
-    it('should return the deleted team', (done) => {
-      chai.request(server)
-        .delete('/team')
+  describe('[DELETE] /teams/:id', () => {
+    it('should delete a team', (done) => {
+      const deleteTeam = { name: 'Giants' };
+      chai
+        .request(server)
+        .get('/teams')
         .end((err, res) => {
-          if (err) {
-            console.error(err);
+          chai
+            .request(server)
+            .delete('/teams/' + res.body[0]._id)
+            .send(deleteTeam)
+            .end((err, res) => {
+              if (err) {
+                console.error(err);
+                done();
+              }        
+              expect(res.status).to.equal(200);
+              expect(res.ok).to.be.true;
+            });
             done();
-          }
-          expect(res.status).to.equal(200);
-          expect(req.res).to.equal(null);
         });
-        done();
     });
   });
 });

@@ -7,7 +7,7 @@ server.use(express.json());
 
 const Team = require('./models');
 
-server.post('/team', (req, res) => {
+server.post('/teams', (req, res) => {
   const teamInfo = req.body;
   const newTeam = new Team(teamInfo);
 
@@ -28,30 +28,22 @@ server.get('/teams', (req, res) => {
   });
 });
 
-server.put('/team', (req, res) => {
-  const { name, sport } = req.body;
-
-  Team.update({ name }, req.body)
-    .then(team => {
-      Team.find({ name }).then(team => {
-        res.status(200).json(team);
-      });
-    })
-    .catch(err => {
-      res.json(err);
-    });
+server.put('/teams/:id', (req, res) => {
+  const { id } = req.params;
+  const team = req.body;
+  Team.findByIdAndUpdate(id, (err, team) => {
+    if (err) return res.send(err);
+    res.send(team)
+  });
 });
 
-server.delete('/team', (req, res) => {
-  const { name, sport } = req.body;
-  User.find({ name })
-    .remove()
-    .then(res => {
-      res.status(200).json({ message: `Successfully deleted ${name}.` });
-    })
-    .catch(err => {
-      res.json(err);
-    });
+server.delete('/teams/:id', (req, res) => {
+  const { id } = req.params;
+  const team = req.body;
+  Team.findByIdAndRemove(id, (err, team) => {
+    if (err) return res.send(err);
+    res.send({ message: `successfully deleted ${team}` })
+  });
 });
 
 module.exports = server;
