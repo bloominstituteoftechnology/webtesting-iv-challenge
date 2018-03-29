@@ -37,6 +37,23 @@ server.delete('/weapons/:name', (req, res) => {
     });
 });
 
+server.put('/weapons/:name', (req, res) => {
+  const { name } = req.params;
+  const weapon = req.body;
+  Weapon.findOneAndUpdate(
+    { name },
+    weapon,
+    { new: true })
+  .then(newWeapon => {
+    console.log('then')
+    res.status(200).json(newWeapon);
+  })
+  .catch(err => {
+    console.log('catch');
+    res.status(500).json(err);
+  })
+})
+
 server.listen(PORT, err => {
   if (err) console.log(err);
   console.log(`server is listening on port ${PORT}`);
