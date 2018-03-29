@@ -155,10 +155,10 @@ describe('Server', () => {
             .put('/band/' + 'kjfdakslj234')
             .send(updatedBand)
             .end((error, response) => {
-              if (error) console.error(error)
-              expect(response.body).to.equal('Band ID Not Found');    
-              done();          
-            })
+              if (error) console.error(error);
+              expect(response.body).to.equal('Band ID Not Found');
+              done();
+            });
         });
     });
   });
@@ -183,15 +183,15 @@ describe('Server', () => {
       chai
         .request(server)
         .get('/bands')
-        .end((err,res) => {
+        .end((err, res) => {
           chai
             .request(server)
-            .delete('/band/'+'35kljgf5432')
+            .delete('/band/' + '35kljgf5432')
             .end((error, response) => {
               expect(response.body).to.equal('Error Deleting Band');
               done();
-            })
-        })
-    })
-  })
+            });
+        });
+    });
+  });
 });

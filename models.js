@@ -18,7 +18,7 @@ BandSchema.methods.getBandName = function() {
 
 BandSchema.methods.getBandGenre = function() {
   return this.genre;
-}
+};
 
 BandSchema.statics.getAllBands = (cb) => {
   Band.find({}, (err, bands) => {
@@ -28,10 +28,10 @@ BandSchema.statics.getAllBands = (cb) => {
 };
 
 BandSchema.statics.getBandByName = (bandName, cb) => {
-  Band.findOne({ name: bandName }, (err,band) => {
-    if (err) console.error(err)
+  Band.findOne({ name: bandName }, (err, band) => {
+    if (err) console.error(err);
     cb(band);
-  })
+  });
 };
 
 const Band = mongoose.model('Band', BandSchema);
