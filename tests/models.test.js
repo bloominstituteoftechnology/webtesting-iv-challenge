@@ -41,7 +41,8 @@ describe('Weapons', () => {
       Weapon.getAllWeapons(weapons => {
         assert.equal(weapons.length, '2');
         assert.equal(weapons[0].name, 'Knife');
-      });
-    });
-  });
-});
+        Weapon.find.restore(); // We didn't seem to need this.
+      });                      // It was added in afterwards
+    });                        // from the solution lecture.
+  });                          // It restores `.find` from being
+});                            // an altered stub method.
