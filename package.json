@@ -1,0 +1,31 @@
+{
+  "name": "server-testing",
+  "version": "1.0.0",
+  "description": "Lambda Server-Testing",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "mocha ./api/tests/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikhilkamineni/Server-Testing.git"
+  },
+  "author": "Nikhil&Chris",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nikhilkamineni/Server-Testing/issues"
+  },
+  "homepage": "https://github.com/nikhilkamineni/Server-Testing#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "express": "^4.16.3",
+    "mocha": "^5.0.5",
+    "mongoose": "^5.0.12",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.17.2",
+    "sinon": "^4.4.10"
+  }
+}
