@@ -29,7 +29,7 @@ describe('Server', () => {
   });
 
   describe('[POST] /teams', () => {
-    it('should add a new team', done => {
+    it('should add a new team', (done) => {
       const newTeam = {
         name: 'Giants',
         sport: 'Football',
@@ -71,7 +71,7 @@ describe('Server', () => {
   });
 
   describe('[PUT] /teams/:id', () => {
-    it('should return updated team', done => {
+    it('should return updated team', (done) => {
       const updateTeam = { name: 'Giants', sport: 'Testing' };
       chai
         .request(server)
