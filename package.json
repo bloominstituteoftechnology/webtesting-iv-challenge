@@ -4,7 +4,8 @@
   "description": "Server testing",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "start": "nodemon index.js",
+    "test": "mocha *.test.js"
   },
   "repository": {
     "type": "git",
