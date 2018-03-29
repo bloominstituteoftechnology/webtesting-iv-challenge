@@ -15,4 +15,15 @@ describe('Bands', () => {
             expect(band.getBandName()).to.equal('VVS');
         });
     });
+
+    describe('getAllBands', () => {
+        it('should return all the bands', () => {
+            sinon.stub(Band, 'find'); //stub function gets access to Band constructor and stub's find gets all bands from BAnd.
+            Band.find.yields(null, [
+                {name: 'VVS1', genre: 'Alt-Rock'},
+                {name: 'Something', genre: 'Emo Rock'}
+            ]);
+        });
+    });
 });
+
