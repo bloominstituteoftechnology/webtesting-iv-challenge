@@ -10,7 +10,7 @@ describe("Painters", () => {
             const newPainter = Painter({
                 name: "Franz Kline",
                 style: "Abstract-Expressionist"
-            }).save();
+            });
             expect(newPainter.getPainterName()).to.equal("Franz Kline");
         });
     });

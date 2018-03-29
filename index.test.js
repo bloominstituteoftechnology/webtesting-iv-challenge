@@ -59,7 +59,7 @@ describe('Index', () => {
           done();
         }
         expect(res.status).to.equal(200);
-        expect(res.body[0].name).to.equal("Franz Kline");
+        expect(res.body[0].name).to.equal("van Gogh");
       });
       done();
     });

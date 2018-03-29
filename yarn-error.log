@@ -23,7 +23,7 @@ npm manifest:
     "license": "MIT",
     "scripts": {
       "start" : "nodemon index.js",
-      "test" : "mocha *.test.js"
+      "test" : "mocha --exit *.test.js"
     },
     "dependencies": {
       "chai": "^4.1.2",
@@ -793,9 +793,9 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 2
+  Exit code: 1
   Command: C:\WINDOWS\system32\cmd.exe
-  Arguments: /d /s /c mocha *.test.js
+  Arguments: /d /s /c mocha --exit *.test.js
   Directory: C:\Users\admin\Documents\programming\lambda\Testing\Server-Testing
   Output:
   
