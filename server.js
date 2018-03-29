@@ -20,4 +20,13 @@ server.post('/api/topping', (req, res) => {
   });
 })
 
+server.delete('/api/topping/:id', (req, res) => {
+  // console.log(req.params);
+  // const { id } = req.params;
+  Topping.findOneAndRemove(req.params.id, (err, deleted) => {
+    if (err) return res.send(err);
+    res.status(200).send(deleted);
+  });
+});
+
 module.exports = server;

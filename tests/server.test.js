@@ -11,6 +11,7 @@ chai.use(chaihttp);
 const Topping = require('../model');
 
 describe('Server', () => {
+    let fakeId;
     beforeEach((done) => {
       mongoose.connect('mongodb://localhost/punit');
       const db = mongoose.connection;
@@ -22,13 +23,14 @@ describe('Server', () => {
           console.log('Topping those Pizzas!');
       });
       new Topping({
-          name: 'test 2',
+          name: 'test',
           category: 'vegetable'
       }).save((err, saved) => {
         if (err) {
             console.log(err);
             return done();
         }
+        fakeId = saved._id;
         done();
         });
     });
@@ -75,10 +77,21 @@ describe('Server', () => {
         });
     });
 
-    // describe('[DELETE] /api/delete/:id', () => {
-    //     it('should delete a topping from the list', (done) => {
-    //         chai.request(server, console.log(req.params))
-    //         .delete(console.log(req.params));
-    //     });
-    // });
+    describe('[DELETE] /api/delete/:id', () => {
+        console.log(fakeId);
+        it('should delete a topping from the list', (done) => {
+            chai.request(server)
+            .delete(`/api/delete/${fakeId}`)
+            .end((err, res) => {
+                if (err) {
+                    console.error(err);
+                    done();
+                }
+                console.log(res);
+                expect(res.status).to.equal(200);
+                // expect(res.body.name).to.equal('test');
+            });
+            done();
+        });
+    });
 });
