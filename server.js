@@ -52,5 +52,4 @@ server.delete('/api/cars/:id', (req, res) => {
     })
 });
 
-
 module.exports = server;
