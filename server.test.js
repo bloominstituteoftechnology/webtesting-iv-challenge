@@ -11,9 +11,8 @@ chai.use(chaihttp);
 
 const Car = require('./models');
 
-let carID;
-
 describe('Server', () => {
+  let carID;
   before((done) => {
     mongoose.connect('mongodb://localhost/test');
     const db = mongoose.connection;
@@ -32,8 +31,29 @@ describe('Server', () => {
     });
   });
 
+  beforeEach(done => {
+    new Car({
+      manufacturer: 'Lexus',
+      name: 'LFA'
+    }).save()
+      .then(car => {
+        carID = car.id;
+        done();
+      })
+      .catch(err => {
+        console.log(err);
+        done();
+      });
+  });
+
+  afterEach(done => {
+    Car.remove()
+      .then(() => done())
+      .catch(err => done(err))
+  })
+
   describe('[POST] /cars', () => {
-    it('should add a new car', () => {
+    it('should add a new car', (done) => {
       const newCar = {
         manufacturer: 'Ferrari',
         name: '458 Speciale'
@@ -44,27 +64,28 @@ describe('Server', () => {
         .end((err, res) => {
           if (err) {
             console.error(err);
+            done();
           }
-          carID = res.body['_id'];
           expect(res.status).to.equal(200);
           expect(res.body.name).to.equal('458 Speciale');
         });
+        done();
     });
   });
   describe('[GET] /cars', () => {
-    it('should return all cars', () => {
+    it('should return all cars', (done) => {
       chai.request(server)
         .get('/cars')
         .end((err, res) => {
           if (err) {
             console.error(err);
+            done();
           }
           expect(res.status).to.equal(200);
-          console.log('res.body', res.body);
-          console.log('res.body', res.body[0]);
           expect(res.body.length).to.equal(1);
-          expect(res.body[0].manufacturer).to.equal('Ferrari');
+          expect(res.body[0].manufacturer).to.equal('Lexus');
         });
+        done();
     });
   });
 
@@ -82,23 +103,20 @@ describe('Server', () => {
             console.error(err);
             done();
           }
-          expect(res.status).to.equal(200);
-          console.log(res.body);
           expect(res.body.manufacturer).to.equal('McLaren');
         });
         done();
     });
   });
-  // describe('[DELETE] /cars', () => {
-  //   it('should delete a car', () => {
-  //     chai.request(server)
-  //       .delete('/cars')
-  //       .end((err, res) => {
-  //         if (err) console.error(err);
-  //         expect(res.status).to.equal(200);
-  //         expect(res).to.be.json;
-  //         expect(res.body).to.have.property('REMOVED');
-  //       });
-  //   });
-  // });
+
+  describe('[DELETE] /cars/:id', () => {
+    it('should delete a car', (done) => {
+      chai.request(server)
+        .delete(`/cars/${carID}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+        });
+        done();
+    });
+  });
 });

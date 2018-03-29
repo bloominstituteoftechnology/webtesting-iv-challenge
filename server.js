@@ -19,13 +19,6 @@ server.post('/cars', (req, res) => {
     })
 });
 
-// server.get('/cars', (req, res) => {
-//   Car.find({}, (error, cars) => {
-//     if (error) return res.send(error);
-//     return res.send(cars);
-//   });
-// });
-
 server.get('/cars', (req, res) => {
   Car.find()
     .then(cars => {
@@ -39,22 +32,25 @@ server.get('/cars', (req, res) => {
 server.put('/cars/:id', (req, res) => {
   const { id } = req.params;
   const updatedCar = req.body;
-  Car.findByIdAndUpdate(id, updatedCar)
-  .then(car => {
-    res.status(200).json(car);
+  Car.findByIdAndUpdate(id, {$set: updatedCar}, {new: true})
+  .then(update => {
+    res.status(200).json(update);
   })
   .catch(err => {
     res.status(500).json(err);
   })
 });
 
-// server.delete('/cars/:id', (req, res) => {
-//   const { id } = req.params;
-//   Car.findByIdAndRemove(id, (error, car) => {
-//     if(error) return res.send(error);
-//     return res.send(car);
-//   });
-// });
+server.delete('/cars/:id', (req, res) => {
+  const { id } = req.params;
+  Car.findByIdAndRemove(id)
+    .then(() => {
+      res.status(200).json({ success: 'DELETED'});
+    })
+    .catch(err => {
+      res.status(500).json({ err });
+    })
+});
 
 
 module.exports = server;
