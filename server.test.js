@@ -19,7 +19,7 @@ describe('Server', () => {
       console.error('connection error');
     });
     db.once('open', () => {
-      console.log('connected');
+      console.log('db connected');
       done();
     });
   });
@@ -34,10 +34,11 @@ describe('Server', () => {
     it('should add a new record', (done) => {
       const newRecord = {
         artistName: 'The Beatles',
-        name: "Sgt. Pepper's Lonely Hearts Club Band",
-        type: 'LP',
+        albumName: "Sgt. Pepper's Lonely Hearts Club Band",
+        recordType: 'LP',
       };
-      chai.request(server)
+      chai
+        .request('localhost:3030/records')
         .post('/records')
         .send(newRecord)
         .end((err, res) => {
@@ -46,17 +47,46 @@ describe('Server', () => {
             done();
           }
           expect(res.status).to.equal(200);
-          console.log(res);
-          expect(res.body.artistName).to.equal(
-            "The Beatles"
-          );
+          expect(res.body.artistName).to.equal('The Beatles');
         });
       done();
     });
   });
-  // describe('GET to /records', () => {
-  //   it('should return all records', () => {
-
-  //   })
-  // })
+  describe('GET to /records', () => {
+    it('should return all records', (done) => {
+      const newRecord1 = {
+        artistName: 'The Beatles',
+        albumName: "Sgt. Pepper's Lonely Hearts Club Band",
+        recordType: 'LP',
+      };
+      const newRecord2 = {
+        artistName: 'The Beatles',
+        albumName: 'The White Album',
+        recordType: 'LP',
+      };
+      const newRecord3 = {
+        artistName: 'The Beatles',
+        albumName: 'Something Else',
+        recordType: 'LP',
+      };
+      // const poster = chai.request('localhost:3030/records').keepOpen();
+      // Promise.all([
+      //   poster.post('/records').send(newRecord1),
+      //   poster.post('/records').send(newRecord2),
+      //   poster.post('/records').send(newRecord3).then(res =>console.log(res.body)),
+      // ]).then(() => {
+        chai.request('localhost:3030/records')
+          .get('/records').end((err, res) => {
+            console.log('get response', res);
+            if (err) {
+              console.error(err);
+              done();
+            }
+          expect(res.status).to.equal(200);
+          expect(res.body[0].artistName).to.equal('The Beatles');
+        });
+        done();
+      // });
+    });
+  });
 });
