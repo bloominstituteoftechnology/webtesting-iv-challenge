@@ -26,9 +26,6 @@ server.get('/team', (req, res) => {
     .then(teams => {
       res.status(200).json(teams);
     })
-    .catch(err => {
-      res.json(err);
-    });
 });
 
 server.put('/team', (req, res) => {

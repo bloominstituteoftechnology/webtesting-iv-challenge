@@ -32,7 +32,7 @@ describe('Server', () => {
     it('should add a new team', done => {
       const newTeam = {
         name: 'Arsenal',
-        sport: 'Soccer',
+        sport: 'soccer',
       };
       chai
         .request(server)
@@ -45,25 +45,24 @@ describe('Server', () => {
           }
           expect(res.status).to.equal(200);
           expect(res.body.name).to.equal('Arsenal');
+          expect(res.body.sport).to.equal('soccer');
         });
       done();
     });
   });
-
-  describe('[GET] /team', () => {
-    it('should return a team name', done => {
+  
+    describe('[GET] /team', () => {
+    it('should return list of teams', () => {
+      
       chai
         .request(server)
-        .get('/team')
+        .get('./teams')
         .end((err, res) => {
-          if (err) {
-            console.error(err);
-            done();
-          }
+          if (err) console.error(err);
           expect(res.status).to.equal(200);
-          expect(res.body[0].name).to.equal('Arsenal');
+          expect(res.body.length).to.equal(3);
+          expect(res.body[0].name).to.equal('Giants');
         });
-      done();
     });
   });
 
@@ -72,7 +71,7 @@ describe('Server', () => {
       const updateTeam = { name: 'Stupid_Lions', sport: 'FootBall' };
       chai
         .request(server)
-        .put('/team')
+        .put('./team')
         .send(updateTeam)
         .end((err, res) => {
           if (err) {
@@ -86,5 +85,30 @@ describe('Server', () => {
     });
   });
 
-  //describe('[DELETE] /team', () => )
+  describe('[DELETE] /team', () => {
+    it('should return the deleted team', () => {
+      const xTeam = {
+        name: 'Red Bulls',
+        sport: 'soccer',
+      };
+      chai.request(server)
+        .post('./team')
+        .send(xTeam)
+        .end((err, res) => {
+          if (err) console.error(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.name).to.equal('Red Bulls');
+          expect(res.body.sport).to.equal('soccer');
+        });
+      chai.request(server)
+        .delete('./team')
+        .send({name: 'Giants', sport: 'Football'})
+        .end((err, res) => {
+          if (err) console.error(err);
+          expect(res.status).to.equal(404);
+          expect(res.body.name).to.equal('Giants');
+          expect(res.body.sport).to.equal('Football')
+        });
+    });
+  });
 });

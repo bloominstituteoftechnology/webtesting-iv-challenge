@@ -15,7 +15,7 @@ Platform:
 
 npm manifest: 
   {
-    "name": "Server-Testing-Mini",
+    "name": "Server-Testing",
     "version": "1.0.0",
     "description": "STM",
     "main": "index.js",
@@ -31,10 +31,10 @@ npm manifest:
       "mongoose": "^5.0.12",
       "morgan": "^1.9.0",
       "sinon": "^4.4.10"
-      },
-    "scripts": { 
+    },
+    "scripts": {
       "test": "mocha *.test.js",
-      "start": "nodemon index.js" 
+      "start": "nodemon index.js"
     }
   }
 

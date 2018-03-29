@@ -27,7 +27,7 @@ describe('Teams', () => {
             ]);
             Team.getAllTeams((teams) => {
                 expect(teams.length).to.equal(3);
-                expect(teams[1].name).to.equal('Lions');
+                expect(teams[0].name).to.equal('Giants');
             });
         });
     });
