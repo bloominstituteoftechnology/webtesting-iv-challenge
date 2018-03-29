@@ -16,6 +16,10 @@ BandSchema.methods.getBandName = function() {
   return this.name;
 };
 
+BandSchema.methods.getBandGenre = function() {
+  return this.genre;
+}
+
 BandSchema.statics.getAllBands = (cb) => {
   Band.find({}, (err, bands) => {
     if (err) console.error(err);

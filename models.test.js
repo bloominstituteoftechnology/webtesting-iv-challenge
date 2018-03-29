@@ -45,4 +45,26 @@ describe('Bands', () => {
       })
     })
   })
+  describe('getBandGenre', () => {
+    it('should return the band genre', () => {
+      const band = new Band({
+        name: 'Descendents',
+        genre: 'Pop Punk',
+      });
+      expect(band.getBandGenre()).to.equal('Pop Punk');
+    })
+  })
+  describe('Band', () => {
+    it('should have name,genre,_id properties', () => {
+      const band = new Band({
+        name: 'Against Me!',
+        genre: 'Anarcho-Folk Punk'
+      })
+      expect(band.getBandName()).to.equal('Against Me!');
+      expect(band.getBandGenre()).to.equal('Anarcho-Folk Punk');
+      expect(band.name).to.exist;
+      expect(band.genre).to.exist;
+      expect(band._id).to.exist;
+    })
+  })
 });
