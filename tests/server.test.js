@@ -87,9 +87,8 @@ describe('Server', () => {
                     console.error(err);
                     done();
                 }
-                console.log(res);
                 expect(res.status).to.equal(200);
-                // expect(res.body.name).to.equal('test');
+                expect(res.body.name).to.equal('test');
             });
             done();
         });
