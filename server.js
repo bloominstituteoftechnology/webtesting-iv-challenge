@@ -3,16 +3,17 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const User = require('./models');
 
+
 const server = express();
 server.use(morgan('combined'));
 server.use(express.json());
 
-server.get('/user', (req, res) => {
+server.get('/api/user', (req, res) => {
     User.find({},(err, resp) =>{
         res.send(resp);
     });
 });
-server.post('/user', (req, res) => {
+server.post('/api/user', (req, res) => {
     const user = new User(req.body);
     user.save((err, newUser) =>{
         res.send(newUser);
