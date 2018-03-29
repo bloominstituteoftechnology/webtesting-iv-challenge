@@ -29,6 +29,39 @@ describe('Server', () => {
     });
   });
 
+  //==========================
+  //  BEFORE and AFTER HOOKS
+  //==========================
+
+  let bookID;
+  
+  beforeEach((done) => {
+    new Book({
+      title: 'A New Earth',
+      author: "Eckhart Tolle"
+    })
+    .save((err, book) => {
+      if (err) {
+        console.error(err);
+        return done();
+      }
+      bookID = book.id;
+      done();
+    });
+  });
+
+  afterEach((done) => {
+    Book
+      .remove({}, (err) => {
+        if (err) console.error(err);
+        done();
+    });
+  });
+
+  //==========================
+  //       ROUTE TESTS
+  //==========================
+
   describe('[GET] /books', () => {
     it('should retrieve the book titles', done => {
       chai
@@ -63,38 +96,68 @@ describe('Server', () => {
     });
   });
 
+  // describe('[DELETE] /books/:id', () => {
+  //   it('should delete the correct book by id', done => {
+  //     const book = new Book({
+  //       title: 'Slaughterhouse Five',
+  //       author: 'Kurt Vonnegut',
+  //     });
+  //     book.save((err, book) => {
+  //       chai
+  //         .request(server)
+  //         .delete(`/books/${book.id}`)
+  //         .end((err, res) => {
+  //           expect(res.status).to.equal(200);
+  //           done();
+  //         });
+  //     });
+  //   });
+  //   it('should return the deleted books title', done => {
+  //     const book = new Book({
+  //       title: 'Slaughterhouse Five',
+  //       author: 'Kurt Vonnegut',
+  //     });
+  //     book.save((err, book) => {
+  //       chai
+  //         .request(server)
+  //         .delete(`/books/${book.id}`)
+  //         .end((err, res) => {
+  //           expect(res.body.title).to.equal('Slaughterhouse Five');
+  //           done();
+  //         });
+  //     });
+  //   });
+  // });
+
+  //==========================
+  //  EXAMPLE DELETE REFACTOR
+  //==========================
+
   describe('[DELETE] /books/:id', () => {
-    it('should delete the correct book by id', done => {
-      const book = new Book({
-        title: 'Slaughterhouse Five',
-        author: 'Kurt Vonnegut',
-      });
-      book.save((err, book) => {
-        chai
-          .request(server)
-          .delete(`/books/${book.id}`)
-          .end((err, res) => {
-            expect(res.status).to.equal(200);
+    it('should remove the book', (done) => {
+      chai.request(server)
+        .delete(`/books/${bookID}`)
+        .end((err, res) => {
+          if (err) {
+            console.log(err);
+            return done();
+          }
+          expect(res.status).to.equal(200);
+          Book.findById(bookID, (err, deletedBook) => {
+            if (err) {
+              console.log(err);
+              return done();
+            }
+            expect(deletedBook).to.equal(null);
             done();
           });
-      });
-    });
-    it('should return the deleted books title', done => {
-      const book = new Book({
-        title: 'Slaughterhouse Five',
-        author: 'Kurt Vonnegut',
-      });
-      book.save((err, book) => {
-        chai
-          .request(server)
-          .delete(`/books/${book.id}`)
-          .end((err, res) => {
-            expect(res.body.title).to.equal('Slaughterhouse Five');
-            done();
-          });
-      });
+        });
     });
   });
+
+  //==========================
+  //          END
+  //==========================
 
   describe('[PUT] /books/:id', () => {
     const book = new Book({
