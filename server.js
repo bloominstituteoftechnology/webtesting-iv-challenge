@@ -7,7 +7,7 @@ server.use(express.json());
 
 const Team = require('./models');
 
-server.post('/team', (req, res) => {
+server.post('/api/team', (req, res) => {
     const newTeam = new Team(req.body);
     newTeam
     .save()
@@ -17,13 +17,13 @@ server.post('/team', (req, res) => {
     });
 });
 
-server.get('/teams', (req, res) => {
+server.get('/api/teams', (req, res) => {
 	Team.find({}, function (err, teams){
 		res.json(teams);
 	});
 });
 
-server.put('/team', (req, res) => {
+server.put('/api/team', (req, res) => {
     const { name, sport } = req.body;
     Team.findOneAndUpdate({ name }, {$set:{sport}}, { new: true }, function(err, team){
         if(err){
@@ -35,11 +35,11 @@ server.put('/team', (req, res) => {
     // .catch(err => res.send(err));
 });
 
-server.get('/team', (req, res) => {
-    res.json(team);
-});
+// server.get('/api/team', (req, res) => {
+//     res.json(team);
+// });
 
-server.delete('/team', (req, res) => {
+server.delete('/api/team', (req, res) => {
     const { name, sport } = req.body;
     Team.findOneAndRemove({ name }, function (err, team){
         if (err) res.json(err);

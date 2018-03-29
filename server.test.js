@@ -50,14 +50,14 @@ describe('Server', () => {
   //   });
   // });
 
-  describe('[POST] /team', () => {
+  describe('[POST] /api/team', () => {
     it('should add a new team', (done) => {
       const newTeam = {
         name: 'L.A Lakers',
         sport: 'Basketball',
       };
       chai.request(server)
-        .post('/team')
+        .post('/api/team')
         .send(newTeam)
         .end((err, res) => {
           if (err) console.error(err);
@@ -74,7 +74,7 @@ describe('Server', () => {
         name: 'L.A Lakers',
       };
       chai.request(server)
-        .post('/team')
+        .post('/api/team')
         .send(newTeam)
         .end((err, res) => {
           if (err) console.error(err);
@@ -84,11 +84,11 @@ describe('Server', () => {
     });
   });
 
-  describe('[GET] /teams', () => {
+  describe('[GET] /api/teams', () => {
     it('should return list of teams', (done) => {
       console.log('testing - get request method');
       chai.request(server)
-        .get('/teams')
+        .get('/api/teams')
         .end((err, res) => {
           // console.log('get from db', res.body);
           if (err) console.error(err);
@@ -101,14 +101,14 @@ describe('Server', () => {
   });
 
 
-  describe('[PUT] /team', () => {
+  describe('[PUT] /api/team', () => {
     it('should update a team', (done) => {
       const updatedTeam = {
         name: 'L.A Lakers',
         sport: 'Baseball',
       };
       chai.request(server)
-        .put('/team')
+        .put('/api/team')
         .send(updatedTeam)
         .end((err, res) => {
           if (err) console.error(err);
@@ -122,10 +122,10 @@ describe('Server', () => {
     });
   });
 
-  describe('[DELETE] /team', () => {
+  describe('[DELETE] /api/team', () => {
     it('should return the deleted team', () => {
       chai.request(server)
-        .delete('/team')
+        .delete('/api/team')
         .send({name: 'L.A Lakers', sport: 'Baseball'})
         .end((err, res) => {
           console.log('deleted team', res.body);
