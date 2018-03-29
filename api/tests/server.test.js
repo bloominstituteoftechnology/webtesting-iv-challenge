@@ -37,7 +37,6 @@ describe('Server', () => {
         .end((err, res) => {
           if (err) console.error(err);
           expect(res.status).to.equal(200);
-          console.log('IN THE TEST ', res.body);
           expect(res.body).to.be.an('array');
           done();
         });
@@ -64,8 +63,8 @@ describe('Server', () => {
     });
   });
 
-  describe('[DELETE] /books/:id', done => {
-    it('should delete the correct book by id', () => {
+  describe('[DELETE] /books/:id', () => {
+    it('should delete the correct book by id', done => {
       const book = new Book({
         title: 'Slaughterhouse Five',
         author: 'Kurt Vonnegut',
@@ -76,7 +75,25 @@ describe('Server', () => {
           .delete(`/books/${book.id}`)
           .end((err, res) => {
             expect(res.status).to.equal(200);
-            // expect(res.body.title).to.equal('Slaughterhouse Five');
+            done();
+          });
+      });
+    });
+  });
+
+  describe('[PUT] /books/:id', () => {
+    it('should update the book by id', done => {
+      const book = new Book({
+        title: 'Test book title',
+        author: 'Test author man',
+      });
+
+      book.save((err, book) => {
+        chai
+          .request(server)
+          .put(`/books/${book.id}`)
+          .end((err, res) => {
+            expect(res.status).to.equal(200);
             done();
           });
       });

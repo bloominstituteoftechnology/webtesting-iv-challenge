@@ -56,12 +56,12 @@ server.put('/books/:id', (req, res) => {
   const { id } = req.params;
   const bookInfo = req.body;
 
-  Book.findByIdAndUpdate(id, bookInfo)
+  Book.findByIdAndUpdate(id, bookInfo, {new: true})
     .then(book => {
       if (!book) {
         res.status(404).send({ message: 'No book found!'});
       } else {
-        res.status(200).send(bookInfo);
+        res.status(200).send(book);
       }
     })
     .catch(err => {
