@@ -51,27 +51,31 @@ describe('Server', () => {
     });
   });
   
-    describe('[GET] /team', () => {
-    it('should return list of teams', () => {
+    describe('[GET] /teams', () => {
+    it('should return list of teams', (done) => {
       
       chai
         .request(server)
-        .get('./teams')
+        .get('/teams')
         .end((err, res) => {
-          if (err) console.error(err);
+          if (err) {
+            console.error(err);
+            done();
+          }
           expect(res.status).to.equal(200);
+          expect(Array.isArray(res.body)).to.equal(true);
           expect(res.body.length).to.equal(3);
-          expect(res.body[0].name).to.equal('Giants');
         });
+        done();
     });
   });
 
   describe('[PUT] /team', () => {
     it('should return updated team', done => {
-      const updateTeam = { name: 'Stupid_Lions', sport: 'FootBall' };
+      const updateTeam = { name: 'Stupid_Lions', sport: 'Football' };
       chai
         .request(server)
-        .put('./team')
+        .put('/team')
         .send(updateTeam)
         .end((err, res) => {
           if (err) {
@@ -86,29 +90,18 @@ describe('Server', () => {
   });
 
   describe('[DELETE] /team', () => {
-    it('should return the deleted team', () => {
-      const xTeam = {
-        name: 'Red Bulls',
-        sport: 'soccer',
-      };
+    it('should return the deleted team', (done) => {
       chai.request(server)
-        .post('./team')
-        .send(xTeam)
+        .delete('/team')
         .end((err, res) => {
-          if (err) console.error(err);
+          if (err) {
+            console.error(err);
+            done();
+          }
           expect(res.status).to.equal(200);
-          expect(res.body.name).to.equal('Red Bulls');
-          expect(res.body.sport).to.equal('soccer');
+          expect(req.res).to.equal(null);
         });
-      chai.request(server)
-        .delete('./team')
-        .send({name: 'Giants', sport: 'Football'})
-        .end((err, res) => {
-          if (err) console.error(err);
-          expect(res.status).to.equal(404);
-          expect(res.body.name).to.equal('Giants');
-          expect(res.body.sport).to.equal('Football')
-        });
+        done();
     });
   });
 });

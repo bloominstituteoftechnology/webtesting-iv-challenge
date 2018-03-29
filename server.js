@@ -21,11 +21,11 @@ server.post('/team', (req, res) => {
     });
 });
 
-server.get('/team', (req, res) => {
-  Team.find()
-    .then(teams => {
-      res.status(200).json(teams);
-    })
+server.get('/teams', (req, res) => {
+  Team.find({}, (err, teams) => {
+    if (err) return res.send(err);
+    res.send(teams)
+  });
 });
 
 server.put('/team', (req, res) => {
@@ -36,6 +36,18 @@ server.put('/team', (req, res) => {
       Team.find({ name }).then(team => {
         res.status(200).json(team);
       });
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
+
+server.delete('/team', (req, res) => {
+  const { name, sport } = req.body;
+  User.find({ name })
+    .remove()
+    .then(res => {
+      res.status(200).json({ message: `Successfully deleted ${name}.` });
     })
     .catch(err => {
       res.json(err);
