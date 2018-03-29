@@ -34,7 +34,7 @@ describe('Server', () => {
       genre: 'Hardcore',
     });
     const band2 = new Band({
-      name: 'Queers',
+      name: 'The Vandals',
       genre: 'Pop Punk',
     });
     await band.save();
@@ -59,6 +59,22 @@ describe('Server', () => {
         });
     });
   });
+  describe('[POST] /band', () => {
+    it('should not post an incomplete band', (done) => {
+      const newBand = {
+        name: 'La Armada'
+      };
+      chai
+        .request(server)
+        .post('/band')
+        .send(newBand)
+        .end((err, res) => {
+          if (err) console.log(err);
+          expect(res.body.errors.genre.message).to.equal('Path `genre` is required.');
+          done();
+        })
+    })
+  })
   describe('[GET] /bands', () => {
     it('should return all bands', (done) => {
       chai
@@ -104,7 +120,7 @@ describe('Server', () => {
             .request(server)
             .delete('/band/' + res.body[1]._id)
             .end((error, response) => {
-              expect(response.body.name).to.equal('Queers');
+              expect(response.body.name).to.equal('The Vandals');
               done();
             });
         });

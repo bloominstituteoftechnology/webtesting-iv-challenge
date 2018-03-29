@@ -22,17 +22,13 @@ BandSchema.statics.getAllBands = (cb) => {
     cb(bands);
   });
 };
-//This broke everything, couldn't fix...
-// BandSchema.statics.getBandByName = (bandName, cb) => {
-//   Band.findOne({ name: bandName })
-//     .then(res => {
-//       if (res) cb(res);
-//       else res.status(500).json('Band Name Not Found');
-//     })
-//     .catch(error => {
-//       res.status(500).json(error)
-//     })
-// };
+
+BandSchema.statics.getBandByName = (bandName, cb) => {
+  Band.findOne({ name: bandName }, (err,band) => {
+    if (err) console.error(err)
+    cb(band);
+  })
+};
 
 const Band = mongoose.model('Band', BandSchema);
 

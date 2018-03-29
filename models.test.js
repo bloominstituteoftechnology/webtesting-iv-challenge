@@ -22,32 +22,27 @@ describe('Bands', () => {
         null,
         [
           { name: 'Linkin Park', genre: 'Garbage' },
-          { name: 'Queers', genre: 'Pop Punk' },
+          { name: 'The Vandals', genre: 'Pop Punk' },
         ]
       );
       Band.getAllBands((bands) => {
         expect(bands.length).to.equal(2);
-        expect(bands[1].name).to.equal('Queers');
+        expect(bands[1].name).to.equal('The Vandals');
         Band.find.restore();
       });
     });
   });
-  //This broke everything, couldn't fix...
-  // describe('getBandByName', () => {
-  //   it('should return the matching band', () => {
-  //     sinon.stub(Band, 'find');
-  //     Band.find.yields(
-  //       null,
-  //       [
-  //         { name: 'Linkin Park', genre: 'Garbage' },
-  //         { name: 'Queers', genre: 'Pop Punk' },
-  //       ]
-  //     );
-  //     const bandName = "Queers";
-  //     Band.getBandByName(bandName,(band) => {
-  //       expect(band.name).to.equal('Queers');
-  //       Band.find.restore();
-  //     });
-  //   });
-  // });
+  describe('getBandByName', () => {
+    it('should return band with name provided', () => {
+      sinon.stub(Band, 'findOne');
+      Band.findOne.yields(
+        null,
+          { name: 'The Vandals', genre: 'Pop Punk' },
+      );
+      Band.getBandByName('The Vandals', (band) => {
+        expect(band.name).to.equal('The Vandals');
+        Band.findOne.restore();
+      })
+    })
+  })
 });

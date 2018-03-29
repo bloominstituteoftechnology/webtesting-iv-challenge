@@ -1,5 +1,5 @@
 const express = require('express');
-
+const mongoose = require('mongoose');
 const server = express();
 server.use(express.json());
 
@@ -50,5 +50,7 @@ server.delete('/band/:id', (req, res) => {
       res.status(500).json('Error Deleting Band')
     })
 });
+
+mongoose.connect('mongodb://localhost/test');
 
 module.exports = server;
