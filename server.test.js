@@ -33,8 +33,10 @@ describe('/anime', () => {
         console.log(err);
         return done();
       };
-      mongoose.connection.close()
-      done();
+      mongoose.connection.db.dropDatabase(() => {
+        mongoose.connection.close()
+        done();
+      });
     });
   });
 
@@ -118,5 +120,22 @@ describe('/anime', () => {
           done();
         });
     });
+
+    it('should return an error when missing a name', (done) => {
+      const newAnime = {
+        genre: 'Adventure/Fantasy'
+      };
+      chai.request(server)
+        .post('/anime')
+        .send(newAnime)
+        .end((err, res) => {
+          if (err) {
+            console.error(err);
+            done();
+          }
+          expect(res.status).to.equal(400);
+          done(); 
+        });
+      });
   });
 });
