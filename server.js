@@ -24,12 +24,27 @@ server.get('/teams', (req, res) => {
 });
 
 server.put('/team', (req, res) => {
-	teams[0].name = req.body.name;
-   res.json(teams[0]);
+    const { name, sport } = req.body;
+    Team.findOneAndUpdate({ name }, {$set:{sport}}, { new: true }, function(err, team){
+        if(err){
+            res.send(err);
+        }
+        res.json(team);
+    });
+    // .then(team => res.json(team))
+    // .catch(err => res.send(err));
 });
 
 server.get('/team', (req, res) => {
     res.json(team);
+});
+
+server.delete('/team', (req, res) => {
+    const { name, sport } = req.body;
+    Team.findOneAndRemove({ name }, function (err, team){
+        if (err) res.json(err);
+        res.json(team);
+    });
 });
 
 module.exports = server;

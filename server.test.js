@@ -90,7 +90,7 @@ describe('Server', () => {
       chai.request(server)
         .get('/teams')
         .end((err, res) => {
-          console.log('get from db', res.body);
+          // console.log('get from db', res.body);
           if (err) console.error(err);
           expect(res.status).to.equal(200);
           expect(res.body.length).to.equal(4);
@@ -100,29 +100,39 @@ describe('Server', () => {
     });
   });
 
-  // describe('[DELETE] /team', () => {
-  //   it('should return the deleted team', () => {
-  //     const newTeam = {
-  //       name: 'Red Sox',
-  //       sport: 'Baseball',
-  //     };
-  //     chai.request(server)
-  //       .post('/team')
-  //       .send(newTeam)
-  //       .end((err, res) => {
-  //         if (err) console.error(err);
-  //         expect(res.status).to.equal(200);
-  //         expect(res.body.name).to.equal('L.A Lakers');
-  //         expect(res.body.sport).to.equal('Basketball');
-  //       });
-  //     chai.request(server)
-  //       .delete('/team')
-  //       .send({name: 'Las Vegas Raiders', sport: 'Football'})
-  //       .end((err, res) => {
-  //         if (err) console.error(err);
-  //         expect(res.status).to.equal(404);
-  //         expect(res.body.name).to.equal('Las Vegas Raiders');
-  //       });
-  //   });
-  // });
+
+  describe('[PUT] /team', () => {
+    it('should update a team', (done) => {
+      const updatedTeam = {
+        name: 'L.A Lakers',
+        sport: 'Baseball',
+      };
+      chai.request(server)
+        .put('/team')
+        .send(updatedTeam)
+        .end((err, res) => {
+          if (err) console.error(err);
+          // console.log('get from db', res.body);
+          expect(res.status).to.equal(200);
+          expect(res.body.name).to.equal('L.A Lakers');
+          expect(res.body.sport).to.equal('Baseball');
+          // expect(res.body).to.have.own.property('_id');
+        });
+        done();
+    });
+  });
+
+  describe('[DELETE] /team', () => {
+    it('should return the deleted team', () => {
+      chai.request(server)
+        .delete('/team')
+        .send({name: 'L.A Lakers', sport: 'Baseball'})
+        .end((err, res) => {
+          console.log('deleted team', res.body);
+          if (err) console.error(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.name).to.equal('L.A Lakers');
+        });
+    });
+  });
 });
