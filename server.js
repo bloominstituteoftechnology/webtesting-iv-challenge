@@ -1,14 +1,22 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const User = require('./models');
 
 const server = express();
 server.use(morgan('combined'));
 server.use(express.json());
 
-
-server.get('/users', (req, res) => {
-    res.json('Hello World');
+server.get('/user', (req, res) => {
+    User.find({},(err, resp) =>{
+        res.send(resp);
+    });
+});
+server.post('/user', (req, res) => {
+    const user = new User(req.body);
+    user.save((err, newUser) =>{
+        res.send(newUser);
+    });
 });
 
 mongoose.Promise = global.Promise;
