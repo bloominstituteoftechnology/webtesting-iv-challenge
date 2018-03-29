@@ -27,6 +27,7 @@ describe('Toppings', () => {
             Topping.getAllTheToppings((toppings) => {
                 expect(toppings.length).to.equal(2);
                 expect(toppings[1].name).to.equal('pineapple');
+                Topping.find.restore();
             });
         });
     });
