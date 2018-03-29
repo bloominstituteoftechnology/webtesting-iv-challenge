@@ -7,7 +7,7 @@ server.use(express.json());
 
 const Car = require('./models');
 
-server.post('/cars', (req, res) => {
+server.post('/api/cars', (req, res) => {
   const { manufacturer, name } = req.body;
   const newCar = new Car({ manufacturer, name });
   newCar.save()
@@ -19,7 +19,7 @@ server.post('/cars', (req, res) => {
     })
 });
 
-server.get('/cars', (req, res) => {
+server.get('/api/cars', (req, res) => {
   Car.find()
     .then(cars => {
       res.status(200).json(cars);
@@ -29,7 +29,7 @@ server.get('/cars', (req, res) => {
     })
 })
 
-server.put('/cars/:id', (req, res) => {
+server.put('/api/cars/:id', (req, res) => {
   const { id } = req.params;
   const updatedCar = req.body;
   Car.findByIdAndUpdate(id, {$set: updatedCar}, {new: true})
@@ -41,7 +41,7 @@ server.put('/cars/:id', (req, res) => {
   })
 });
 
-server.delete('/cars/:id', (req, res) => {
+server.delete('/api/cars/:id', (req, res) => {
   const { id } = req.params;
   Car.findByIdAndRemove(id)
     .then(() => {

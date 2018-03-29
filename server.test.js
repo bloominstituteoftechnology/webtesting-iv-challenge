@@ -52,14 +52,14 @@ describe('Server', () => {
       .catch(err => done(err))
   })
 
-  describe('[POST] /cars', () => {
+  describe('[POST] /api/cars', () => {
     it('should add a new car', (done) => {
       const newCar = {
         manufacturer: 'Ferrari',
         name: '458 Speciale'
       };
       chai.request(server)
-        .post('/cars')
+        .post('/api/cars')
         .send(newCar)
         .end((err, res) => {
           if (err) {
@@ -72,10 +72,10 @@ describe('Server', () => {
         done();
     });
   });
-  describe('[GET] /cars', () => {
+  describe('[GET] /api/cars', () => {
     it('should return all cars', (done) => {
       chai.request(server)
-        .get('/cars')
+        .get('/api/cars')
         .end((err, res) => {
           if (err) {
             console.error(err);
@@ -89,14 +89,14 @@ describe('Server', () => {
     });
   });
 
-  describe('[PUT] /cars/:id', () => {
+  describe('[PUT] /api/cars/:id', () => {
     it('should update a car', (done) => {
       const updatedCar = {
         manufacturer: 'McLaren',
         name: 'F1',
       };
       chai.request(server)
-        .put(`/cars/${carID}`)
+        .put(`/api/cars/${carID}`)
         .send(updatedCar)
         .end((err, res) => {
           if (err) {
@@ -109,10 +109,10 @@ describe('Server', () => {
     });
   });
 
-  describe('[DELETE] /cars/:id', () => {
+  describe('[DELETE] /api/cars/:id', () => {
     it('should delete a car', (done) => {
       chai.request(server)
-        .delete(`/cars/${carID}`)
+        .delete(`/api/cars/${carID}`)
         .end((err, res) => {
           expect(res.status).to.equal(200);
         });
