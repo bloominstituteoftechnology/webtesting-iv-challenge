@@ -8,7 +8,7 @@ const server = express();
 server.use(morgan('combined'));
 server.use(express.json());
 
-server.get('/api/user', (req, res) => {
+server.get('/api/users', (req, res) => {
     User.find({},(err, resp) =>{
         res.send(resp);
     });
