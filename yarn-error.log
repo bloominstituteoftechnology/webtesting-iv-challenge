@@ -2388,7 +2388,7 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 1
+  Exit code: 2
   Command: sh
   Arguments: -c mocha *.test.js
   Directory: /Users/dixiekorley/Desktop/CS7/Server-Testing

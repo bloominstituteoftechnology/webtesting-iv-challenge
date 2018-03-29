@@ -70,22 +70,25 @@ describe('Server', () => {
                 name: 'Matthew Smith',
                 occupation: 'Author'
             });
-    
+
+            const second = {
+                name: 'Matthew Smith',
+                occupation: 'Software Engineering'
+            }
+
             chai.request(server)
                 .get('/jobs')
                 .end((err, res) => {
-                    console.log(res.body[0].id);
-                    console.log(res.body);
                     chai.request(server)
-                        .put('/jobs/'+res.body.id)
+                        .put('/jobs/' + res.body[0]._id)
                         .send(first)
                         .end((err, res) => {
                             if (err) console.log(err);
                             expect(res.status).to.equal(200);
                             expect(res.body.occupation).to.equal('Software Engineer');
                         });
-                   });
-            done();
+                    done();
+                });
         });
     });
 

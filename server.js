@@ -28,7 +28,7 @@ server.get('/jobs', (req, res) => {
     });
 });
 
-server.put('/jobs', (req, res) => {
+server.put('/jobs/:id', (req, res) => {
     const { id } = req.params;
     const job = req.body;
     Jobs.findByIdAndUpdate(id, (err, job) => {
