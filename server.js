@@ -20,25 +20,36 @@ server.post('/teams', (req, res) => {
 server.get('/teams', (req, res) => {
   Team.find({}, (err, teams) => {
     if (err) return res.send(err);
-    res.send(teams)
+    res.send(teams);
   });
 });
 
-server.put('/teams/:id', (req, res) => {
-  const { id } = req.params;
-  const team = req.body;
-  Team.findByIdAndUpdate(id, (err, team) => {
-    if (err) return res.send(err);
-    res.status(200).send(id)
+server.put('/team', (req, res) => {
+  const { id, name, sport } = req.body;
+  Band.findById(id, (err, team) => {
+    if (err) {
+      res.status(422).json({ error: 'Team not found by that Id' });
+      return;
+    }
+    if (name) {
+      team.name = name;
+    }
+    if (sport) {
+      team.sport = sport;
+    }
+    team.save((error, savedTeam) => {
+      if (error) res.status(500).json(error);
+      res.status(200).json(savedTeam);
+    });
   });
 });
 
 server.delete('/teams/:id', (req, res) => {
   const { id } = req.params;
-  const team = { name, sport } = req.body;
+  const team = ({ name, sport } = req.body);
   Team.findByIdAndRemove(id, (err, team) => {
     if (err) return res.send(err);
-    res.send({ message: `successfully deleted ${team}` })
+    res.send({ message: `successfully deleted ${team}` });
   });
 });
 
