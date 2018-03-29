@@ -17,7 +17,7 @@ TeamSchema.methods.getTeamName = function() {
 }
 
 TeamSchema.statics.getAllTeams = (cb) => {
-    Team.find({}, (err, teams) => {
+    Team.findOne({}, (err, teams) => {
     if (err) console.error(err);
     cb(teams);
   });

@@ -19,9 +19,9 @@ describe('Teams', () => {
 
   describe('getAllTeams', () => {
     it('should return all the teams', () => {
-      sinon.stub(Team, 'find');
-      Team.find.yields(null, [
-        { name: 'Sacramento Kings', sport: 'Basketball' },
+      sinon.stub(Team, 'findOne');
+      Team.findOne.yields(null, [
+        { name: 'Houston Rockets', sport: 'Basketball' },
         { name: 'Philadelphia Eagles', sport: 'Football' }
       ]);
       Team.getAllTeams((teams) => {

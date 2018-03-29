@@ -30,8 +30,28 @@ describe('Server', () => {
     });
   });
 
+  beforeEach((done) => {
+    new Team({
+      name: 'Sacramento Kings',
+      sport: 'Basketball'
+    }).save((err, team) => {
+      if (err) {
+        console.log(err);
+        return done();
+      }
+      done();
+    });
+  });
+
+  // afterEach((done) => {
+  //   Team.remove({}, (err) => {
+  //     if (err) console.log(err);
+  //     done();
+  //   });
+  // });
+
   describe('[POST] /team', () => {
-    it('should add a new team', () => {
+    it('should add a new team', (done) => {
       const newTeam = {
         name: 'L.A Lakers',
         sport: 'Basketball',
@@ -40,15 +60,16 @@ describe('Server', () => {
         .post('/team')
         .send(newTeam)
         .end((err, res) => {
-          // console.log(res.body);
           if (err) console.error(err);
           expect(res.status).to.equal(200);
           expect(res.body.name).to.equal('L.A Lakers');
           expect(res.body.sport).to.equal('Basketball');
           expect(res.body).to.have.own.property('_id');
         });
+        done();
     });
-    it('should return Validation error', () => {
+
+    it('should return Validation error', (done) => {
       const newTeam = {
         name: 'L.A Lakers',
       };
@@ -56,29 +77,28 @@ describe('Server', () => {
         .post('/team')
         .send(newTeam)
         .end((err, res) => {
-          // console.log(err);
           if (err) console.error(err);
-          // expect(res.status).to.equal(200);
           expect(res.body.name).to.equal('ValidationError');
-          // expect(res.body.sport).to.equal('Basketball');
-          // expect(res.body).to.have.own.property('_id');
         });
+        done();
     });
   });
 
-  // describe('[GET] /teams', () => {
-  //   it('should return list of teams', () => {
-  
-  //     chai.request(server)
-  //       .get('/teams')
-  //       .end((err, res) => {
-  //         if (err) console.error(err);
-  //         expect(res.status).to.equal(200);
-  //         expect(res.body.length).to.equal(3);
-  //         expect(res.body[0].name).to.equal('Oakland Raiders');
-  //       });
-  //   });
-  // });
+  describe('[GET] /teams', () => {
+    it('should return list of teams', (done) => {
+      console.log('testing - get request method');
+      chai.request(server)
+        .get('/teams')
+        .end((err, res) => {
+          console.log('get from db', res.body);
+          if (err) console.error(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.length).to.equal(4);
+          expect(res.body[0].name).to.equal('Sacramento Kings');
+        });
+        done();
+    });
+  });
 
   // describe('[DELETE] /team', () => {
   //   it('should return the deleted team', () => {
