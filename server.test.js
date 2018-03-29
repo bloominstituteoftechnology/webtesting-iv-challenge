@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
 
 const Anime = require('./model');
 const server = require('./server');
@@ -14,6 +13,7 @@ describe('/anime', () => {
   let animeId;
 
   beforeEach((done) => {
+    mongoose.connect('mongodb://localhost/test');
     new Anime({
       name: 'Appleseed',
       genre: 'Sci-fi Action'
@@ -33,6 +33,7 @@ describe('/anime', () => {
         console.log(err);
         return done();
       };
+      mongoose.connection.close()
       done();
     });
   });
