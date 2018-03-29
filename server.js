@@ -23,18 +23,18 @@ server.post('/anime', (req, res) => {
 });
 
 server.put('/anime', (req, res) => {
-  Anime.findById(req.body.id, (err, anime) => {
-    anime.name = req.body.name;
-    anime.genre = req.body.genre;
-    anime.save((err, updatedAnime) => {
-      if (err) return res.status(400).json(err.message);
-      res.send(updatedAnime);
-    });
+  const updatedAnime = {
+    name: req.body.name,
+    genre: req.body.genre,
+  }
+  Anime.findByIdAndUpdate(req.body.id, updatedAnime, (err, anime) => {
+    if (err) return res.status(400).json(err.message);
+    res.send(updatedAnime);
   });
 });
 
 server.delete('/anime/:id', (req, res) => {
-  Anime.findById(req.params.id).remove((err, removedAnime) => {
+  Anime.findByIdAndRemove(req.params.id, (err) => {
     if (err) return res.status(400).json(err.message);
     res.send('successfully deleted');
   });
