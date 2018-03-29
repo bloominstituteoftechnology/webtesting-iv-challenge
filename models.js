@@ -14,7 +14,7 @@ const BandSchema = new Schema({
     }
 });
 
-BandSchema.methods.getBandName = () => {
+BandSchema.methods.getBandName = function() {
     return this.name;
 };
 
