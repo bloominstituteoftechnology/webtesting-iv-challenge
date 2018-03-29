@@ -26,10 +26,10 @@ server.get('/teams', (req, res) => {
 
 server.put('/teams/:id', (req, res) => {
   const { id } = req.params;
-  const team = { name, sport } = req.body;
+  const team = req.body;
   Team.findByIdAndUpdate(id, (err, team) => {
     if (err) return res.send(err);
-    res.send(team)
+    res.status(200).send(id)
   });
 });
 

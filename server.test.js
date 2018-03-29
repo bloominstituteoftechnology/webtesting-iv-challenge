@@ -10,7 +10,7 @@ chai.use(chaihttp);
 
 const Team = require('./models');
 
-describe('Server', () => {
+describe('server', () => {
   before(done => {
     mongoose.connect('mongodb://localhost/test');
     const db = mongoose.connection;
@@ -72,7 +72,7 @@ describe('Server', () => {
 
   describe('[PUT] /teams/:id', () => {
     it('should return updated team', (done) => {
-      const updateTeam = { name: 'Giants', sport: 'Testing' };
+      const updateTeam = new Team({ name: 'Giants', sport: 'Testing' });
       chai
         .request(server)
         .get('/teams')
@@ -85,9 +85,11 @@ describe('Server', () => {
               if (err) {
                 console.error(err);
                 done();
-              }        
+              }    
+              console.log('why are you not working?');
               expect(res.status).to.equal(200);
-              expect(res.body[0].sport).to.equal('Testing');
+              expect(res.body).to.be.an('object');
+              expect(res.body[0].sport).to.equal('Pablo');
             });
             done();
         });
@@ -96,7 +98,7 @@ describe('Server', () => {
 
   describe('[DELETE] /teams/:id', () => {
     it('should delete a team', (done) => {
-      const deleteTeam = { name: 'Giants' };
+      const deleteTeam = new Team({ name: 'Giants' });
       chai
         .request(server)
         .get('/teams')
