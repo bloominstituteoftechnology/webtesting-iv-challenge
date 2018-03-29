@@ -48,21 +48,22 @@ describe('server.js', () => {
         .post('/weapons')
         .send(karambit)
         .end((err, res) => {
-          chai
-            .request(server)
-            .get('/weapons')
-            .end((err, res) => {
-              if (err) {
-                console.error(err);
-                done();
-              }
-              assert.equal(res.status, 200);
-              assert.isArray(res.body);
-              assert.lengthOf(res.body, 2);
-              assert.equal(res.body[0].name, 'Knife');
-              assert.equal(res.body[1].name, 'Karambit');
-              done();
-            });
+          console.log(err || res);
+        });
+      chai
+        .request(server)
+        .get('/weapons')
+        .end((err, res) => {
+          if (err) {
+            console.error(err);
+            done();
+          }
+          assert.equal(res.status, 200);
+          assert.isArray(res.body);
+          assert.lengthOf(res.body, 2);
+          assert.equal(res.body[0].name, 'Knife');
+          assert.equal(res.body[1].name, 'Karambit');
+          done();
         });
     });
   });
@@ -84,6 +85,24 @@ describe('server.js', () => {
             done();
           }
           assert.equal(res.body.name, 'Pencil');
+          done();
+        });
+    });
+    it('should have a status code of 200', done => {
+      const pencil = {
+        name: 'Pencil',
+        description: 'Pokes the flesh',
+      };
+
+      chai
+        .request(server)
+        .post('/weapons')
+        .send(pencil)
+        .end((err, res) => {
+          if (err) {
+            console.error(err);
+            done();
+          }
           assert.equal(res.status, 200);
           done();
         });
