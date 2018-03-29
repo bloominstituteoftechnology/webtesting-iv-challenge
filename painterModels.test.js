@@ -7,7 +7,7 @@ const Painter = require("./painterModels");
 describe("Painters", () => {
     describe("getPainterName", () => {
         it("should return the painter's name", () => {
-            const newPainter = Painter({
+            const newPainter = new Painter({
                 name: "Franz Kline",
                 style: "Abstract-Expressionist"
             });
@@ -19,7 +19,7 @@ describe("Painters", () => {
         it("should return all painters", () => {
             sinon.stub(Painter, "find");
             // const cb = () => { return };
-            Painter.find.yields(null, [
+            Painter.find.yields([
                 {
                     name: "van Gogh",
                     style: "Post-Impressionism"

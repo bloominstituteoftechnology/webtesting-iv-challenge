@@ -37,6 +37,31 @@ server.get('/allPainters', (req,res) => {
   // res.json("test");
 });
 
+server.put('/painter/:id', (req, res) => {
+  const id = req.params.id;
+  const { name, style } = req.body;
+
+  Painter.findByIdAndUpdate(id, { name, style }, { new: true })
+    .then(sg => {
+      res.status(201).json(sg);
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    })
+});
+
+server.delete('/painter/:id', (req, res) => {
+  const id = req.params.id;
+
+  Painter.findByIdAndRemove(id)
+  .then(sg => {
+    res.json(sg);
+  })
+  .catch(err => {
+    res.status(500).json(err);
+  });
+});
+
 // server.get('/painterTest', (req, res) => {
 //   Painter.findOne({ name: 'Franz Kline' })
 //     .then(ptr => {
