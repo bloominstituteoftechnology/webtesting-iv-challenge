@@ -85,6 +85,7 @@ describe('Server', () => {
                         .end((err, res) => {
                             if (err) console.log(err);
                             expect(res.status).to.equal(200);
+                            expect(res.body).to.be.a('object');
                             expect(res.body.occupation).to.equal('Software Engineer');
                         });
                     done();
@@ -92,4 +93,25 @@ describe('Server', () => {
         });
     });
 
+    describe('[DELETE] /jobs/:id', () => {
+        it('should delete a single job on /jobs/<id>', (done) => {
+            const first = {
+                name: 'Matthew Smith',
+                occupation: 'Software Engineering'
+            }
+            chai.request(server)
+            .get('/jobs')
+            .end((err, res) => {
+                chai.request(server)
+                .delete('/jobs/'  + res.body[0]._id)
+                .end((err, res) => {
+                    if(err) console.log(err);
+                    expect(res.status).to.equal(200);
+                    expect(res.body).to.be.a('object');
+                    expect(res.body.value).to.equal('undefined');
+                });
+                done();
+            })
+        })
+    })
 });

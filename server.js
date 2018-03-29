@@ -35,6 +35,14 @@ server.put('/jobs/:id', (req, res) => {
         if (err) return res.send(err);
         res.send(id);
     });
-})
+});
+
+server.delete('/jobs/:id', (req, res) => {
+    const { id } = req.params;
+    Jobs.findByIdAndRemove(id, (err, job) => {
+        if (err) return res.send(err);
+        res.send(job);
+    });
+});
 
 module.exports = server;
