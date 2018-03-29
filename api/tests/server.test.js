@@ -82,18 +82,32 @@ describe('Server', () => {
   });
 
   describe('[PUT] /books/:id', () => {
+    const book = new Book({
+      title: 'Test book title',
+      author: 'Test author man',
+    });
+    const newBook = {
+      title: 'New book title',
+      };
     it('should update the book by id', done => {
-      const book = new Book({
-        title: 'Test book title',
-        author: 'Test author man',
-      });
-
       book.save((err, book) => {
         chai
           .request(server)
-          .put(`/books/${book.id}`)
+          .put(`/books/${book.id}`, newBook)
           .end((err, res) => {
             expect(res.status).to.equal(200);
+            done();
+          });
+      });
+    });
+    it('should return new book title', done => {
+      book.save((err, book) => {
+        chai
+          .request(server)
+          .put(`/books/${book.id}`, newBook)
+          .send(newBook)
+          .end((err, res) => {
+            expect(res.body.title).to.equal('New book title');
             done();
           });
       });

@@ -18,9 +18,6 @@ server.get('/', function(req, res) {
 });
 
 server.get('/books', (req, res) => {
-  // res
-  //   .status(200)
-  //   .json({ message: 'Here are your books', books: ['Slaughterhouse Five'] });
   Book.find({})
     .then(books => {
       res.status(200).json(books);
