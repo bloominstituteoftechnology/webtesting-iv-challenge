@@ -62,7 +62,7 @@ describe('Server', () => {
   describe('[POST] /band', () => {
     it('should not post an incomplete band', (done) => {
       const newBand = {
-        name: 'La Armada'
+        name: 'La Armada',
       };
       chai
         .request(server)
@@ -70,11 +70,13 @@ describe('Server', () => {
         .send(newBand)
         .end((err, res) => {
           if (err) console.log(err);
-          expect(res.body.errors.genre.message).to.equal('Path `genre` is required.');
+          expect(res.body.errors.genre.message).to.equal(
+            'Path `genre` is required.'
+          );
           done();
-        })
-    })
-  })
+        });
+    });
+  });
   describe('[GET] /bands', () => {
     it('should return all bands', (done) => {
       chai
@@ -99,14 +101,38 @@ describe('Server', () => {
         .request(server)
         .get('/bands')
         .end((err, res) => {
+          if (err) console.error(err);
           chai
             .request(server)
             .put('/band/' + res.body[0]._id)
             .send(updatedBand)
             .end((error, response) => {
+              if (error) console.error(error);
               expect(response.body.name).to.equal('Dinosaur Jr.');
               done();
             });
+        });
+    });
+  });
+  describe('[PUT] /band/:id', () => {
+    it('should not find the band at an incorrect id', (done) => {
+      const updatedBand = {
+        name: 'Guttermouth',
+        genre: 'Punk',
+      };
+      chai
+        .request(server)
+        .get('/bands')
+        .end((err, res) => {
+          chai
+            .request(server)
+            .put('/band/' + 'kjfdakslj234')
+            .send(updatedBand)
+            .end((error, response) => {
+              if (error) console.error(error)
+              expect(response.body).to.equal('Band ID Not Found');    
+              done();          
+            })
         });
     });
   });
