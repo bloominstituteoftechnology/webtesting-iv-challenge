@@ -1,5 +1,5 @@
 {
-  "name": "Server-Testing-Mini",
+  "name": "Server-Testing",
   "version": "1.0.0",
   "description": "STM",
   "main": "index.js",
@@ -18,6 +18,6 @@
     },
   "scripts": { 
     "test": "mocha *.test.js",
-    "start": "nodemon index.js" 
+    "start": "nodemon index.js"
   }
 }
