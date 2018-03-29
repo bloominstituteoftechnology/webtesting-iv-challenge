@@ -2,9 +2,9 @@ const express = require('express');
 const server = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 
-server.use(morgan('combined'));
+// server.use(morgan('combined'));
 server.use(express.json());
 
 const Book = require('./models/BookModel');
@@ -18,9 +18,13 @@ server.get('/', function(req, res) {
 });
 
 server.get('/books', (req, res) => {
-  res
-    .status(200)
-    .json({ message: 'Here are your books', books: ['Slaughterhouse Five'] });
+  // res
+  //   .status(200)
+  //   .json({ message: 'Here are your books', books: ['Slaughterhouse Five'] });
+  Book.find({})
+    .then(books => {
+      res.status(200).json(books);
+    })
 });
 
 server.post('/books', (req, res) => {
@@ -40,19 +44,30 @@ server.post('/books', (req, res) => {
   }
 });
 
-// server.post('/books', (req, res) => {
-//   const book = new Book(req.body);
-//   book.save((err, savedBook) => {
-//     if (err) return res.send(err);
-//     res.send(savedBook);
-//   });
-// });
-
 server.delete('/books/:id', (req, res) => {
   const { id } = req.params;
-  Book.findByIdAndRemove(id).then(book => {
+  Book.findByIdAndRemove(id)
+    .then(book => {
     res.status(200).json(book);
   });
 });
+
+server.put('/books/:id', (req, res) => {
+  const { id } = req.params;
+  const bookInfo = req.body;
+
+  Book.findByIdAndUpdate(id, bookInfo)
+    .then(book => {
+      if (!book) {
+        res.status(404).send({ message: 'No book found!'});
+      } else {
+        res.status(200).send(bookInfo);
+      }
+    })
+    .catch(err => {
+      res.status(500).send({ message: 'Error!' });
+    });
+
+})
 
 module.exports = server;
