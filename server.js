@@ -15,6 +15,16 @@ mongoose
   .then(() => console.log('Successfully connected to MongoDB'))
   .catch(err => console.log('Error connecting to MongoDB'));
 
+server.get('/weapons', (req, res) => {
+  Weapon.find({})
+    .then(weapons => {
+      res.status(200).send(weapons);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+});
+
 server.post('/weapons', (req, res) => {
   const newWeapon = req.body;
   const weapon = new Weapon(newWeapon);
@@ -40,19 +50,16 @@ server.delete('/weapons/:name', (req, res) => {
 server.put('/weapons/:name', (req, res) => {
   const { name } = req.params;
   const weapon = req.body;
-  Weapon.findOneAndUpdate(
-    { name },
-    weapon,
-    { new: true })
-  .then(newWeapon => {
-    console.log('then')
-    res.status(200).json(newWeapon);
-  })
-  .catch(err => {
-    console.log('catch');
-    res.status(500).json(err);
-  })
-})
+  Weapon.findOneAndUpdate({ name }, weapon, { new: true })
+    .then(newWeapon => {
+      console.log('then');
+      res.status(200).json(newWeapon);
+    })
+    .catch(err => {
+      console.log('catch');
+      res.status(500).json(err);
+    });
+});
 
 server.listen(PORT, err => {
   if (err) console.log(err);
