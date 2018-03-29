@@ -1,0 +1,24 @@
+{
+  "name": "Server-Testing",
+  "version": "1.0.0",
+  "description": "Server testing assignment",
+  "main": "index.js",
+  "repository": "https://github.com/dk574/Server-Testing.git",
+  "author": "John P. Correia, Dixie E. Korley",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "express": "^4.16.3",
+    "mocha": "^5.0.5",
+    "mongoose": "^5.0.12",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.17.2",
+    "sinon": "^4.4.10"
+  },
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "mocha *.test.js"
+  }
+}
