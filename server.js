@@ -28,6 +28,15 @@ server.get('/api/cars', (req, res) => {
       res.status(500).json(err)
     })
 })
+server.get('/api/cars/:id', (req, res) => {
+  Car.findById(req.params.id)
+    .then(cars => {
+      res.status(200).json(cars);
+    })
+    .catch(err => {
+      res.status(500).json(err)
+    })
+})
 
 server.put('/api/cars/:id', (req, res) => {
   const { id } = req.params;

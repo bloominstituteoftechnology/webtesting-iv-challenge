@@ -28,6 +28,7 @@ describe('Server', () => {
   after((done) => {
     mongoose.connection.db.dropDatabase(() => {
       mongoose.connection.close(done);
+      console.log("out of DB")
     });
   });
 
@@ -38,6 +39,7 @@ describe('Server', () => {
     }).save()
       .then(car => {
         carID = car.id;
+        console.log("getting CarID")
         done();
       })
       .catch(err => {
@@ -48,7 +50,11 @@ describe('Server', () => {
 
   afterEach(done => {
     Car.remove()
-      .then(() => done())
+      .then(() => {
+        console.log("after  ")
+        done()
+      }
+      )
       .catch(err => done(err))
   })
 
@@ -69,7 +75,7 @@ describe('Server', () => {
           expect(res.status).to.equal(200);
           expect(res.body.name).to.equal('458 Speciale');
         });
-        done();
+      done();
     });
   });
   describe('[GET] /api/cars', () => {
@@ -85,9 +91,28 @@ describe('Server', () => {
           expect(res.body.length).to.equal(1);
           expect(res.body[0].manufacturer).to.equal('Lexus');
         });
-        done();
+      done();
     });
   });
+
+  describe('[GET] /api/cars/:id', () => {
+    it('should return car with the given id', (done) => {
+      chai.request(server)
+        .get(`/api/cars/${carID}`)
+        .end((err, res) => {
+          if (err) {
+            console.error(err);
+            done();
+          }
+          expect(res.status).to.equal(200);
+          //expect(res.body.length).to.equal(1);
+          console.log("BBBBBBBBBBBBBB ",res.body)
+          expect(res.body.manufacturer).to.equal('Lexus');
+          expect(res.body).to.be.a('object');
+        });
+      done();
+    });
+  }); 
 
   describe('[PUT] /api/cars/:id', () => {
     it('should update a car', (done) => {
@@ -103,9 +128,11 @@ describe('Server', () => {
             console.error(err);
             done();
           }
+          console.log(res.body)
           expect(res.body.manufacturer).to.equal('McLaren');
+
         });
-        done();
+      done();
     });
   });
 
@@ -114,10 +141,11 @@ describe('Server', () => {
       chai.request(server)
         .delete(`/api/cars/${carID}`)
         .end((err, res) => {
+          console.log(res.body)
           expect(res.body).to.have.property('success');
           expect(res.status).to.equal(200);
         });
-        done();
+      done();
     });
   });
 });

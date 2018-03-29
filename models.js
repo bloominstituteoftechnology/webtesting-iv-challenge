@@ -13,6 +13,7 @@ const CarSchema = new Schema({
 });
 
 CarSchema.methods.getCarName = function() {
+  console.log( "PPPPPPPPPPPPPPP",this.name)
   return this.name;
 };
 
