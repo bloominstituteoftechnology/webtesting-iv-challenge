@@ -8,12 +8,16 @@ server.use(express.json());
 server.get('/api/toppings', (req, res) => {
   Topping.find({}, (err, topping) => {
     if (err) return res.send(err);
-    res.status(200).send(topping);
+    res.status(200).json(topping);
   });
 });
 
 server.post('/api/topping', (req, res) => {
-  res.json(req.body);
+  const topping = new Topping(req.body);
+  topping.save((err, newTopping) => {
+    if (err) return res.send(err);
+    res.status(200).json(newTopping);    
+  });
 })
 
 module.exports = server;

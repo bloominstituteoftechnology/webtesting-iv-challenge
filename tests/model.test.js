@@ -13,7 +13,6 @@ describe('Toppings', () => {
                 name: 'pepperoni',
                 category: 'meat',
             });
-            console.log(topping);
             expect(topping.addATopping()).to.equal('pepperoni');
         });
     });

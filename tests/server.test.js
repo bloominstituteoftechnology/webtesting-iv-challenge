@@ -11,7 +11,7 @@ chai.use(chaihttp);
 const Topping = require('../model');
 
 describe('Server', () => {
-    before((done) => {
+    beforeEach((done) => {
       mongoose.connect('mongodb://localhost/punit');
       const db = mongoose.connection;
       db.on('error', () => {
@@ -32,7 +32,7 @@ describe('Server', () => {
         done();
         });
     });
-    after((done) => {
+    afterEach((done) => {
         mongoose.connection.db.dropDatabase(() => {
             mongoose.connection.close(done);
         });
@@ -74,4 +74,11 @@ describe('Server', () => {
             done();
         });
     });
+
+    // describe('[DELETE] /api/delete/:id', () => {
+    //     it('should delete a topping from the list', (done) => {
+    //         chai.request(server, console.log(req.params))
+    //         .delete(console.log(req.params));
+    //     });
+    // });
 });
