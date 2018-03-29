@@ -79,6 +79,21 @@ describe('Server', () => {
           });
       });
     });
+    it('should return the deleted books title', done => {
+      const book = new Book({
+        title: 'Slaughterhouse Five',
+        author: 'Kurt Vonnegut',
+      });
+      book.save((err, book) => {
+        chai
+          .request(server)
+          .delete(`/books/${book.id}`)
+          .end((err, res) => {
+            expect(res.body.title).to.equal('Slaughterhouse Five');
+            done();
+          });
+      });
+    });
   });
 
   describe('[PUT] /books/:id', () => {
@@ -88,7 +103,7 @@ describe('Server', () => {
     });
     const newBook = {
       title: 'New book title',
-      };
+    };
     it('should update the book by id', done => {
       book.save((err, book) => {
         chai
