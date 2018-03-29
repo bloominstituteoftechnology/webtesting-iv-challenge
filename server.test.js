@@ -28,6 +28,18 @@ describe('Server', () => {
       mongoose.connection.close(done);
     });
   });
+  /*
+  let bands = [
+    {
+      name: '1',
+      genre: '2'
+    },
+    {
+      name: '3',
+      genre: '4'
+    },
+  ]
+  */
   beforeEach(async () => {
     const band = new Band({
       name: 'La Armada',
@@ -39,6 +51,20 @@ describe('Server', () => {
     });
     await band.save();
     await band2.save();
+    /*
+    Promise.all(bands.map(band => {
+      return new Promise((resolve,reject) => {
+        Band(band).save()
+        .then(savedBand => resolve(savedBand))
+        .catch(err => reject(err))
+      })
+    }))
+    .then(rv => {
+      bands = JSON.parse(JSON.stringify(rv));
+      done();
+    })
+    .catch(err => done(err));
+    */
   });
   describe('[POST] /band', () => {
     it('should add a new band', (done) => {

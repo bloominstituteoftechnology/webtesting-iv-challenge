@@ -18,7 +18,7 @@ server.post('/band', (req, res) => {
       res.status(201).json(savedBand);
     })
     .catch((error) => {
-      res.status(500).json(error);
+      res.status(422).json(error);
     });
 });
 
@@ -33,7 +33,7 @@ server.put('/band/:id', (req, res) => {
       } else res.status(404).json('Band ID Not Found');
     })
     .catch((error) => {
-      res.status(500).json('Error Updating Band');
+      res.status(422).json('Error Updating Band');
     });
 });
 
@@ -47,7 +47,7 @@ server.delete('/band/:id', (req, res) => {
       } else res.status(404).json('Band ID Not Found');
     })
     .catch((error) => {
-      res.status(500).json('Error Deleting Band');
+      res.status(422).json('Error Deleting Band');
     });
 });
 

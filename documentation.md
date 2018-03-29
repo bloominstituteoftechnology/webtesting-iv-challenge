@@ -1,67 +1,30 @@
-# API Documentation
+# Band API Documentation
+Handler Documentation for Bands API
+#### by Cody Wendekenecht and Glenn-David Daniel
 
-How to handle GET/POST/PUT/DELETE
+### Handlers 
+| Name | EndPoint  | HTTP Verb | Data | Description |
+| :-- | :-- | :--- |  :--- | :--- |
+| getBandName |  /api/bands | GET | JSON | Returns the expected band name
+| getAllBands |  /api/bands | GET | JSON | Returns all the names of all bands
+| ???GET [Band Name] |  /api/bands | GET | JSON | Returns band with name provided
+| ???POST |  /api/bands | POST | JSON | Will add a new band
+| getBandByName |  /api /band/:id | GET | JSON | Returns all bands
+| getBandGenre |  /api /band/[Band Name] | GET | JSON | Returns genre of target band name
+| findByIdAndUpdate |  /api /band/:id | PUT | JSON | Updates the band matching the target :id
+| getBandByName |  /api /band/:id | PUT | JSON |  Will  not update the band at an incorrect :id
+| findByIdAndRemove |  /api /band/:id | DELETE | JSON |  Will  delete the band at :id
 
-### Port - Location of all endpoints to interface with our API is at `http://localhost:3000`
 
-## [Get] `/api/bands`
-
-| EndPoint  | Type | Data |
-| ---------- | :--: | ---: |
-| /api/bands | Get  | json |
-
-### Example:
-
-```
-{
-    name: 'Rush',
-    genre: 'Classic Rock'
-}
-{
-    name: 'Linkin Park',
-    genre: 'Alternative'
-}
-```
-
-## [POST] `/api/band`
-
-| EndPoint | Type | Data |
-| --------- | :--: | ---: |
-| /api/band | Post | json |
-
-### Example:
-
-```
-{
-    name: 'Rush'
-    genre: 'Classic Rock'
-}
-```
-
-## [PUT] `/api/bands/:name`
-
-| EndPoint  | Type | Data |
-| ---------- | :--: | ---: |
-| /api/band:name | PUT  | json |
-
-### Example:
-
-```
-{
-    name: 'Rush',
-}
-```
-
-## [DELETE] `/api/band/:name`
-
-| EndPoint  | Type | Data |
-| ---------- | :--: | ---: |
-| /api/band:name | DELETE  | json |
-
-### Example:
-
-```
-{
-    name: 'Rush',
-}
-```
+### EXPECTED TEST RESULTS
+| Name | EndPoint  | HTTP Verb | Data | Description |
+| :-- | :-- | :--- |  :--- | :--- |
+| getBandName |  /api/bands | GET | JSON | Returns the expected band name
+| getAllBands |  /api/bands | GET | JSON | Returns all the names of all bands
+| getBandByName |  /api/bands | GET | JSON | Returns band with name provided
+| ??? |  /api/bands | POST | JSON | Will  add a new band
+| ??? |  /api/bands | POST | JSON | Will  not post an incomplete band
+| getBandByName |  /api /band/:id | GET | JSON | Returns band matching target :id
+| findByIdAndUpdate |  /api /band/:id | PUT | JSON | Updates the band matching target :id
+| findByIdAndRemove |  /api /band/:id | DELETE | JSON |  Will  delete the band matching target :id
+| findByIdAndRemove |  /api /band/:id | DELETE | JSON |  Will  not delete a band with an incorrect :id
