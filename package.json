@@ -1,0 +1,21 @@
+{
+  "name": "Server-Testing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/cliffkang/Server-Testing.git",
+  "author": "cliffkang <cliffgkang@gmail.com>",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "mocha *.test.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "express": "^4.16.3",
+    "mocha": "^5.0.5",
+    "mongoose": "^5.0.12",
+    "morgan": "^1.9.0",
+    "sinon": "^4.4.10"
+  }
+}
