@@ -5,6 +5,7 @@ const ShowSchema = new Schema({
    name: {
       required: true,
       type: String,
+      unique: true,
    },
    year: {
       type: Number,
@@ -12,12 +13,18 @@ const ShowSchema = new Schema({
    },
 });
 
-const Show = mongoose.model('Show', ShowSchema);
+ShowSchema.methods.getShowName = function() {
+   if (this.name) return this.name
+   return 'not a valid name';
+}
 
-ShowSchema.methods.getShowName = () => {
-   Show.find()
-      .then()
-      .catch();
+ShowSchema.statics.getAllShows = (cb) => {
+   Show.find({}, (err, shows) => {
+      if (err) console.error(err);
+      cb(shows);
+   });
 };
+
+const Show = mongoose.model('Show', ShowSchema);
 
 module.exports = Show;
