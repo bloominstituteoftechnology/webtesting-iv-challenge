@@ -52,6 +52,7 @@ describe('Server', () => {
         .send(newBand)
         .end((err, res) => {
           if (err) console.error(err);
+          console.log("FAILING HERE", res.body)
           expect(res.status).to.equal(201);
           expect(res.body.name).to.equal('La Armada');
           expect(res.body.genre).to.equal('Hardcore');
