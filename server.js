@@ -9,7 +9,7 @@ server.use(express.json());
 
 server.get('/anime', (req, res) => {
   Anime.find({}, (err, anime) => {
-    if (err) return res.send(err);
+    if (err) return res.status(400).json(err.message);
     res.send(anime);
   });
 });
@@ -17,7 +17,7 @@ server.get('/anime', (req, res) => {
 server.post('/anime', (req, res) => {
   const anime = new Anime(req.body);
   anime.save((err, newAnime) => {
-    if (err) return res.send(err);
+    if (err) return res.status(400).json(err.message);
     res.send(newAnime);
   });
 });
@@ -27,7 +27,7 @@ server.put('/anime', (req, res) => {
     anime.name = req.body.name;
     anime.genre = req.body.genre;
     anime.save((err, updatedAnime) => {
-      if (err) return res.send(err);
+      if (err) return res.status(400).json(err.message);
       res.send(updatedAnime);
     });
   });
@@ -35,7 +35,7 @@ server.put('/anime', (req, res) => {
 
 server.delete('/anime/:id', (req, res) => {
   Anime.findById(req.params.id).remove((err, removedAnime) => {
-    if (err) return res.send(err);
+    if (err) return res.status(400).json(err.message);
     res.send('successfully deleted');
   });
 });
