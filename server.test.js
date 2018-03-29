@@ -52,7 +52,6 @@ describe('Server', () => {
         .send(newBand)
         .end((err, res) => {
           if (err) console.error(err);
-          console.log("FAILING HERE", res.body)
           expect(res.status).to.equal(201);
           expect(res.body.name).to.equal('La Armada');
           expect(res.body.genre).to.equal('Hardcore');
@@ -116,7 +115,7 @@ describe('Server', () => {
     });
   });
   describe('[PUT] /band/:id', () => {
-    it('should not find the band at an incorrect id', (done) => {
+    it('should not update the band at an incorrect id', (done) => {
       const updatedBand = {
         name: 'Guttermouth',
         genre: 'Punk',
@@ -153,4 +152,20 @@ describe('Server', () => {
         });
     });
   });
+  describe('[DELETE] /band/:id', () => {
+    it('should not delete a band at an incorrect id', (done) => {
+      chai
+        .request(server)
+        .get('/bands')
+        .end((err,res) => {
+          chai
+            .request(server)
+            .delete('/band/'+'35kljgf5432')
+            .end((error, response) => {
+              expect(response.body).to.equal('Error Deleting Band');
+              done();
+            })
+        })
+    })
+  })
 });

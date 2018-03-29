@@ -14,41 +14,41 @@ server.post('/band', (req, res) => {
 
   newBand
     .save()
-    .then(savedBand => {
+    .then((savedBand) => {
       res.status(201).json(savedBand);
     })
-    .catch(error => {
+    .catch((error) => {
       res.status(500).json(error);
-    })
+    });
 });
 
 server.put('/band/:id', (req, res) => {
   const { id } = req.params;
   const updatedBand = req.body;
 
-  Band.findByIdAndUpdate(id, updatedBand, {new: true})
-    .then(band => {
+  Band.findByIdAndUpdate(id, updatedBand, { new: true })
+    .then((band) => {
       if (band) {
         res.status(200).json(band);
-      }
-      else res.status(404).json("Band ID Not Found")
+      } else res.status(404).json('Band ID Not Found');
     })
-    .catch(error => {
-      res.status(500).json("Error Updating Band")
-    })
+    .catch((error) => {
+      res.status(500).json('Error Updating Band');
+    });
 });
 
 server.delete('/band/:id', (req, res) => {
   const { id } = req.params;
 
   Band.findByIdAndRemove(id)
-    .then(removedBand => {
-      if (removedBand) res.status(200).json(removedBand)
-      else res.status(404).json('Band ID Not Found')
+    .then((removedBand) => {
+      if (removedBand) {
+        res.status(200).json(removedBand);
+      } else res.status(404).json('Band ID Not Found');
     })
-    .catch(error => {
-      res.status(500).json('Error Deleting Band')
-    })
+    .catch((error) => {
+      res.status(500).json('Error Deleting Band');
+    });
 });
 
 mongoose.connect('mongodb://localhost/test');
