@@ -1,7 +1,5 @@
-
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-
 
 const BandSchema = new Schema({
     name: {

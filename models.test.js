@@ -19,11 +19,16 @@ describe('Bands', () => {
     describe('getAllBands', () => {
         it('should return all the bands', () => {
             sinon.stub(Band, 'find'); //stub function gets access to Band constructor and stub's find gets all bands from BAnd.
-            Band.find.yields(null, [
+            Band.find.yields([
                 {name: 'VVS1', genre: 'Alt-Rock'},
                 {name: 'Something', genre: 'Emo Rock'}
             ]);
+            Band.getAllBands(bands => {
+                expect(bands.length).to.equal(2);
+                expect(bands[0].name).to.equal('VVS1');
+                expect(bands[1].genre).to.equal('Emo Rock');
+                Band.find.restore();
+            });
         });
     });
 });
-
