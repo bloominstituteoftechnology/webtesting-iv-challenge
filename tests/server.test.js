@@ -47,19 +47,22 @@ describe('server.js', () => {
         .request(server)
         .post('/weapons')
         .send(karambit)
-        .get('/weapons')
         .end((err, res) => {
-          if (err) {
-            console.error(err);
-            done();
-          }
-          assert.equal(res.status, 200);
-          assert.isArray(res);
-          assert.lengthOf(res, 2);
-          assert.equal(res.length, 2);
-          assert.equal(res[0].name, 'Knife');
-          assert.equal(res[1].name, 'Karambit');
-          done();
+          chai
+            .request(server)
+            .get('/weapons')
+            .end((err, res) => {
+              if (err) {
+                console.error(err);
+                done();
+              }
+              assert.equal(res.status, 200);
+              assert.isArray(res.body);
+              assert.lengthOf(res.body, 2);
+              assert.equal(res.body[0].name, 'Knife');
+              assert.equal(res.body[1].name, 'Karambit');
+              done();
+            });
         });
     });
   });
