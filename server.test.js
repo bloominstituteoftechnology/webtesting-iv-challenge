@@ -114,6 +114,7 @@ describe('Server', () => {
       chai.request(server)
         .delete(`/api/cars/${carID}`)
         .end((err, res) => {
+          expect(res.body).to.have.property('success');
           expect(res.status).to.equal(200);
         });
         done();
