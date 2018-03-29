@@ -1,106 +1,94 @@
 const mongoose = require('mongoose');
 const chaihttp = require('chai-http');
 const chai = require('chai');
-const { assert, expect } = chai;
+const { assert } = chai;
 const sinon = require('sinon');
 
 const server = require('../server');
 const Weapon = require('../models/WeaponsModel');
 
+mongoose
+  .connect('mongodb://localhost/test')
+  .then(() => console.log('connected to mongodb'))
+  .catch(err => console.log(err));
+
 chai.use(chaihttp);
 
 describe('server.js', () => {
-  
-  before(done => {
-    console.log('before');
-    mongoose.connect('mongodb://localhost/test');
-    const dbase = mongoose.connection; 
-    dbase.on('error', () => {
-      console.error('connection error');
-    });
-    dbase.once('open', () => {
-      console.log('we are connected');
+  beforeEach(done => {
+    const knife = {
+      name: 'Knife',
+      description: 'Stabs the flesh',
+    };
+    const weapon = new Weapon(knife);
+    weapon.save((err, savedWeapon) => {
+      if (err) {
+        console.log(err);
+        return done();
+      }
       done();
     });
   });
 
-  after(done => {
-    console.log('after');
-    mongoose.connection.db.dropDatabase(() => {
-      console.log('inside .dropDatabase()');
-      mongoose.connection.close(done);
+  afterEach(done => {
+    Weapon.remove({}, err => {
+      if (err) console.log(err);
+      done();
     });
   });
 
   describe('[Post] /weapons', () => {
     it('should add a new weapon', done => {
-      const knife = {
-        name: 'Knife',
-        description: 'Stabs the flesh',
+      const pencil = {
+        name: 'Pencil',
+        description: 'Pokes the flesh',
       };
-      //const newWeapon = new Weapon(knife);
+
       chai
         .request(server)
         .post('/weapons')
-        .send(knife)
+        .send(pencil)
         .end((err, res) => {
           if (err) {
             console.error(err);
-            return done();
+            done();
           }
-          expect(res.status).to.equal(200);
-         /* expect.equal(res.status, 200);*/
-         expect(res.body.name).to.equal('Knife');
-         // expect.equal(res.body.name, 'Knife');
+          assert.equal(res.status, 200);
+          assert.equal(res.body.name, 'Pencil');
           done();
         });
-     // done();
     });
   });
-  // describe('[PUT] /weapons', () => {
-  //   it('should edit an existing weapon', done => {
-  //     const knife = {
-  //       name: 'Knife',
-  //       description: 'Stabs the flesh',
-  //     };
-  //     const newWeapon = new Weapon(knife);
-  //     chai
-  //       .request(server)
-  //       .post('/weapons')
-  //       .send(newWeapon)
-  //       .end((err, res) => {
-  //         if (err) {
-  //           console.error(err);
-  //           done();
-  //         }
-  //         assert.equal(res.status, 200);
-  //         assert.equal(res.body.name, 'Knife');
-  //       });
-  //     done();
-  //   });
-  // });
-  // describe('[DELETE] /weapons/:name', () => {
-  //   it('should add a new weapon', done => {
-  //     const knife = {
-  //       name: 'Knife',
-  //       description: 'Stabs the flesh',
-  //     };
-  //     const newWeapon = new Weapon(knife);
-  //     chai
-  //       .request(server)
-  //       .post('/weapons')
-  //       .send(newWeapon)
-  //       .delete('/weapons/:name')
-  //       .send(weapon)
-  //       .end((err, res) => {
-  //         if (err) {
-  //           console.error(err);
-  //           done();
-  //         }
-  //         assert.equal(res.status, 200);
-  //         assert.equal(res.body.name, 'Knife');
-  //       });
-  //     done();
-  //   });
-  // });
+
+  describe('[Delete] /weapons/:name', () => {
+    it('should delete the specified weapon', done => {
+      chai
+        .request(server)
+        .delete('/weapons/Knife')
+        .end((err, res) => {
+          if (err) {
+            console.error(err);
+            done();
+          }
+          Weapon.findOne({ name: 'Knife' })
+            .then(weapon => assert.notExists(weapon))
+            .catch(err => res.json(err));
+          assert.equal(res.body.name, 'Knife');
+          done();
+        });
+    });
+    it('should send back the deleted weapon', done => {
+      chai
+        .request(server)
+        .delete('/weapons/Knife')
+        .end((err, res) => {
+          if (err) {
+            console.error(err);
+            done();
+          }
+          assert.equal(res.body.name, 'Knife');
+          done();
+        });
+    });
+  });
 });
