@@ -37,5 +37,26 @@ Provides access to the collection of teams of various sports.
 ```
 
 ## PUT Route
+| Endpoint      | Type          | Data  |
+| ------------- |:-------------:| -----:|
+| /api/team     | PUT | json |
+
+### Example:
+```
+  {
+    name: 'L.A Lakers',
+    sport: 'Basketball',
+  }
+```
 
 ## DELETE Route
+| Endpoint      | Type          | Data  |
+| ------------- |:-------------:| -----:|
+| /api/team     | DELETE | json |
+
+### Example:
+```
+  {
+    name: 'Boston Celtics'
+  }
+```
