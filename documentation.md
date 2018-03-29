@@ -1,12 +1,11 @@
-# Example API Documentation
-Here's the description of our glorious API! *NOTE:* interfacing with our API will bring you much joy and happiness!
+#Server-Testing Assignment - Jobs
 
 ## Port - Location of all endpoints to interface with our API is at `http://localhost:3000`
 
-## [GET] `/api/list`
+## [GET] `/jobs`
 | Endpoint      | Type          | Data  |
 | ------------- |:-------------:| -----:|
-| /api/bands     | GET | json |
+| /jobs     | GET | json |
 
 ### Example:
 ```
@@ -16,24 +15,66 @@ Here's the description of our glorious API! *NOTE:* interfacing with our API wil
     occupation: 'Author',
   },
   {
-    name: 'Olivia Walters',
+    name: 'Joyce Corley',
     occupation: 'Nurse',
   }
 ]
 ```
 
 
-## [POST] `/api/list`
+## [POST] `/jobs`
 | Endpoint      | Type          | Data  |
 | ------------- |:-------------:| -----:|
-| /api/band     | POST | json |
+| /jobs    | POST | json |
 
 ### Example:
 ```
 {
-  name: 'Rush',
+  name: 'John Smith',
   occupation: 'Author',
 }
 ```
 
-TBC
+
+## [PUT] `/jobs/:id`
+| Endpoint      | Type          | Data  |
+| ------------- |:-------------:| -----:|
+| /jobs/:id   | PUT | json |
+
+### Example:
+```
+{
+  name: 'Matthew Smith',
+  occupation: 'Author',
+}
+ ```
+
+ Matthew Smith changes occupations to...
+
+ ```
+{
+  name: 'Matthew Smith',
+  occupation: 'Software Engineer', //Switches here.
+}
+```
+
+
+## [DELETE] `/jobs/:id`
+| Endpoint      | Type          | Data  |
+| ------------- |:-------------:| -----:|
+| /jobs/:id    | DELETE | json |
+
+### Example:
+```
+{
+  name: 'Matthew Smith',
+  occupation: 'Software Engineer',
+}
+```
+Matthew Smith gets deleted
+
+```
+
+null
+
+```
