@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 const server = express();
 
-const PORT = 3030;
+const PORT = 3000;
 
 server.use(morgan('combined'));
 server.use(express.json());
@@ -17,7 +17,7 @@ mongoose
 
 server.post('/weapons', (req, res) => {
   const newWeapon = req.body;
-  const weapon = new weapon(newWeapon);
+  const weapon = new Weapon(newWeapon);
   weapon
     .save()
     .then(weapon => res.status(200).json(weapon))
@@ -30,3 +30,5 @@ server.listen(PORT, err => {
   if (err) console.log(err);
   console.log(`server is listening on port ${PORT}`);
 });
+
+module.exports = server;

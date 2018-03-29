@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const chaihttp = require('chai-http');
 const chai = require('chai');
-const { assert } = chai;
+const { assert, expect } = chai;
 const sinon = require('sinon');
 
 const server = require('../server');
@@ -10,10 +10,11 @@ const Weapon = require('../models/WeaponsModel');
 chai.use(chaihttp);
 
 describe('server.js', () => {
-  const dbase = mongoose.connection;
+  
   before(done => {
     console.log('before');
     mongoose.connect('mongodb://localhost/test');
+    const dbase = mongoose.connection; 
     dbase.on('error', () => {
       console.error('connection error');
     });
@@ -25,9 +26,9 @@ describe('server.js', () => {
 
   after(done => {
     console.log('after');
-    dbase.db.dropDatabase(() => {
+    mongoose.connection.db.dropDatabase(() => {
       console.log('inside .dropDatabase()');
-      dbase.close(done);
+      mongoose.connection.close(done);
     });
   });
 
@@ -37,20 +38,23 @@ describe('server.js', () => {
         name: 'Knife',
         description: 'Stabs the flesh',
       };
-      const newWeapon = new Weapon(knife);
+      //const newWeapon = new Weapon(knife);
       chai
         .request(server)
         .post('/weapons')
-        .send(newWeapon)
+        .send(knife)
         .end((err, res) => {
           if (err) {
             console.error(err);
-            done();
+            return done();
           }
-          assert.equal(res.status, 200);
-          assert.equal(res.body.name, 'Knife');
+          expect(res.status).to.equal(200);
+         /* expect.equal(res.status, 200);*/
+         expect(res.body.name).to.equal('Knife');
+         // expect.equal(res.body.name, 'Knife');
+          done();
         });
-      done();
+     // done();
     });
   });
   // describe('[PUT] /weapons', () => {
