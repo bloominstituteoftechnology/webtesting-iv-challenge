@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const chaihttp = require('chai-http');
 const chai = require('chai');
-const { assert } = chai;
+const {assert} = chai;
 const sinon = require('sinon');
 
 const server = require('../server');
@@ -53,8 +53,8 @@ describe('server.js', () => {
             console.error(err);
             done();
           }
-          assert.equal(res.status, 200);
           assert.equal(res.body.name, 'Pencil');
+          assert.equal(res.status, 200);
           done();
         });
     });
@@ -70,24 +70,45 @@ describe('server.js', () => {
             console.error(err);
             done();
           }
-          Weapon.findOne({ name: 'Knife' })
-            .then(weapon => assert.notExists(weapon))
-            .catch(err => res.json(err));
           assert.equal(res.body.name, 'Knife');
-          done();
+          Weapon.findOne({name: 'Knife'}, (err, weapon) => {
+            if (err) {
+              console.log(err);
+              done();
+            }
+            assert.notExists(weapon);
+						done();
+          });
         });
     });
-    it('should send back the deleted weapon', done => {
+  });
+
+  describe('[Put] /weapons/:name', () => {
+    it('should update the specified weapon', done => {
+      const updatedWeapon = {
+        name: 'Beak',
+        description: 'Bites the flesh'
+      };
+
       chai
         .request(server)
-        .delete('/weapons/Knife')
+        .put('/weapons/Knife')
+        .send(updatedWeapon)
         .end((err, res) => {
           if (err) {
             console.error(err);
             done();
           }
-          assert.equal(res.body.name, 'Knife');
-          done();
+          assert.equal(res.status, 200);
+          assert.equal(res.body.name, 'Beak');
+          Weapon.findOne({name: 'Knife'}, (err, weapon) => {
+            if (err) {
+              console.log(err);
+              done();
+            }
+            assert.notExists(weapon);
+						done();
+          });
         });
     });
   });
