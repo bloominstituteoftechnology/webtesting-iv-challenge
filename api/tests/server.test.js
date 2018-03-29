@@ -34,13 +34,12 @@ describe('Server', () => {
   //==========================
 
   let bookID;
-  
-  beforeEach((done) => {
+
+  beforeEach(done => {
     new Book({
       title: 'A New Earth',
-      author: "Eckhart Tolle"
-    })
-    .save((err, book) => {
+      author: 'Eckhart Tolle',
+    }).save((err, book) => {
       if (err) {
         console.error(err);
         return done();
@@ -50,11 +49,10 @@ describe('Server', () => {
     });
   });
 
-  afterEach((done) => {
-    Book
-      .remove({}, (err) => {
-        if (err) console.error(err);
-        done();
+  afterEach(done => {
+    Book.remove({}, err => {
+      if (err) console.error(err);
+      done();
     });
   });
 
@@ -79,8 +77,8 @@ describe('Server', () => {
   describe('[POST] /books', () => {
     it('should save a new book', done => {
       const book = {
-        title: 'A New Earth',
-        author: 'Eckhart Tolle',
+        title: 'A New Book',
+        author: 'Eckhart llksdaTolle',
       };
 
       chai
@@ -88,60 +86,26 @@ describe('Server', () => {
         .post('/books')
         .send(book)
         .end((err, res) => {
+          console.log();
           if (err) return console.error(err);
           expect(res.status).to.equal(201);
-          expect(res.body.title).to.equal('A New Earth');
+          expect(res.body.title).to.equal('A New Book');
           done();
         });
     });
   });
 
-  // describe('[DELETE] /books/:id', () => {
-  //   it('should delete the correct book by id', done => {
-  //     const book = new Book({
-  //       title: 'Slaughterhouse Five',
-  //       author: 'Kurt Vonnegut',
-  //     });
-  //     book.save((err, book) => {
-  //       chai
-  //         .request(server)
-  //         .delete(`/books/${book.id}`)
-  //         .end((err, res) => {
-  //           expect(res.status).to.equal(200);
-  //           done();
-  //         });
-  //     });
-  //   });
-  //   it('should return the deleted books title', done => {
-  //     const book = new Book({
-  //       title: 'Slaughterhouse Five',
-  //       author: 'Kurt Vonnegut',
-  //     });
-  //     book.save((err, book) => {
-  //       chai
-  //         .request(server)
-  //         .delete(`/books/${book.id}`)
-  //         .end((err, res) => {
-  //           expect(res.body.title).to.equal('Slaughterhouse Five');
-  //           done();
-  //         });
-  //     });
-  //   });
-  // });
-
-  //==========================
-  //  EXAMPLE DELETE REFACTOR
-  //==========================
-
   describe('[DELETE] /books/:id', () => {
-    it('should remove the book', (done) => {
-      chai.request(server)
+    it('should remove the book properly', done => {
+      chai
+        .request(server)
         .delete(`/books/${bookID}`)
         .end((err, res) => {
           if (err) {
             console.log(err);
             return done();
           }
+          expect(res.body.title).to.equal('A New Earth')
           expect(res.status).to.equal(200);
           Book.findById(bookID, (err, deletedBook) => {
             if (err) {
@@ -155,40 +119,28 @@ describe('Server', () => {
     });
   });
 
-  //==========================
-  //          END
-  //==========================
-
   describe('[PUT] /books/:id', () => {
-    const book = new Book({
-      title: 'Test book title',
-      author: 'Test author man',
-    });
     const newBook = {
       title: 'New book title',
     };
     it('should update the book by id', done => {
-      book.save((err, book) => {
-        chai
-          .request(server)
-          .put(`/books/${book.id}`, newBook)
-          .end((err, res) => {
-            expect(res.status).to.equal(200);
-            done();
-          });
-      });
+      chai
+        .request(server)
+        .put(`/books/${bookID}`, newBook)
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          done();
+        });
     });
     it('should return new book title', done => {
-      book.save((err, book) => {
-        chai
-          .request(server)
-          .put(`/books/${book.id}`, newBook)
-          .send(newBook)
-          .end((err, res) => {
-            expect(res.body.title).to.equal('New book title');
-            done();
-          });
-      });
+      chai
+        .request(server)
+        .put(`/books/${bookID}`)
+        .send(newBook)
+        .end((err, res) => {
+          expect(res.body.title).to.equal('New book title');
+          done();
+        });
     });
   });
 });
