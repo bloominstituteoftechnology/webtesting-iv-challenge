@@ -26,7 +26,8 @@ server.get('/teams', (req, res) => {
 
 server.put('/team', (req, res) => {
   const { id, name, sport } = req.body;
-  Band.findById(id, (err, team) => {
+  console.log(id);
+  Team.findById(id, (err, team) => {
     if (err) {
       res.status(422).json({ error: 'Team not found by that Id' });
       return;

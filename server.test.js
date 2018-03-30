@@ -93,36 +93,21 @@ describe('server', () => {
   describe('[PUT] /team', () => {
     it('should return updated team', done => {
       const updateTeam = { id: teamId, name: 'Bills', sport: 'Testing' };
-      chai
-        .request(server)
-        .get('/team')
-        .send(updateTeam)
-        .end((err, res) => {
-          if (err) {
-            console.log(err);
-            done();
-          }
-          expect(res.body.name).to.equal(updateTeam.name);
-          expect(res.body.sport).to.equal(updateTeam.sport);
-        });
-      done();
-    });
-
-    it('should handle error if bad id sent', done => {
-      const updateTeam = { id: 'blajdfd', name: 'Giants', sport: 'Testing' };
-
+      console.log(updateTeam);
       chai
         .request(server)
         .put('/team')
         .send(updateTeam)
         .end((err, res) => {
           if (err) {
-            expect(err.status).to.equal(422);
-            const { error } = err.response.body;
-            expect(error).to.eql('Team not found by that Id');
+            console.log(err);
+            done();
           }
-          done();
+          console.log(res.body.name);
+          expect(res.body.name).to.equal(updateTeam.name);
+          expect(res.body.sport).to.equal(updateTeam.sport);
         });
+      done();
     });
   });
 
