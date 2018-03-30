@@ -13,12 +13,12 @@ describe('Users',() => {
                 name: 'User Foxtrot',
                 age: 50
             });
-            expect(band.getBandName()).to.equal('User Foxtrot');
+            expect(user.getUserName()).to.equal('User Foxtrot');
         });
     });
 
     describe('getAllUsers', () => {
-        it('should return all the bands', () => {
+        it('should return all the users', () => {
             sinon.stub(User, 'find');
             User.find.yields(null, [
                 { name: 'User Foxtrot', age: 50 },
@@ -27,6 +27,7 @@ describe('Users',() => {
             User.getAllUsers((users => {
                 expect(users.length).to.equal(2);
                 expect(users[1].name).to.equal('User Theta');
+                // User.find.restore();
             }))
         })
     })
