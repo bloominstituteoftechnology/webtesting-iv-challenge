@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongod://localhost/shows');
 
 const server = require('./server');
 const Show = require('./models');
@@ -16,12 +15,10 @@ describe('Server', () => {
    let testShow = null;
 
    before(done => {
-      mongoose.connect('mongodb://localhost/shows');
+      // mongoose.Promise = global.Promise;
+      mongoose.connect('mongodb://localhost/testShow');
       const db = mongoose.connection;
-      db.on('error', () => {
-         console.error('connection error');
-         done();
-      });
+      db.on('error', () => console.error.bind(console, 'connection error'));
       db.once('open', () => {
          console.log('we are connected');
          done();
@@ -32,22 +29,33 @@ describe('Server', () => {
       mongoose.connection.close();
       if (mongoose.connection.readyState === 0) done();
       else console.error('error closing connection'), done();
+      // mongoose.connection.db.dropDatabase(() => mongoose.connection.close(done));
    });
 
-   // beforeEach((done) => {
-   //    const myShow = new Show({
-   //       name: 'One Piece',
-   //       year: 1999
-   //    });
-   //    myShow.save().then(show => {
-   //       testShow = show;
-   //       showId = show._id;
-   //       done();
-   //    }).catch(err => {
-   //       console.error(err);
-   //       done();
-   //    });
-   // })
+   beforeEach(done => {
+      const myShow = new Show({
+         name: 'One Piece',
+         year: 1999,
+      });
+      myShow
+         .save()
+         .then(show => {
+            testShow = show;
+            showId = String(show._id);
+            done();
+         })
+         .catch(err => {
+            console.error(err);
+            done();
+         });
+   });
+
+   afterEach(done => {
+      Show.remove({}, err => {
+         if (err) console.log(err);
+         done();
+      });
+   });
 
    describe('[POST] /show', () => {
       it('should add a new show', done => {
@@ -69,44 +77,43 @@ describe('Server', () => {
             });
          done();
       });
-   });
-
-   describe('[GET] /show', () => {
-      it('should get the show info for one show', done => {
-         const newShow = {
-            name: 'Shokugeki no Souma',
-            year: 2014,
-         };
-         chai
-            .request(server)
-            .get('/show')
-            .send(newShow)
-            .end((err, res) => {
-               if (err) {
-                  console.error(err);
-                  done();
-               }
-               expect(res.status).to.equal(200);
-               expect(res.body[0]).to.equal({
-                  name: 'Shokugeki no Souma',
-                  year: 2014,
-               });
-            });
-      });
 
       it('returns a status 422 upon receiving bad data', done => {
          const newShow = {
-            year: 2012,
+            name: 'Shokugeki no Souma',
+            year: '2014',
          };
          chai
             .request(server)
             .post('/show')
             .send(newShow)
             .end((err, res) => {
-               expect(res.status).to.equal(422);
-               console.log(err);
+               if (err) {
+                  expect(res.status).to.equal(422);
+                  console.log('err is', err);
+                  const { error } = err.response.body;
+                  expect(error).to.equal('invalid input error');
+               } else console.log('error not occuring as it should');
+               done();
             });
-            done();
+      });
+   });
+
+   describe('[GET] /show', () => {
+      it('should get the show info for one show', done => {
+         chai
+            .request(server)
+            .get('/show')
+            .send(testShow)
+            .end((err, res) => {
+               if (err) {
+                  console.error(err);
+                  done();
+               }
+               expect(res.status).to.equal(200);
+               expect(res.body[0].name).to.equal('One Piece');
+            });
+         done();
       });
    });
 
@@ -128,30 +135,43 @@ describe('Server', () => {
       });
    });
 
-   // describe('getShowInfo', () => {
-   //    it('should return the expected show name', () => {
-   //       const show = new Show({
-   //          name: 'Black Mirror',
-   //          year: 2015,
-   //       });
-   //       expect(show.getShowInfo()).to.equal.apply({
-   //          name: 'Black Mirror',
-   //          year: 2015,
-   //       });
-   //    });
-   // });
+   describe('[PUT] /show', () => {
+      it('should update a document given an id and some text', done => {
+         const showUpdate = {
+            id: showId,
+            name: 'One Piece: The Red Line',
+         };
+         chai
+            .request(server)
+            .put('/show')
+            .send(showUpdate)
+            .end((err, res) => {
+               if (err) {
+                  throw new Error(err);
+                  done();
+               }
+               expect(res.body.name).to.equal(showUpdate.name);
+               done();
+            });
+      });
 
-   // describe('getAllShows', () => {
-   //    it('should return all the shows', () => {
-   //       sinon.stub(Show, 'find');
-   //       Show.find.yields(null, [
-   //          { name: 'Black Mirror', year: 2015 },
-   //          { name: 'Brooklyn Nine-Nine', year: 2013 },
-   //       ]);
-   //       Show.getAllShows(shows => {
-   //          expect(shows.length).to.equal(2);
-   //          expect(shows[1].name).to.equal('Brooklyn Nine-Nine');
-   //       });
-   //    });
-   // });
+      it('should handle error if bad id sent', done => {
+         const showUpdate = {
+            id: 'wrongOne',
+            name: 'One Piece: The Red Line',
+         };
+         chai
+            .request(server)
+            .put('/show')
+            .send(showUpdate)
+            .end((err, res) => {
+               if (err) {
+                  expect(err.status).to.equal(422);
+                  const { error } = err.response.body;
+                  expect(error).to.equal('Show not found by that Id');
+               }
+               done();
+            });
+      });
+   });
 });

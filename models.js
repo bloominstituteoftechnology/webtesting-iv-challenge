@@ -5,11 +5,10 @@ const ShowSchema = new Schema({
    name: {
       required: true,
       type: String,
-      unique: true,
    },
    year: {
-      type: Number,
       required: true,
+      type: Number,
    },
 });
 
@@ -20,7 +19,7 @@ ShowSchema.methods.getShowName = function() {
 
 ShowSchema.statics.getAllShows = (cb) => {
    Show.find({}, (err, shows) => {
-      if (err) console.error(err);
+      if (err) return cb(err);
       cb(shows);
    });
 };
