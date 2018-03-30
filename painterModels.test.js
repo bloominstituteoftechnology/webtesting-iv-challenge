@@ -30,9 +30,9 @@ describe("Painters", () => {
                 }
             ]);
             Painter.getAllPainters(painters => {
-                console.log('test');
                 expect(painters.length).to.equal(2);
                 expect(painters[1].name).to.equal("Franz Kline");
+                Painter.find.restore();
             });
         });
     });

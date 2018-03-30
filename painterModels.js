@@ -5,7 +5,7 @@ const PainterSchema = new Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
+    // unique: true,
   },
   style: {
     type: String,
@@ -18,11 +18,8 @@ PainterSchema.methods.getPainterName = function() {
 };
 
 PainterSchema.statics.getAllPainters = (cb) => {
-  Painter.find((err, ptr) => {
-    if(err) {
-      console.error(err);
-      return;
-    }
+  Painter.find({}, (err, ptr) => {
+    if(err) return cb(err);
     cb(ptr);
   })
     // .then(sg => cb(sg))

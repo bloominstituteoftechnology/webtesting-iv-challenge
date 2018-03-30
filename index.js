@@ -5,11 +5,11 @@ const server = express();
 server.use(express.json());
 server.use(morgan('combined'));
 const mongoose = require('mongoose');
-const Painter = require('./painterModels')
+const Painter = require('./painterModels');
 
-// mongoose.connect('mongoDB://localhost:/painters', () => {
-//   console.log("MongoDB active!...Collection is called 'painters'.");
-// });
+mongoose.connect('mongoDB://localhost:/painters', () => {
+  console.log("MongoDB active!...Collection is called 'painters'.");
+});
 
 server.post('/painter', (req,res) => {
   // res.json(req.body);
@@ -18,7 +18,7 @@ server.post('/painter', (req,res) => {
     style: req.body.style
   })
   .save()
-  .then(sG => res.json(sG))
+  .then(sG => res.status(201).json(sG))
   .catch(err => res.status(404).json({error: err}));
 });
 
@@ -43,11 +43,12 @@ server.put('/painter/:id', (req, res) => {
 
   Painter.findByIdAndUpdate(id, { name, style }, { new: true })
     .then(sg => {
-      res.status(201).json(sg);
+      console.log(sg);
+      res.status(201).send(sg);
     })
     .catch(err => {
       res.status(500).json(err);
-    })
+    });
 });
 
 server.delete('/painter/:id', (req, res) => {
