@@ -21,9 +21,9 @@ const postShow = (req, res) => {
 
 const getShowInfo = (req, res) => {
    const { name } = req.body;
-   console.log('name is', name);
    Show.find({ name })
-      .then(showInfo => {
+   .then(showInfo => {
+      console.log('name is', name);
          res.status(200).send(showInfo);
       })
       .catch(err => {
