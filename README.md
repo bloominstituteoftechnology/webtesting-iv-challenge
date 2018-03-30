@@ -1,3 +1,10 @@
+# TV Show API Documentation
+
+A description of the impending API!
+
+# Port location: `http://localhost:3050`
+#[GET] `/api/shows`
+
 # Server-Testing
 
 ## Topics
