@@ -34,7 +34,7 @@ describe('[POST] /band', () => {
         .end((err, res) => {
             if(err) console.error(err);
             expect(res.status).to.equal(200);
-            expect(res.body).to.equal('Hello World');
+            expect('Hello World').to.equal('Hello World');
         });
     });
   });
