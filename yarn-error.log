@@ -1,0 +1,33 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\jalal\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js init
+
+PATH: 
+  C:\Users\jalal\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\jalal\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Skype\Phone;C:\Program Files\Git\cmd;C:\Program Files\nodejs;C:\Users\jalal\AppData\Local\Microsoft\WindowsApps;C:\Users\jalal\AppData\Local\GitHubDesktop\bin;C:\Users\jalal\AppData\Roaming\npm;C:\Program Files\MongoDB\Server\3.6\bin;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+
+Yarn version: 
+  1.6.0
+
+Node version: 
+  8.9.4
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: Can't answer a question unless a user TTY
+      at ConsoleReporter.question (C:\Users\jalal\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:93239:59)
+      at Object.<anonymous> (C:\Users\jalal\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:86193:38)
+      at Generator.next (<anonymous>)
+      at step (C:\Users\jalal\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:98:30)
+      at C:\Users\jalal\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:109:13
+      at <anonymous>
+      at process._tickCallback (internal/process/next_tick.js:188:7)
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

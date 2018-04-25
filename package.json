@@ -1,0 +1,20 @@
+{
+  "name": "Server-Testing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Ajmaljalal/Server-Testing.git",
+  "author": "Ajmal Jalal <ajmaljalal58@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "express": "^4.16.3",
+    "mocha": "^5.1.1",
+    "mongoose": "^5.0.16",
+    "morgan": "^1.9.0",
+    "sinon": "^4.5.0"
+  },
+  "scripts": {
+    "test": "mocha *.test.js"
+  }
+}
