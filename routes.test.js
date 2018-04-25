@@ -9,38 +9,40 @@ mongoose.connect('mongodb://localhost/metatest', () => {
 
 const expect = chai.expect;
 const server = require('./server.js');
+const Meta = require('./Meta.js');
 const Deck = require('./Deck.js');
+const Pilot = require('./Pilot.js');
 
 chai.use(chaiHTTP);
 
-describe('Something', () => {
-  let DeckId;
+describe('MTG META', () => {
+  let MetaId;
   beforeEach(done => {
-    const newDeck = new Deck({
+    const newMeta = new Meta({
       name: 'Binkus',
     });
-    newDeck.save((err, savedDeck) => {
+    newMeta.save((err, savedMeta) => {
       if (err) {
         console.log(err);
         return done();
       }
-      DeckId = savedSata._id;
+      MetaId = savedSata._id;
       done();
     });
   });
 
   afterEach(done => {
-    Deck.remove({}, err => {
+    Meta.remove({}, err => {
       if (err) console.log(err);
       done();
     });
   });
 
-  describe('[GET] /api/Decks', () => {
-    it('should get a list of all Decks', done => {
+  describe('[GET] /api/metas', () => {
+    it('should get a list of all metas in the db', done => {
       chai
         .request(server)
-        .get('/api/Decks')
+        .get('/api/Metas')
         .end((err, res) => {
           if (err) {
             // assert that err should be type status
