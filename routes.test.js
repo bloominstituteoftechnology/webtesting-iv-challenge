@@ -95,6 +95,17 @@ describe('Bands', () => {
   });
 
   describe(`[DELETE] /bands/:id`, () => {
-    it('should delete a band at the provided Id', done => {});
+    it('should delete a band at the provided Id', done => {
+      const band = new Band({ name: 'Dave Brubeck', genre: 'Jazz' });
+      band.save((err, book) => {
+        chai
+          .request(server)
+          .delete('/bands/' + band._id)
+          .end((err, response) => {
+            expect(response.status).to.equal(200);
+            done();
+          });
+      });
+    });
   });
 });
