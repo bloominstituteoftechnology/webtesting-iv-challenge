@@ -8,8 +8,8 @@ mongoose.connect("mongodb://localhost/test", {}, err => {
 });
 
 const expect = chai.expect;
-const server = require("./server");
+const server = require("../server");
 
 chai.use(chaiHTTP);
 
-// const Band = require('./band'); //schema
+const Band = require("./models/band"); //schema

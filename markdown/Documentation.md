@@ -38,7 +38,7 @@ const BandSchema = new Schema({
     type: String,
     required: true
   },
-  tourstatus: {
+  tourStatus: {
     type: String,
     required: true
   }

@@ -9,7 +9,7 @@ server.use(morgan("dev"));
 
 // test
 server.get("/", (req, res) => {
-    res.send("Workin");
+    res.send("Nope");
 });
 
 module.exports = server;
