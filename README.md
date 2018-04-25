@@ -1,26 +1,65 @@
-# Server-Testing
+# Server-Testing-Mini
 
-## Topics
+## A follow along practice for teaching Test Driven Development (TDD)
 
-* TDD
-* `sinon`
-* `chai`
-* `mocha`
-* `chai-http`
-* `done()`
-* statics vs methods
-* documentation
+#### The purpose of this guided demo is to get you to set up your environment for building out your CRUD API with documentation, tests and of course, your endpoints.
 
-## Project
+---
 
-For this project you will be creating an API using a test driven development approach as well as writing documentation.  As an example of good documentation you can reference GitHub's API docs: https://developer.github.com/v3/git/commits/
+## Step 1. Project Initialization
 
-For this project you will be building a simple restful API for a database with collections of your choosing.
+* Initialize your project with the `yarn init` command (This will create a `package.json` file).
+* You can then run `yarn add` commands to in order to save your `node_modules`.
+* The packages that we need for this project are:
+  * express
+  * body-parser
+  * mongoose
+  * mocha
+  * chai
+  * chai-http
+  * morgan --> this is new, we'll chat about it.
+  * sinon
 
-## Requirements
+## Step 2. Project Setup
 
-1. Your API must have routes that use the following HTTP verbs: GET, PUT, POST, and DELETE.
-2. You must have documentation for each route.  Write your documentation in a file called `documentation.md`.
-3. You must have at least one test written for each route.  Write your tests BEFORE you write the actual routes.
-4. Your models should have some methods/statics that are tested.
-5. You will need to have tests for your routes and for your models.
+* Create the following files in your project.
+  * server.js
+  * app.js
+  * documentation.md
+  * .gitignore
+  * routes.test.js
+  * models.test.js
+
+## Step 3. Build A Server
+
+* In your `package.json` file, under `scripts` add the test command:
+
+  ```json
+  "scripts": {
+    "test": "mocha *.test.js"
+  },
+  ```
+
+* This command will allow you to run your tests. If you would like, you can add `"start": "nodemon app.js"` to the `scripts`. Keep in mind that whichever file you point the "start" script to is where you'll invoke the Express _listen()_ method (your "entry point").
+* Next, head over to the `server.js` file that you created, and build out the boilerplate code for your Node server.
+
+## Step 4. Build A Testing Environment
+
+* Now we're going to set up our testing environment. Head over to your `routes.test.js` file, and require `mongoose`, `chai`, and `chai-http`.
+* Also, pass `chaiHTTP` into your `chai` as `middlware`.
+
+  ```js
+  chai.use(chaiHTTP);
+  ```
+
+* And of course, you'll want to require your server as it will be used to mock calls to your api.
+* Finally, call `mongoose.connect` to link up with a testing `mongo` instance.
+
+  ```js
+  mongoose.connect('mongodb://localhost/test');
+  ```
+
+---
+
+* This should be all you need to get started on this project!
+* This mini-project will actually be the starter pack for the [Server-Testing](https://github.com/LambdaSchool/Server-Testing) lab.
