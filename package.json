@@ -1,8 +1,8 @@
 {
-  "name": "Server-Testing-Mini",
+  "name": "Server-Testing",
   "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/kait-schorr/Server-Testing-Mini.git",
+  "main": "app.js",
+  "repository": "https://github.com/kait-schorr/Server-Testing.git",
   "author": "Kaitlyn Schorr <kaitlynschorr@gmail.com>",
   "license": "MIT",
   "dependencies": {
@@ -16,7 +16,7 @@
     "sinon": "^4.5.0"
   },
   "scripts": {
-    "test": "mocha *.test.js",
+    "test": "mocha tests/*.test.js",
     "start": "nodemon app.js"
   }
 }
