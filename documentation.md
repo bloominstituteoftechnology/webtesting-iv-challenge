@@ -8,9 +8,9 @@ Refer to the following endpoints for routes. The route create takes in a movie t
 
 ### API Endpoints
 
-| TYPE   | URL              | DATA                |
-| ------ | ---------------- | ------------------- |
-| POST   | /api/band/create | movie*, year*       |
-| GET    | /api/band/list   |                     |
-| PUT    | /api/band/update | id*, movie*, year\* |
-| DELETE | /api/band/delete | id\*                |
+| TYPE   | URL                  | DATA                |
+| ------ | -------------------- | ------------------- |
+| POST   | /api/band/create     | movie*, year*       |
+| GET    | /api/band/list       |                     |
+| PUT    | /api/band/update/:id | id*, movie*, year\* |
+| DELETE | /api/band/delete/:id | id\*                |
