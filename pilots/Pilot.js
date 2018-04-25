@@ -1,12 +1,19 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
-const PilotSchema = new Schema({
+const Pilot = new mongoose.Schema({
   name: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  password: {
     type: String,
   },
 });
 
-const Pilot = mongoose.model('Pilot', PilotSchema);
-
-module.exports = Pilot;
+module.exports = mongoose.model('Pilot', Pilot);

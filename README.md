@@ -31,10 +31,10 @@ Magic card information is fetched from mtgjson API (https://mtgjson.com/) and ca
 
 ### `api/decks/{metaName}`
 
-| TYPE | DATA                                 | DESCRIPTION                                   |
-| ---- | ------------------------------------ | --------------------------------------------- |
-| GET  |                                      | View a list of all decks in the selected meta |
-| POST | commander, themes, pilot, password\* | Create a new deck in the selected meta        |
+| TYPE | DATA                                       | DESCRIPTION                                   |
+| ---- | ------------------------------------------ | --------------------------------------------- |
+| GET  |                                            | View a list of all decks in the selected meta |
+| POST | name, commander, themes, pilot, password\* | Create a new deck in the selected meta        |
 
 * passwords are only required if the meta is setup to be password protected
 
