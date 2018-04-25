@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const DataSchema = new Schema({
+const DeckSchema = new Schema({
   name: {
     type: String,
   },
 });
 
-const Data = mongoose.model('Data', DataSchema);
+const Deck = mongoose.model('Deck', DeckSchema);
 
-module.exports = Data;
+module.exports = Deck;

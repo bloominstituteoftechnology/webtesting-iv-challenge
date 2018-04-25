@@ -2,45 +2,45 @@ const mongoose = require('mongoose');
 const chai = require('chai');
 const chaiHTTP = require('chai-http');
 
-mongoose.connect('mongodb://localhost/test', () => {
+mongoose.connect('mongodb://localhost/metatest', () => {
   if (err) return console.log(err);
   console.log('Connected to TEST DB');
 });
 
 const expect = chai.expect;
 const server = require('./server.js');
-const Data = require('./data.js');
+const Deck = require('./Deck.js');
 
 chai.use(chaiHTTP);
 
 describe('Something', () => {
-  let dataId;
+  let DeckId;
   beforeEach(done => {
-    const newData = new Data({
+    const newDeck = new Deck({
       name: 'Binkus',
     });
-    newData.save((err, savedData) => {
+    newDeck.save((err, savedDeck) => {
       if (err) {
         console.log(err);
         return done();
       }
-      dataId = savedSata._id;
+      DeckId = savedSata._id;
       done();
     });
   });
 
   afterEach(done => {
-    Data.remove({}, err => {
+    Deck.remove({}, err => {
       if (err) console.log(err);
       done();
     });
   });
 
-  describe('[GET] /apli/data', () => {
-    it('should get a list of all data', done => {
+  describe('[GET] /api/Decks', () => {
+    it('should get a list of all Decks', done => {
       chai
         .request(server)
-        .get('/api/data')
+        .get('/api/Decks')
         .end((err, res) => {
           if (err) {
             // assert that err should be type status
