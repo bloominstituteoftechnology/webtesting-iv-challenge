@@ -1,0 +1,25 @@
+{
+  "name": "Server-Testing",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "https://github.com/onHawk/Server-Testing.git",
+  "author": "<luisd824@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha routes.test.js",
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "express": "^4.16.3",
+    "mocha": "^5.1.1",
+    "mongoose": "^5.0.16",
+    "morgan": "^1.9.0",
+    "sinon": "^4.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  }
+}
