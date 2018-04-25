@@ -71,31 +71,47 @@ describe('Battlefield', () => {
     });
   });
 
-  describe(` [POST] /api/battlefield`, () => {
-    it('should able to make a post request', done => {
+  //   describe(` [POST] /api/battlefield`, () => {
+  //     it('should able to make a post request', done => {
+  //       const battlefield = {
+  //         name: 'agent',
+  //         kills: '123',
+  //         deaths: '1'
+  //       };
+  //       chai
+  //         .request(server)
+  //         .post('/api/battlefield')
+  //         .send(battlefield)
+  //         .end((error, response) => {
+  //           if (error) {
+  //             console.log(error);
+  //             return done();
+  //           }
+  //           return done();
+  //         });
+  //     });
+  //   });
+
+  describe('/POST battlefield', () => {
+    it('it should not POST a book without pages field', done => {
       const battlefield = {
-        name: 'xyz',
+        name: 'agent',
         kills: '123',
         deaths: '1'
       };
       chai
         .request(server)
         .post('/api/battlefield')
-        .send({
-          //   _method: 'put',
-          //   name: 'xyz',
-          //   kills: '123',
-          //   deaths: '1'
-          battlefield
-        })
-        .end((error, response) => {
-          if (error) {
-            console.log(error);
-            return done();
-          }
-          console.log(response);
-          expect(response.status).to.equal(200);
-          return done();
+        .send(battlefield)
+        .end((err, res) => {
+          console.log(res);
+          expect(res.status).to.equal(200);
+          //   expect(res).to.equal({ });
+
+          //res.body.should.have.property('errors');
+          //res.body.errors.should.have.property('pages');
+          //res.body.errors.pages.should.have.property('kind').eql('required');
+          done();
         });
     });
   });
