@@ -15,4 +15,4 @@ server.use('/api/metas', metasRouter);
 server.use('/api/decks', decksRouter);
 server.use('/api/pilots', pilotsRouter);
 
-module.exports = { server };
+module.exports = server;

@@ -3,7 +3,7 @@ const chai = require('chai');
 const chaiHTTP = require('chai-http');
 
 mongoose.connect('mongodb://localhost/metatest', () => {
-  if (err) return console.log(err);
+  if (err) return console.log('errorrr');
   console.log('Connected to TEST DB');
 });
 
@@ -17,7 +17,7 @@ chai.use(chaiHTTP);
 
 describe('MTG META', () => {
   let MetaId;
-  beforeEach(done => {
+  before(done => {
     const newMeta = new Meta({
       name: 'Binkus',
       location: 'SF Bay',
@@ -33,7 +33,7 @@ describe('MTG META', () => {
     });
   });
 
-  afterEach(done => {
+  after(done => {
     Meta.remove({}, err => {
       if (err) console.log(err);
       done();
@@ -53,7 +53,7 @@ describe('MTG META', () => {
           }
           expect(res.status).to.equal(200);
           done();
-          console.log(res);
+          console.log(res.body);
         });
     });
   });
