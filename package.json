@@ -1,0 +1,31 @@
+{
+  "name": "Server-Testing",
+  "version": "1.0.0",
+  "description": "## Topics",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DragonRydrz/Server-Testing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DragonRydrz/Server-Testing/issues"
+  },
+  "homepage": "https://github.com/DragonRydrz/Server-Testing#readme",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "mocha": "^5.1.1",
+    "mongoose": "^5.0.16",
+    "morgan": "^1.9.0",
+    "sinon": "^4.5.0"
+  }
+}
