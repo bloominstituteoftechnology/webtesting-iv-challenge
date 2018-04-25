@@ -1,0 +1,40 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add express body-parser mongoose mocha mongo chai chai--http morgan sinon
+
+PATH: 
+  C:\Users\hrehman000\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\hrehman000\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files\nodejs;C:\Program Files (x86)\Yarn\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit;C:\Users\hrehman000\AppData\Local\Microsoft\WindowsApps;C:\Users\hrehman000\AppData\Roaming\npm;C:\Users\hrehman000\AppData\Local\GitHubDesktop\bin;C:\Users\hrehman000\AppData\Local\Yarn\bin;C:\Program Files\MongoDB\Server\3.6\bin;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  8.11.1
+
+Platform: 
+  win32 x64
+
+npm manifest: 
+  {
+    "name": "Server-Testing-Mini",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/habib1234731/Server-Testing-Mini.git",
+    "author": "habib1234731 <habibrehman1234731@gmail.com>",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: Couldn't find package "chai--http" on the "npm" registry.
+      at new MessageError (C:\Program Files (x86)\Yarn\lib\cli.js:186:110)
+      at NpmResolver.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:51625:15)
+      at Generator.next (<anonymous>)
+      at step (C:\Program Files (x86)\Yarn\lib\cli.js:98:30)
+      at C:\Program Files (x86)\Yarn\lib\cli.js:109:13
+      at <anonymous>
+      at process._tickCallback (internal/process/next_tick.js:188:7)
