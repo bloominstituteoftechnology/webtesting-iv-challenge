@@ -3,6 +3,14 @@ const Band = require('../model/Model');
 
 router
   .route('/')
+  .get((req, res) => {
+    Band.find({}, (err, bands) => {
+      if (err) {
+        res.status(500).json({ error: 'Cannot find your bands' });
+      }
+      res.json(bands);
+    });
+  })
 
   .post((req, res) => {
     const band = new Band(req.body);
@@ -16,18 +24,6 @@ router
         res
           .status(500)
           .json({ error: 'There was an errror creating the band' });
-      });
-  })
-  .get((req, res) => {
-    Band.find({})
-      .then(bands => {
-        res.status(200).json(bands);
-      })
-      .catch(err => {
-        res.status(500).json({
-          errorMessage:
-            'There was an error while getting the band to the database.'
-        });
       });
   });
 

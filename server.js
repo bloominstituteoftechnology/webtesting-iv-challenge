@@ -1,24 +1,33 @@
-const mongoose = require('mongoose');
-
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const Model = require('./model/Model');
-const Routes = require('./routes/Routes');
-
+const Band = require('./Model');
 const server = express();
-
 server.use(bodyParser.json());
 server.use(morgan('dev'));
 
-mongoose.connect('mongodb://localhost/bands', {}, err => {
-  if (err) return console.log(err);
-  console.log('DB Connection Achieved');
-});
+server
 
-server.use('/api/bands', Routes);
+  .get('/api/bands', (req, res) => {
+    Band.find({}, (err, bands) => {
+      if (err) {
+        res.status(500).json({ error: 'Cannot find your bands' });
+      }
+      res.json(bands);
+    });
+  })
 
-const port = process.env.PORT || 6000;
-server.listen(port, () => {
-  console.log(`\n=== API running on http://localhost:${port} ===\n`);
-});
+  .post('/api/bands', (req, res) => {
+    const band = new Band(req.body);
+    const { name, genre, numberOfMembers, yearFounded } = req.body;
+    band
+      .save()
+      .then(savedBand => {
+        res.status(201).json({ savedBand });
+      })
+      .catch(error => {
+        res.status(500).json({ error: 'There was an error creating band' });
+      });
+  });
+
+module.exports = server;
