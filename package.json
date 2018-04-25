@@ -1,11 +1,11 @@
 {
-  "name": "Server-Testing",
+  "name": "server-testing",
   "version": "1.0.0",
   "description": "## Topics",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "mocha *.test.js",
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -27,5 +27,8 @@
     "mongoose": "^5.0.16",
     "morgan": "^1.9.0",
     "sinon": "^4.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
   }
 }
