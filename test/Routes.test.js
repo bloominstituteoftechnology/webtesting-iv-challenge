@@ -59,15 +59,22 @@ describe('Bands', () => {
 
   describe(`[POST] /api/bands`, () => {
     it('should post a band in the database', done => {
+      const newBand = new Band({
+        name: 'Radiohead',
+        genre: 'Alt-rock',
+        numberOfMembers: '2',
+        yearFounded: '1990'
+      });
       chai
         .request(server)
         .post('/api/bands')
+        .send(newBand)
         .end((err, response) => {
           if (err) {
             console.log(err);
             return done();
           }
-          expect(response.status).to.equal(500);
+          expect(response.status).to.equal(201);
           return done();
         });
     });
