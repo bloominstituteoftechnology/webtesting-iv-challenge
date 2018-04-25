@@ -1,4 +1,6 @@
-# Server Testing Project - API Docs
+# Band - API Docs
+
+### For Server-Testing Project
 
 This API is for interfacing with something. This is an open sourced project. For contributing please reference [this contribution guide](www.google.com).
 
@@ -8,12 +10,19 @@ This API is for interfacing with something. This is an open sourced project. For
 
 * The following is a list of all the endpoints available for use with this API.
 
-### [POST] `api/band/create`
+### [GET] `/bands`
 
-| TYPE          | URL              | DATA          |
-| ------------- | ---------------- | ------------- |
-| POST          | /api/band/create | name*, genre* |
-| col 2 is      | centered         | $12           |
-| zebra stripes | are neat         | $1            |
+### [POST] `/bands`
+
+### [PUT] `/bands/:id`
+
+### [DELETE] `/bands/:id`
+
+| TYPE   | URL        | DATA          |
+| ------ | ---------- | ------------- |
+| GET    | /bands     |               |
+| POST   | /bands     | name*, genre* |
+| PUT    | /bands/:id | name*, genre* |
+| DELETE | /bands/:id | \_id\*        |
 
 * all fields marked with `*` are required

@@ -44,17 +44,12 @@ describe('Bands', () => {
         .get('/bands')
         .end((err, response) => {
           if (err) {
-            // assert that err should be type status etc.
             console.log(err);
             done();
           }
           expect(response.status).to.equal(200);
           done();
         });
-      // check if its an array
-      // check if 200
-      // check body
-      // check id
     });
   });
 
