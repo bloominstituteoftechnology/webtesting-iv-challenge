@@ -77,22 +77,18 @@ describe('Bands', () => {
       };
       chai
         .request(server)
-        .post('/api/bands', {
-          name: 'BonJovi',
-          genre: 'Classic Rock',
-          recentAlbum: 'Bounce',
-        })
+        .post('/api/bands')
+        .send(createBand)
         .end((err, response) => {
           if (err) {
-            console.log(err);
             return done();
           }
-          console.log(response);
           //   expect(response.status).to.equal(201);
           expect(response.body).to.haveOwnProperty('_id');
           expect(response.body).to.haveOwnProperty('name');
           expect(response.body).to.haveOwnProperty('genre');
           expect(response.body).to.haveOwnProperty('recentAlbum');
+          return done();
         });
     });
   });

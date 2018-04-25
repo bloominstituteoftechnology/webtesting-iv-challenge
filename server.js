@@ -18,18 +18,14 @@ server.get('/api/bands', (req, res) => {
 
 server.post('/api/bands', (req, res) => {
   const band = new Band(req.body);
-  console.log('before');
   band
     .save()
     .then(response => {
-      console.log(response);
       res.status(201).json(response);
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json(err);
     });
-  console.log('after');
 });
 
 module.exports = server;
