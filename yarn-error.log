@@ -1,0 +1,35 @@
+Arguments: 
+  /usr/bin/node /usr/local/bin/yarn add express
+
+PATH: 
+  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+Yarn version: 
+  1.6.0
+
+Node version: 
+  6.11.4
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com registry.yarnpkg.com:443
+      at errnoException (dns.js:28:10)
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:76:26)
+
+npm manifest: 
+  {
+    "name": "Server-Testing-Mini",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/runranron/Server-Testing-Mini.git",
+    "author": "William Pelton <williamrpelton@gmail.com>",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
