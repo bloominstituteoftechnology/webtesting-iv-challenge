@@ -1,0 +1,30 @@
+{
+  "name": "package.json",
+  "version": "1.0.0",
+  "description": "server testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha *.test.js",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/csstone12/Server-Testing.git"
+  },
+  "author": "chris stone",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/csstone12/Server-Testing/issues"
+  },
+  "homepage": "https://github.com/csstone12/Server-Testing#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "express": "^4.16.3",
+    "mocha": "^5.1.1",
+    "mongoose": "^5.0.16",
+    "morgan": "^1.9.0",
+    "sinon": "^4.5.0"
+  }
+}
