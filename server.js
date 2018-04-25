@@ -16,4 +16,15 @@ server.get('/api/movies', (req, res) => {
   });
 });
 
+server.post((req, res) => {
+  const movie = new Movie(req.body);
+
+  movie
+    .save()
+    .then(savedMovie => {
+      res.status(201).json(savedMovie);
+    })
+    .catch(err => res.status(500).json(err));
+});
+
 module.exports = server;
