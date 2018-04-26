@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const bandSchema = new mongoose.Schema({
+const BandSchema = new mongoose.Schema({
   bandName: {
     type: String,
     required: true
@@ -11,6 +11,24 @@ const bandSchema = new mongoose.Schema({
   }
 });
 
-const Band = mongoose.model('Band', bandSchema);
+BandSchema.methods.getName = function() {
+  return this.bandName;
+};
+
+BandSchema.methods.getGenre = function() {
+  return this.bandGenre;
+};
+
+BandSchema.statics.getAllBands = function(callBack) {
+  Band.find({})
+    .then(allBands => {
+      callBack(allBands);
+    })
+    .catch(err => {
+      callBack(err);
+    });
+};
+
+const Band = mongoose.model('Band', BandSchema);
 
 module.exports = Band;
