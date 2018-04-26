@@ -12,7 +12,7 @@ const bandSchema = new Schema({
         required: true,
     },
     tourStatus: {
-        type: String,
+        type: Boolean,
         required: true,
     },
 });

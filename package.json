@@ -1,7 +1,7 @@
 {
     "name": "Server-Testing",
     "version": "1.0.0",
-    "main": "index.js",
+    "main": "server.js",
     "license": "MIT",
     "dependencies": {
         "chai": "^4.1.2",
@@ -13,7 +13,7 @@
         "sinon": "^4.5.0"
     },
     "scripts": {
-        "test": "mocha *.test.js",
+        "test": "mocha tests/*.test.js",
         "start": "nodemon app.js"
     }
 }
