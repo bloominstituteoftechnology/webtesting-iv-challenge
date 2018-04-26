@@ -15,15 +15,19 @@ server.get('/api/battlefield', (req, res) => {
     .catch(error => res.status(404).json({ error: 'error in get' }));
 });
 
-//   const friend = new Friend(req.body);
-//   friend
-//     .save()
-//     .then(saveFriend => {
-//       res.status(200).json(saveFriend);
-//     })
-//     .catch(error => {
-//       res.status(500).json(error);
-//     });
+server
+  .put('/api/battlefield/', (req, res) => {
+    const updatedUser = {name, kills, deaths} = req.body;
+    const {id} = req.body;
+    battlefield
+      .findById({id})
+      .then((updatedUser) => {
+        res.status(200).json(updatedUser);
+      })
+      .catch((error) => {
+        res.status(500).json({message: "There was an error getting data from the database "});
+      });
+  })
 
 server.post('/api/battlefield', (req, res) => {
   const battlefield = new Battlefield(req.body);

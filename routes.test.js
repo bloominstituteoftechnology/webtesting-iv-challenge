@@ -76,44 +76,29 @@ describe('Battlefield', () => {
     });
   });
 
-  // describe(` [PUT] /api/battlefield`, () => {
-  //   it('should be able to put request', done => {
-  //     chai
-  //       .request(server)
-  //       .put('/api/battlefield')
-  //       .end((error, response) => {
-  //         if (error) {
-  //           console.log(error);
-  //           // expect(response.status).to.equal(200);
-  //           return done();
-  //         }
-  //         expect(response.status).to.equal(404);
-  //         return done();
-  //       });
-  //   });
-  // });
-
-  //   describe(` [POST] /api/battlefield`, () => {
-  //     it('should able to make a post request', done => {
-  //       const battlefield = {
-  //         name: 'agent',
-  //         kills: '123',
-  //         deaths: '1'
-  //       };
-  //       chai
-  //         .request(server)
-  //         .post('/api/battlefield')
-  //         .send(battlefield)
-  //         .end((error, response) => {
-  //           if (error) {
-  //             console.log(error);
-  //             return done();
-  //           }
-  //           return done();
-  //         });
-  //     });
-  //   });
-
+  describe(` [PUT] /api/battlefield`, () => {
+    it('should be able to put request', done => {
+      const integral = { 
+          name: 'agentt732',
+          kills: '1000',
+          deaths: '20' }
+      chai
+        .request(server)
+        .put('/api/battlefield/')
+        .send(integral)
+        .end((error, response) => {
+          if (error) {
+            console.log(error);
+            // expect(response.status).to.equal(200);
+            return done();
+          }
+          expect(response.status).to.equal(200);
+          expect(response.body.name).to.equal('agentt732');
+          return done();
+        });
+    });
+  });
+  
   describe('/POST battlefield', () => {
     it('it should POST ', done => {
       const battlefield = {
