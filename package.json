@@ -4,8 +4,9 @@
   "description": "## Topics",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "test": "mocha tests/*.test.js",
+    "watch": "mocha tests/*.test.js -R nyan --watch",
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
