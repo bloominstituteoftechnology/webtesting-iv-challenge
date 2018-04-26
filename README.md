@@ -10,6 +10,6 @@ The following endpoints are available for use with this API
 |---------------|-------------------|-----------------------|
 |POST           |/api/band/create   |bandName*, bandGenre   |
 |GET            |/api/band/read     |                       |
-|PUT            |/api/band/update   |bandName, bandGenre    |
-|
+|PUT            |/api/band/:id      |bandID*                |
+|DELETE         |/api/band/:id      |bandID*                |
 
