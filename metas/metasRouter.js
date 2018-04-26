@@ -27,4 +27,23 @@ router
     }
   });
 
+  router
+  .route('/:metaName')
+  .get((req, res) => {
+    Meta.find({name: req.params.metaName})
+      .then(meta => res.status(200).json(meta[0]))
+      .catch(err => res.status(500).json(err));
+  })
+  .put((req, res) => {
+    Meta.updateOne({name: req.params.metaName}, req.body)
+      .then(meta => res.status(200).json(meta))
+      .catch(err => res.status(500).json(err));
+  })
+  .delete((req, res) => {
+    Meta.deleteOne({name: req.params.metaName})
+      .then(meta => res.status(200).json(meta))
+      .catch(err => res.status(500).json(err));
+  })
+  
+
 module.exports = router;

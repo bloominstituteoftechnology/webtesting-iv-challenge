@@ -83,25 +83,31 @@ describe('Routes', () => {
           'location': 'San Diego',
           'password': '123'
           })
-          .end(function(err, res) {
+          .end((err, res) => {
+            if (err) {
+              expect(res.status).to.equal(501);
+              done();
+            }
             expect(res).to.have.status(201);
             done();
           });
     });
   });
   describe('[GET] /api/metas/:meta', () => {
-    it('should return a meta', done => {
+    it('should return the meta named in the url paramter', done => {
       chai
         .request(server)
         .get(`/api/metas/Bink`)
         .end((err, res) => {
           if (err) {
-            expect(res.status).to.equal(501);
+            expect(res.status).to.equal(500);
             done();
           }
-          expect(res.status).to.equal(201);
+          expect(res.status).to.equal(200);
+          expect(res.body.name).to.equal('Bink');
+          expect(res.body.location).to.equal('SF Bay');
+          expect(res.body.password).to.equal('pw');
           done();
-          console.log(res);
         });
     });
   });
@@ -111,9 +117,9 @@ describe('Routes', () => {
         .request(server)
         .put('/api/metas/Bink')
         .send({
-          name: 'Updated Bink',
-          location: 'SF Bay',
-          password: 'pw',
+          'name': 'Updated Bink',
+          'location': 'Portland, OR',
+          'password': 'pww'
         })
         .end((err, res) => {
           if (err) {
@@ -121,8 +127,8 @@ describe('Routes', () => {
             done();
           }
           expect(res.status).to.equal(200);
+          expect(res.body.ok).to.equal(1);
           done();
-          console.log(res);
         });
     });
   });
@@ -131,15 +137,14 @@ describe('Routes', () => {
       chai
         .request(server)
         .delete('/api/metas/Boinkus')
-        .send({})
         .end((err, res) => {
           if (err) {
             expect(res.status).to.equal(500);
             done();
           }
           expect(res.status).to.equal(200);
+          expect(res.body.ok).to.equal(1);
           done();
-          console.log(res);
         });
     });
   });
