@@ -25,17 +25,17 @@ server.post('/api/dbz-chars/add', (req, res) => {
     });
 });
 
-server.put('/api/dbz-chars/:character', (req, res) => {
-  const { character } = req.params;
+server.put('/api/dbz-chars/:name', (req, res) => {
+  const { name } = req.params;
   const { race, planet } = req.body;
 
   Char
-    .findOneAndUpdate({ name: character }, { race: race, planet: planet })
+    .findOneAndUpdate({ name: name }, { race: race, planet: planet }, { new: true })
     .then(updatedChar => {
-      res.status(200).json(updatedChar)
+      res.status(200).json(updatedChar);
     })
     .catch(err => {
-      res.status(500).json({error: 'you messed up somewhere'}, err)
+      res.status(500).json({ error: 'you messed up somewhere' }, err);
     });
 
 

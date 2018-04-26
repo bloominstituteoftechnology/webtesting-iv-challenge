@@ -26,7 +26,7 @@ describe('Characters', () => {
 
   beforeEach((done) => {
     const newChar = new Char({
-      name: 'Vegeta',
+      name: 'Bob',
       race: 'Saiyan',
       planet: 'Vegeta'
     });
@@ -75,12 +75,12 @@ describe('Characters', () => {
     });
   });
 
-  describe(`[PUT] /api/dbz-chars/:character`, () => {
+  describe(`[PUT] /api/dbz-chars/name`, () => {
     it('should update a character on the db', () => {
       return chai
               .request(server)
               .put('/api/dbz-chars/Vegeta')
-              .send({ race: 'human', planet: 'Earth'})
+              .send({ race: 'Human', planet: 'Earth'})
               .then((res) => {
                 expect(res.status).to.equal(200);
               });
