@@ -149,8 +149,3 @@ describe('Routes', () => {
     });
   });
 });
-
-//check if array
-//check if 200
-//check body
-//check id
