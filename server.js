@@ -27,19 +27,10 @@ server.post('/api/dbz-chars/add', (req, res) => {
 
 server.put('/api/dbz-chars/:character', (req, res) => {
   const { character } = req.params;
-  const {  race, planet } = req.body;
+  const { race, planet } = req.body;
 
   Char
-    .find({ name: character })
-    .then(chr => {
-      
-      chr.planet = planet;
-      chr.race = race;
-
-      chr.save();
-    })
-    
-
+    .findOneAndUpdate({ name: character }, { race: race, planet: planet })
     .then(updatedChar => {
       res.status(200).json(updatedChar)
     })

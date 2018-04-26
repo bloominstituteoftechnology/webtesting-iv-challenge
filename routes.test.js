@@ -26,7 +26,7 @@ describe('Characters', () => {
 
   beforeEach((done) => {
     const newChar = new Char({
-      name: 'Vegeta',
+      name: 'egeta',
       race: 'Saiyan',
       planet: 'Vegeta'
     });
