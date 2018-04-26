@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon app.js",
-    "test": "mocha *.test.js --watch"
+    "test": "mocha *.test.js"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
