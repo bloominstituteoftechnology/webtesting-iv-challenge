@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 const chai = require('chai');
 const chaiHTTP = require('chai-http');
 
-mongoose
-  .connect('mongodb://localhost/testingMini', {})
-  .then(() => console.log('\n=== connected to mongo ===\n'))
-  .catch(error => console.log('There was an error connecting to mongo.'));
-
 const expect = chai.expect;
 const server = require('./server');
 const Battlefield = require('./battlefield');
@@ -15,6 +10,20 @@ chai.use(chaiHTTP);
 
 describe('Battlefield', () => {
   let battlefieldId;
+
+  before(done => {
+    mongoose
+      .connect('mongodb://localhost/testingMini', {})
+      .then(() => console.log('\n=== connected to mongo ===\n'))
+      .catch(error => console.log('There was an error connecting to mongo.'));
+    return done();
+  });
+
+  after(done => {
+    mongoose.connection.close();
+    done();
+  });
+
   beforeEach(done => {
     const newBattlefield = new Battlefield({
       name: 'agentt732',
@@ -117,8 +126,8 @@ describe('Battlefield', () => {
         .post('/api/battlefield')
         .send(battlefield)
         .end((err, res) => {
-          console.log(res);
-          //expect(res.status).to.equal(200);
+         // console.log(res);
+          expect(res.status).to.equal(200);
           expect(typeof res.body).to.equal('object');
           expect(res.body.name).to.equal('b');
           //res.body.should.have.property('errors');
