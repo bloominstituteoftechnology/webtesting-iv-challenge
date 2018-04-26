@@ -1,0 +1,29 @@
+{
+  "name": "server-testing",
+  "version": "1.0.0",
+  "description": "* TDD\r * `sinon`\r * `chai`\r * `mocha`\r * `chai-http`\r * `done()`\r * statics vs methods\r * documentation",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha *.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nourmhassan/Server-Testing.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nourmhassan/Server-Testing/issues"
+  },
+  "homepage": "https://github.com/nourmhassan/Server-Testing#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "express": "^4.16.3",
+    "mocha": "^5.1.1",
+    "mongoose": "^5.0.16",
+    "morgan": "^1.9.0",
+    "sinon": "^4.5.0"
+  }
+}
