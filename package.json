@@ -1,0 +1,28 @@
+{
+  "name": "Server-Testing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/kennington24/Server-Testing.git",
+  "author": "Kenny <khpham24@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "express": "^4.16.3",
+    "mocha": "^5.1.1",
+    "mongo": "^0.1.0",
+    "mongodb": "^3.0.7",
+    "mongoose": "^5.0.16",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.17.3",
+    "router": "^1.3.2",
+    "router-express": "^1.5.2",
+    "sinon": "^4.5.0"
+  },
+  "scripts": {
+    "test": "mocha test/*.test.js",
+    "watch": "mocha test/*.test.js -R nyan --watch",
+    "start": "nodemon app.js"
+  }
+}
