@@ -2,7 +2,7 @@
 
 ### For Server-Testing Project
 
-This API is for interfacing with something. This is an open sourced project. For contributing please reference [this contribution guide](www.google.com).
+This API is for interfacing with the Top 100 Billboard musicians and bands. This is an open sourced project. For contributing please reference [this contribution guide](www.google.com).
 
 * A special note on how to work with this API.
 
@@ -12,17 +12,25 @@ This API is for interfacing with something. This is an open sourced project. For
 
 ### [GET] `/bands`
 
+Returns an array of Band objects in the database.
+
 ### [POST] `/bands`
+
+Creates a new Band object in the database.
 
 ### [PUT] `/bands/:id`
 
+Updates a Band object.
+
 ### [DELETE] `/bands/:id`
 
-| TYPE   | URL        | DATA          |
-| ------ | ---------- | ------------- |
-| GET    | /bands     |               |
-| POST   | /bands     | name*, genre* |
-| PUT    | /bands/:id | name*, genre* |
-| DELETE | /bands/:id | \_id\*        |
+Removes a Band object from the database.
+
+| TYPE   | URL        | DATA                 |
+| ------ | ---------- | -------------------- |
+| GET    | /bands     |                      |
+| POST   | /bands     | name*, genre*        |
+| PUT    | /bands/:id | \_id*,name*, genre\* |
+| DELETE | /bands/:id | \_id\*               |
 
 * all fields marked with `*` are required
