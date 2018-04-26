@@ -8,6 +8,7 @@ mongoose.connect('mongodb://localhost/movies', {}, err => {
 });
 
 const expect = chai.expect;
+const should = chai.should;
 const server = require('./server');
 const Movie = require('./movie');
 
@@ -48,12 +49,37 @@ describe('Movies', () => {
             return done();
           }
           expect(response.status).to.equal(200);
+          expect(response.body).to.be.an('array');
           return done();
         });
-      // check if its an array
-      // check if 200
-      // check body
-      // check id
     });
   });
+  
+  describe(`[POST] /api/movies`, () => {
+    it('should save a movie document to the db', done => {
+      chai
+        .request(server)
+        .post('/api/movies')
+        .send({ title: 'Shark Tales', genre: 'Animation' })
+        .then(response => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
+    });
+    it(`Should fail if bad title or genre aren't provided`, done => {
+      chai
+        .request(server)
+        .post('/api/movies')
+        .send({ genre: 'Animation' })
+        .then(response => {
+          done();
+        })
+        .catch(err => {
+          throw err;
+        });
+    });
+  });
+
 });
