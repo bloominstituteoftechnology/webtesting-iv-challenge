@@ -1,0 +1,26 @@
+{
+  "name": "Server-Testing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/astro11/Server-Testing.git",
+  "author": "astro11 <aquila.strother@asu.edu>",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha *.test.js",
+    "watch": "mocha --watch",
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "express": "^4.16.3",
+    "mocha": "^5.1.1",
+    "mongoose": "^5.0.16",
+    "morgan": "^1.9.0",
+    "sinon": "^4.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  }
+}
