@@ -21,11 +21,26 @@ describe('Battlefield', () => {
       kills: '100',
       deaths: '1'
     });
+
     newBattlefield.save((error, savedBF) => {
       if (error) {
         console.log(error);
         return done();
       }
+    });
+
+    const newBF = new Battlefield({
+      name: 'agent',
+      kills: '100',
+      deaths: '1'
+    });
+
+    newBF.save((error, savedBF) => {
+      if (error) {
+        console.log(error);
+        return done();
+      }
+
       battlefieldId = savedBF._id;
       return done();
     });
@@ -42,34 +57,32 @@ describe('Battlefield', () => {
         .request(server)
         .get('/api/battlefield')
         .end((error, response) => {
-          if (error) {
-            console.log(error);
-            expect(response.status).to.equal(404);
+          console.log(error);
 
-            return done();
-          }
+          expect(Array.isArray(response.body)).to.equal(true);
+
           expect(response.status).to.equal(200);
           return done();
         });
     });
   });
 
-  describe(` [PUT] /api/battlefield`, () => {
-    it('should be able to put request', done => {
-      chai
-        .request(server)
-        .put('/api/battlefield')
-        .end((error, response) => {
-          if (error) {
-            console.log(error);
-            // expect(response.status).to.equal(200);
-            return done();
-          }
-          expect(response.status).to.equal(404);
-          return done();
-        });
-    });
-  });
+  // describe(` [PUT] /api/battlefield`, () => {
+  //   it('should be able to put request', done => {
+  //     chai
+  //       .request(server)
+  //       .put('/api/battlefield')
+  //       .end((error, response) => {
+  //         if (error) {
+  //           console.log(error);
+  //           // expect(response.status).to.equal(200);
+  //           return done();
+  //         }
+  //         expect(response.status).to.equal(404);
+  //         return done();
+  //       });
+  //   });
+  // });
 
   //   describe(` [POST] /api/battlefield`, () => {
   //     it('should able to make a post request', done => {
@@ -93,11 +106,11 @@ describe('Battlefield', () => {
   //   });
 
   describe('/POST battlefield', () => {
-    it('it should not POST a book without pages field', done => {
+    it('it should POST ', done => {
       const battlefield = {
-        name: 'agent',
-        kills: '123',
-        deaths: '1'
+        name: 'b',
+        kills: '12345',
+        deaths: '12'
       };
       chai
         .request(server)
@@ -106,9 +119,11 @@ describe('Battlefield', () => {
         .end((err, res) => {
           console.log(res);
           expect(res.status).to.equal(200);
-          //   expect(res).to.equal({ });
-
+          expect(typeof res.body).to.equal('object');
+          expect(res.body.name).to.equal('b');
           //res.body.should.have.property('errors');
+          //expect(res.body.name).to.have.json( 'b' );
+
           //res.body.errors.should.have.property('pages');
           //res.body.errors.pages.should.have.property('kind').eql('required');
           done();

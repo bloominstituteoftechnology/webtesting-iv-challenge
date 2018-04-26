@@ -6,6 +6,7 @@
   "author": "habib1234731 <habibrehman1234731@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "mocha *.test.js"
   },
   "dependencies": {
