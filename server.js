@@ -46,4 +46,10 @@ server.put('/api/bands/:id', (req, res) => {
     });
 });
 
+server.delete('/api/bands/:id', (req, res) => {
+  Band.findByIdAndRemove(req.params.id)
+    .then(response => res.json({ status: 'success' }))
+    .catch(err => res.status(500).json(err));
+});
+
 module.exports = server;

@@ -123,13 +123,29 @@ describe('Bands', () => {
         .end((err, response) => {
           if (err) {
             console.log(err);
-            done();
+          } else {
+            expect(response.body).to.haveOwnProperty('_id');
+            expect(response.body).to.haveOwnProperty('name');
+            expect(response.body).to.haveOwnProperty('genre');
+            expect(response.body).to.haveOwnProperty('recentAlbum');
+            expect(response.body.name).to.equal(updatedBand.name.toUpperCase());
           }
-          expect(response.body).to.haveOwnProperty('_id');
-          expect(response.body).to.haveOwnProperty('name');
-          expect(response.body).to.haveOwnProperty('genre');
-          expect(response.body).to.haveOwnProperty('recentAlbum');
-          expect(response.body.name).to.equal(updatedBand.name.toUpperCase());
+          done();
+        });
+    });
+  });
+
+  describe('[DELETE] /api/bands:id', done => {
+    it('should update a band object on the database', done => {
+      chai
+        .request(server)
+        .delete(`/api/bands/${bandId}`)
+        .end((err, response) => {
+          if (err) {
+            console.log(err);
+          } else {
+            expect(response.body.status).to.equal('success');
+          }
           done();
         });
     });
