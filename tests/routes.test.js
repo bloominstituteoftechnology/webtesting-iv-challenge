@@ -62,4 +62,72 @@ describe('Bands', () => {
         });
     });
   });
+
+  describe(`[GET] /api/bands`, () => {
+    it('should get a list of bands from the db', done => {
+      chai
+        .request(server)
+        .get('/api/bands')
+        .end((err, res) => {
+          if (err) {
+            console.log(err);
+            return done();
+          }
+          expect(res.status).to.equal(200);
+          expect(res.body.length).to.equal(1);
+          expect(Array.isArray(res.body)).to.equal(true);
+          done();
+        });
+    });
+  });
+
+  describe(`[PUT] /api/bands/:id`, () => {
+    it('should update the band document in the db', done => {
+      const update = {
+        name: 'White Denim',
+        genre: 'Rock',
+        numberOfMembers: 4,
+        yearFounded: 2006
+      };
+      chai
+        .request(server)
+        .put(`/api/bands/${bandId}`)
+        .send(update)
+        .end((err, res) => {
+          if (err) {
+            console.log(err);
+            return done();
+          }
+          expect(res.status).to.equal(200);
+          expect(res.body.name).to.equal('White Denim');
+          expect(res.body.genre).to.equal('Rock');
+          expect(res.body.numberOfMembers).to.equal(4);
+          expect(res.body.yearFounded).to.equal(2006);
+          done();
+        });
+    });
+  });
+
+  describe(`[DELETE] /api/bands/id`, () => {
+    it('should delete the band document from the db', done => {
+      chai
+        .request(server)
+        .delete(`/api/bands/${bandId}`)
+        .end((err, res) => {
+          if (err) {
+            console.log(err);
+            return done();
+          }
+          Band.findById(bandId, (err, deletedBand) => {
+            if (err) {
+              console.log(err);
+              return done();
+            }
+            expect(deletedBand).to.equal(null);
+          });
+          expect(res.status).to.equal(200);
+          done();
+        });
+    });
+  });
 });

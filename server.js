@@ -34,25 +34,6 @@ server
       });
   })
 
-  //   // Read Band By ID
-  //   .get((req, res) => {
-  //     Band.findById(req.params.id)
-  //       .then(band => {
-  //         if (band === null) {
-  //           res.status(404).json({
-  //             message: 'The band with the specified id does not exist.'
-  //           });
-  //         } else {
-  //           res.status(200).json(band);
-  //         }
-  //       })
-  //       .catch(err => {
-  //         res
-  //           .status(500)
-  //           .json({ error: 'The band information could not be retrieved.' });
-  //       });
-  //   });
-
   // Update Band
   .put('/api/bands/:id', (req, res) => {
     const { id } = req.params;
@@ -61,7 +42,7 @@ server
 
     Band.findByIdAndUpdate(id, update)
       .then(band => {
-        res.status(201).json(update);
+        res.status(200).json(update);
       })
       .catch(err => {
         res
@@ -70,7 +51,8 @@ server
       });
   })
 
-  .delete((req, res) => {
+  // Delete Band
+  .delete('/api/bands/:id', (req, res) => {
     Band.findByIdAndRemove(req.params.id)
       .then(band => {
         res.status(200).json({ message: 'The band was successfully deleted.' });
