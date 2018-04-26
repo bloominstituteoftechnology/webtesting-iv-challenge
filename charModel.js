@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
+
 const CharSchema = new Schema({
     name: {
         type: String,
@@ -14,7 +15,9 @@ const CharSchema = new Schema({
     planet: {
       type: String,
       required: true
-    }
+    },
+
+   
 });
 
 const Char = mongoose.model('Char', CharSchema);

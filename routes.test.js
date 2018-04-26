@@ -74,4 +74,17 @@ describe('Characters', () => {
               });
     });
   });
+
+  describe(`[PUT] /api/dbz-chars/:character`, () => {
+    it('should update a character on the db', () => {
+      return chai
+              .request(server)
+              .put('/api/dbz-chars/Vegeta')
+              .send({ race: 'human', planet: 'Earth'})
+              .then((res) => {
+                expect(res.status).to.equal(200);
+              });
+    })
+  });
+
 });
