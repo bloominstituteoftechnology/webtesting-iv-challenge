@@ -15,10 +15,9 @@ describe("Bee", () => {
   });
 
   after(done => {
-    console.log(mongoose.connection);
     mongoose.connection.close(err => {
       if (err) {
-        return console.log(err);
+        console.log(err);
       }
       done();
     });

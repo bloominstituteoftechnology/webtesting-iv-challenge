@@ -96,6 +96,24 @@ describe("Bees", () => {
           return done();
         });
     });
+    it("should return an error if not given a breed and a honey production value", done => {
+      chai
+        .request(server)
+        .post("/api/bees")
+        .send({})
+        .then(response => {
+          expect(response.body.errors.honey.message).to.equal(
+            "Path `honey` is required."
+          );
+          expect(response.body.errors.breed.message).to.equal(
+            "Path `breed` is required."
+          );
+          return done();
+        })
+        .catch(err => {
+          console.log("ERROR: ", err);
+        });
+    });
   });
   describe(`[PUT] /api/bees/id`, () => {
     let updatedBee = { breed: "German", honey: "OK" };

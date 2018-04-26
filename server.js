@@ -20,17 +20,19 @@ server.get("/api/bees", (req, res) => {
 server.post("/api/bees", (req, res) => {
   console.log(req.body);
   const newBee = new Bee(req.body);
-  newBee.save((err, savedBee) => {
-    if (err) {
-      return console.log(err);
-    }
-    Bee.find((err, allBees) => {
-      if (err) {
-        return console.log(err);
-      }
-      res.status(201).json(allBees);
+  newBee
+    .save()
+    .then(savedBee => {
+      Bee.find((err, allBees) => {
+        if (err) {
+          res.json(err);
+        }
+        res.status(201).json(allBees);
+      });
+    })
+    .catch(err => {
+      res.status(422).json(err);
     });
-  });
 });
 
 server.put("/api/bees/:id", (req, res) => {
