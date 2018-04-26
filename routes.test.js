@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+const mongooole.log(updatedChar);
+e = require('mongoose');
 const chai = require('chai');
 const chaiHTTP = require('chai-http');
 
@@ -26,7 +27,7 @@ describe('Characters', () => {
 
   beforeEach((done) => {
     const newChar = new Char({
-      name: 'egeta',
+      name: 'Vegeta',
       race: 'Saiyan',
       planet: 'Vegeta'
     });

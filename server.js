@@ -32,7 +32,6 @@ server.put('/api/dbz-chars/:name', (req, res) => {
   Char
     .findOneAndUpdate({ name: name }, { race: race, planet: planet }, { new: true })
     .then(updatedChar => {
-      console.log(updatedChar);
       if (!updatedChar) {
         res.status(500).json(err);
         return;
