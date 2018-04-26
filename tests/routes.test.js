@@ -3,19 +3,27 @@ const mongoose = require('mongoose');
 const chai = require('chai');
 const chaiHTTP = require('chai-http');
 
-mongoose.connect('mongodb://localhost/test', {}, err => {
-  if (err) return console.log(err);
-  console.log('TEST DB Connection Achieved');
-});
-
 const expect = chai.expect;
 const server = require('../server');
-const Band = require('../Model');
+const Band = require('../bands');
 
 chai.use(chaiHTTP);
 
 describe('Bands', () => {
   let bandId;
+  before(done => {
+    mongoose.connect('mongodb://localhost/test', {}, err => {
+      if (err) return console.log(err);
+      console.log('TEST DB Connection Achieved');
+    });
+    done();
+  });
+
+  after(done => {
+    mongoose.connection.close();
+    done();
+  });
+
   beforeEach(done => {
     const newBand = new Band({
       name: 'Radiohead',

@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const server = express();
-const Band = require('./Model');
+const Band = require('./bands');
 
 server.use(bodyParser.json());
 server.use(morgan('dev'));
