@@ -29,6 +29,28 @@ describe('MTG META', () => {
         return done();
       }
       MetaId = savedMeta._id;
+    });
+    const newMeta2 = new Meta({
+      name: 'Bink',
+      location: 'SF Bay',
+      password: 'pw',
+    });
+    newMeta2.save((err, savedMeta2) => {
+      if (err) {
+        console.log(err);
+        return done();
+      }
+    });
+    const newMeta3 = new Meta({
+      name: 'Boinkus',
+      location: 'SF Bay',
+      password: 'pw',
+    });
+    newMeta3.save((err, savedMeta3) => {
+      if (err) {
+        console.log(err);
+        return done();
+      }
       done();
     });
   });
@@ -41,19 +63,18 @@ describe('MTG META', () => {
   });
 
   describe('[GET] /api/metas', () => {
-    it('should get a list of all metas in the db', done => {
+    it('should get a list of all metas in the db with status 200:OK', done => {
       chai
         .request(server)
         .get('/api/metas')
         .end((err, res) => {
           if (err) {
-            // assert that err should be type status
-            console.log(err);
+            expect(res.status).to.equal(500);
             done();
           }
           expect(res.status).to.equal(200);
+          expect(res.body.length).to.equal(3);
           done();
-          console.log(res.body);
         });
     });
   });
@@ -64,8 +85,7 @@ describe('MTG META', () => {
         .post('/api/metas', '')
         .end((err, res) => {
           if (err) {
-            // assert that err should be type status
-            console.log(err);
+            expect(res.status).to.equal(500);
             done();
           }
           expect(res.status).to.equal(200);
@@ -81,8 +101,7 @@ describe('MTG META', () => {
         .get(`/api/metas/meta1`)
         .end((err, res) => {
           if (err) {
-            // assert that err should be type status
-            console.log(err);
+            expect(res.status).to.equal(500);
             done();
           }
           expect(res.status).to.equal(200);
@@ -98,8 +117,7 @@ describe('MTG META', () => {
         .put('/api/metas/meta1', '')
         .end((err, res) => {
           if (err) {
-            // assert that err should be type status
-            console.log(err);
+            expect(res.status).to.equal(500);
             done();
           }
           expect(res.status).to.equal(200);
@@ -115,8 +133,7 @@ describe('MTG META', () => {
         .delete('/api/metas/meta1', '')
         .end((err, res) => {
           if (err) {
-            // assert that err should be type status
-            console.log(err);
+            expect(res.status).to.equal(500);
             done();
           }
           expect(res.status).to.equal(200);
