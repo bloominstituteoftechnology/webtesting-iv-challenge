@@ -19,6 +19,10 @@ const BeeSchema = new Schema({
   }
 });
 
+BeeSchema.methods.getBreed = function() {
+  return this.breed;
+};
+
 const Bee = mongoose.model("Bee", BeeSchema);
 
 module.exports = Bee;

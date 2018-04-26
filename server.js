@@ -5,28 +5,55 @@ const server = express();
 server.use(express.json());
 server.use(morgan("dev"));
 
-const Bee = require("./models/BeeModel");
+const Bee = require("./models/BeeModel.js");
 
 server.get("/api/bees", (req, res) => {
-  Bee.find().then((err, bees) => {
-    console.log(bees);
-    if (err) {
+  Bee.find()
+    .then(response => {
+      res.json(response);
+    })
+    .catch(err => {
       res.status(500).json(err);
-    }
-    res.json(bees);
-  });
+    });
 });
 
 server.post("/api/bees", (req, res) => {
-  res.status(201).json(req.body);
+  console.log(req.body);
+  const newBee = new Bee(req.body);
+  newBee.save((err, savedBee) => {
+    if (err) {
+      return console.log(err);
+    }
+    Bee.find((err, allBees) => {
+      if (err) {
+        return console.log(err);
+      }
+      res.status(201).json(allBees);
+    });
+  });
 });
 
 server.put("/api/bees/:id", (req, res) => {
-  res.status(200).json(req.body);
+  Bee.findByIdAndUpdate(req.params.id, req.body, (err, updatedBee) => {
+    if (err) {
+      return console.log(err);
+    }
+    Bee.findById(req.params.id, (err, updatedBee) => {
+      if (err) {
+        return console.log(err);
+      }
+      res.json(updatedBee);
+    });
+  });
 });
 
 server.delete("/api/bees/:id", (req, res) => {
-  res.status(200).json("Success");
+  Bee.findByIdAndRemove(req.params.id, (err, removedBee) => {
+    if (err) {
+      return console.log(err);
+    }
+    res.json(removedBee);
+  });
 });
 
 module.exports = server;
