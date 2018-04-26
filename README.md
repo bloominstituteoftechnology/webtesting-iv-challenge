@@ -8,8 +8,8 @@ The following endpoints are available for use with this API
 
 |TYPE           |URL                |DATA                   |
 |---------------|-------------------|-----------------------|
-|POST           |/api/band/create   |bandName*, bandGenre   |
-|GET            |/api/band/read     |                       |
-|PUT            |/api/band/:id      |bandID*                |
-|DELETE         |/api/band/:id      |bandID*                |
+|POST           |/api/bands/        |bandName*, bandGenre   |
+|GET            |/api/bands/        |                       |
+|PUT            |/api/bands/:id     |bandID*                |
+|DELETE         |/api/bands/:id     |bandID*                |
 
