@@ -32,13 +32,15 @@ server.put('/api/dbz-chars/:name', (req, res) => {
   Char
     .findOneAndUpdate({ name: name }, { race: race, planet: planet }, { new: true })
     .then(updatedChar => {
+      console.log(updatedChar);
       if (!updatedChar) {
-        res.status(500).json({ error: 'Character does not exist!' });
+        res.status(500).json(err);
+        return;
       }
       res.status(200).json(updatedChar);
     })
     .catch(err => {
-      res.status(500).json({ error: 'you messed up somewhere' }, err);
+      res.status(500).json(err);
     });
 
 
