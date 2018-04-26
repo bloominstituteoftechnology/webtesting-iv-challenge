@@ -24,10 +24,10 @@ describe('Movies', () => {
     newMovie.save((err, savedMovie) => {
       if (err) {
         console.log(err);
-        done();
+        return done();
       }
       movieId = savedMovie._id;
-      done();
+      return done();
     });
   });
 
@@ -62,10 +62,11 @@ describe('Movies', () => {
         .post('/api/movies')
         .send({ title: 'Shark Tales', genre: 'Animation' })
         .then(response => {
-          done();
+          return done();
         })
         .catch(err => {
           throw err;
+          done();
         });
     });
     it(`Should fail if bad title or genre aren't provided`, done => {
@@ -74,12 +75,66 @@ describe('Movies', () => {
         .post('/api/movies')
         .send({ genre: 'Animation' })
         .then(response => {
-          done();
+          return done();
         })
         .catch(err => {
           throw err;
+          return done();
         });
     });
   });
 
+  describe('/GET/:id movie', () => {
+    it('it should GET a movie by the given id', (done) => {
+      let movie = new Movie({ title: "The Lord of the Rings", genre: "Hobbitry" });
+      movie.save((err, movie) => {
+          chai
+          .request(server)
+          .get('/api/movies/' + movie.id)
+          .send(movie)
+          .end((err, res) => {
+              // expect(res.status).to.equal(200);
+              expect(res.body).to.be.an('object');
+              // expect(res.body).to.be.have.property('_id');
+            return done();
+          });
+      });
+    });
+  });
+
+  describe('/PUT/:id movie', () => {
+    it('it should UPDATE a movie given the id', (done) => {
+      let movie = new Movie({title: "The Chronicles of Narnia", genre: "Science Fiction" })
+      movie.save((err, movie) => {
+              chai
+              .request(server)
+              .put('/api/movies/' + movie.id)
+              .send({title: "The Chronicles of Narnia", genre: "Science Fiction" })
+              .end((err, res) => {
+                expect(res.body).to.be.an('object');
+                return done();
+              });
+        });
+    });
+  });
+
+
+  describe('/DELETE/:id movie', () => {
+    it('it should DELETE a movie given the id', (done) => {
+      let movie = new Movie({title: "The Chronicles of Narnia", genre: "Science Fiction" })
+      movie.save((err, movie) => {
+              chai
+              .request(server)
+              .delete('/movies/' + movie.id)
+              .end((err, res) => {
+                  // res.should.have.status(200);
+                  // res.body.should.be.a('object');
+                  // res.body.should.have.property('message').eql('Book successfully deleted!');
+                  // res.body.result.should.have.property('ok').eql(1);
+                  // res.body.result.should.have.property('n').eql(1);
+                return done();
+              });
+        });
+    });
+});
 });

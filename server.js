@@ -16,4 +16,20 @@ server.get('/api/movies', (req, res) => {
   });
 });
 
+server.post('/api/movies', (req, res) => {
+  const { title, genre } = req.body;
+  const newMovie = new Band({ title, genre });
+  newMovie
+    .save()
+    .then(savedMovie => {
+      Movie.find({}, (err, allMovies) => {
+        // handle that error!
+        res.json(allMovies);
+      });
+    })
+    .catch(errr => {
+      res.status(422).json(errr);
+    });
+});
+
 module.exports = server;
