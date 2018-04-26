@@ -41,13 +41,13 @@ describe('Bands', () => {
   });
 
   describe(`[POST] /api/bands`, () => {
+    const band = new Band({
+      name: 'Tool',
+      genre: 'Progressive Rock',
+      numberOfMembers: 4,
+      yearFounded: 1990
+    });
     it('should create a new band in the db', done => {
-      const band = new Band({
-        name: 'Tool',
-        genre: 'Progressive Rock',
-        numberOfMembers: 4,
-        yearFounded: 1990
-      });
       chai
         .request(server)
         .post('/api/bands')
@@ -73,9 +73,12 @@ describe('Bands', () => {
             console.log(err);
             return done();
           }
+          const { name, genre } = res.body[0];
           expect(res.status).to.equal(200);
           expect(res.body.length).to.equal(1);
           expect(Array.isArray(res.body)).to.equal(true);
+          expect(name).to.equal('Radiohead');
+          expect(genre).to.equal('Alternative Rock');
           done();
         });
     });
