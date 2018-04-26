@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 const chai = require('chai');
 const chaiHTTP = require('chai-http');
 
-mongoose.connect('mongodb://localhost/metatest', () => {
-  if (err) return console.log('errorrr');
-  console.log('Connected to TEST DB');
-});
-
 const expect = chai.expect;
 const server = require('./server.js');
 const Meta = require('./metas/Meta.js');
@@ -15,51 +10,51 @@ const Pilot = require('./pilots/Pilot.js');
 
 chai.use(chaiHTTP);
 
-describe('MTG META', () => {
-  let MetaId;
-  before(done => {
-    const newMeta = new Meta({
+describe('Routes', () => {
+  before (done => {
+    mongoose.connect('mongodb://localhost/metatest', {}, err => {
+      if (err) return console.log('Start your mongo DB!');
+      console.log('TEST DB Connection Achieved');
+    });
+    done();
+  })
+  beforeEach(done => {
+    const newMeta = {
       name: 'Binkus',
       location: 'SF Bay',
       password: 'pw',
-    });
-    newMeta.save((err, savedMeta) => {
-      if (err) {
-        console.log(err);
-        return done();
-      }
-      MetaId = savedMeta._id;
-    });
-    const newMeta2 = new Meta({
+    };
+    const newMeta2 = {
       name: 'Bink',
       location: 'SF Bay',
       password: 'pw',
-    });
-    newMeta2.save((err, savedMeta2) => {
-      if (err) {
-        console.log(err);
-        return done();
-      }
-    });
-    const newMeta3 = new Meta({
+    };
+    const newMeta3 = {
       name: 'Boinkus',
       location: 'SF Bay',
       password: 'pw',
+    };
+    Meta.create(newMeta, newMeta2, newMeta3, function(
+      err,
+      newMeta,
+      newMeta2,
+      newMeta3
+    ) {
+      if (err) console.log(err);
     });
-    newMeta3.save((err, savedMeta3) => {
-      if (err) {
-        console.log(err);
-        return done();
-      }
-      done();
-    });
+    done();
   });
 
-  after(done => {
+  afterEach(done => {
     Meta.remove({}, err => {
       if (err) console.log(err);
-      done();
+      return done();
     });
+  })
+
+  after(done => {
+    mongoose.connection.close();
+    done();
   });
 
   describe('[GET] /api/metas', () => {
@@ -74,37 +69,37 @@ describe('MTG META', () => {
           }
           expect(res.status).to.equal(200);
           expect(res.body.length).to.equal(3);
-          done();
         });
+      done();
     });
   });
   describe('[POST] /api/metas', () => {
     it('should post a new meta to the db', done => {
       chai
         .request(server)
-        .post('/api/metas', '')
-        .end((err, res) => {
-          if (err) {
-            expect(res.status).to.equal(500);
+        .post('/api/metas')
+        .send({
+          'name': 'added meta',
+          'location': 'San Diego',
+          'password': '123'
+          })
+          .end(function(err, res) {
+            expect(res).to.have.status(201);
             done();
-          }
-          expect(res.status).to.equal(200);
-          done();
-          console.log(res);
-        });
+          });
     });
   });
   describe('[GET] /api/metas/:meta', () => {
     it('should return a meta', done => {
       chai
         .request(server)
-        .get(`/api/metas/meta1`)
+        .get(`/api/metas/Bink`)
         .end((err, res) => {
           if (err) {
-            expect(res.status).to.equal(500);
+            expect(res.status).to.equal(501);
             done();
           }
-          expect(res.status).to.equal(200);
+          expect(res.status).to.equal(201);
           done();
           console.log(res);
         });
@@ -114,7 +109,12 @@ describe('MTG META', () => {
     it('should update a meta in the db', done => {
       chai
         .request(server)
-        .put('/api/metas/meta1', '')
+        .put('/api/metas/Bink')
+        .send({
+          name: 'Updated Bink',
+          location: 'SF Bay',
+          password: 'pw',
+        })
         .end((err, res) => {
           if (err) {
             expect(res.status).to.equal(500);
@@ -130,7 +130,8 @@ describe('MTG META', () => {
     it('should delete a meta in the db', done => {
       chai
         .request(server)
-        .delete('/api/metas/meta1', '')
+        .delete('/api/metas/Boinkus')
+        .send({})
         .end((err, res) => {
           if (err) {
             expect(res.status).to.equal(500);

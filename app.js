@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const server = require('./server.js');
 const port = 5000;
 
-mongoose.connect('mongodb://localhost/Meta', () => {
+mongoose.connect('mongodb://localhost/meta', () => {
   console.log('Connected to DB: MTG Meta');
 });
 

@@ -1,61 +1,45 @@
-// const mongoose = require('mongoose');
-// const chai = require('chai');
-// const chaiHTTP = require('chai-http');
+const mongoose = require('mongoose');
+const chai = require('chai');
+const sinon = require('sinon');
 
-// mongoose.connect('mongodb://localhost/metatest', () => {
-//   if (err) return console.log(err);
-//   console.log('Connected to TEST DB');
-// });
+const expect = chai.expect;
+const Meta = require('./metas/Meta.js');
+const Deck = require('./decks/Deck.js');
+const Pilot = require('./pilots/Pilot.js');
 
-// const expect = chai.expect;
-// const server = require('./server.js');
-// const Deck = require('./Deck.js');
+describe('Models', () => {
+  before(done => {
+    mongoose.connect('mongodb://localhost/metatest', err => {
+      if (err) return console.log('Start your mongo DB!');
+      console.log('Connected to TEST DB');
+    });
+    done();
+  });
 
-// chai.use(chaiHTTP);
+  after(done => {
+    mongoose.connection.close();
+    done();
+  });
 
-// describe('MTG META', () => {
-//   let DeckId;
-//   beforeEach(done => {
-//     const newDeck = new Deck({
-//       name: 'Binkus',
-//     });
-//     newDeck.save((err, savedDeck) => {
-//       if (err) {
-//         console.log(err);
-//         return done();
-//       }
-//       DeckId = savedSata._id;
-//       done();
-//     });
-//   });
-
-//   afterEach(done => {
-//     Deck.remove({}, err => {
-//       if (err) console.log(err);
-//       done();
-//     });
-//   });
-
-//   describe('[GET] /api/Decks', () => {
-//     it('should get a list of all Decks', done => {
-//       chai
-//         .request(server)
-//         .get('/api/Decks')
-//         .end((err, res) => {
-//           if (err) {
-//             // assert that err should be type status
-//             console.log(err);
-//             done();
-//           }
-//           expect(res.status).to.equal(200);
-//           done();
-//           console.log(res);
-//         });
-//     });
-//   });
-// });
-
-//check if array
-//check if 200
-//check body
-//check id
+  describe('Meta Schema', () => {
+    it('should have a name', done => {
+      const meta = new Meta({ name: 'tester', location: 'New York, New York' });
+      expect(meta.getName()).to.equal('tester');
+      done();
+    });
+    it('should have a location', done => {
+      const meta = new Meta({ name: 'tester', location: 'New York, New York' });
+      expect(meta.getLocation()).to.equal('New York, New York');
+      done();
+    });
+    it('if it has a password it should be hashed', done => {
+      const meta = new Meta({
+        name: 'tester',
+        location: 'New York, New York',
+        password: 'pw',
+      });
+      expect(meta.getPassword()).to.equal('New York, New York');
+      done();
+    });
+  });
+});

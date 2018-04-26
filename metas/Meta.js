@@ -16,6 +16,18 @@ const Meta = new mongoose.Schema({
   },
 });
 
+Meta.methods.getName = function() {
+  return this.name;
+};
+
+Meta.methods.getLocation = function() {
+  return this.location;
+};
+
+Meta.methods.getPassword = function() {
+  return this.password;
+};
+
 module.exports = mongoose.model('Meta', Meta);
 
 //hash password
