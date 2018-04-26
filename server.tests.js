@@ -115,7 +115,6 @@ describe('Bands', () => {
       const updatedBand = {
         name: 'skillet',
         genre: 'Rock',
-        recentAlbum: 'Ride the Lightning',
       };
       chai
         .request(server)
@@ -130,6 +129,7 @@ describe('Bands', () => {
           expect(response.body).to.haveOwnProperty('name');
           expect(response.body).to.haveOwnProperty('genre');
           expect(response.body).to.haveOwnProperty('recentAlbum');
+          expect(response.body.name).to.equal(updatedBand.name.toUpperCase());
           done();
         });
     });
