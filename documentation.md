@@ -10,12 +10,12 @@ This API is for interfacing with ASTRO's favorite movies. This is an open source
 
 ### [GET] `api/movies`
 
-| TYPE          | URL               | DATA                      |
-| ------------- | ----------------  | ------------------------- |
-| GET           | /api/movies       | movieTitle*, movieGenre*  |
-| PUT           |                   |                           |
-| POST          |                   |                           |
-| DELETE        |                   |                           |
+| TYPE          | URL               | DATA                                  |
+| ------------- | ----------------  | ------------------------------------- |
+| GET           | /api/movies       | movieId*, movieTitle*, movieGenre*    |
+| PUT           |                   |                                       |
+| POST          |/api/movies        | movieTitle*, movieGenre*              |
+| DELETE        |                   |                                       |
 
 
 * all fields marked with `*` are required
