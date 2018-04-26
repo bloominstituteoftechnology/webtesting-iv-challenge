@@ -80,3 +80,59 @@ describe('Bands', () => {
     });
   });
 });
+
+describe('Band', () => {
+  beforeEach(done => {
+    Band.remove({}, err => {
+      done();
+    });
+  });
+
+  describe(`[PUT] /api/bands/:id`, () => {
+    it('Should update the band given an ID', done => {
+      let band = new Band({
+        name: 'adfs',
+        genre: 'adf',
+        numberOfMembers: 1948,
+        yearFounded: 778
+      });
+      band.save((err, band) => {
+        chai
+          .request(server)
+          .put('/api/bands/' + band.id)
+          .end((err, response) => {
+            if (err) {
+              console.log(err);
+              done();
+            }
+            expect(response.status).to.equal(201);
+            done();
+          });
+      });
+    });
+  });
+
+  describe(`[DELETE] /api/bands/:id`, () => {
+    it('Should delete the band given the ID', done => {
+      let band = new Band({
+        name: 'adfs',
+        genre: 'adf',
+        numberOfMembers: 1948,
+        yearFounded: 778
+      });
+      band.save((err, band) => {
+        chai
+          .request(server)
+          .delete('/api/bands/' + band.id)
+          .end((err, response) => {
+            if (err) {
+              console.log(err);
+              done();
+            }
+            expect(response.status).to.equal(200);
+            done();
+          });
+      });
+    });
+  });
+});

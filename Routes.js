@@ -46,17 +46,15 @@ router
   .delete((req, res) => {
     Band.findByIdAndRemove(req.params.id)
       .then(band => {
-        res.status(200).json({ message: 'The band was successfully deleted' });
+        res.status(200).json({ message: 'The band was succesfully deleted.' });
       })
       .catch(err => {
         if (res.status(404)) {
-          res.json({
-            errorMessage: 'The band with the specified ID does not exist.'
-          });
+          res.json({ errorMessage: 'The band with that id does not exist.' });
         } else {
           res
             .status(500)
-            .json({ errorMessage: 'The band could not be removed' });
+            .json({ errorMessage: 'The band could not be removed.' });
         }
       });
   });
