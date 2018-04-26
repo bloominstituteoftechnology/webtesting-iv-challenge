@@ -8,13 +8,20 @@ const expect = chai.expect;
 
 chai.use(chaiHTTP);
 
-mongoose.connect('mongodb://localhost/testMini', {}, err => {
-  if (err) return console.log(err);
-  console.log('TEST DB Connection Achieved');
-});
-
 describe('Bands', () => {
   let bandId;
+  before(done => {
+    mongoose.connect('mongodb://localhost/testMini', {}, err => {
+      if (err) return console.log(err);
+      console.log('TEST DB Connection Achieved');
+    });
+    done();
+  });
+
+  after(done => {
+    mongoose.connection.close();
+    done();
+  });
   beforeEach(done => {
     const newBand = new Band({
       name: 'John Coltrane',
@@ -25,7 +32,7 @@ describe('Bands', () => {
         console.log(err);
         done();
       }
-      bandId = savedBand._id;
+      bandId = savedBand._id.toString();
       done();
     });
   });
@@ -47,7 +54,12 @@ describe('Bands', () => {
             console.log(err);
             done();
           }
+          const { _id, name, genre } = response.body[0];
           expect(response.status).to.equal(200);
+          expect(response.body).to.be.an('array');
+          expect(_id).to.equal(bandId);
+          expect(name).to.equal('John Coltrane');
+          expect(genre).to.equal('Jazz');
           done();
         });
     });
@@ -68,6 +80,8 @@ describe('Bands', () => {
             done();
           }
           expect(response.status).to.equal(200);
+          expect(response.body.length).to.equal(2);
+          expect(response.body).to.be.an('array');
           done();
         });
     });
@@ -82,7 +96,12 @@ describe('Bands', () => {
           .put('/bands/' + band._id)
           .send({ name: 'The Dave Brubeck Quartet', genre: 'Jazz' })
           .end((err, response) => {
+            const { _id, name, genre } = response.body[1];
             expect(response.status).to.equal(200);
+            expect(response.body).to.be.an('array');
+            expect(response.body.length).to.equal(2);
+            expect(_id).to.equal(band._id.toString());
+            expect(name).to.equal('The Dave Brubeck Quartet');
             done();
           });
       });
@@ -98,6 +117,7 @@ describe('Bands', () => {
           .delete('/bands/' + band._id)
           .end((err, response) => {
             expect(response.status).to.equal(200);
+            expect(response.body.length).to.equal(1);
             done();
           });
       });

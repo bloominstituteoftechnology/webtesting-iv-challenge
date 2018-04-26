@@ -21,7 +21,7 @@ server.get('/bands', (req, res) => {
       res.status(200).json(response);
     })
     .catch(err => {
-      res.status(500).json({ error: 'Error getting' });
+      res.status(500).json({ error: 'Error GETting' });
     });
 });
 
@@ -30,7 +30,9 @@ server.post('/bands', (req, res) => {
   newBand
     .save()
     .then(response => {
-      res.status(200).json(response);
+      Band.find({}, (err, allBands) => {
+        res.status(200).json(allBands);
+      });
     })
     .catch(err => {
       res.status(500).json({ error: 'Could not POST new band.' });
@@ -40,7 +42,9 @@ server.post('/bands', (req, res) => {
 server.put('/bands/:id', (req, res) => {
   Band.findByIdAndUpdate(req.params.id, req.body)
     .then(response => {
-      res.status(200).json(response);
+      Band.find({}, (err, allBands) => {
+        res.status(200).json(allBands);
+      });
     })
     .catch(err => {
       res.status(500).json({ error: 'Error PUTting.' });
@@ -49,10 +53,12 @@ server.put('/bands/:id', (req, res) => {
 server.delete('/bands/:id', (req, res) => {
   Band.findByIdAndRemove(req.params.id, req.body)
     .then(response => {
-      res.status(200).json(response);
+      Band.find({}, (err, allBands) => {
+        res.status(200).json(allBands);
+      });
     })
     .catch(err => {
-      res.status(200).json({ error: 'Error Deleting' });
+      res.status(200).json({ error: 'Error DELETing' });
     });
 });
 
