@@ -1,26 +1,19 @@
-# Server-Testing
+# Bands API
 
-## Topics
+This API is for interfacing with Ryan's favorite bands. This is an open sourced project. For contributing please reference [this contribution guide](www.ryanisawesome.com).
 
-* TDD
-* `sinon`
-* `chai`
-* `mocha`
-* `chai-http`
-* `done()`
-* statics vs methods
-* documentation
+* A special note on how to work with this API here.
 
-## Project
+## API Endpoints
 
-For this project you will be creating an API using a test driven development approach as well as writing documentation.  As an example of good documentation you can reference GitHub's API docs: https://developer.github.com/v3/git/commits/
+* The following is a list of all of the endpoints that you have available for use with our API.
 
-For this project you will be building a simple restful API for a database with collections of your choosing.
+### [POST] `api/band/create`
 
-## Requirements
+| TYPE          | URL              | DATA                  |
+| ------------- | ---------------- | --------------------- |
+| POST          | /api/band/create | bandName*, bandGenre* |
+| col 2 is      | centered         | $12                   |
+| zebra stripes | are neat         | $1                    |
 
-1. Your API must have routes that use the following HTTP verbs: GET, PUT, POST, and DELETE.
-2. You must have documentation for each route.  Write your documentation in a file called `documentation.md`.
-3. You must have at least one test written for each route.  Write your tests BEFORE you write the actual routes.
-4. Your models should have some methods/statics that are tested.
-5. You will need to have tests for your routes and for your models.
+* all fields marked with `*` are required
