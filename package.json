@@ -1,0 +1,26 @@
+{
+  "name": "Server-Testing-Mini",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/habib1234731/Server-Testing-Mini.git",
+  "author": "habib1234731 <habibrehman1234731@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "mocha *.test.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "express": "^4.16.3",
+    "mocha": "^5.1.1",
+    "mongo": "^0.1.0",
+    "mongoose": "^5.0.16",
+    "morgan": "^1.9.0",
+    "sinon": "^4.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  }
+}
