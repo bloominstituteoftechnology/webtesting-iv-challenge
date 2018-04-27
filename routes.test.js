@@ -107,7 +107,7 @@ describe('Battlefield', () => {
     });
   });
 
-  describe('/POST battlefield', () => {
+  describe('[POST] /api/battlefield', () => {
     it('it should POST ', done => {
       const battlefield = {
         name: 'b',
