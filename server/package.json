@@ -1,0 +1,43 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "An API where you can make notes, and have friends",
+  "main": "app.js",
+  "directories": {
+    "api": "api",
+    "friends": "friends",
+    "notes": "notes",
+    "users": "users",
+    "test": "mocha *.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emukupa/Server-Testing.git"
+  },
+  "bugs": {
+    "url": "https://github.com/emukupa/Server-Testing/issues"
+  },
+  "homepage": "https://github.com/emukupa/Server-Testing#readme",
+  "scripts": {
+    "test": "mocha tests/*.test.js",
+    "start": "nodemon app.js"
+  },
+  "keywords": ["friends", "notes", "users"],
+  "author": "Edward Manda",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  },
+  "dependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "helmet": "^3.12.0",
+    "lodash": "^4.17.10",
+    "mocha": "^5.1.1",
+    "mongoose": "^5.0.16",
+    "morgan": "^1.9.0",
+    "sinon": "^4.5.0"
+  }
+}

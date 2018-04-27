@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "bcrypt": "^2.0.1",
+    "chai-http": "^4.0.0"
+  }
+}
