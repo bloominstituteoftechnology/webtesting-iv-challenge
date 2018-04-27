@@ -60,17 +60,20 @@ describe('Battlefield', () => {
       return done();
     });
   });
+
   describe(` [GET] /api/battlefield`, () => {
     it('should get a list of battlefield users', done => {
       chai
         .request(server)
         .get('/api/battlefield')
         .end((error, response) => {
-          console.log(error);
-
+          if (error) {
+            console.log(error);
+            return done();
+          }
+          expect(response.status).to.equal(200);
           expect(Array.isArray(response.body)).to.equal(true);
 
-          expect(response.status).to.equal(200);
           return done();
         });
     });
@@ -99,7 +102,6 @@ describe('Battlefield', () => {
           expect(response.body.name).to.equal('sudo');
           expect(response.body.kills).to.equal('1000');
           expect(response.body.deaths).to.equal('20');
-
           return done();
         });
     });
@@ -141,13 +143,13 @@ describe('Battlefield', () => {
           if (error) {
             console.log(error);
             // expect(response.status).to.equal(200);
-             done();
+            done();
           }
           expect(response.status).to.equal(200);
           // expect(response.body.name).to.equal('sudo');
           // expect(response.body.kills).to.equal('1000');
           // expect(response.body.deaths).to.equal('20');
-          Battlefield.findById(battleId, (error, user) => {
+          Battlefield.findByIdAndRemove(battleId, (error, user) => {
             if (error) {
               console.log(error);
               done();

@@ -20,6 +20,19 @@ const BattlefieldSchema = new Schema({
   }
 });
 
+BattlefieldSchema.methods.getName = function() {
+  return this.name;
+};
+
+BattlefieldSchema.statics.getAllData = async function() {
+  try {
+    const data = await Battlefield.find({});
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
 const Battlefield = mongoose.model('Battlefield', BattlefieldSchema);
 
 module.exports = Battlefield;

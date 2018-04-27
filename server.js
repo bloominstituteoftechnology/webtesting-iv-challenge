@@ -8,11 +8,12 @@ server.use(express.json());
 server.use(morgan('dev'));
 
 server.get('/api/battlefield', (req, res) => {
-  Battlefield.find()
-    .then(user => {
-      res.status(200).json(user);
-    })
-    .catch(error => res.status(404).json({ error: 'error in get' }));
+  Battlefield.find({}, (error, response) => {
+    if (error) {
+      return res.status(404).json(error);
+    }
+    res.send(response);
+  });
 });
 
 server.put('/api/battlefield', (req, res) => {
