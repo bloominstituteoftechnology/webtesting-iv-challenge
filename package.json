@@ -1,0 +1,33 @@
+{
+  "name": "server-testing",
+  "version": "1.0.0",
+  "description": "## Topics",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha *.test.js",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RedSkelly/Server-Testing.git"
+  },
+  "keywords": [],
+  "author": "Shaun Kelly",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RedSkelly/Server-Testing/issues"
+  },
+  "homepage": "https://github.com/RedSkelly/Server-Testing#readme",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "express": "^4.16.3",
+    "mocha": "^5.1.1",
+    "mongoose": "^5.0.16",
+    "morgan": "^1.9.0",
+    "sinon": "^4.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  }
+}
