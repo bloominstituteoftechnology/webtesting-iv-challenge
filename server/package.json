@@ -19,14 +19,10 @@
   },
   "homepage": "https://github.com/emukupa/Server-Testing#readme",
   "scripts": {
-    "test": "tests/test.js",
+    "test": "mocha tests/*.test.js",
     "start": "nodemon app.js"
   },
-  "keywords": [
-    "friends",
-    "notes",
-    "users"
-  ],
+  "keywords": ["friends", "notes", "users"],
   "author": "Edward Manda",
   "license": "ISC",
   "devDependencies": {
