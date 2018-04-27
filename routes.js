@@ -34,8 +34,8 @@ router
         const woof = new Woof(req.body);
         woof
             .save()
-            .then(woofs => {
-                res.status(200).json(woofs);
+            .then(woof => {
+                res.status(200).json(woof);
             })
             .catch(err => {
                 res.status(500).json(err);
@@ -48,7 +48,7 @@ router
         Woof
             .findById(id)
             .then(woof => {
-                if (!woof.message) {
+                if (!woof) {
                     res.status(404).json({ message: "Woof was not found." });
                 } else {
                     Woof
