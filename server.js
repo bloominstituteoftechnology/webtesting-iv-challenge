@@ -13,7 +13,7 @@ server.get('/', (req, res) => {
 
 server.get('/api/bands', (req, res) => {
   Band.find({})
-    .then(response => res.status(200).json(response))
+    .then(bands => res.status(200).json(bands))
     .catch(err => res.status(500).json({ error: 'Cannot fetch bands' }));
 });
 
@@ -21,11 +21,11 @@ server.post('/api/bands', (req, res) => {
   const band = new Band(req.body);
   band
     .save()
-    .then(response => res.status(201).json(response))
+    .then(band => res.status(201).json(band))
     .catch(err => res.status(500).json({ error: 'Cannot create band' }));
 });
 
-// server.get('api/bands/:id', (req, res) => {
+// server.get('/api/bands/:id', (req, res) => {
 //   const id = new id(req.params);
 //   Band.findById()
 //     .then(response => {

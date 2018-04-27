@@ -10,6 +10,17 @@ const BandSchema = new Schema({
   albumHitSong: { type: String },
 });
 
+BandSchema.methods.getName = function() {
+  return this.name;
+};
+
+BandSchema.statics.getAllBands = function(callBack) {
+  Band.find({}, (err, bands) => {
+    if (err) console.log(err);
+    cb(bands);
+  });
+};
+
 const Band = mongoose.model('Band', BandSchema);
 
 module.exports = Band;
