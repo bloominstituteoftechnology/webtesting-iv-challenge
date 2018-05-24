@@ -4,7 +4,21 @@ const bcrypt = require('bcrypt');
 const Note = require('./Note');
 
 describe('/notes', () => {
+    beforeAll(() => {
+        mongoose
+        .connect(`mongodb://localhost/testnotedb`)
+        .then(connected => {
+            console.log('Connected')
+        })
+        .catch(err => {
+            console.log('Not Connected')
+        })
+    })
 
+    afterAll(() => {
+        mongoose.disconnected()
+    })
+    
     // POST notes
     describe('POST notes', () => {
         it('checks if note is created properly', async () => {
