@@ -41,24 +41,18 @@ describe('GET to /api/dogs', () => {
 
 describe('POST to /api/dogPost', () => {
     it('should add a new dog to DB', async() => {
-        
-        
-        
-        Dog.find({})
-        chai
-            .request(server)
+        const dog = { name: "Kenzie", breed: "English Settler" };
+        const response = await request(server)
             .post('/api/dogPost')
-            .end((err, response) => {
-                if(err) {
-                    console.log(err);
-                    return done();
-                }
-                // console.log(response);
-                expect(response.status).to.equal(201);
-                return done();
-            })
+            .send(dog);
+        
+        expect(response.status).toEqual(201);
+        expect(response.type).toEqual('application/json');
+        expect(response.body).toHaveProperty('_id');
+        expect(response.body).toHaveProperty('name');
+        expect(response.body).toHaveProperty('breed');
     })
-})
+});
 
     
     beforeAll(() => {
