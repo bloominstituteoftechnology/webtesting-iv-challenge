@@ -9,6 +9,10 @@ describe('Food Schema here', () => {
       .then(console.log('connected to the mongo database'));
   });
 
+  beforeEach(() => {
+    
+  })
+
   afterEach(() => {
     return Food.remove;
   });
@@ -21,6 +25,7 @@ describe('Food Schema here', () => {
 
     const savedFood = await Food.create(food);
 
-    expect(saveFood.food).toEqual('Sandwich');
+    expect(savedFood.name).toBe('Sandwich');
+
   })
 })
