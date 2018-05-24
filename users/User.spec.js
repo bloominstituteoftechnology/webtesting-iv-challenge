@@ -13,11 +13,11 @@ describe('User model', () => {
   });
 
   beforeEach(() => {
-    // return User.remove();
+   // return User.remove();
   });
 
   afterEach(() => {
-    // return User.remove();
+    return User.remove();
   });
 
   afterAll(() => {
@@ -32,8 +32,25 @@ describe('User model', () => {
     expect(savedUser.password).not.toEqual(user.password);
     expect(savedUser.password).toHaveLength(60);
   });
-});
-describe('Delete', () => {
-    it('Should delete a single User', () => {
 
-    })})
+    // it('Should delete a single User', async () => {
+    //     const user = { username: 'Bilbo', password: 'irrelevant' };
+    //     const savedUser = await User.create(user); // new + save
+    //     expect(savedUser.password).not.toEqual(user.password);
+    //     expect(savedUser.password).toHaveLength(60);
+    
+    // })
+    it('.delete should work', async (done) => {
+      // const user = { username: 'frodo', password: 'irrelevant' };
+
+      // const savedUser = await User.create(user); 
+      // user.findByIdAndRemove('/', function(req, res) {
+      //   res.sendStatus(200);
+      // });
+  
+      request(server)
+        .delete('/')
+        .expect(200, done);
+    });
+
+});
