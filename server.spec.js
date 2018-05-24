@@ -39,6 +39,22 @@ describe('server', () => {
     expect(response.body).toEqual(fries);
   });
 
+  it('should return error if post without fries data', async () => {
+    let response;
+
+    try {
+    response =  await request(server)
+      .post('/api/fries')
+      .send(null);
+    } 
+    catch(err) {
+      console.log(err);
+    }
+
+    expect(response.status).toBe(500);
+    expect(response.body).toBe("Need to include fries data");
+  });
+
   it('should delete a fries object', async () => {
     const fries = await Fries.findOne();
 
@@ -54,5 +70,21 @@ describe('server', () => {
 
     expect(response.status).toBe(200);
     expect(response.body).toEqual({"message": `Friend with id ${fries._id} deleted.`});
+  });
+
+  it('should return error if delete nonexistentid', async () => {
+
+    let response;
+
+    try {
+    response =  await request(server)
+      .delete(`/api/fries/98798798`)
+    } 
+    catch(err) {
+      console.log(err);
+    }
+
+    expect(response.status).toBe(500);
+    expect(response.body).toEqual({"errorMessage": "The fries information could not be removed."});
   });
 });

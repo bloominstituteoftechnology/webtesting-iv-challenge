@@ -5,6 +5,11 @@ const Fries = require('./FriesModel');
 server.use(express.json());
 
 server.post('/api/fries', async (req, res) => {
+
+  if (Object.keys(req.body).length === 0) {
+    return res.status(500).json("Need to include fries data");
+  }
+
   try {
     const response = await Fries.create(req.body)
     res.status(200).json(response);
@@ -16,7 +21,6 @@ server.post('/api/fries', async (req, res) => {
 });
 
 server.delete('/api/fries/:id', (req, res) => {
-  console.log('id param is', req.params.id);
     Fries.findByIdAndRemove(req.params.id)
       .then(fries => {
         if (!fries) {
