@@ -6,15 +6,6 @@ describe("User model", () => {
     beforeAll(() => {
         return mongoose.connect('mongodb://localhost/test-server-model').then(console.log('test DB'))
     })
-
-    beforeEach(() => {
-
-    })
-
-    afterEach(() => {
-
-    })
-
     afterAll(() => {
         return User.remove()
     })
