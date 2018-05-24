@@ -19,7 +19,7 @@ describe("User model", () => {
   });
 
   it("should hash the password before saving the user", async () => {
-    const user = { username: "frodo", password: "irrelevant" };
+    const user = { username: "jasonbourne", password: "identity" };
 
     const savedUser = await User.create(user); // new + save
 
