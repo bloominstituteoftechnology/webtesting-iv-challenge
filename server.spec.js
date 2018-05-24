@@ -39,6 +39,31 @@ describe('server', () => {
     expect(response.body).toEqual(fries);
   });
 
+  it('should return validation error if fries info incomplete', async () => {
+    const fries = {
+      salt: true,
+      ketchup: false
+    };
+
+    let response;
+
+    try {
+    response =  await request(server)
+      .post('/api/fries')
+      .send(fries);
+    } 
+    catch(err) {
+      console.log(err);
+    }
+
+    delete response.body.__v;
+    delete response.body._id;
+
+    expect(response.status).toBe(500);
+    expect(response.type).toBe('application/json');
+    expect(response.body["_message"]).toEqual("Fries validation failed");
+  });
+
   it('should return error if post without fries data', async () => {
     let response;
 
