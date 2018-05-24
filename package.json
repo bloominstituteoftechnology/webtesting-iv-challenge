@@ -4,7 +4,7 @@
   "description": "Server Testing Project",
   "main": "server.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test jest --watch --verbose"
+    "test": "cross-env NODE_ENV=test jest --watchAll --verbose"
   },
   "jest": {
     "testEnvironment": "node"
