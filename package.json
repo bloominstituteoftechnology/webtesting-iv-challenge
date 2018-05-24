@@ -9,12 +9,9 @@
   "jest": {
     "testEnvironment": "node"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/LambdaSchool/Server-Testing.git"
-  },
+  "repository": "git+https://github.com/LambdaSchool/Server-Testing.git",
   "keywords": [],
-  "author": "",
+  "author": "Kaitlyn Flynn <kaitlynflynn@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/LambdaSchool/Server-Testing/issues"
@@ -26,7 +23,10 @@
     "supertest": "^3.1.0"
   },
   "dependencies": {
+    "bcrypt": "^2.0.1",
+    "cors": "^2.8.4",
     "express": "^4.16.3",
+    "helmet": "^3.12.1",
     "mongoose": "^5.1.2"
   }
 }
