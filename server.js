@@ -8,6 +8,12 @@ server.get('/', (req, res) => {
     res.status(200).json({api: "running"})
 });
 
+server.get('/users', (req, res) => {
+    User.find().then(users => {
+        res.status(200).json(users)
+    })
+})
+
 mongoose.connect('mongodb://localhost/test-server').then(console.log("Connected to db"))
 
 
@@ -20,7 +26,13 @@ server.post('/', (req, res) => {
     }).catch(err => {
         res.send(err)
     })
+})
 
+server.delete(`/:id`, (req, res) => {
+    let id = req.query.id;
+    User.findByIdAndRemove(id).then(success => {
+        res.status(200).json({message: "Deleted"})
+    })
 })
 
 if(process.env.NODE_ENV !== 'test') {
