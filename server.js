@@ -1,69 +1,77 @@
-const express = require('express');
+const express = require("express");
 
 const server = express();
 
-const User = require('../User');
+const User = require("./users/Users");
+
+const mongoose = require("mongoose");
+
+// connect to mongo
+mongoose
+  .connect("mongodb://localhost/testingdb")
+  .then(mongo => {
+    console.log("connected to the database");
+  })
+  .catch(err => {
+    console.log("Error connecting to database", err);
+  });
+
+if (process.env.NODE_ENV !== "test") {
+  server.listen(9000, () => console.log(`\n=== API up on port: 9000 ===\n`));
+}
+server.use(express.json());
+//server.use('/api/users', userController);
 
 server.get('/', (req, res) => {
-  res.status(200).json({ api: 'running!' });
+    res.status(200).json({ api: 'running!' });
+  });
+  
+server.get("/users", (req, res) => {
+  User.find()
+    .then(users => {
+      res.status(200).json(users);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json(
+          { errorMessage: "The users information could not be retrieved." },
+          err
+        );
+    });
 });
 
-if (process.env.NODE_ENV !== 'test') {
-  server.listen(9000);
-}
-server.post('/', (req, res) => {
-    const { body } = req;
-  
-    if (!body.name) {
-      res.status(400).json({ message: 'Project name is required.' });
-    } else if (body.name.length > 128) {
-      res
-        .status(400)
-        .json({ message: 'Project name is limited to 128 characters' });
-    } else if (!body.description) {
-      res.status(400).json({ message: 'Project Description is required' });
-    } else if (body.description.length > 128) {
-      res
-        .status(400)
-        .json({ message: 'Project description is limited to 128 characters' });
-    } else if (body.completed && typeof body.complete !== 'boolean') {
-      res.status(400).json({
-        message:
-          'Complete flag is not required, but if supplied must be true or false.',
+server.post("/", (req, res) => {
+  const userData = req.body;
+
+  const user = new User(userData);
+
+  user
+    .save()
+    .then(user => {
+      res.status(201).json(user);
+    })
+    .catch(err => {
+      res.status(500).json({
+        errorMessage:
+          "There was an error while saving the user to the database."
       });
-    } else {
-      User
-        .insert(body)
-        .then(newProject => {
-          res.json(newProject);
-        })
-        .catch(error => {
-          res.status(500).json(error);
-        });
-    }
-  });
-  server.delete('/:id', (req, res) => {
-    const { id } = req.params;
-  
-    User
-      .remove(id)
-      .then(count => {
-        if (count > 0) {
-          User
-            .get()
-            .then(projects => {
-              res.json(projects);
-            })
-            .catch(error => res.status(500).json(error));
-        } else {
-          res
-            .status(404)
-            .json({ message: `Project with id ${id} does not exist.` });
-        }
+    });
+});
+server.delete('/:id', (req, res) => {
+    User.findByIdAndRemove(req.params.id)
+      .then(user => {
+        if (user === null)
+          res.status(404).json({
+            message: "The user with the specified ID does not exist."
+          });
+        else res.status(200).json(user);
       })
       .catch(error => {
-        res.status(500).json(error);
+        res
+          .status(500)
+          .json({ message: "The user could not be removed" }, err);
       });
-  });
+  })
 
 module.exports = server;

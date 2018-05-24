@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt'); // yarn added this
 
-const User = require('./User');
+const User = require('./Users');
 
 describe('User model', () => {
   beforeAll(() => {
@@ -17,7 +17,7 @@ describe('User model', () => {
   });
 
   afterEach(() => {
-    return User.remove();
+    // return User.remove();
   });
 
   afterAll(() => {
@@ -33,3 +33,7 @@ describe('User model', () => {
     expect(savedUser.password).toHaveLength(60);
   });
 });
+describe('Delete', () => {
+    it('Should delete a single User', () => {
+
+    })})
