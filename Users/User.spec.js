@@ -4,7 +4,7 @@ const User = require('./User')
 
 describe("User model", () => {
     beforeAll(() => {
-        return mongoose.connect('mongodb://localhost/test-server').then(console.log('test DB'))
+        return mongoose.connect('mongodb://localhost/test-server-model').then(console.log('test DB'))
     })
 
     beforeEach(() => {
@@ -18,8 +18,10 @@ describe("User model", () => {
     afterAll(() => {
         return User.remove()
     })
-    it("Should hasj password before saving the user", async() => {
+    it("Should hash password before saving the user", async() => {
         const user = {username: "Don", password: "Don"};
         const savedUser = await User.create(user);
+        expect(savedUser.password).not.toEqual(user.password);
+        expect(savedUser.password).toHaveLength(60)
     })
 })
