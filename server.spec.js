@@ -39,10 +39,26 @@ describe('server', () => {
     };
   
     const response = await request(server).post('/register').send(user)
-    console.log(response.body);
+    //console.log(response.body);
     expect(response.status).toEqual(201);
     expect(response.type).toEqual('application/json');
     expect(response.body.newUser.username).toEqual(user.username);
+  });
+  
+  
+  it('should delete user given username', async () => {
+    const user = {
+      username: 'user',
+      password: 'pass',
+    };
+  
+    const todel = await request(server).post('/register').send(user)
+  
+    const response = await request(server).del('/delete/user')
+    console.log(response.body);
+    expect(response.status).toEqual(200);
+    expect(response.type).toEqual('application/json');
+    expect(response.body.message).toEqual('user deleted');
   });
   
   
