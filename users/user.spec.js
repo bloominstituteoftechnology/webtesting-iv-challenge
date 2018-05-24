@@ -58,6 +58,12 @@ describe('CRUD for /users', () => {
     expect(response.status).toBe(200);
     expect(updatedUser.username).toBe('patrick');
   })
+
+  it('should compare bcrypt passwords', async () => {
+    const newUser = await User.create(user);
+    const response = await request(server).post('/users/login').send(newUser);
+    expect(response.status).toBe(200);
+  })
   
   it('should not allow passwords less than 5 characters long', async () => {
     const badPasswordUser = { username: 'brandon', password: 'poop' };

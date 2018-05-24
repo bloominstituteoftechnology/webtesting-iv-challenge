@@ -29,6 +29,15 @@ server.post('/users', (req, res) => {
     .catch(err => res.status(500).json({ error: 'error saving user' }))
 })
 
+server.post('/users/login', (req, res) => {
+  const { username, password } = req.body;
+  User
+    .findOne({ username })
+    .then(user => user.validatePassword(password, (err, match) => err !== null ? true : false))
+    .then(isValid => res.status(200).json({ success: 'login successful' }))
+    .catch(err => res.status(500).json({ error: 'invalid credentials' }))
+})
+
 server.delete('/users/:id', (req, res) => {
   const { id } = req.params;
   User

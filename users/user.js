@@ -22,4 +22,10 @@ UserSchema.pre('save', function(next) {
   })
 })
 
+UserSchema.methods.validatePassword = function(plaintextPW, cb) {
+  bcrypt.compare(plaintextPW, this.password, (err, match) => {
+    return err ? cb(err) : cb(null, match)
+  })
+}
+
 module.exports = mongoose.model('User', UserSchema);
