@@ -24,7 +24,11 @@ describe('User model', () => {
     expect(savedUser.password).toHaveLength(60);
   });
 
-  describe('Delete user', () => {
-
+  describe('Delete', () => {
+    it('should delete a user', async (done) => {
+      request(server)
+        .delete("/")
+        .expect(200, done);
+    });
   });
 ;})
