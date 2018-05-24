@@ -1,5 +1,6 @@
 const request = require('supertest');
 const mongoose = require('mongoose');
+const Fries = require('./FriesModel');
 
 const server = require('./server');
 
@@ -24,8 +25,7 @@ describe('server', () => {
     try {
     response =  await request(server)
       .post('/api/fries')
-      .send(fries) 
-      .set('Accept', 'application/json');
+      .send(fries);
     } 
     catch(err) {
       console.log(err);
@@ -39,4 +39,20 @@ describe('server', () => {
     expect(response.body).toEqual(fries);
   });
 
+  it('should delete a fries object', async () => {
+    const fries = await Fries.findOne();
+
+    let response;
+
+    try {
+    response =  await request(server)
+      .delete(`/api/fries/${fries._id}`)
+    } 
+    catch(err) {
+      console.log(err);
+    }
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({"message": `Friend with id ${fries._id} deleted.`});
+  });
 });
