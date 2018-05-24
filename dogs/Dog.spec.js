@@ -3,50 +3,47 @@ const mongoose = require('mongoose');
 
 const Dog = require('./Dog')
 
-// describe('Dogs', () => {
-//     let dogId;
-//     beforeEach(done => {
-//         const newDog = new Dog({
-//             name: "Kenzie",
-//             breed: "English Settler"
-//         });
-//     newDog
-//         .save((err, savedDog) => {
-//             if(err) {
-//                 console.log(err);
-//                 done();
-//             }
-//         dogId = savedDog._id;
-//         done();
-//         })
-//     });
+describe('Dogs', () => {
+    let dogId;
+    beforeEach(done => {
+        const newDog = new Dog({
+            name: "Kenzie",
+            breed: "English Settler"
+        });
+    newDog
+        .save((err, savedDog) => {
+            if(err) {
+                console.log(err);
+            } else {
+              dogId = savedDog._id;
+            }
+            done();
+        })
+    });
 
-//     afterEach(done => {
-//         Dog.remove({}, err => {
-//             if (err) console.log(err);
-//             return done();
-//         });
-//     });
+    afterEach(() => {
+        return Dog.remove();
+    });
+
+    afterAll(() => {
+        Dog.remove().then(() => mongoose.disconnect());
+    });
 
 describe('GET to /api/dogs', () => {
     it('should get a list of dog breeds', async() => {
-        const savedDog = await Dog.create
-            .request(server)
-            .get('/api/dogs')
-            .end((err, response) => {
-                if (err) {
-                    console.log(err);
-                    return done();
-                }
-                expect(response.status).to.equal(200);
-                return done();
-            })
-    });
+        const response = await request(server).get('/api/dogs');
+
+        expect(response.status).toEqual(200);
+        expect(response.type).toEqual('application/json');
+    })
 });
 
 
 describe('POST to /api/dogPost', () => {
-    it('should add a new dog to DB', done => {
+    it('should add a new dog to DB', async() => {
+        
+        
+        
         Dog.find({})
         chai
             .request(server)
