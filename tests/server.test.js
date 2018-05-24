@@ -7,7 +7,7 @@ const User = require('../dead/character.js')
 describe('Server API', () => {
   beforeAll(() => {
     const users = []
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 1; i++) {
       users.push({ username: userName(), password: password() })
     }
     return mongoose.connect('mongodb://localhost')
