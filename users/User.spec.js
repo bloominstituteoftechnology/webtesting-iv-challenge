@@ -12,9 +12,7 @@ describe("User model", () => {
       .then(console.log("connected to test db"));
   });
 
-  beforeEach(() => {
-    // return User.remove();
-  });
+  beforeEach(() => {});
 
   afterEach(() => {
     return User.remove();
@@ -31,22 +29,5 @@ describe("User model", () => {
 
     expect(savedUser.password).not.toEqual(user.password);
     expect(savedUser.password).toHaveLength(60);
-  });
-
-  describe("DELETE user", () => {
-    it("should delete existing user successfully",  () => {
-      const user = { username: "frodo", password: "irrelevant" };
-      // const savedUser = await User.create(user); // new + save
-      // const { id } = savedUser.id; // new + save
-      // console.log(savedUser._id);
-        request(User)
-        .delete("/")
-        .then(res => {
-          const { success, message } = res.body;
-          expect(success).toBeTruthy();
-          expect(message).toBe("Delete successfully");
-        })
-        .catch(err => console.log(err));
-    });
   });
 });
