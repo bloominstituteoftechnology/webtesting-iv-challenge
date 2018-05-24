@@ -18,9 +18,10 @@ describe('/notes', () => {
     afterAll(() => {
         mongoose.disconnected()
     })
-    
+
     // POST notes
     describe('POST notes', () => {
+
         it('checks if note is created properly', async () => {
             // arrange
             const noteBody = { title: 'Chores', body: 'Pick up milk', password: 'dabadoo'}
@@ -30,6 +31,18 @@ describe('/notes', () => {
 
             // assert
             expect(newNote.title).toEqual('Chores');
+
+        })
+
+        it('checks if password is properly hashed', async () => {
+            // arrange
+            const noteBody = { title: 'Chores', body: 'Pick up milk', password: 'dabadoo'}
+
+            // act
+            const newNote = await Note.create(noteBody);
+
+            // assert
+            expect(newNote.password).not.toEqual(noteBody.password);
 
         })
     })
