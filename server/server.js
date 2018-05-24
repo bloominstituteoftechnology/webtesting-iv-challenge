@@ -28,9 +28,8 @@ server.get('/api/users/:id', (req, res) => {
 })
 
 server.put('/api/users/:id', (req, res) => {
-  User.findByIdAndUpdate(req.params.id, req.body)
-    .then(() => User.findById(req.params.id)
-      .then(user => res.status(200).send({ user })))
+  User.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .then(user => res.status(200).send({ user }))
     .catch(err => res.status(500).send(err))
 })
 
