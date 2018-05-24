@@ -15,7 +15,7 @@ const friesSchema = new mongoose.Schema({
   }
 });
 
-friesSchema.method.superSizeMe = function() {
+friesSchema.methods.superSizeMe = function() {
   this.size = 'super';
 }
 
