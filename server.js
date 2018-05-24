@@ -37,6 +37,14 @@ server.delete('/users/:id', (req, res) => {
     .catch(err => res.status(500).json({ error: 'error removing user' }))
 })
 
+server.put('/users/:id', (req, res) => {
+  const { id } = req.params;
+  User
+    .findByIdAndUpdate(id, req.body)
+    .then(updated => res.status(200).json(updated))
+    .catch(err => res.status(500).json({ error: 'error updating this user' }))
+})
+
 process.env.NODE_ENV !== 'test' ? server.listen(9000) : null;
 
 module.exports = server;

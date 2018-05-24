@@ -19,9 +19,11 @@ describe('POST & DELETE to /users', () => {
   afterAll(() => mongoose.disconnect()) // disconnect from database after all tests run
 
   it('should fetch existing users', async () => {
+    const newUser = await User.create(user);
     const response = await request(server).get('/users');
     expect(response.status).toEqual(200);
     expect(response.type).toEqual('application/json');
+    expect(response.body.length).toBeGreaterThan(0);
     expect(response.body).not.toBeUndefined();
   })
 
@@ -46,6 +48,15 @@ describe('POST & DELETE to /users', () => {
     const users = await User.find();
     expect(response.status).toBe(200);
     expect(users).toHaveLength(0);
+  })
+
+  it('should update an existing user', async () => {
+    const newUser = await User.create(user);
+    const updates = { username: 'patrick' };
+    const response = await request(server).put(`/users/${newUser._id}`).send(updates);
+    const updatedUser = await User.findById(newUser._id);
+    expect(response.status).toBe(200);
+    expect(updatedUser.username).toBe('patrick');
   })
   
   it('should not allow passwords less than 5 characters long', async () => {
