@@ -29,4 +29,18 @@ describe("user model", () => {
 
     expect(savedUser.password).not.toEqual(user.password);
   });
+  it("should check the password hash length using the static function", async () => {
+    const user = { username: "frodo", password: "irrelevant" };
+
+    const savedUser = await User.create(user);
+
+    expect(savedUser.password).toHaveLength(60);
+  });
+  it("should return the username using the static function", async () => {
+    const user = { username: "frodo", password: "irrelevant" };
+
+    const savedUser = await User.create(user);
+
+    expect(savedUser.username).toEqual(user.username);
+  });
 });
