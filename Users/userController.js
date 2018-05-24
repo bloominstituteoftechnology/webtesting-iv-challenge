@@ -2,7 +2,7 @@ const express = require("express");
 
 const User = require("./User");
 
-const router = express.router();
+const router = express.Router();
 
 router.get("/", (req, res) => {
   let query = User.find();
@@ -35,3 +35,5 @@ router.post("/register", (req, res) => {
       }
     });
 });
+
+module.exports = router;
