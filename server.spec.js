@@ -58,15 +58,16 @@ describe("server", () => {
     const user = { password: "irrelevant" };
 
     const response = await request(server)
-      .get("/reroute")
+      .post("/create")
       .send(user);
-    expect(response.status).toEqual(302);
+    expect(response.status).toEqual(500);
   });
-  it("should reroute to login page when it hits this end point", async () => {
+  it("should reroute to google.com when it hits this end point", async () => {
     let expectedErr = 302;
+    let expectedUrl = "https://google.com";
 
     const response = await request(server).get("/reroute");
     expect(response.status).toEqual(302);
-    // expect(response.header[Location]).toEqual("https://google.com");
+    expect(response.header.location).toEqual(expectedUrl);
   });
 });
