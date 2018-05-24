@@ -22,10 +22,13 @@ if (process.env.NODE_ENV !== "test") {
 server.use(express.json());
 //server.use('/api/users', userController);
 
-server.get('/', (req, res) => {
-    res.status(200).json({ api: 'running!' });
-  });
-  
+server.get("/", (req, res) => {
+  res.status(200).json({ api: "running!" });
+});
+server.delete("/", (req, res) => {
+  res.status(200).send("Delete successfully");
+});
+
 server.get("/users", (req, res) => {
   User.find()
     .then(users => {
@@ -58,20 +61,18 @@ server.post("/", (req, res) => {
       });
     });
 });
-server.delete('/:id', (req, res) => {
-    User.findByIdAndRemove(req.params.id)
-      .then(user => {
-        if (user === null)
-          res.status(404).json({
-            message: "The user with the specified ID does not exist."
-          });
-        else res.status(200).json(user);
-      })
-      .catch(error => {
-        res
-          .status(500)
-          .json({ message: "The user could not be removed" }, err);
-      });
-  })
+server.delete("/:id", (req, res) => {
+  User.findByIdAndRemove(req.params.id)
+    .then(user => {
+      if (user === null)
+        res.status(404).json({
+          message: "The user with the specified ID does not exist."
+        });
+      else res.status(200).json(user);
+    })
+    .catch(error => {
+      res.status(500).json({ message: "The user could not be removed" }, err);
+    });
+});
 
 module.exports = server;
