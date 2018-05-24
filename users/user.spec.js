@@ -4,7 +4,7 @@ const User = require('./user');
 const request = require('supertest');
 const server = require('../server');
 
-describe('POST & DELETE to /users', () => {
+describe('CRUD for /users', () => {
   const user = { username: 'jeffrey', password: 'flynn' };
   
   beforeAll(() => { // establish connection to database
