@@ -2,19 +2,42 @@ const request = require('supertest');
 
 const server = require('./server.js');
 
-describe('/', () => {
-    it('should run the server and display initial message', async () => {
+describe('server', () => {
 
-        // arrange
-        const expected = { api: 'running' };
+    describe('/', () => {
+        it('should run the server and display initial message', async () => {
 
-        // act
-        const actual = await request(server).get('/');
+            // arrange
+            const expected = { api: 'running' };
 
-        // assert
-        expect(actual.status).toEqual(200);
-        expect(actual.type).toEqual('application/json')
-        expect(actual.body).toEqual(expected);
-        
+            // act
+            const actual = await request(server).get('/');
+
+            // assert
+            expect(actual.status).toEqual(200);
+            expect(actual.type).toEqual('application/json')
+            expect(actual.body).toEqual(expected);
+            
+        })
     })
+
+    // describe('/post', () => {
+    //     it('should run the server and display initial message', async () => {
+
+    //         // arrange
+    //         const expected = { api: 'running' };
+
+    //         // act
+    //         const actual = await request(server).get('/');
+
+    //         // assert
+    //         expect(actual.status).toEqual(200);
+    //         expect(actual.type).toEqual('application/json')
+    //         expect(actual.body).toEqual(expected);
+            
+    //     })
+    // })
+
+
+
 })
