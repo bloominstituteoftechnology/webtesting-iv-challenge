@@ -36,7 +36,7 @@ describe('/pets', () => {
 
             // assert
             expect(newPet.name).toEqual('Comrade');
-            // expect(response.status).toBe(201);
+            // expect(newPet.status).toEqual(200);
             done();
         });
 

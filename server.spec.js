@@ -6,10 +6,10 @@ describe('/', () => {
     it('should run server', async () => {
       const expected = { api: 'Server running!' };
   
-      const actual = await request(server).get('/');
+      const response = await request(server).get('/');
   
-      expect(actual.status).toEqual(200);
-      expect(actual.type).toEqual('application/json');
-      expect(actual.body).toEqual(expected);
+      expect(response.status).toEqual(200);
+      expect(response.type).toEqual('application/json');
+      expect(response.body).toEqual(expected);
     });
   });
