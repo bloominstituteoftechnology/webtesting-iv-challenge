@@ -21,11 +21,20 @@ describe("User model", () => {
   });
 
   it("should hash the password before saving the user", async () => {
-    const user = { username: "frodo", password: "baggins" };
+    const user = { username: "frodo", password: "bagginsbaggins" };
 
     const savedUser = await User.create(user);
 
     expect(savedUser.password).not.toEqual(user.password);
     expect(savedUser.password).toHaveLength(60);
+  });
+
+  it("username and password should be strings", async () => {
+    const user = { username: "frodo", password: "bagginsbaggins" };
+
+    const savedUser = await User.create(user);
+
+    expect(typeof savedUser.username).toEqual("string");
+    expect(typeof savedUser.password).toEqual("string");
   });
 });
