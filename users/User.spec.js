@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const User = require('./user');
+const User = require('./User');
 const request = require('supertest');
 const server = require('../server');
 
 describe('POST & DELETE to /users', () => {
-  const user = { username: 'jeffrey', password: 'flynn' };
+  const user = { username: 'david', password: 'morales' };
   
   beforeAll(() => {
     return mongoose
