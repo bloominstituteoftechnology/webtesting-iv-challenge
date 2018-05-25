@@ -6,12 +6,25 @@ const server = require('./server');
 
 describe('server', () => {
   beforeAll(() => {
-    return mongoose
+    mongoose
       .connect('mongodb://localhost/testingdb')
       .then(console.log('connected to test db'))
       .catch(err => console.log(err)); 
 
   });
+
+  
+  afterAll( async () => {
+    try {
+      await Fries.remove(); // actually don't need this as we delete the only user at last test
+      mongoose.disconnect();
+    } 
+    catch(err) {
+      console.log(err)
+    }
+  });
+
+
 
   it('should save a fries object', async () => {
     const fries = {
@@ -31,12 +44,9 @@ describe('server', () => {
       console.log(err);
     }
 
-    delete response.body.__v;
-    delete response.body._id;
-
     expect(response.status).toBe(200);
     expect(response.type).toBe('application/json');
-    expect(response.body).toEqual(fries);
+    expect(response.body).toMatchObject(fries);
   });
 
   it('should return validation error if fries info incomplete', async () => {
@@ -55,9 +65,6 @@ describe('server', () => {
     catch(err) {
       console.log(err);
     }
-
-    delete response.body.__v;
-    delete response.body._id;
 
     expect(response.status).toBe(500);
     expect(response.type).toBe('application/json');

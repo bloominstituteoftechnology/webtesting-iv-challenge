@@ -12,6 +12,16 @@ describe('Fries', () => {
 
   });
 
+  afterAll( async () => {
+    try {
+      await Fries.remove();
+      mongoose.disconnect();
+    } 
+    catch(err) {
+      console.log(err)
+    }
+  });
+
   it('should super size', async () => {
     let fries;
 
