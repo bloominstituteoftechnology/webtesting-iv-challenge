@@ -77,5 +77,19 @@ describe('Server API', () => {
         expect(response.body.user).toMatchObject(updatedUser)
       })
   })
+
+  it('responds to a delete to /api/users/:id with the deleted document', async () => {
+    const user = { username: userName(), password: password() }
+    const document = new User(user)
+    const { _id } = document
+    return document.save()
+      .then(async () => {
+        const response = await request(server).delete(`/api/users/${_id}`)
+
+        expect(response.status).toBe(200)
+        expect(response.type).toBe('application/json')
+        expect(response.body.user).toMatchObject({ username: user.username })
+      })
+  })
 })
 

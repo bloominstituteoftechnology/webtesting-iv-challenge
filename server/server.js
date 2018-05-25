@@ -33,4 +33,10 @@ server.put('/api/users/:id', (req, res) => {
     .catch(err => res.status(500).send(err))
 })
 
+server.delete('/api/users/:id', (req, res) => {
+  User.findByIdAndRemove(req.params.id)
+    .then(user => res.status(200).send({ user }))
+    .catch(err => res.status(200).send(err))
+})
+
 module.exports = server
