@@ -47,7 +47,7 @@ describe('/notes', () => {
     describe('POST notes', () => {
         beforeAll(() => {
             mongoose
-            .connect(`mongodb://localhost/testnotedb`)
+            .connect(`mongodb://localhost/notesdb`)
             .then(connected => {
                 console.log('Connected')
             })
@@ -56,69 +56,77 @@ describe('/notes', () => {
             })
         })
 
-        afterAll(() => {
-            mongoose.disconnected()
-        })
+        beforeEach(() => {
+            // return User.remove();
+          });
+        
+          afterEach(() => {
+            // return Note.remove();
+          });
+        
+          afterAll(() => {
+            return mongoose.disconnect();
+          });
 
         it('checks if note is created properly', async () => {
             // arrange
-            const noteBody = { title: 'Choresz', body: 'Pick up milk', password: 'dabadoo'}
-
+            const noteBody = { username: 'Uname1', title: 'Test successfull', password: 'pass'}
+            const newTitle = noteBody.title;
             // act
             const newNote = await Note.create(noteBody);
 
             // assert
-            expect(newNote.title).toEqual('Choresz');
+            console.log('New note',newNote);
+            console.log('noteBody', noteBody);
 
-        })
-
-        it('checks if password is properly hashed', async () => {
-            // arrange
-            const noteBody = { title: 'Chores', body: 'Pick up milk', password: 'dabadoo'}
-
-            // act
-            const newNote = await Note.create(noteBody);
-
-            // assert
+            expect(newNote.title).toBe(newTitle);
             expect(newNote.password).not.toEqual(noteBody.password);
-
+            expect(typeof newNote.checkPassword).toBe('function')
         })
+
+
     })
 
-    // DELETE notes
-    describe('DELETE notes', () => {
-        beforeAll(() => {
-            mongoose
-            .connect(`mongodb://localhost/testnotedb`)
-            .then(connected => {
-                console.log('Connected')
-            })
-            .catch(err => {
-                console.log('Not Connected')
-            })
+// DELETE notes
+describe('DELETE notes', () => {
+    beforeAll(() => {
+        mongoose
+        .connect(`mongodb://localhost/notesdb`)
+        .then(connected => {
+            console.log('Connected')
         })
-
-        it('checks if id being passed in is an object', async () => {
-
-            // arrange
-            const id = { _id: "5b072a80f10812f8b16a5edf" }
-           
-            // assert
-            expect(typeof id).toBe('object')
-        })
-
-        it('checks if note is deleted', async () => {
-
-            // arrange
-            // const id = { _id: "5b072aa2bcb8aef8bdd7c688" }
-            // const title = { title: 'Choresz'}
-
-            // act
-            // const note = await Note.findOneAndRemove(title);
-            
-            // assert
-            // expect(title).not.toEqual(note.title)
+        .catch(err => {
+            console.log('Not Connected')
         })
     })
+    beforeEach(() => {
+        // return User.remove();
+      });
+    
+      afterEach(() => {
+        // return Note.remove();
+      });
+    
+      afterAll(() => {
+        return mongoose.disconnect();
+      });
+    // afterAll(() => {
+    //     mongoose.disconnect()
+    // })
+    
+    it('checks if note is deleted', async () => {
+        
+        // arrange
+        const id = { _id: "5b07addac4a89c42f5f9eb30"}
+        
+        const notes = Note.findById(id);
+
+        // act
+        const note = await Note.findByIdAndRemove(id);
+        
+        // assert
+        expect(await notes).toBeNull()
+    })
+})
 
 })

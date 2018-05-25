@@ -6,9 +6,12 @@ const notesSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
-  password: String,
+  password: {
+    type: String,
+    required: true,
+  },
   notes: {
-      type: Object,
+      type: String,
       required: false,
   },
   title: String,
@@ -27,5 +30,7 @@ notesSchema.pre('save', function(next) {
       next(err);
     });
 });
-
+notesSchema.methods.checkPassword = function (inputPassword) {
+  return bcrypt.compare(inputPassword, this.password);
+};
 module.exports = mongoose.model('Notes', notesSchema);
