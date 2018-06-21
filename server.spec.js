@@ -16,7 +16,7 @@ describe('server', () => {
   });
 
   it('should post new users', async() => {
-    const newUser = { username: 'lilac', password: 'whatever' };
+    const newUser = { username: 'goodbye', password: 'hello' };
     const response = await request(server).post('/').send(newUser);
 
     expect(response.status).toEqual(201);
@@ -24,18 +24,18 @@ describe('server', () => {
     expect(response.body).toHaveProperty('username');
     expect(response.body).toHaveProperty('password');
   });
-
+  
   it('should be able to update existing user', async() => {
     const updatedUser = { username: 'smurf', password: 'goodbye' };
-    const id = '5b2c2471bc766828ff7d14fc';
-    const response = await request(server).put(`/${id}`).send(updatedUser);
+   // const id = '5b2c2471bc766828ff7d14fc';
+    const response = await request(server).put('/put').send(updatedUser);
   
     expect(response.status).toEqual(200);
   });
  
   it('should delete user and return a status message', async() => {
-    let id = '5b2c181ce6be5a2581435451';
-    const response = await request(server).delete(`/${id}`);
+    //let id = '5b2c181ce6be5a2581435451';
+    const response = await request(server).delete('/delete');
     expect(response.body).toEqual('deleted');
   });
  

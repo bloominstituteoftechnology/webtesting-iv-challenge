@@ -37,7 +37,7 @@ server.post('/', (req, res) => {
     });
 });
 
-server.put('/:id', (req,res) => {
+server.put('/put', (req,res) => {
   const { username, password } = req.body;
   const id = req.params.id;
   User.findByIdAndUpdate( id, { username, password } ).then(user => {
@@ -54,7 +54,7 @@ server.put('/:id', (req,res) => {
   });
 });
 
-server.delete('/:id', (req,res) => {
+server.delete('/delete', (req,res) => {
   const { id } = req.params;
   User.findByIdAndRemove(id)
     .then(response => {
