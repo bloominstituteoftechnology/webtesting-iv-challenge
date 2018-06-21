@@ -15,10 +15,10 @@ describe('server.js', () => {
     expect(response.type).toEqual('application/json'); 
 
     //create the user 
-    // let supertestResponse = await request(server).get('/hobbits');
+    let supertestResponse = await request(server).get('/hobbits');
 
-    // supertestResponse = await request(server).delete('/hobbits');
-    // supertestResponse = await request(server).get('/hobbits');
+    supertestResponse = await request(server).delete('/hobbits');
+    supertestResponse = await request(server).get('/hobbits');
 
     });
 }); 
