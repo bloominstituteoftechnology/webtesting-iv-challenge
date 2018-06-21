@@ -14,7 +14,7 @@ describe('user model', () => {
         return mongoose.disconnect();
     });
 
-    it('should hash passwords before storing to the DB, pw should have a length of 60', async () => {
+    it('should hash passwords before storing to the DB, hashed pw should have a length of 60', async () => {
         const user = { username: 'bilbo', password: 'baggins' };
 
         const savedUser = await User.create(user)
@@ -28,7 +28,7 @@ describe('user model', () => {
 
         expect(savedUser.username).toEqual(user.username);
     })
-    it('should return status code 204, after succesfully deleting a user', async () => {
+    it('should return the deleted resource', async () => {
         const user = { username: 'bilbo', password: 'baggins' };
 
         const savedUser = await User.create(user)
