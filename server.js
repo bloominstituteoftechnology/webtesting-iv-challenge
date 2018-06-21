@@ -24,6 +24,7 @@ server.use(express.json());
  * DEFINE: Endpoints.
  */
 server.get('/', (req, res) => res.send({ status: 'API Running...' }));
+server.post('/', handlePOST);
 
 /**
  * DEFINE: global Post-Middlewares if any
@@ -37,5 +38,22 @@ server.get('/', (req, res) => res.send({ status: 'API Running...' }));
 // server.listen(port, () => {
 //   console.log(`Server up and running on ${port}`);
 // });
+
+/**
+ * ROUTE HANDLERS: define route handlers
+ */
+function handlePOST(req, res, next) {
+  const parameters = req.body;
+
+  const toPost = new db(parameters);
+  toPost
+    .save()
+    .then(newDocument => {
+      res.status(201).json(newDocument);
+    })
+    .catch(e => {
+      next(e);
+    });
+}
 
 module.exports = server;

@@ -14,7 +14,7 @@ afterAll(() => {
   return db.disconnect();
 });
 
-describe.only('GET', () => {
+describe('GET', () => {
   const endpoint = '/';
   let response;
   beforeAll(async () => {
@@ -29,7 +29,12 @@ describe.only('GET', () => {
 });
 describe('POST', () => {
   const endpoint = '/';
-  test('Request`s body must be of type JSON', () => {});
+  const newData = { field1: 'Hola Caracola', field2: 'qué pasa calbaza', password: 'no te lo vas a creer' };
+  let response;
+  beforeAll(async () => {
+    response = await request(server).post(newData);
+  });
+  test.only('Request`s body must be of type JSON', () => {});
   test('Collection.create( newDocument ) -> must return the newy created Document', () => {});
   test('If Document to create contains a password -> Encrypt password', () => {});
 });
