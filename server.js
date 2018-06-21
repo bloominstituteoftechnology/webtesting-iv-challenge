@@ -1,12 +1,13 @@
 const express = require('express');
 const mongoose = require("mongoose");
 const server = express();
-const Book = require("./bookModels/Books");
+const book = require("./bookModels/Book");
+
 server.use(express.json());
 
 mongoose
   .connect("mongodb://localhost/bookdb")
-  .then(mongo => {
+  .then(mongoose => {
     console.log("connected...");
   })
   .catch(err => {
@@ -21,10 +22,14 @@ server.get('/', (req, res) => {
   })
 });
 
-server.get("/books", (req, res) => {
+server.delete("/", (req, res) => {
+  res.status(200).send("Deleted successfully");
+});
+
+server.get("/book", (req, res) => {
   Book.find()
-    .then(Books => {
-      res.status(200).json(books);
+    .then(Book => {
+      res.status(200).json(book);
     })
     .catch(err => {
       res
@@ -55,7 +60,7 @@ server.post("/", (req, res) => {
 });
 
 server.delete('/:id', (req, res) => {
-  User.findByIdAndRemove(req.params.id)
+  Book.findByIdAndRemove(req.params.id)
     .then(book => {
       if (book === null)
         res.status(404).json({
