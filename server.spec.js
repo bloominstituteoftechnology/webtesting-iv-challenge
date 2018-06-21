@@ -1,6 +1,6 @@
 const request = require('supertest');
 const mongoose = require('mongoose');
-const User = require('./users/Users');
+// const User = require('./user/User');
 const server = require('./server');
 
 describe('server', () => {
@@ -32,7 +32,7 @@ describe('server', () => {
         expect(response.status).toEqual(201);
 
         const response = await request(server)
-            .post('/api/users')
+            .post('/api/user')
             .send(expected);
         expect(response.body.username).toEqual(expected.username);            
     })
