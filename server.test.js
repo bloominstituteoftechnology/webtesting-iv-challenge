@@ -1,5 +1,5 @@
-const request = require('request');
-const server = require('server');
+const request = require('supertest');
+const server = require('./server');
 
 describe('server.js', () => {
   it('should return OK status code and a JSON object from the index route', async () => {
@@ -8,7 +8,7 @@ describe('server.js', () => {
       body: {
         api: 'running'
       },
-      type: 'application/JSON'
+      type: 'application/json'
     };
     const response = await request(server).get('/');
     expect(response.status).toBe(expected.status);
