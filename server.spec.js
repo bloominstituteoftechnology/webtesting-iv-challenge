@@ -1,6 +1,6 @@
 const request = require('supertest');
 const mongoose = require('mongoose');
-// const User = require('./user/User');
+const User = require('./users/User');
 const server = require('./server');
 
 describe('server', () => {
@@ -30,11 +30,10 @@ describe('server', () => {
 
     it('should respond with a 201 code and the user object when one is created', async () => {
         const expected = { username: 'lambda', password: 'school' };
-        expect(response.status).toEqual(201);
-
         const response = await request(server)
             .post('/api/user')
             .send(expected);
+        expect(response.status).toEqual(201);
         expect(response.body.username).toEqual(expected.username);            
     })
 
