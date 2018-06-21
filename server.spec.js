@@ -25,16 +25,6 @@ describe('server.js', () => {
     const response = await request(server).post('/api/users').send(body).set('Accept', 'application/json');
 
     expect(response.status).toEqual(201);
-    
-    // request(server).post('/api/users')
-    //   .send(body)
-    //   .set('Accept', 'application/json')
-    //   .expect(res => {
-    //     res.body.username = body.username;
-    //   })
-    //   .expect(201, {
-    //     name: body.username
-    //   }, done)
   });
 
   // it('should return a status code of 200 and the deleted user', async () => {
