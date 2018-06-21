@@ -1,0 +1,55 @@
+{
+    "Named Import": {
+      "prefix": "nim",
+      "body": "import { $2 } from '$1';$0"
+    },
+    "Default Import": {
+      "prefix": "dim",
+      "body": "import $1 from '$2';$0"
+    },
+    "iife": {
+      "prefix": "iife",
+      "body": "(function() {\n\t'use strict';\n\n\t$0\n\n})();",
+      "description": "Immediately Invoked Function Expression"
+    },
+    "ngComponent": {
+      "prefix": "ngc",
+      "body": "(function() {\n\t'use strict';\n\n\tangular.module('$1').component('$2', {\n\t\ttemplateUrl: '$3',\n\t\tcontroller: Controller,\n\t\tcontrollerAs: 'model',\n\t\tbindings: {$4},\n\t});$0\n\n})();",
+      "description": "AngularJS Component"
+    },
+    "ngModule": {
+      "prefix": "ng",
+      "body": "(function() {\n\t'use strict';\n\n\tangular.module('$1');\n\n\t$0\n\n})();",
+      "description": "AngularJS Module"
+    },
+    "nodeRequire": {
+      "prefix": "rem",
+      "body": "const $1 = require('$1$2');$0",
+      "description": "CommonJS Require"
+    },
+    "routeHandler": {
+      "prefix": "rhl",
+      "body": "'/$1', (req, res) => {\n\t$0\n}",
+      "description": "node.js route handler"
+    },
+    "Node post route": {
+      "prefix": "postroute",
+      "body": "server.post('/$1', (req, res) => {\n\t$0\n});",
+      "description": "node.js post route handler"
+    },
+    "Node get route": {
+      "prefix": "getroute",
+      "body": "server.get('/$1', (req, res) => {\n\t$0\n});",
+      "description": "node.js get route handler"
+    },
+    "Jest test case": {
+      "prefix": "jestit",
+      "body": "it('$1', () => {\n\t$0\n});",
+      "description": "jest test case"
+    },
+    "Jest test suite": {
+      "prefix": "jestst",
+      "body": "describe('$1', () => {\n\t$0\n});",
+      "description": "jest test suite"
+    }
+  }
