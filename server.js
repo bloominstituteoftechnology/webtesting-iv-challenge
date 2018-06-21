@@ -6,6 +6,7 @@ const express = require('express');
 
 /* Server */
 const server = express();
+const drinkRoutes = require('./routes/drinkRoutes');
 // General Middleware
 // server.use(helmet());
 // server.use(cors());
@@ -17,6 +18,8 @@ server.use(express.json());
 server.get('/', (req, res) => {
   res.status(200).json({ api: "is running" });
 });
+
+server.use('/drinks',drinkRoutes);
 
 /* Server Listen START! */
 // const port = process.env.PORT || 5500;
