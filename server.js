@@ -26,18 +26,18 @@ server.post('/api/users', (req, res) => {
         .catch(err => {
             res.status(500).json(err);
         })
-
-    // const newUser = new User({ username, password });
-    // newUser
-    //     .save()
-    //     .then(savedUser => {
-    //         res.status(201).json(savedUser);
-    //     })
-    //     .catch(err => {
-    //         res.status(500).json(err);
-    //     })
 })
 
+server.delete('/api/users/id', (req, res) => {
+    User
+        .findByIdAndRemove(req.params.id)
+        .then(user => {
+            res.status(200).json({ success: `User with id ${req.params.id} has been removed from the database.` })
+        })
+        .catch(err => {
+            res.status(500).json({ error: "The user could not be removed" })
+        })
+})
 
 if (process.env.NODE_ENV !== 'test') 
     server.listen(port, () => console.log(`\n\n\n\n\n===== Server listening at http://localhost:${ port }`));
