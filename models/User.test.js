@@ -2,12 +2,11 @@ const mongoose = require('mongoose');
 const User = require('./User');
 
 describe('user model', () => {
-  const testUser = {
-    username: 'dannyv',
-    password: 'password'
-  };
+  const testUser = {};
 
   beforeAll(() => {
+    testUser.username = 'dannyv';
+    testUser.password = 'password';
     return mongoose.connect('mongodb://localhost/testdb');
   });
 
@@ -25,10 +24,12 @@ describe('user model', () => {
   });
 
   it('should have method isValidPassword that checks if given password is correct', async () => {
-    const correctPassword = testUser.password;
-    const incorrectPassword = `not${correctPassword}`;
     const savedUser = await User.create(testUser);
-    expect(savedUser.isValidPassword(correctPassword)).toBeTruthy();
-    expect(savedUser.isValidPassword(incorrectPassword)).toBeFalsy();
+    const correctPassword = await savedUser.isValidPassword(testUser.password);
+    const incorrectPassword = await savedUser.isValidPassword(
+      `not${correctPassword}`
+    );
+    expect(correctPassword).toBeTruthy();
+    expect(incorrectPassword).toBeFalsy();
   });
 });
