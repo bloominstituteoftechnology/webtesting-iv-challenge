@@ -4,6 +4,7 @@
   "description": "Server Testing Project",
   "main": "server.js",
   "scripts": {
+    "start": "nodemon server.js",
     "test": "cross-env NODE_ENV=test jest --watch --verbose"
   },
   "jest": {
@@ -27,6 +28,7 @@
   },
   "dependencies": {
     "express": "^4.16.3",
-    "mongoose": "^5.1.2"
+    "mongoose": "^5.1.2",
+    "nodemon": "^1.17.5"
   }
 }
