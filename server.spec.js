@@ -14,14 +14,14 @@ describe('server.js', () => {
         expect(response.body).toEqual(expectedBody);
     });
 
-    // it('should return all posts at route /posts', async () => {
-    //     const expectedStatusCode = 200;
-    //     const expectedBody = { api: 'running' };
+    it('should return all posts at route /posts', async () => {
+        const expectedStatusCode = 200;
+        const expectedBody = { api: 'running' };
 
-    //     const posts = await superTestRequest(server).get('/posts');
+        const posts = await superTestRequest(server).get('/posts');
         
-    //     expect(posts.status).toEqual(expectedStatusCode);
-    //     expect(posts.type).toEqual('application/json');
-    //     expect(posts.body).toEqual(expectedBody);
-    // })
+        expect(posts.status).toEqual(expectedStatusCode);
+        expect(posts.type).toEqual('application/json');
+        expect(posts).toEqual(expectedBody);
+    })
 });
