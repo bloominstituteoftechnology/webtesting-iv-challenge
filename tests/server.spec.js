@@ -34,9 +34,12 @@ describe('server.js', () => {
     it('POST: Makes a new drink with a 201 smile and JSON response.', async () => {
       const expectedStatusCode = 201;
   
-      const response = await superRequest(server).post('/drinks',testDrink);
+      const response = await superRequest(server)
+        .post('/drinks')
+        .send(testDrink);
+
       expect(response.status).toBe(expectedStatusCode);
-      expect(response.body).toEqual(testDrink);
+      expect(response.body).toEqual(expect.objectContaining(testDrink));
     });
 
     it('POST: Rejects your drink order because you can\'t speak Italian', async () => {
@@ -58,13 +61,15 @@ describe('server.js', () => {
   
       const response = await superRequest(server).get('/drinks');
       expect(response.status).toBe(expectedStatusCode);
-      expect(response.body).toEqual([testDrink]);
+      expect(response.body).toEqual([expect.objectContaining(testDrink)]);
     });
 
     it('DOES NOT GET: no coffee for you, bruh', async () => {
       const expectedStatusCode = 418;
 
-      const response = await superRequest(server).get('/drinks', {type: "coffee"});
+      const response = await superRequest(server)
+        .get('/drinks')
+        .send({type: "coffee"});
       expect(response.status).toBe(expectedStatusCode);
     });
   
@@ -72,15 +77,21 @@ describe('server.js', () => {
     it('DELETE: Throws away the drink because it\'s not alcoholic', async () => {
       const expectedStatusCode = 200;
       const { name } = testDrink;
-      const response = await superRequest(server).delete('/drinks', {name});
+      
+      const response = await superRequest(server)
+        .delete('/drinks')
+        .send({ name });
       expect(response.status).toBe(expectedStatusCode);
-      expect(response.body).toEqual([testDrink]);
+      expect(response.body).toEqual(expect.objectContaining(testDrink));
     });
     
     it('DELETE: Cannot throw away what hasn\'t been made', async () => {
-      const expectedStatusCode = 400;
+      const expectedStatusCode = 404;
     
-      const response = await superRequest(server).delete('/drinks', { name: "Orion" });
+      const response = await superRequest(server)
+        .delete('/drinks')
+        .send({ name: "Orion" });
+
       expect(response.status).toBe(expectedStatusCode);
     });
   });
