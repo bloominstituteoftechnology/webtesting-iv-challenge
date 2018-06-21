@@ -1,5 +1,5 @@
 const request = require('supertest');
-const server = express()
+const server = require('./server')
 
 describe('server.js', () => {
     it('should return OK and a JSON object from the index route', async () => {

@@ -26,7 +26,9 @@
     "supertest": "^3.1.0"
   },
   "dependencies": {
+    "bcrypt": "^2.0.1",
     "express": "^4.16.3",
-    "mongoose": "^5.1.2"
+    "mongoose": "^5.1.2",
+    "nodemon": "^1.17.5"
   }
 }
