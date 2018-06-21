@@ -2,9 +2,8 @@ const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 
+const friendController = require('./friends/friendController');
 const db = require('./data/db.js');
-const charactersRouter = require('./characters/charactersRouter.js');
-const filmsRouter = require('./films/filmsRouter.js');
 const server = express();
 
 mongoose
@@ -15,8 +14,7 @@ mongoose
 server.use(helmet());
 server.use(express.json());
 
-server.use('/api/characters', charactersRouter);
-server.use('/api/films', filmsRouter);
+server.use('/api/friends', friendController);
 
 server.get('/', (req, res) => res.send('API Running...'));
 
