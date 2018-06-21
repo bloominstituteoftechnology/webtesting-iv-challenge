@@ -22,8 +22,11 @@ server.get('/', (req, res) => {
 });
 
 server.post('/api/users', (req, res) => {
-    console.log(req.body);
     const { username, password } = req.body;
+    if (!username || !password) {
+        res.status(404).json({bullshit: "bullshit"});
+        return;
+    }
     User
         .create({ username, password })
         .then((user) => {
@@ -33,6 +36,11 @@ server.post('/api/users', (req, res) => {
 });
 
 server.delete('/api/users', (req, res) => {
+    const { password } = req.body;
+    if (!password) {
+        res.status(404).json({bullshit: "bullshit"});
+        return;
+    }
     User
         .remove({})
         .then((result) => {

@@ -30,10 +30,28 @@ describe('server.js', () => {
     expect(response.type).toEqual('application/json');
   });
 
-  it('should return 200 and JSON object when deleting to api/users', async () => {
+  it('should return 404 and JSON object when deleting to api/users without a password', async () => {
+    const expectedStatusCode = 404;
+
+    const response = await request(server).delete('/api/users').send({ bullshit: 'bullshit' });
+
+    expect(response.status).toEqual(expectedStatusCode);
+    expect(response.type).toEqual('application/json');
+  });
+
+  it('should return 200 and JSON object when deleting to api/users with a password', async () => {
     const expectedStatusCode = 200;
 
-    const response = await request(server).delete('/api/users');
+    const response = await request(server).delete('/api/users').send({ password: 'password' });
+
+    expect(response.status).toEqual(expectedStatusCode);
+    expect(response.type).toEqual('application/json');
+  });
+
+  it('should return 404 and JSON error message if no username and password are provided to post', async () => {
+    const expectedStatusCode = 404;
+
+    const response = await request(server).post('/api/users').send({ bullshit: "some bullshit" });
 
     expect(response.status).toEqual(expectedStatusCode);
     expect(response.type).toEqual('application/json');
