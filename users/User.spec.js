@@ -7,6 +7,14 @@ describe('User model', () => {
         return mongoose.connect('mongodb://localhost/testdb')
     })
 
+    afterEach(() => {
+        return User.remove();
+    })
+
+    afterAll(() => {
+        return mongoose.disconnect();
+    })
+
     it('should hash users password before saving', async() => {
         const user = { username: 'gollum', password: 'precious' };
 
