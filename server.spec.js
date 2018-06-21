@@ -32,9 +32,23 @@ describe('server.js', () => {
         const expectedStatusCode = 201;
         const expectedBody = { username: 'braden', password: 'password' };
 
-        const newUser = await request(server).post('/users').send(expectedBody).set('Accept', 'application/json');
+        const newUser = await request(server).post('/users').send(expectedBody);
 
         expect(newUser.body.username).toEqual('braden');
         expect(newUser.body.password).not.toEqual('password');
+    });
+
+    it('should return a JSON object with the deleted user and a deleted status code', async () => {
+        const expectedStatusCode = 200;
+        const expectedBody = { username: 'braden', password: 'password' };
+
+        const newUser = await request(server).post('/users').send(expectedBody).set('Accept', 'application/json');
+        const deleteUser = await request(server).delete(`/users/${newUser.body._id}`).set('Accept', 'application/json');
+
+        expect(newUser.body.username).toEqual('braden');
+        expect(newUser.body.password).not.toEqual('password');
+
+        expect(deleteUser.body.username).toEqual('braden');
+        expect(deleteUser.body.password).not.toEqual('password');
     });
 });
