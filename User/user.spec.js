@@ -8,7 +8,7 @@ const User = require('./User')
   });
 
   afterEach(() => {
-    return User.remove();
+    // return User.remove(); 
   })
 
   afterAll(() => {
@@ -26,14 +26,18 @@ const User = require('./User')
     
   // })
 
-  it('did it delete'), async () => {
-    const username = {username: 'steve', password: 'MrSteve'};
-    console.log('test')
+  it('did it delete', async () => {
+    const username = {username: 'steve1', password: 'MrSteve'};
+    
     const newHuman = await User.create(username);
-    // const goodBye = await User.remove(newHuman)
-
-    // expect(goodBye.name).not.toEqual(username.username)
-  }
+      
+    
+    expect(newHuman.username).toEqual(username.username);
+    await User.findOneAndRemove({username: 'steve1'});
+    const findSteve = await User.find({username: 'steve1'});
+    
+    expect(findSteve.username).toEqual(undefined)
+  })
 
 
 
