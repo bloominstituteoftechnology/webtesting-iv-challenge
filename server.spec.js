@@ -23,10 +23,11 @@ describe('server.js', () => {
 
   it('should return 201 and JSON object when posting to api/users', async () => {
     const expectedStatusCode = 201;
-
-    const response = await request(server).post('/api/users').send({ username: "john", password: "something"});
+    const body = { username: "john", password: "something"}
+    const response = await request(server).post('/api/users').send(body);
 
     expect(response.status).toEqual(expectedStatusCode);
+    expect(response.body).toMatchObject({ username: "john" });
     expect(response.type).toEqual('application/json');
   });
 
@@ -43,8 +44,8 @@ describe('server.js', () => {
     const expectedStatusCode = 200;
 
     const response = await request(server).delete('/api/users').send({ password: 'password' });
-
     expect(response.status).toEqual(expectedStatusCode);
+    expect(response.body).toMatchObject({ "ok": 1 });
     expect(response.type).toEqual('application/json');
   });
 

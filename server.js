@@ -57,8 +57,8 @@ mongoose.connect('mongodb://localhost/testdb', {}, err => {
   console.log('Mongoose connected us to our DB');
 });
 
-server.listen(port, () => {
-    console.log(`\n=== API running on http://localhost:${port} ===\n`);
-  });
+// server.listen(port, () => {
+//     console.log(`\n=== API running on http://localhost:${port} ===\n`);
+//   });
 
 module.exports = server;
