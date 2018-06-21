@@ -19,11 +19,18 @@ describe('server.js', () => {
     expect(response.body).toEqual(expectedBody);
     expect(response.type).toEqual('application/json');
 
-    // create the user
-    let supertestResponse = await request(server).get('/123');
     // check the user exist
-    supertestResponse = await request(server).delete('/123');
-    supertestResponse = await request(server).get('/123');
+    // supertestResponse = await request(server).delete('/123');
+    // supertestResponse = await request(server).get('/123');
+
+  });
+  it('should return an OK status code and a JSON object fron /api/todos', async () => {
+    const expectedStatusCode = 200;
+
+    // get all todos
+    let response = await request(server).get('/api/todos');
+
+    expect(response.status).toEqual(expectedStatusCode);
 
   });
 });
