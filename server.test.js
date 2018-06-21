@@ -1,5 +1,5 @@
 const server = require('./server');
-const Request = require('supertest');
+const request = require('supertest');
 const db = require('./data/db');
 
 beforeAll(() => {
@@ -11,9 +11,15 @@ afterAll(() => {
   return db.disconnect();
 });
 
-describe('GET', () => {
+describe.only('GET', () => {
   const endpoint = '/';
-  test('Return a 200 code', () => {});
+  let response;
+  beforeAll(async () => {
+    response = await request(server).get('/');
+  });
+  test('Return a 200 code', async () => {
+    expect(response.status).toEqual(200);
+  });
   test('Response`s body is of type JSON', () => {});
 });
 describe('POST', () => {

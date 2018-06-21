@@ -32,7 +32,9 @@ server.get('/', (req, res) => res.send('API Running...'));
 /**
  *  LAUNCH SERVER:
  */
-const port = process.env.PORT || 6666;
-server.listen(port, () => {
-  console.log(`Server up and running on ${port}`);
-});
+// const port = process.env.PORT || 6767;
+// server.listen(port, () => {
+//   console.log(`Server up and running on ${port}`);
+// });
+
+module.exports = server;
