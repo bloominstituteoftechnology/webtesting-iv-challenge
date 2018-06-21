@@ -1,13 +1,16 @@
-const mongoose = require('mongoose');
-const Post = require('./Post');
+const request = require('supertest');
 
+const server = require('./server');
 
-describe('post model', () => {
-    
-    it('should have a post body', async () => {
-        const post = { title: 'test', body: 'test' }
-        const savedPost = await Post.create(post);
+describe('server.js', () => {
+    it('should return an OK status code and a JSON object from the index route', async () => {
+        const expectedStatusCode = 200;
+        const expectedBody = { api: 'running' };
 
-        expect(savedPost.body).toEqual('test');
-    })
-})
+        const response = await request(server).get('/');
+
+        expect(response.status).toEqual(expectedStatusCode);
+        expect(response.type).toEqual('application/json');
+        expect(response.body).toEqual(expectedBody);
+    });
+});
