@@ -3,9 +3,12 @@ const request = require('supertest');
 const db = require('./data/db');
 
 beforeAll(() => {
-  db.connectTo('server_testing')
-    .then(() => console.log('\n... SERVER TEST Connected to Database ...\n'))
-    .catch(err => console.log('\n*** ERROR Connecting to Database ***\n', err));
+  /**
+   * db.connect(): if the connection is on server.js it is nor neccesary to connect here in the server.test.js
+   */
+  //   db.connectTo('server_testing')
+  //     .then(() => console.log('\n... SERVER TEST Connected to Database ...\n'))
+  //     .catch(err => console.log('\n*** ERROR Connecting to Database ***\n', err));
 });
 afterAll(() => {
   return db.disconnect();
@@ -20,7 +23,9 @@ describe.only('GET', () => {
   test('Return a 200 code', async () => {
     expect(response.status).toEqual(200);
   });
-  test('Response`s body is of type JSON', () => {});
+  test('Response`s body is of type JSON', () => {
+    expect(response.type).toBe('application/json');
+  });
 });
 describe('POST', () => {
   const endpoint = '/';

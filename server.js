@@ -23,7 +23,7 @@ server.use(express.json());
 /**
  * DEFINE: Endpoints.
  */
-server.get('/', (req, res) => res.send('API Running...'));
+server.get('/', (req, res) => res.send({ status: 'API Running...' }));
 
 /**
  * DEFINE: global Post-Middlewares if any
@@ -31,6 +31,7 @@ server.get('/', (req, res) => res.send('API Running...'));
 
 /**
  *  LAUNCH SERVER:
+ *  While testing: do not launch the server, it throws an Error when the test is launched. This Error do not interfere with the test.
  */
 // const port = process.env.PORT || 6767;
 // server.listen(port, () => {
