@@ -21,10 +21,11 @@ describe('server', () => {
 
     it('should respond with a 200 code and api: running', async () => {
         const expected = { api: 'running' };
-        expect(response.status).toEqual(200);
-
+        const expectCode = 200;
         const response = await request(server).get('/');
-        expect(response.body).toEqual(expectedBody);
+        expect(response.status).toEqual(expectCode);
+        expect(response.body).toEqual(expected);
+        expect(response.body).toEqual(expected);
     });
 
     it('should respond with a 201 code and the user object when one is created', async () => {
