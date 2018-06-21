@@ -9,13 +9,13 @@ describe('server.js', () => {
         return mongoose.connect('mongodb://localhost/servertestdb');
     });
 
-    // afterEach(() => {
-    //     return User.remove();
-    // });
+    afterEach(() => {
+        return User.remove();
+    });
 
-    // afterAll(() => {
-    //     return mongoose.disconnect();
-    // })
+    afterAll(() => {
+        return mongoose.disconnect();
+    })
 
     it('should return an OK status code and a JSON object from the index route', async () => {
         const expectedStatusCode = 200;
@@ -28,14 +28,13 @@ describe('server.js', () => {
         expect(response.type).toEqual('application/json');
     });
 
-    it.skip('should return a JSON object with the created user and a Created status code', async () => {
+    it('should return a JSON object with the created user and a Created status code', async () => {
         const expectedStatusCode = 201;
         const expectedBody = { username: 'braden', password: 'password' };
 
-        const newUser = await request(server).post('/users', (expectedBody));
+        const newUser = await request(server).post('/users').send(expectedBody).set('Accept', 'application/json');
 
-        expect(newUser.status).toEqual(expectedStatusCode);
-        expect(newUser.body).toEqual(expectedBody);
-        expect(newUser.type).toEqual('application/json');
+        expect(newUser.body.username).toEqual('braden');
+        expect(newUser.body.password).not.toEqual('password');
     });
 });

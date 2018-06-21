@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('./User');
 
-describe('user model', () => {
+describe.skip('user model', () => {
     beforeAll(() => {
         return mongoose.connect('mongodb://localhost/servertestdb');
     });
@@ -15,7 +15,7 @@ describe('user model', () => {
     });
 
     it('should hash the password before saving the user', async () => {
-        const user = { username: 'braden', password: 'password' };
+        const user = { username: 'steve', password: 'password' };
 
         const newUser = await User.create(user);
 
