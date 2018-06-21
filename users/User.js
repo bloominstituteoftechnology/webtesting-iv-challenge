@@ -20,7 +20,7 @@ userSchema.pre('save', function(next) {
         .then(hash => {
             this.password = hash;
         next();
-        });
+        })
 
         .catch(error => {
             next(error);

@@ -15,10 +15,10 @@ server.get('/users', (req, res) => {
         .find()
         .then(users => {
             res.status(200).json(users)
-        });
+        })
         .catch(error => {
             res.status(500).json({ 
-                errorMessage: error.message; 
+                errorMessage: error.message
             });
         });
 });
@@ -29,10 +29,10 @@ server.get('/users/:id', (req, res) => {
         .findById(id)
         .then(user => {
             res.status(200).json(users)
-        });
+        })
         .catch(error => {
             res.status(500).json({
-                errorMessage: error.message;
+                errorMessage: error.message
             });
         });
 })
@@ -55,7 +55,7 @@ server.delete('/users/:id', (req, res) => {
         .findByIdAndRemove(id)
         .then(response => res.status(200).json({
             response: 'user deleted'
-        }));
+        }))
         .catch(error => {
             res.status(500).json({
                 errorMessage: error.message
