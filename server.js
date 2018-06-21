@@ -22,16 +22,11 @@ app.get('/api/users', (req, res) => {
 })
 .post('/api/users', (req, res) => {
   const body = ({ username, password } = req.body);
-
+  
   User.create(body)
-    .exec((err, user) => {
-      if (err)
-        return res.status(500).json(err);
-        // return console.log(err);
-
-      res.status(201).json(user);
-    })
-})
+    .then(data => res.status(201).json(data))
+    .catch(err => res.status(500).json(err));
+});
 
 mongoose.connect('mongodb://localhost/servertesting')
   .then(() => console.log('\n===== DB Connected ====='))
