@@ -8,23 +8,23 @@ const User = require('./User')
   });
 
   afterEach(() => {
-    // return User.remove(); 
+    return User.remove(); 
   })
 
   afterAll(() => {
     return mongoose.disconnect();
   })
   
-  // it('tests if we have created anyting', async () => {
-  //   const username = {username: 'steve', password: 'MrSteve'};
-  //   const savedUser = await User.create(username);
+  it('tests if we have created anyting', async () => {
+    const username = {username: 'steve', password: 'MrSteve'};
+    const savedUser = await User.create(username);
 
-  //   const expectedStatusCode = 200
-  //   // console.log(savedUser)
-  //   expect(savedUser.username).toEqual(username.username);
-  //   // expect(savedUser.status).toEqual(expectedStatusCode)
+    const expectedStatusCode = 200
+    // console.log(savedUser)
+    expect(savedUser.username).toEqual(username.username);
+    // expect(savedUser.status).toEqual(expectedStatusCode)
     
-  // })
+  })
 
   it('did it delete', async () => {
     const username = {username: 'steve1', password: 'MrSteve'};
