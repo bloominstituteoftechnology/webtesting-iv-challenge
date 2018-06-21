@@ -1,6 +1,7 @@
-const request = require('supertest')
+const request = require('supertest');
 
-const server = require('./server'); // this is our first red, it doesn't exist
+// const server = require('./server'); // this is our first red, it doesn't exist
+
 
 describe('server.js', () => {
     
@@ -14,9 +15,7 @@ describe('server.js', () => {
     expect(response.status).toEqual(expectedStatusCode)
   });
 
-  it('tests if we have created anyting', async () => {
-      const expectedStatusCode = 200
-      const expectedBody = 
-  })
+ 
+  
   
 }); 
