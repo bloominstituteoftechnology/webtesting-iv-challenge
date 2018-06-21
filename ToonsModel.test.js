@@ -18,6 +18,7 @@ describe('Toon Model', () => {
 
         expect(newToon.name).toEqual(thrall.name);
         expect(newToon.franchise).toEqual(thrall.franchise)
+        expect(newToon.password).not.toEqual(thrall.password)
         expect(newToon.password).toHaveLength(60)
     })
 })
