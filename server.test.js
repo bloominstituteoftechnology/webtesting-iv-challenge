@@ -34,7 +34,14 @@ describe('POST', () => {
   beforeAll(async () => {
     response = await request(server).post(newData);
   });
-  test.only('Request`s body must be of type JSON', () => {});
+  test.only('Request`s body must contain valid data', async () => {
+    const responseToBadRequest = await request(server)
+      .post('/')
+      .send('Sending a String not a JSON');
+    console.log(responseToBadRequest.error.message);
+    expect(responseToBadRequest.status).toEqual(500);
+    expect(responseToBadRequest.error.message).toEqual('cannot POST / (500)');
+  });
   test('Collection.create( newDocument ) -> must return the newy created Document', () => {});
   test('If Document to create contains a password -> Encrypt password', () => {});
 });

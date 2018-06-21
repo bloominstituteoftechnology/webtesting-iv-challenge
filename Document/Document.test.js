@@ -3,7 +3,7 @@ const Document = require('./Document.model');
 beforeAll(() => {});
 
 describe('MongDB Document', () => {
-  test.only('Must valididate required fields', async () => {
+  test('Must valididate required fields', async () => {
     const newDocument = new Document({
       field1: 'Hola Caracola',
       field2: 'qué pasa calbaza',
@@ -14,9 +14,7 @@ describe('MongDB Document', () => {
         console.log('response', response);
       })
       .catch(e => {
-        console.log('error', e._message);
         const validation = e._message;
-        console.log('validation', validation);
         expect(validation).toEqual('Document validation failed');
       });
   });
