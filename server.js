@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const server = express();
 
+const User = require("./User");
+
 server.use(express.json());
 
 server.get('/', (req, res) => {
