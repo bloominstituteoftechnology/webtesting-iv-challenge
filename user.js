@@ -11,12 +11,15 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-userSchema.pre('save', function(){
-    bcrypt
-        .hash(this.password, 10)
-        .then(hash => {
-            this.password = hash;
+userSchema.pre('save', function (next) {
+    bcrypt.hash(this.password, 10, (err, hash) => {
+        if (err) {
+            next(err)
+        }
+        this.password = hash;
 
-            next();
-        })
-})
+        next();
+    });
+});
+
+module.exports = mongoose.model('User', userSchema, 'users');

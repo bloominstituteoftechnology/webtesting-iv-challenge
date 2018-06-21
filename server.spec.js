@@ -1,14 +1,18 @@
 //When making a GET request, the API should respond with a status code of 200
 
 const request = require('supertest');
+const mongoose = require('mongoose');
 const server = require('./server');
+
 
 describe('server.js', () => {
     beforeAll(() => {
         return mongoose.connect(`mongodb://localhost/testdb`)
-            .then(res => console.log('connected', res))
-            .catch(err => console.log('error', err))
+           
     }) 
+    afterAll(() => {
+        return server.disconnect();
+    })
 
      
     it('should return OK and a JSON object from the index route', async() => {
@@ -25,4 +29,3 @@ describe('server.js', () => {
     })
 
 })
-
