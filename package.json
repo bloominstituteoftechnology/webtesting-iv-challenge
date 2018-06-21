@@ -14,8 +14,8 @@
     "url": "git+https://github.com/LambdaSchool/Server-Testing.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Danny Vail",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/LambdaSchool/Server-Testing/issues"
   },
