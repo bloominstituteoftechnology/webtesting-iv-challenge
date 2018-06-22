@@ -23,13 +23,13 @@ describe('user model', () => {
         expect(savedUser.password).toHaveLength(60);
     })
     it('should return the correct username stored in the db', async () => {
-        const user = { username: 'bilbo', password: 'baggins' };
+        const user = { username: 'Marc', password: 'baggins' };
         const savedUser = await User.create(user)
 
         expect(savedUser.username).toEqual(user.username);
     })
     it('should return the deleted resource', async () => {
-        const user = { username: 'bilbo', password: 'baggins' };
+        const user = { username: 'Paul', password: 'baggins' };
 
         const savedUser = await User.create(user)
         const response = await User.findByIdAndRemove(savedUser._id)
