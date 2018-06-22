@@ -1,10 +1,10 @@
-const friendController = require('./friendController.js');
+const server = require('./server.js');
 const request = require('supertest');
 const mongoose = require('mongoose');
 
 describe('Films Router', () => {
   it('it should return OK and a JSON object from the index route', async() => {
-    const response = await request(friendController).get('/')
+    const response = await request(server).get('/')
 
     expect(response.status).toEqual(200);
     expect(response.body).toEqual({ api: 'running ' });
@@ -12,20 +12,19 @@ describe('Films Router', () => {
   });
 });
 
-describe('User Model', () => {
-  beforeAll(() => {
-    return mongoose.connect('mongodb://localhost/testdb');
-  })
-  afterEach(() => {
-    return User.remove;
-  })
-  afterAll(() => {
-    return mongoose.disconnect()
-  })
-  it('it should hash the password before saving the user', async() => {
-    const bilbo = { username: 'bilbo', password: 'baggins' }
-    const savedUser = await User.create(bilbo)
-    expect(savedUser.password).not.toEqual(bilbo.password);
-    expect(savedUser.password).toHaveLength(99);
+describe('Films Router - Create Films', () => {
+  it('POST create', async() => {
+    const newFilm = { title: 'A New Hope - Something' }
+    const response = await request(server).post('/films')
+      .send(newFilm)
+    expect(response.status).toEqual(201)
+
+  });
+});
+
+describe('Films Router - Delete Films', () => {
+  it('DELETE', async() => {
+    const response = await request(server).delete('/films/5b2c42cd7831a359e7bb8655')
+    expect(response.status).toEqual(200)
   });
 });
