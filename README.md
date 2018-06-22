@@ -32,3 +32,7 @@ We will also add integration tests to verify that the API is persisting and remo
 1.  Write the **tests BEFORE** writing the route handlers.
 1.  The `integration tests` can be written after the model is created.
 1.  Your `mongoose model` should have at least a `method` or `static` that is tested.
+
+---
+
+Project START!
