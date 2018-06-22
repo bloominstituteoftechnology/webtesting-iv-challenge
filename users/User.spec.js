@@ -24,4 +24,5 @@ describe('user model', () => {
     expect(savedUser.password).not.toEqual(bilbo.password);
     expect(savedUser.password).toHaveLength(60);
   });
+
 });
