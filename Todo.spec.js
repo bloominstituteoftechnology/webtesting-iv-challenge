@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const Todo = require('./Todo');
 
-describe('Todo model', () => {
+describe.skip('Todo model', () => {
   beforeAll(() => {
-    return mongoose.connect('mongodb://localhost/todoTest');
+    return mongoose.connect('mongodb://localhost/todoTest2');
   });
 
   afterEach(() => {

@@ -24,11 +24,31 @@ describe('server.js', () => {
     // supertestResponse = await request(server).get('/123');
 
   });
-  it('should return an OK status code and a JSON object fron /api/todos', async () => {
+  it.skip('Get all todos should return an OK status(200) code and a JSON object fron /api/todos', async () => {
     const expectedStatusCode = 200;
-
+    
     // get all todos
     let response = await request(server).get('/api/todos');
+
+    expect(response.status).toEqual(expectedStatusCode);
+
+  });
+  it.skip('Create Todo should return an OK status(201) code and a JSON object fron /api/todos', async () => {
+    const expectedStatusCode = 201;
+    const todo = {task: 'Testing from server.js'};
+
+    // post a todo
+    let response = await request(server).post('/api/todos').send(todo);
+
+    expect(response.status).toEqual(expectedStatusCode);
+
+  });
+  it('Get Todo by id should return an OK status(200) code and a JSON object fron /api/todos', async () => {
+    const expectedStatusCode = 200;
+    const todo = {task: 'Testing server.js'};
+
+    // get a todo by id
+    let response = await request(server).get('/api/todo/5b2c44f13cbc794134f1c671');
 
     expect(response.status).toEqual(expectedStatusCode);
 

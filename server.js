@@ -1,13 +1,18 @@
 const express = require('express');
+// const mongoose = require('mongoose');
+
 const server = express();
 const db = require('./data/db.js');
+
+// const ObjectId = mongoose.Schema.Types.ObjectId;
+
 
 const Todo = require('./Todo');
 
 
 server.use(express.json());
 
-db.connectTo('API_databaes')
+db.connectTo('todoTest')
   .then(() => console.log('\n... API Connected to Database ...\n'))
   .catch(err => console.log('\n*** ERROR Connecting to Database ***\n', err));
 
@@ -40,6 +45,18 @@ server.get('/api/todos', (req, res) => {
     });
 });
 
+server.get('/api/todo/:id', (req, res) => {
+  const { id } = req.params;
+  Todo.findById(id)
+    .then(todo => {
+      res.status(200).json(todo);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ message: 'Error getting todos', error: err });
+    });
+});
 
 server.delete('/api/todo/:id', (req, res) => {
   const { id } = req.params;
