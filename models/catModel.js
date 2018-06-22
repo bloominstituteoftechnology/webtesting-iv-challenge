@@ -1,13 +1,14 @@
 const mongoose = require('mongoose')
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
-const catSchema = new mongoose.Schema({
+const CatSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
     },
     gender: {
         type: {
+            String,
             enum: ["male", "female"]
         },
         required: true
@@ -18,7 +19,7 @@ const catSchema = new mongoose.Schema({
     }]
 })
 
-catSchema.pre('save', function(next) {
+CatSchema.pre('save', function(next) {
     if (this.gender === "male") {
         this.name = 'Sir ' + this.name
     } else if (this.gender === "female") {
@@ -28,4 +29,4 @@ catSchema.pre('save', function(next) {
     }
 })
 
-module.exports = mongoose.model('Cat', catSchema)
+module.exports = mongoose.model('Cat', CatSchema)

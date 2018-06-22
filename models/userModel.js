@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
 })
 
 userSchema.pre('save', function(next) {
@@ -24,5 +24,9 @@ userSchema.pre('save', function(next) {
             next(err)
         });
 });
+
+userSchema.methods.validatePassword = function(passwordGuess) {
+    return bcrypt.compare(passwordGuess, this.password)
+}
 
 module.exports = mongoose.model('User', userSchema)
