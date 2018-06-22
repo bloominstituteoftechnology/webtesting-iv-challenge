@@ -29,8 +29,13 @@ describe('/users', () => {
     it('should create a user and return status 201', async () => {
         const bilbo = { username: 'frodo', password: '12344556' }
         const newUser = await request(server).post('/api/users').send(bilbo)
-        // console.log(newUser)
+
         expect(newUser.status).toBe(201)
+    })
+    it('should create a user and return the User as Json Object', async () => {
+        const bilbo = { username: 'Carl', password: '12344556' }
+        const newUser = await request(server).post('/api/users').send(bilbo)
+        expect(newUser.body.username).toEqual('Carl')
     })
 
     it('should send status 400 if our password is below 6 characters long', async () => {
