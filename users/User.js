@@ -6,7 +6,13 @@ const userSchema = new mongoose.Schema({
         type: String,
         unique: true
     },
-    password: String,
+    password: {
+        type: String,
+        required: true
+    },
+    country: {
+        type: String 
+    }
 });
 
 userSchema.pre('save', function(next) {
@@ -19,6 +25,6 @@ userSchema.pre('save', function(next) {
         })
         .catch(err => {
             console.log(err);
-        })
-})
+        });
+});
 module.exports = mongoose.model('User', userSchema);
