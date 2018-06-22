@@ -28,14 +28,14 @@ server.post('/api/users', (req, res) => {
         })
 })
 
-server.delete('/api/users/id', (req, res) => {
+server.delete('/api/users/:id', (req, res) => {
     User
         .findByIdAndRemove(req.params.id)
         .then(user => {
-            res.status(200).json({ success: `User with id ${req.params.id} has been removed from the database.` })
+            res.status(200).json({ success: `User has been removed from the database.` })
         })
         .catch(err => {
-            res.status(500).json({ error: "The user could not be removed" })
+            res.status(500).json({ error: err.message })
         })
 })
 
