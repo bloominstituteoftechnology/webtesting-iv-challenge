@@ -22,18 +22,31 @@ server.get('/', (req, res) => {
 });
     
 server.post('/toons', (req, res) => {
-    const newToon = req.body
-    
+    const newToon = req.body;
     Toon    
         .create(newToon)
-        .then(response => {
-            res.status(201).json({ newToon: response })
-        })
-        .catch(error => {
-            console.log(error)
-            res.status(500).json({ message: error.message })
-        })
+        .then(response => 
+            res.status(201).json({ data: response })
+        )
+        .catch(error => 
+            res.status(500).json({ message: error })
+    )
 })
+
+// server.delete('/toons/:id', (req, res) => {
+//     Toon
+//         .findByIdAndRemove(req.params.id)
+//         .then(response => {
+//             if(response){
+//                 res.status(200).json({ success: `Character with id ${req.params.id} has been removed from the database.` })
+//             } else {
+//                 res.status(404).json({ error: "The Toon with the specified id does not exist" })
+//             }
+//         })
+//         .catch(err => {
+//             res.status(500).json({ error: "The Toon could not be removed" })
+//         })
+// })
 
 if(process.env.NODE_ENV !== 'test') {     
     server.listen(port, () => {
