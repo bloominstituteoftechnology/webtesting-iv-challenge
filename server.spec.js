@@ -5,7 +5,7 @@
 */
 
 const request = require('supertest')
-const server = require('./server') //doesn't exist yet
+const server = require('./server')
 
 describe('server' , () => {
     it('should return the correct status code and message for GET to route "/"', async () => {
