@@ -1,7 +1,9 @@
 const express = require('express')
 const server = express()
+const userController = require('./users/userController')
 
 server.use(express.json())
+server.use('/api/users', userController)
 
 server.get('/', (req, res) => {
     res.status(200).json({ api: 'running' })

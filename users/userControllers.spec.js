@@ -21,7 +21,9 @@ describe('User Controllers', () => {
     it('should create a new user', async () => {
         const response = await request(server)
             .post('/api/users/register')
+            .send(testUser)
 
-        expect(response.status).toBe(201)
+        expect(response.status).toEqual(201)
+        expect(response.body.username).toEqual('cass')
     })
 })
