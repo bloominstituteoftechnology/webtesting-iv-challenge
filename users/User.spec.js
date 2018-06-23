@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const User = require('./User') //doesn't exist yet
+const User = require('./User')
 
 describe('User Model', () => {
     beforeAll(() => {
