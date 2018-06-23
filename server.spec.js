@@ -1,59 +1,70 @@
 const request = require('supertest');
-const mongoose = require('mongoose');
-const server = require('./server');
-const User = require('./User/User.js');
-
-// const server = require('./server'); // This is our first red, it doesn't exist.
+const server = require('./server'); // This is our first red, it doesn't exist.
+const User = require('./users/User');
+// const mongoose = require('mongoose');
 
 describe('server.js', () => {
-
-    beforeAll(() => {
-        return mongoose.connect('mongod://localhost/server-testing-db');
-    });
-
-    afterEach(() => {
-        return User.remove();
-    });
-
-    afterAll(() => {
-        return mongoose.disconnect();
-    })
-
-    it('Should return an "okay" status code and a JSON object from the index route.', async () => {
+    it('Should return an "okay" status and a JSON object from the index route.', async () => {
         const expectedStatusCode = 200;
         const expectedBody = { api: 'Running...'}
 
-        // Do a GET request to our API (in server.js) and inspect the response 
+        // Do a GET request to our API (in server.js) and inspect the response. 
         const response = await request(server).get('/');
 
         expect(response.status).toEqual(expectedStatusCode);
         expect(response.body).toEqual(expectedBody);
         expect(response.type).toEqual('application/json');
     });
+});
 
-    it('Should return a JSON object with the created user and a created status code.', async () => {
-        const expectedStatusCode = 201;
-        const expectedBody = { username: 'paulgraham', password: 'ycombinator' };
+describe('/users', () => {
+    afterEach(() => {
+        return User.remove();
+    })
 
-        const newUser = await request(server).post('/users').send(expectedBody);
-    
-        expect(newUser.body.username).toEqual('paul graham');
-        expect(newUser.body.password).not.toEqual('ycombinator');
+    it('Should create a new user and return status code 201.', async () => {
+        const user = { username: 'Paul Graham', password: 'ycombinator' }
+        const newUser = await request(server).post('/api/users').send(user)
+
+        expect(newUser.status).toBe(201)
     });
 
-    it('Should return a JSON object with the deleted user and a deleted status code.', async () => {
-        const expectedStatusCode = 200;
-        const expectedBody = { username: 'paulgraham', password: 'ycombinator' };
-
-        const newUser = await request(server).post('/users').send(expectedBody).set('Accept', 'application/json');
-        const deleteUser = await request(server).delete(`/users/${newUser.body._id}`).set('Accept', 'application/json');
-
-        expect(newUser.body.username).toEqual('paulgraham');
-        expect(newUser.body.password).not.toEqual('ycombinator');
-
-        expect(deleteUser.body.username).toEqual('paulgraham');
-        expect(deleteUser.body.password).not.toEqual('ycombinator');
+    it('Should create a new user and return his/her name as a JSON object.', async () => {
+        const user = { username: 'Jessica Livingston', password: 'ycombinator' }
+        const newUser = await request(server).post('/api/users').send(user)
+        
+        expect(newUser.body.username).toEqual('Jessica Livingston')
     });
+
+    it('Should send status code 400 if the password length is below 10 characters.', async () => {
+        const user = { username: 'Sam Altman', password: 'ycom' }
+        const newUser = await request(server).post('/api/users').send(user)
+        
+        expect(newUser.status).toBe(400)
+    });
+});
+
+describe('/delete', () => {
+    it('Should delete a user and return with a status code 204', async () => {
+        const expectedStatusCode = 204;
+        const expectedBody = { username: 'Michael Seibel', password: 'ycombinator' }
+
+        const newUser = await request(server).post('/api/users')
+        deletedUser = await request(server).delete(`/users/${newUser.body._id}`).set('Accept', 'application/json')
+
+        expect(newUser.body.username).toEqual('Michael Seibel')
+        expect(newUser.body.password).not.toEqual('ycombinator')
+
+        expect(deleteUser.body.username).toEqual('Michael Seibel')
+        expect(deleteUser.body.password).not.toEqual('ycombinator')
+    });
+
+    it('Should return status code 404 if user is not found.', async () => {
+        const response = await request(server).delete('/api/users').send({ id: 'samplebadrequest' })
+        
+        expect(response.status).toBe(404)
+    });
+});
 
         // // Create the user
         // let supertestResponse = await request(server).get('/123');
@@ -71,6 +82,4 @@ describe('server.js', () => {
         // //   expect(response.body).toEqual(expectedBody);
         // //   expect(response.type).toEqual('application/json');
         // // })
-
-});
 
