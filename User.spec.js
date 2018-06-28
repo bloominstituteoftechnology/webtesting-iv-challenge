@@ -24,8 +24,15 @@ describe('userModel', () => {
         it('should hash the password before saving the user', async () => {
             const testUser = { username: 'harry', password: 'potter' };
             const saveUser = await User.create(testUser);
-            
+
             expect(saveUser.password).not.toEqual(testUser.password);
         })
+        it('should be string', async () => {
+            const testUser = { username: 'harry', password: 'potter' };
+            const saveUser = await User.create(testUser);
+
+            expect(typeof saveUser.username).toBe('string');
+            expect(typeof saveUser.password).toBe('string');
+        });
     })
 })
