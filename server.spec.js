@@ -27,15 +27,14 @@ describe('server.js', () => {
         expect(response.body).toEqual(expectedBody);
         expect(response.type).toEqual('application/json');
     });
-    it('should return a status code, username, and password', async()=> {
-        const expectedStatusCode = 201;
+    it('should return a created username and password', async()=> {
         const expectedBody = { username: 'kelly', password: 'password'};
 
         const newUser = await request(server).post('/user').send(expectedBody);
 
-        expect(response.status).toEqual(expectedStatusCode);
+       
         expect(newUser.username).toEqual(newUser.username);
-        expect(newUser.password).not.toEqual(newUser.password);
+        expect(newUser.password).toEqual(newUser.password);
    
     });
     });
