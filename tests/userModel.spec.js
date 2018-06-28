@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
-const user = require('../Models/UserModel');
+const User = require('../Models/UserModel');
 
 
-describe('user model', () => {
+describe('User Model', () => {
     beforeAll(() => {
         return mongoose.connect('mongodb://localhost/testdb');
     })
     afterEach(() => {
-        return user.remove();
+        return User.remove();
     })
     afterAll(() => {
         return mongoose.disconnect();
