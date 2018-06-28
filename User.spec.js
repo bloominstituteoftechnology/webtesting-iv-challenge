@@ -15,11 +15,17 @@ describe('userModel', () => {
     })
 
     describe('create user', () => {
-        it('should create users and password successfully', async () => {
+        it('should create users successfully', async () => {
             const testUser = { username: 'harry', password: 'potter' };
             const saveUser = await User.create(testUser);
+
             expect(saveUser.username).toEqual(testUser.username);
-            expect(saveUser.password).toEqual(testUser.password);
         });
+        it('should hash the password before saving the user', async () => {
+            const testUser = { username: 'harry', password: 'potter' };
+            const saveUser = await User.create(testUser);
+            
+            expect(saveUser.password).not.toEqual(testUser.password);
+        })
     })
 })
