@@ -12,4 +12,11 @@ server.post('/users', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
+server.delete('/users/:id', (req, res) => {
+    let { id } = req.params;
+    User.findByIdAndRemove(id)
+    .then(user => res.status(200).json(user))
+    .catch(err =>  res.status(500).json(err))
+});
+
 module.exports = server;

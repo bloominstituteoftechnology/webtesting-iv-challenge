@@ -27,7 +27,7 @@ describe('server.js', () => {
         expect(response.body).toEqual(expectedBody);
         expect(response.type).toEqual('application/json');
     });
-    it('should return a created username and password', async()=> {
+    it('should return a created username and password', async() => {
         const expectedBody = { username: 'kelly', password: 'password'};
 
         const newUser = await request(server).post('/user').send(expectedBody);
@@ -36,5 +36,15 @@ describe('server.js', () => {
         expect(newUser.username).toEqual(newUser.username);
         expect(newUser.password).toEqual(newUser.password);
    
+    });
+    it('should delete user and password', async() => {
+        const expectedBody = { username: 'kelly', password: 'password' };
+        const newUser = await request(server).post('/user').send(expectedBody);
+        const deleteUser = await(server).delete('/user')
+
+        expect(newUser.username).toEqual(newUser.username);
+        expect(newUser.password).toEqual(newUser.password);
+        expect(deleteUser.username).toEqual(newUser.username);
+        expect(deleteUser.username).toEqual(newUser.password);
     });
     });
