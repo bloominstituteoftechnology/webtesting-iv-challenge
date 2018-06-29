@@ -12,4 +12,5 @@ describe('server.js', () => {
         expect(response.body).toEqual(expectedBody);
         expect(response.type).toEqual('application/json');
     })
+
 })
