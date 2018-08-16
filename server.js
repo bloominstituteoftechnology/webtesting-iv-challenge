@@ -10,7 +10,7 @@ server.get('/', (req, res) => {
 server.post('/greet', (req, res) => {
     const { name } = req.body;
 
-    res.status(200).json({ hello: name });
+    res.status(201).json({ hello: name });
 });
 
 server.put('/greet/:name', (req, res) => {
