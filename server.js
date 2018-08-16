@@ -18,4 +18,9 @@ server.post('/species', (req, res) => {
     res.status(200).json({ species: `${animal}`});
 })
 
+server.delete('/species/:id', (req, res) => {
+    const { id } = req.params.id
+    res.status(200).send(id)
+})
+
 module.exports = server

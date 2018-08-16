@@ -19,13 +19,17 @@ describe('server get requests', () => {
     })
 
     it('creates a species', async () => {
-        const user = { species: 'Jaguar' };
+        const species = { species: 'Jaguar' };
 
         const response = await request(server).post('/species').send( {animal: 'Jaguar'} )
-        expect(response.body).toEqual(user);
+        expect(response.body).toEqual(species);
     })
 
     it('deletes a species', async () => {
-        
+        const species = {};
+
+        const response = await request(server).delete('/species/1') 
+        expect(response.body).toEqual(species)
     })
+
 })
