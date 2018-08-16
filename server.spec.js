@@ -44,4 +44,17 @@ describe('server.js', () => {
             expect(response.body).toEqual(expected);
         });
     })
+    describe('DELETE root endpoint (/)', () => {
+        it ('should return a 200 OK status code for the DELETE request', async () => {
+            const response = await request(server)
+            .delete('/4');
+            expect(response.status).toEqual(codes.OK);
+        });
+        it ('should return the right id parameter for the delete request', async () => {
+            const id = 4;
+            const response = await request(server)
+            .delete(`/${id}`);
+            expect(response.body).toEqual(`Deleted user with the id of ${id}`);
+        });
+    })
 })
