@@ -13,7 +13,7 @@ describe('server.js', () => {
     });
 
     describe('POST /greet', () => {
-        it('should return status code 200, JSON, and { hello: name } when name is provided inside body', async () => {
+        it('should return status code 201, JSON, and { hello: name } when name is provided inside body', async () => {
             await request(server)
                 .post('/greet')
                 .send({ name: 'Tanner' })
@@ -22,7 +22,7 @@ describe('server.js', () => {
         });
     });
 
-    describe('PUT /greet/:id', () => {
+    describe('PUT /greet/:name', () => {
         it('should return status code 200, JSON, and { hello: name } when name is provided inside body', async () => {
             await request(server)
                 .put('/greet/tanner')
@@ -32,11 +32,12 @@ describe('server.js', () => {
         });
     });
 
-    describe('DELETE /greet/:id', () => {
-        it('should return status code 200', async () => {
+    describe('DELETE /greet/:name', () => {
+        it('should return status code 200, JSON, and { removed: name }', async () => {
             const res = await request(server)
                 .delete('/greet/tanner')
-                .expect(200);
+                .expect('Content-Type', /json/)
+                .expect(200, { removed: 'tanner' });
         });
     });
 });
