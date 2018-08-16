@@ -51,17 +51,13 @@ describe('server.js', () => {
 
     it('should delete a book', async () => {
       const book = 'The Lord of the Flies';
-      await request(server)
-        .post('/books')
-        .send({ book: book });
       const response = await request(server)
         .delete('/books')
         .send({ book: book });
       const bookArr = response.body.books;
-      console.log('BOOKARR', bookArr);
-      let valid = false;
+      let valid = true;
       for (let i = 0; i < bookArr.length; i++) {
-        if (bookArr[i] == book) valid = true;
+        if (bookArr[i] == book) valid = false;
       }
       expect(valid).toBe(true);
     });

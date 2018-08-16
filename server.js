@@ -3,7 +3,7 @@ const server = express();
 const PORT = 3003;
 server.use(express.json());
 
-const books = ['Lord of the Rings'];
+let books = ['Lord of the Rings'];
 
 server.get('/', (req, res) => {
   res.status(200).json({ server: 'running' });
@@ -22,7 +22,6 @@ server.post('/books', (req, res) => {
 server.delete('/books', (req, res) => {
   const { book } = req.body;
   const newArr = books.filter(b => b != book);
-  console.log('NEW', nweArr);
   books = newArr;
   res.status(200).json({ books });
 });
