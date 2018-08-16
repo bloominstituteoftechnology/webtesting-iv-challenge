@@ -139,6 +139,32 @@ describe('server.js', () => {
 
             expect(response.body.map(beatle => beatle.instrument)).not.toContain(killThisBeatle.instrument)
         })
+    })
+    describe('PUT /beatles', () => {
+        it('should return JSON', async () => {
+            const expected = 'application/json'
+            const response = await request(server).put('/beatles')
+            expect(response.type).toEqual(expected)
+        })
 
+        it('should return 422 when no info passed', async () => {
+            const expected = 422
+            const response = await request(server).put('/beatles')
+            expect(response.status).toEqual(expected)
+        })
+
+        it('should modify instrument of a beatle when id is given', async () => {
+            const modifications = {id: 1, instrument: 'Banjo'}
+            const response = await request(server).put('/beatles').send(modifications)
+
+            expect(response.body.instrument).toMatch(modifications.instrument)
+        })
+
+        it('should modify name of a beatle when id is given', async () => {
+            const modifications = {id: 1, name: 'Julio'}
+            const response = await request(server).put('/beatles').send(modifications)
+
+            expect(response.body.name).toMatch(modifications.name)
+        })
     })
 })

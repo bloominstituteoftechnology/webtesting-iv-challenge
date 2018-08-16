@@ -72,7 +72,7 @@ server.delete('/beatles', (req,res) => {
 
         res.status(200).json(theBeatles)
     }catch(err){
-        res.status(500).json({id: id, name: name, instrument: instrument, error: "Hey, you can't get rid of a BEATLE!! (you're a monster)"})
+        res.status(500).json({error: "Hey, you can't get rid of a BEATLE!! (you're a monster)"})
     }
 })
 
