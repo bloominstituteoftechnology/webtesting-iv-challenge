@@ -23,21 +23,12 @@ describe('server.js', () => {
     });
 
     describe('PUT /greet/:id', () => {
-        it('should return status code 200', async () => {
-            await request(server).put('/greet/tanner').send({ name: 'Dan' }).expect(200);
-        });
-
-        it('should return JSON', async () => {
-            await request(server).put('/greet/tanner').send({ name: 'Dan' }).expect('Content-Type', /json/);
-        });
-
-        it(`should return { hello: name } when name is provided inside body`, async () => {
-            const expected = { hello: 'Changed name from tanner to Dan' };
-            const res = await request(server)
+        it('should return status code 200, JSON, and { hello: name } when name is provided inside body', async () => {
+            await request(server)
                 .put('/greet/tanner')
-                .send({ name: 'Dan' });
-
-            expect(res.body).toEqual(expected);
+                .send({ name: 'Dan' })
+                .expect('Content-Type', /json/)
+                .expect(200, { hello: 'Changed name from tanner to Dan' });
         });
     });
 
