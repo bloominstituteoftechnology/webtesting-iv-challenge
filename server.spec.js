@@ -1,6 +1,6 @@
 const request = require("supertest");
 
-const server = require("./server.js");
+const {server, db} = require("./server.js");
 
 describe("server.js", () => {
   describe("root endpoint (/)", () => {
@@ -37,7 +37,7 @@ describe("server.js", () => {
     });
 
     it("should return object that looks like expected ", async () => {
-      const expected = { countries: "here are some countries" };
+      const expected = db;
       const res = await request(server).get("/countries");
       expect(res.body).toEqual(expected);
     });
@@ -74,6 +74,7 @@ describe("server.js", () => {
 
             expect(res.status).toEqual(expected) 
     });
+
     it('should return error message if there is no country', async () => {
         const expected = {message: `need country bro`};
         const res = await request(server)
@@ -84,11 +85,12 @@ describe("server.js", () => {
     });
   });
 
+
   describe("DELETE endpoint (/countries/:country)", () => {
     
     it("should return status code 200 OK", async () => {
       const expected = 200;
-      const res = await request(server).delete("/countries/:country");
+      const res = await request(server).delete("/countries/USA");
       expect(res.status).toEqual(expected);
     });
 
@@ -104,5 +106,13 @@ describe("server.js", () => {
 
       expect(res.body).toEqual(expected);
     });
+
+    it("should return error message that says `country does not exist`", async () => {
+        const expected = { message: `country does not exist in database` };
+  
+        const res = await request(server).delete("/countries/q");
+  
+        expect(res.body).toEqual(expected);
+      });
   });
 });
