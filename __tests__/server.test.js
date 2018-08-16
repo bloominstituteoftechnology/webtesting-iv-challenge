@@ -9,7 +9,7 @@ describe('server.js', () => {
       const expected = 'application/json';
       const response = await request(server)
       .post('/users')
-      .send({ name: 'tyson', title: 'dev' });
+      .send({});
 
       expect(response.type).toEqual(expected);
     });
@@ -52,17 +52,10 @@ describe('server.js', () => {
       expect(response.status).toEqual(expected);
     });
 
-    it(`should return status code 200 the user with a JSON response when the id 0 has been deleted`, async () => {
-      const expected = 200;
-      const response = await request(server).delete('/user/0').expect('Content-type', /json/);
-
-      expect(response.status).toEqual(expected);
-    });
-
-    it(`should return { name: 'tyson', title: 'dev' } when the user with id 1 has been deleted`, 
+    it(`should return the JSON object { name: 'tyson', title: 'dev' } when the user with id 0 has been deleted`, 
       async () => {
-        const expected = { name: 'tyson', title: 'dev' };
-        const response = await request(server).delete('/user/1');
+        const expected = { id: 0, name: 'tyson', title: 'dev' };
+        const response = await request(server).delete('/user/0').expect('Content-type', /json/);
 
         expect(response.body).toEqual(expected);
     });
