@@ -11,4 +11,8 @@ server.post('/api/users', (req, res) => {
   res.status(201).json({ msg: `user account (${username}) created.` })
 })
 
+server.delete('/api/users/:id', (req, res) => {
+  const { id } = req.params
+  res.status(200).json({ msg: `user with id ${id} successfully deleted.` })
+})
 module.exports = server
