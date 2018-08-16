@@ -7,17 +7,17 @@ const server = require('./server');
         it('should return a 200 status code', async () => {
             const res = await request(server).get('/users')
             expect(res.status).toEqual(200);
-        })
+        });
         it('returned response should be type JSON', async () => {
             const res = await request(server).get('/users')
             expect(res.type).toEqual('application/json');
-        })
+        });
         it('should return {users: "array of users"} in response body', async () => {
             const expected = {users: 'array of users'}
             const res = await request(server).get('/users')
             expect(res.body).toEqual(expected);
-        })
-    })
+        });
+    });
 
 
      describe('POST /users', () => {
