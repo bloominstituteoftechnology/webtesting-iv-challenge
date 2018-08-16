@@ -78,35 +78,37 @@ describe('server.js', () => {
             });
         });
 
-        // describe('put', () => {
-        //     it('should return an OK status code from the put route', async () => {
-        //         const statusCode = 200;
-        //         const response = await request(server).put('/people/1');
+        describe('put', () => {
+            it('should return an OK status code from the put route', async () => {
+                const statusCode = 200;
+                const response = await request(server).put('/people/1');
 
-        //         expect(response.status).toEqual(statusCode);
-        //     });
+                expect(response.status).toEqual(statusCode);
+            });
 
-        //     it('should return a response body from the put route', async () => {
-        //         const expected = {
-        //             success: true,
-        //             data: {
-        //                 api: 'running'
-        //             }
-        //         };
+            it('should return a response body from the put route', async () => {
+                const expected = {
+                    success: true,
+                    data: {
+                        results: [
+                            { name: 'gandalf' }
+                        ]
+                    }
+                };
 
-        //         const response = await request(server)
-        //             .put('/people/1')
-        //             .send({ lastName: 'baggins' });
+                const response = await request(server)
+                    .put('/people/1')
+                    .send({ name: 'gandalf' });
             
-        //         expect(response.body).toEqual(expected);
-        //     });
+                expect(response.body).toEqual(expected);
+            });
 
-        //     it('should return a response type from the post route', async () => {
-        //         const response = await request(server).post('/');
+            it('should return a response type from the put route', async () => {
+                const response = await request(server).put('/people/1');
 
-        //         expect(response.type).toEqual('application/json');
-        //     });
-        // });
+                expect(response.type).toEqual('application/json');
+            });
+        });
 
         // describe('delete', () => {
 
