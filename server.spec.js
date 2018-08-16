@@ -65,6 +65,23 @@ describe("server.js", () => {
         .send({ country: "USA" });
       expect(res.body).toEqual(expected);
     });
+
+    it('should return status code 422 if there is no country', async () => {
+        const expected = 422;
+        const res = await request(server)
+            .post('/countries')
+            .send({country:""});
+
+            expect(res.status).toEqual(expected) 
+    });
+    it('should return error message if there is no country', async () => {
+        const expected = {message: `need country bro`};
+        const res = await request(server)
+            .post('/countries')
+            .send({country:""});
+
+            expect(res.body).toEqual(expected) 
+    });
   });
 
   describe("DELETE endpoint (/countries/:country)", () => {

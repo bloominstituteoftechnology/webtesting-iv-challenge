@@ -14,7 +14,9 @@ server.get('/', (req, res) => {
 
   server.post('/countries', (req, res) => {
     const {country} = req.body;
-
+        if (!country) {
+            res.status(422).json({message: `need country bro`})
+        }
       res.status(201).json({country});
   });
 
