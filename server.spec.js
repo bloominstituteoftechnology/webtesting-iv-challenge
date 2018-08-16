@@ -4,17 +4,11 @@ const server = require('./server');
 
 describe('server.js', () => {
     describe('GET /', () => {
-        it('should return status code 200', async () => {
-            await request(server).get('/').expect(200);
-        });
-
-        it('should return JSON', async () => {
-            await request(server).get('/').expect('Content-Type', /json/);
-        });
-
-        it(`should return an object containing { api: 'running' } `, async () => {
-            const res = await request(server).get('/');
-            expect(res.body).toEqual({ api: 'running' });
+        it(`should return status code 200, JSON, and an object containing { api: 'running' }`, async () => {
+            await request(server)
+                .get('/')
+                .expect('Content-Type', /json/)
+                .expect(200, { api: 'running' });
         });
     });
 
