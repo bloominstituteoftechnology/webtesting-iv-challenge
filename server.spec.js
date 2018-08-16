@@ -55,8 +55,8 @@ describe("server.js", () => {
       const response = await request(server)
         .post("/resources")
         .send(randomTransaction);
-      const actual = response.body;
-      const expected = randomTransaction;
+      const actual = response.body.account;
+      const expected = randomTransaction.account;
       expect(actual).toEqual(expected);
     });
   });
