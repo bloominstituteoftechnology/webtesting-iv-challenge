@@ -17,6 +17,7 @@ server.post('/instrument', (req, res) => {
 });
 
 server.delete('/instrument', (req, res) => {
+  // console.log(req);
   res.status(200).json({"deleted": "Cello"})
 })
 

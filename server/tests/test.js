@@ -46,11 +46,17 @@ describe('POST /instrument', () => {
 });
 
 describe('delete /instrument', () => {
-  it ('deletes something', async () => {
+//   it ('deletes something', async () => {
+//     const response = await request(server)
+//       .delete('/instrument')
+//       .send('Cello');
+//       expect(response.body).toEqual({"deleted": "Cello"});
+//   })
+  it('has something to delete', async () => {
+    const myReq = request(server);
     const response = await request(server)
       .delete('/instrument')
-      .send('Cello');
-
-      expect(response.body).toEqual({"deleted": "Cello"});
+      .send({"Hello": "World"})
+    expect(response).toEqual({"Hello": "World"});
   })
 })
