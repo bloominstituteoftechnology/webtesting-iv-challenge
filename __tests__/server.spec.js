@@ -23,20 +23,20 @@ describe('server.js', () => {
         })
     })
 
-    describe('Get /musicians ', () => {
+    describe('Get /beatles ', () => {
         it('should return status code 200', async () => {
             const expected = 200
-            const response = await request(server).get('/musicians')
+            const response = await request(server).get('/beatles')
             expect(response.status).toEqual(expected)
         })
 
         it('should return JSON', async () => {
             const expected = 'application/json'
-            const response = await request(server).get('/musicians')
+            const response = await request(server).get('/beatles')
             expect(response.type).toEqual(expected)
         })
 
-        it('returns a list from /musicians', async () => {
+        it('returns a list from /beatles', async () => {
             const expected = [
                 {
                     name: "Paul",
@@ -56,12 +56,33 @@ describe('server.js', () => {
                 }
             ]
 
-            const response = await request(server).get('/musicians')
+            const response = await request(server).get('/beatles')
             expect(response.body).toEqual(expected)
         })
     })
 
-    // describe('', () => {
+    describe('POST /beatles', () => {
+        it('should return status code 200', async () => {
+            const expected = 200
+            const response = await request(server).post('/beatles')
+            expect(response.status).toEqual(expected)
+        })
 
-    // })
+        it('should return JSON', async () => {
+            const expected = 'application/json'
+            const response = await request(server).post('/beatles')
+            expect(response.type).toEqual(expected)
+        })
+
+        it('adds new musician to the Beatles and returns the new group', async () => {
+            const fifthBeatle = {
+                name: "Alex",
+                instrument: "Spoons"
+            }
+
+            const response = await request(server).post('/beatles').send(fifthBeatle)
+            expect(response.body).toContainEqual(fifthBeatle)
+        })
+
+    })
 })

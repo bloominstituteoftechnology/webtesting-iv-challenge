@@ -8,7 +8,7 @@ server.get('/', (req, res) => {
     res.status(200).json({api : "running"})
 })
 
-const dummyMusicos = [
+let dummyMusicos = [
     {
         name: "Paul",
         instrument: "Bass"
@@ -27,7 +27,20 @@ const dummyMusicos = [
     }
 ]
 
-server.get('/musicians', (req,res) => {
+server.get('/beatles', (req,res) => {
+    res.status(200).json(dummyMusicos)
+})
+
+server.post('/beatles', (req, res) => {
+    const { name, instrument} = req.body
+
+    const musician = {
+        name: name,
+        instrument: instrument
+    }
+
+    dummyMusicos.push(musician)
+
     res.status(200).json(dummyMusicos)
 })
 
