@@ -32,9 +32,17 @@ describe('server.js', () => {
     });
 
     describe('POST /smurfs/:id', () => {
-        it('', async () => {
+        it('should return status code 201', async () => {
+            const expected = 201;
+            const response = await request(server).post('/smurfs').send({smurf: "Papa Smurf", id: "0"});
+        
 
-            expect(response.body).toEqual();
+            expect(response.status).toEqual(expected);
         });
+
+        it('should return JSON', async () => {
+            const response = await request(server).post('/smurfs').send({smurf: "Papa Smurf", id: "0"});
+            expect(response.type).toEqual('application/json');
+        })
     });
 });
