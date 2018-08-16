@@ -38,7 +38,7 @@ describe('Server', () => {
       content: 'How much do you really expect me to have to say on this subject?',
     };
     it('destroys a post when an existing id is sent', async () => {
-      const { id } = await request(server)
+      const { body: { id } } = await request(server)
         .post('/posts')
         .send(newPost);
       const response = await request(server).delete(`/posts/${id}`);

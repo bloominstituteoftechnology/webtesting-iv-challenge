@@ -3,7 +3,7 @@ const express = require('express');
 const server = express();
 server.use(express.json());
 
-const store = [];
+let store = [];
 let nextId = 1;
 
 server.get('/', (req, res) => {
@@ -15,6 +15,15 @@ server.post('/posts', (req, res) => {
   store.push({ content, title, userId, id: nextId });
   res.status(201).json({ id: nextId });
   nextId++;
+});
+
+server.delete('/posts/:id', (req, res) => {
+  const { id } = req.params;
+  debugger;
+  const firstLength = store.length;
+  store = store.filter(post => post.id !== Number(id));
+  const deletedNum = firstLength - store.length;
+  res.status(200).json(deletedNum);
 });
 
 server.use((err, req, res, next) => {
