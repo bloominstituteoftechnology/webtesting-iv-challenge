@@ -11,5 +11,12 @@ describe('server.js', () => {
 
       expect(response.status).toEqual(expectedStatusCode);
     })
+
+    it('should return status code 201 from smurfs POST route', async () => {
+      const expectedStatusCode = 201;
+
+      const response = await request(server).post('/smurfs', {name:'jj', age:'22', height:'44'});
+      expect(response.status).toEqual(expectedStatusCode);
+    })
   })
 })

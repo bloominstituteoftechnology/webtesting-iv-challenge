@@ -1,10 +1,8 @@
 const express = require('express');
-const cors = require('cors');
 const port = 3333;
 
 const server = express();
 server.use(express.json());
-server.use(cors());
 
 const sendUserError = (msg, res) => {
   res.status(422);
@@ -66,7 +64,7 @@ server.post('/smurfs', (req, res) => {
 
   smurfs.push(newSmurf);
   smurfId++;
-  res.json(smurfs);
+  res.status(201).json(smurfs);
 });
 
 server.put('/smurfs/:id', (req, res) => {
