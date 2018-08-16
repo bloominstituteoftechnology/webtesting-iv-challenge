@@ -29,5 +29,6 @@ server.delete("/:id", (req, res) => {
     // .then(response => {
     //     res.status(codes.OK).json()
     // });
+    res.status(codes.OK).json(`Deleted user with the id of ${id}`);
 });
 module.exports = server;
