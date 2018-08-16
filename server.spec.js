@@ -28,4 +28,20 @@ describe('server.js', () => {
             expect(item.name).toMatch(/\w/);
         });
     });
+    describe('POST root endpoint (/)', () => {
+        it('should return the status code 201 CREATED for the POST request', async () => {
+            const response = await request(server)
+            .post('/')
+            .send({name: 'test'});
+            expect(response.status).toEqual(codes.CREATED);
+        });
+        it('should return {name: "boots"} when name provided inside the body', async () => {
+            const expected = {name: "boots"};
+            const response = await request(server)
+            .post('/')
+            .send({name: 'boots'});
+
+            expect(response.body).toEqual(expected);
+        });
+    })
 })
