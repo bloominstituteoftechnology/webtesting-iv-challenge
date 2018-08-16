@@ -11,9 +11,12 @@ describe('server.js', () => {
             expect(response.status).toEqual(codes.OK);
         });
         it('should return JSON', async () => {
-            const expected = [{"id": 1, "name": "red potion"}, {"id": 2, "name": "sword"}, {"id": 3, "name": "shield"}];
             const response = await request(server).get('/');
             expect(response.type).toMatch(/json/);
+        });
+        it('checks for the length of a single object in items table', async () => {
+            const response = await request(server).get('/');
+            expect(Object.keys(response.body[0]).length).toBe(2);
         });
     });
 })
