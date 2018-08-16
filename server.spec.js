@@ -51,13 +51,39 @@ describe("server.js", () => {
       const expected = "application/json";
       expect(actual).toEqual(expected);
     });
-    // it("should return expected data", async () => {
-    //   const response = await request(server)
-    //     .post("/resources")
-    //     .send(randomTransaction);
-    //   const actual = response.body;
-    //   const expected = randomTransaction;
-    //   expect(actual).toEqual(expected);
-    //});
+    it("should return expected data", async () => {
+      const response = await request(server)
+        .post("/resources")
+        .send(randomTransaction);
+      const actual = response.body;
+      const expected = randomTransaction;
+      expect(actual).toEqual(expected);
+    });
+  });
+  describe("DELETE /resources/:account", () => {
+    it("should return HTTP status code 410 Gone", async () => {
+      const response = await request(server)
+        .delete("/resources/" + randomTransaction.account)
+        .send({ id: randomTransaction.account });
+      const actual = response.status;
+      const expected = 410;
+      expect(actual).toEqual(expected);
+    });
+    it("should return in JSON format", async () => {
+      const response = await request(server)
+        .delete("/resources/" + randomTransaction.account)
+        .send(randomTransaction);
+      const actual = response.type;
+      const expected = "application/json";
+      expect(actual).toEqual(expected);
+    });
+    it("should return expected data", async () => {
+      const response = await request(server)
+        .delete("/resources/" + randomTransaction.account)
+        .send(randomTransaction.account);
+      const actual = response.body.deleted;
+      const expected = randomTransaction.account;
+      expect(actual).toEqual(expected);
+    });
   });
 });

@@ -17,4 +17,9 @@ server.post("/resources", (req, res) => {
   res.status(201).json(transaction);
 });
 
+server.delete("/resources/:account", (req, res) => {
+  const { account } = req.params;
+  res.status(410).json({ deleted: account });
+});
+
 module.exports = server;
