@@ -25,14 +25,21 @@ describe('server.js', () => {
                 }
             });
 
-            it('should return a response body from the index route', async () => {
-                const expectedBody = { api: 'running' };
+            it('should return a response body from the get route', async () => {
+                const expected = {
+                    success: true,
+                    data: {
+                        results: [
+                            { name: 'frodo baggins' }
+                        ]
+                    }
+                };
                 const response = await request(server).get('/');
 
-                expect(response.body).toEqual(expectedBody);
+                expect(response.body).toEqual(expected);
             });
 
-            it('should return a response type from the index route', async () => {
+            it('should return a response type from the get route', async () => {
                 const response = await request(server).get('/');
 
                 expect(response.type).toEqual('application/json');
@@ -42,30 +49,67 @@ describe('server.js', () => {
         describe('post', () => {
             it('should return an OK status code from the post route', async () => {
                 const statusCode = 200;
-                const response = await request(server)
-                    .post('/')
-                    .send({ first: 'frodo', last: 'baggins' });
+                const response = await request(server).post('/');
 
                 expect(response.status).toEqual(statusCode);
             });
 
-            it('should return object when request body provided', async () => {
-                const expected = { hello: 'frodo baggins' };
+            it('should return a response body from the post route', async () => {
+                const expected = {
+                    success: true,
+                    data: {
+                        results: [
+                            { name: 'bilbo baggins' }
+                        ]
+                    }
+                };
 
                 const response = await request(server)
-                    .post('/greet/frodo')
-                    .send({ lastName: 'baggins' });
+                    .post('/')
+                    .send({ name: 'bilbo baggins' });
             
                 expect(response.body).toEqual(expected);
             });
+
+            it('should return a response type from the post route', async () => {
+                const response = await request(server).post('/');
+
+                expect(response.type).toEqual('application/json');
+            });
         });
 
-        describe('put', () => {
+        // describe('put', () => {
+        //     it('should return an OK status code from the put route', async () => {
+        //         const statusCode = 200;
+        //         const response = await request(server).put('/people/1');
 
-        });
+        //         expect(response.status).toEqual(statusCode);
+        //     });
 
-        describe('delete', () => {
+        //     it('should return a response body from the put route', async () => {
+        //         const expected = {
+        //             success: true,
+        //             data: {
+        //                 api: 'running'
+        //             }
+        //         };
 
-        });
+        //         const response = await request(server)
+        //             .put('/people/1')
+        //             .send({ lastName: 'baggins' });
+            
+        //         expect(response.body).toEqual(expected);
+        //     });
+
+        //     it('should return a response type from the post route', async () => {
+        //         const response = await request(server).post('/');
+
+        //         expect(response.type).toEqual('application/json');
+        //     });
+        // });
+
+        // describe('delete', () => {
+
+        // });
     });
 });

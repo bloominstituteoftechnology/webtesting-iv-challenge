@@ -4,13 +4,27 @@ const server = express();
 server.use(express.json());
 
 server.get('/', (req, res) => {
-    res.status(200).json({ api: 'running' });
+    res.status(200).json({
+        success: true,
+        data: {
+            results: [
+                { name: 'frodo baggins' }
+            ]
+        }
+    });
 });
 
 server.post('/', (req, res) => {
-    const { first, last } = req.body;
+    const { name } = req.body;
 
-    res.status(200).json({ hello: `${first} ${last}` });
+    res.status(200).json({
+        success: true,
+        data: {
+            results: [
+                { name }
+            ]
+        }
+    });
 });
 
 server.post('/greet/:name', (req, res) => {
@@ -18,6 +32,14 @@ server.post('/greet/:name', (req, res) => {
     const { name } = req.params;
 
     res.status(200).json({ hello: `${name} ${lastName}` });
+});
+
+server.put('/people/:id', (req, res) => {
+
+});
+
+server.delete('/people/:id', (req, res) => {
+
 });
 
 module.exports = server;
