@@ -25,7 +25,6 @@ server.get('/users', (req,res) => {
 
 server.post('/users', (req,res) => {
   const {body} = req
-  console.log(body, "req body")
 
   let maxID = Math.max(...[...userDB.map(cv => cv.id)])
 

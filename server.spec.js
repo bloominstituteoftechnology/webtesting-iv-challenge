@@ -53,5 +53,6 @@ describe('Test of server.js', ()=> {
 
       expect(res.body).toEqual({msg:'1 user removed'})
     })
+    
   })
 })
