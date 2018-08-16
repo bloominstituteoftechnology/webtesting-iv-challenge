@@ -16,9 +16,9 @@ server.get('/smurfs', (req, res) => {
 })
 
 server.post('/smurfs', (req, res) => {
-    const { smurf } = req.body;
+    const { smurf, age , id } = req.body;
 
-    res.status(201).json({ smurf: smurf });
+    res.status(201).json({ smurf: smurf, id: id, age: age });
 
 })
 
@@ -30,9 +30,9 @@ server.delete('/smurfs/:id', (req, res) => {
 });
 
 server.put('/smurfs/:id', (req, res) => {
-    const { smurf, id } = req.body;
+    const { smurf, id, age } = req.body;
 
-    res.status(200).json({ smurf: smurf, id: id })
+    res.status(200).json({ smurf: smurf, id: id , age: age})
 })
 
 
