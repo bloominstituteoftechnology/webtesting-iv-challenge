@@ -18,6 +18,22 @@ describe('server.js', () => {
       expect(response.body).toEqual(expected);
     })
   })
+  describe('get to /parishes', () => {
+    test('should return status code 200', async () => {
+      const expected = 200;
+      const response = await request(server).get('/parishes');
+      expect(response.status).toEqual(expected);
+    })
+    test('should return json', async () => {
+      const response = await request(server).get('/parishes');
+      expect(response.type).toEqual('application/json');
+    })
+    test('should return "API is running"', async () => {
+      const expected = { name: 'Westmoreland', capital: 'Savanna-la-Mar' }
+      const response = await request(server).get('/parishes');
+      expect(response.body).toEqual(expected);
+    })
+  })
   describe('post to /parishes', () => {
     test('should return status code 201', async () => {
       const expected = 201;
@@ -38,8 +54,12 @@ describe('server.js', () => {
     test('should return status code 200', async () => {
       const expected = 200;
       const response = await request(server)
-        .delete('/parishes/:parish')
+        .delete('/parishes/Westmoreland')
       expect(response.status).toEqual(expected);
+    })
+    test('should return json', async () => {
+      const response = await request(server).delete('/parishes/Westmoreland');
+      expect(response.type).toEqual('application/json');
     })
     test('should return confirmation country was deleted', async () => {
       const expected = { msg: `Westmoreland has been deleted.` };
