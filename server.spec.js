@@ -12,14 +12,14 @@ describe('Test of server.js', ()=> {
     })
 
     it('returns a json body', async () => {
-      res = await req(server).get('/')
+      const res = await req(server).get('/')
       expect(res.body).toEqual({msg:'Endpoint running'})
     })
   })
 
   describe('Test of endpoint: /users', () => {
     it('should GET a list of users', async () => {
-      res = await req(server).get('/users')
+      const res = await req(server).get('/users')
       expect(res.body).toEqual([
         {id:1, username: "user1", password:"pass1"},
         {id:2, username: "user2", password:"pass2"},
@@ -32,7 +32,7 @@ describe('Test of server.js', ()=> {
 
 
     it('should POST a new user', async () => {
-      res = await req(server).post('/users').send({
+      const res = await req(server).post('/users').send({
         username:'newpost',
         password:'postpass'
       })
@@ -46,6 +46,12 @@ describe('Test of server.js', ()=> {
         {id:6, username: "user6", password:"pass6"},
         {id:7, username:'newpost',password:'postpass'}
       ])
+    })
+
+    it('should DELETE a user', async () => {
+      const res = await req(server).delete('/users/7')
+
+      expect(res.body).toEqual({msg:'1 user removed'})
     })
   })
 })

@@ -38,4 +38,12 @@ server.post('/users', (req,res) => {
   res.status(200).json(userDB)
   
 })
+
+server.delete('/users/:id', (req,res) => {
+  const {id} = req.params
+
+  userDB = userDB.filter(cv => cv.id != id)
+
+  res.status(200).json({msg:'1 user removed'})
+})
 module.exports = server
