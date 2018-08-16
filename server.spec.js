@@ -35,11 +35,18 @@ describe('server.js', () => {
     })
   })
   describe('post to /parishes', () => {
-    test('should return status code 201', async () => {
+    test('should return status code 201 when success', async () => {
       const expected = 201;
       const response = await request(server)
         .post('/parishes')
         .send({ name: 'Westmoreland', capital: 'Savanna-la-Mar' });
+      expect(response.status).toEqual(expected);
+    })
+    test('should return status code 422 when missing info', async () => {
+      const expected = 422;
+      const response = await request(server)
+        .post('/parishes')
+        .send({ name: '', capital: 'Savanna-la-Mar' });
       expect(response.status).toEqual(expected);
     })
     test('should return the created country', async () => {
@@ -49,12 +56,25 @@ describe('server.js', () => {
         .send({ name: 'Westmoreland', capital: 'Savanna-la-Mar' });
       expect(response.body).toEqual(expected);
     })
+    test('should return an error if missing data', async () => {
+      const expected = { msg: 'You need a name and capital.'};
+      const response = await request(server)
+        .post('/parishes')
+        .send({ name: '', capital: 'Savanna-la-Mar' });
+      expect(response.body).toEqual(expected);
+    })
   })
   describe('delete to /parishes/:parish', () => {
     test('should return status code 200', async () => {
       const expected = 200;
       const response = await request(server)
         .delete('/parishes/Westmoreland')
+      expect(response.status).toEqual(expected);
+    })
+    test('should return status code 422', async () => {
+      const expected = 422;
+      const response = await request(server)
+        .delete('/parishes/?')
       expect(response.status).toEqual(expected);
     })
     test('should return json', async () => {

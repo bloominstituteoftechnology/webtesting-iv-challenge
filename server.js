@@ -9,6 +9,9 @@ server.get('/parishes', (req, res) => {
 })
 server.post('/parishes', (req, res) => {
     const { name, capital } = req.body;
+    if (!name || !capital) {
+        res.status(422).json({ msg: 'You need a name and capital.'})
+    }
     res.status(201).json({ name, capital });
 })
 server.delete('/parishes/:parish', (req, res) => {
