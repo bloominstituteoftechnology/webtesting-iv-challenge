@@ -61,3 +61,5 @@ server.put("/smurfs/:id", (req, res) => {
     res.json(smurfs);
   }
 });
+
+module.exports = server;
