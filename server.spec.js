@@ -25,14 +25,14 @@ it('should return JSON', async () => {
 describe('server testing for post request', () => { 
 
 it('should return the name', async() => {
-                const expected ={Hi: "Su"};
+                const expected ={Hi: "Hermione"};
 
-                const response = await request(server).post('/greet').send({name: "Su"});
+                const response = await request(server).post('/greet').send({name: "Hermione"});
                 expect(response.body).toEqual(expected);
 
 });
 
-it('POST /greet/:name', async() => {
+it('should return full name on POST /greet/:name', async() => {
                 const expected ={hello: "Harry Joe"};
 
                 const response = await request(server)
@@ -43,7 +43,37 @@ it('POST /greet/:name', async() => {
 
 });
 
+
+it('should return 404 status code when either name or lastname missing', async() => {
+                const expected =422;
+
+                const response = await request(server)
+                .post('/greet/Hi')
+                .send({lastName: ""});
+		
+                expect(response.status).toEqual(expected);
+
 });
 
+});
+
+describe('server testing for delete request', () => {
+
+it('should return status Code 200 OK', async() => {
+                const expected = 200;
+
+                const response = await request(server).delete('/greet/1');
+                expect(response.status).toEqual(expected);
+
+});
+
+it('should return JSON with a message "Deleted" ', async() => {
+                const expected = {message: "Deleted"};
+
+                const response = await request(server).delete('/greet/2');
+                expect(response.status).toEqual(200);
+
+});
+});
 
 });
