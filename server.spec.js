@@ -27,13 +27,23 @@ describe('server testing for post request', () => {
 it('should return the name', async() => {
                 const expected ={Hi: "Su"};
 
-                const response = await request(server).post('/names').send({name: "Su"});
+                const response = await request(server).post('/greet').send({name: "Su"});
                 expect(response.body).toEqual(expected);
 
 });
+
+it('POST /greet/:name', async() => {
+                const expected ={hello: "Harry Joe"};
+
+                const response = await request(server)
+		.post('/greet/Harry')
+		.send({lastName: "Joe"});
+
+                expect(response.body).toEqual(expected);
+
 });
 
-
+});
 
 
 });
