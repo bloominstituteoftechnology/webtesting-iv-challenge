@@ -110,8 +110,36 @@ describe('server.js', () => {
             });
         });
 
-        // describe('delete', () => {
+        describe('delete', () => {
+            it('should return an OK status code from the delete route', async () => {
+                const statusCode = 200;
+                const response = await request(server).put('/people/1');
 
-        // });
+                expect(response.status).toEqual(statusCode);
+            });
+
+            it('should return a response body from the delete route', async () => {
+                const expected = {
+                    success: true,
+                    data: {
+                        results: [
+                            { name: 'gandalf' }
+                        ]
+                    }
+                };
+
+                const response = await request(server)
+                    .put('/people/1')
+                    .send({ name: 'gandalf' });
+            
+                expect(response.body).toEqual(expected);
+            });
+
+            it('should return a response type from the delete route', async () => {
+                const response = await request(server).put('/people/1');
+
+                expect(response.type).toEqual('application/json');
+            });
+        });
     });
 });
