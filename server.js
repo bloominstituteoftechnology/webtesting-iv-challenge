@@ -23,7 +23,11 @@ server.delete('/posts/:id', (req, res) => {
   const firstLength = store.length;
   store = store.filter(post => post.id !== Number(id));
   const deletedNum = firstLength - store.length;
-  res.status(200).json(deletedNum);
+  if (deletedNum > 0 ) {
+    res.status(204).end();
+  } else {
+    res.status(404).json({ message: 'Did not find the requested resource to delete' });
+  }
 });
 
 server.use((err, req, res, next) => {

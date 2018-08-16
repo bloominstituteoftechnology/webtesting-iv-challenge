@@ -42,8 +42,14 @@ describe('Server', () => {
         .post('/posts')
         .send(newPost);
       const response = await request(server).delete(`/posts/${id}`);
-      expect(response.status).toEqual(200);
-      expect(response.body).toEqual(1);
+      expect(response.status).toEqual(204);
+    });
+
+    it('sends an error if a request is made for deletion of a non-existent post', async () => {
+      const expectedMessage = 'Did not find the requested resource to delete';
+      const response = await request(server).delete(`/posts/3.1`);
+      expect(response.status).toEqual(404);
+      expect(response.body.message).toEqual(expectedMessage);
     });
   });
 });
