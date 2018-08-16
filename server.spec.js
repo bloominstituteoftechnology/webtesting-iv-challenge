@@ -22,6 +22,7 @@ describe('Server', () => {
         title: 'Helvetica and You',
         content: 'How much do you really expect me to have to say on this subject?',
       };
+
       const response = await request(server)
         .post('/posts')
         .send(newPost);
@@ -29,6 +30,20 @@ describe('Server', () => {
       expect(typeof response.body.id).toEqual('number');
       expect(response.body.id).toBeGreaterThan(0);
     });
+
+    it('sends a 401 error if an incomplete post is sent in via post', async () => {
+      const incompletePost = {
+        title: 'Incomplete posting and you',
+        content: 'There\'s content here at least',
+      };
+      const expectedMessage = 'This resource could not be created, as it did not include all required fields.'
+      const response = await request(server)
+        .post('/posts')
+        .send(incompletePost);
+      expect(response.status).toEqual(401);
+      expect(response.body.message).toEqual(expectedMessage);
+    });
+
   });
 
   describe('destroy request', () => {

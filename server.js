@@ -12,9 +12,12 @@ server.get('/', (req, res) => {
 
 server.post('/posts', (req, res) => {
   const { content, title, userId } = req.body;
+  if (!(content && title && userId)) {
+    return res.status(401).json({ message: 'This resource could not be created, as it did not include all required fields.' });
+  }
   store.push({ content, title, userId, id: nextId });
   res.status(201).json({ id: nextId });
-  nextId++;
+  return nextId++;
 });
 
 server.delete('/posts/:id', (req, res) => {
