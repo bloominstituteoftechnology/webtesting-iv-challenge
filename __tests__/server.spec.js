@@ -33,7 +33,7 @@ describe('server', () => {
       expect(response.status).toEqual(418);
     })
 
-    it('should drink the tea requested provided in the parameters', async () => {
+    it('should drink the tea requested in the parameters', async () => {
       const expected = { tea: 'the green tea was delicious' };
       const response = await request(server).delete('/green');
       expect(response.body).toEqual(expected);

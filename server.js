@@ -9,7 +9,7 @@ let teas = [];
 server.get('/', (req, res) => {
   res
     .status(418)
-    .json();
+    .json(teas);
 });
 
 server.post('/', (req, res) => {
