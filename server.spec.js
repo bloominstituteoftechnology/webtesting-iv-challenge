@@ -18,5 +18,14 @@ describe('server.js', () => {
             const response = await request(server).get('/');
             expect(Object.keys(response.body[0]).length).toBe(2);
         });
+        it('checks if the item object has an id and name property with the right data types', async () => {
+            const response = await request(server).get('/');
+            const item = response.body[0];
+            expect(item.id).toBeDefined();
+            expect(item.name).toBeDefined();
+
+            expect(typeof item.id).toMatch("number");
+            expect(item.name).toMatch(/\w/);
+        });
     });
 })
