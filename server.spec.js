@@ -12,7 +12,7 @@ describe("server.js", () => {
     });
   });
 
-  describe("GET: smurf endpoint (/smurfs)", () => {
+  describe("GET: (/smurfs)", () => {
     it("should return status code 200 ok", async () => {
       const expected = 200;
 
@@ -28,7 +28,7 @@ describe("server.js", () => {
     });
   });
 
-  describe("POST: smurf endpoint (/smurfs)", () => {
+  describe("POST: (/smurfs)", () => {
     it("should return status code 200 ok when correct data is provided", async () => {
       const expected = 200;
 
@@ -105,6 +105,37 @@ describe("server.js", () => {
           age: "200",
           height: "5cm"
         });
+      expect(res.text).toEqual(expected);
+    });
+  });
+
+  describe("PUT: (/smurfs/:id)", () => {
+    it("It should send an error code 422 if no smurf is found by that id", async () => {
+      const expected = 422;
+      const res = await request(server).put("/smurfs/2204");
+      expect(res.status).toEqual(expected);
+    });
+
+    it("It should send an appropriate error message if no smurf is found by that id", async () => {
+      const expected = '{"Error":"No Smurf found by that ID"}';
+      const res = await request(server).put("/smurfs/2204");
+      expect(res.text).toEqual(expected);
+    });
+
+    it("It should send status code 200 if a smurf is found by that id", async () => {
+      const expected = 200;
+      const res = await request(server)
+        .put("/smurfs/0")
+        .send({ name: "BBraineyu" });
+      expect(res.status).toEqual(expected);
+    });
+
+    it("It should return a new array if a smurf is found by that id", async () => {
+      const expected =
+        '[{"name":"Brainey","age":200,"height":"5cm"},{"name":"Beaineyugh","age":"200","height":"5cm","id":0},{"name":"Smurferino","age":"200","height":"5cm","id":1}]';
+      const res = await request(server)
+        .put("/smurfs/0")
+        .send({ name: "Beaineyugh" });
       expect(res.text).toEqual(expected);
     });
   });
