@@ -3,7 +3,7 @@ const server = require('../server.js');
 
 describe('server.js', () => {
   
-  describe('POST /users', () => {
+  describe('CREATE /users', () => {
  
     it('should return JSON', async () => {
       const expected = 'application/json';
@@ -14,7 +14,7 @@ describe('server.js', () => {
       expect(response.type).toEqual(expected);
     });
     
-    it(`should return status code 400 OK when name is not provided`, async () => {
+    it(`should return status code 400 Bad Request when name is not provided`, async () => {
       const expected = 400;
       const response = await request(server)
       .post('/users')
@@ -35,10 +35,34 @@ describe('server.js', () => {
     it(`should return { name: 'tyson', title: 'dev' } when name and title are provided`, 
       async () => {
         const expected = { name: 'tyson', title: 'dev' };
-
         const response = await request(server)
           .post('/users')
           .send({ name: 'tyson', title: 'dev' });
+
+        expect(response.body).toEqual(expected);
+    });
+  });
+
+  describe('DELETE /user/:id', () => {
+ 
+    it(`should return status code 404 Not Found with a JSON response when the user id doesn't exist`, async () => {
+      const expected = 404;
+      const response = await request(server).delete('/user/1000').expect('Content-type', /json/);
+
+      expect(response.status).toEqual(expected);
+    });
+
+    it(`should return status code 200 the user with a JSON response when the id 0 has been deleted`, async () => {
+      const expected = 200;
+      const response = await request(server).delete('/user/0').expect('Content-type', /json/);
+
+      expect(response.status).toEqual(expected);
+    });
+
+    it(`should return { name: 'tyson', title: 'dev' } when the user with id 1 has been deleted`, 
+      async () => {
+        const expected = { name: 'tyson', title: 'dev' };
+        const response = await request(server).delete('/user/1');
 
         expect(response.body).toEqual(expected);
     });
