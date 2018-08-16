@@ -19,6 +19,15 @@ server.post("/greet/:name", (req, res) => {
 
 server.delete("/greet/:name", (req, res) => {
   const { name } = req.params;
-  res.status(400).json("Frodo Deleted");
+  res.status(200).json(`${name} Deleted`);
 });
+
+server.put("/greet/:id", (req, res) => {
+  const { name, id } = req.body;
+  if (!name || !id) {
+    res.status(400).json({ error: "Please put in a name or id" });
+  }
+  res.status(200).json({ name: name, id: id });
+});
+
 module.exports = server;
