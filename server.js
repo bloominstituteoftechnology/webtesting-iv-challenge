@@ -2,8 +2,14 @@ const express = require("express");
 const server = express();
 server.use(express.json());
 
+let db = [{ user: "jameson" }, { user: "joe" }, { user: "will" }];
+
+server.get("/user", () => {
+  res.status(200).json(db);
+});
+
 server.get("/", (req, res) => {
-  res.status(200).json({ api: "runnindg" });
+  res.status(200).json({ api: "running" });
 });
 
 //users
@@ -55,4 +61,4 @@ server.delete("/users/:id", (req, res) => {
   //   });
 });
 
-module.exports = server;
+module.exports = { server, db };
