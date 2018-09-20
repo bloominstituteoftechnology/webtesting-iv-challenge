@@ -12,9 +12,9 @@ describe("server.js", () => {
         .get("/")
         .then(res => {
           response = res;
-        });
 
-      expect(response.status).toEqual(expectedStatusCode);
+          expect(response.status).toEqual(expectedStatusCode);
+        });
     });
 
     it("should return a JSON object fron the index route", async () => {
@@ -25,9 +25,9 @@ describe("server.js", () => {
         .get("/")
         .then(res => {
           response = res;
-        });
 
-      expect(response.body).toEqual(expectedBody);
+          expect(response.body).toEqual(expectedBody);
+        });
     });
 
     it("should return a JSON object fron the index route", () => {
@@ -36,9 +36,9 @@ describe("server.js", () => {
         .get("/")
         .then(res => {
           response = res;
-        });
 
-      expect(response.type).toEqual("application/json");
+          expect(response.type).toEqual("application/json");
+        });
     });
   });
 
@@ -51,9 +51,9 @@ describe("server.js", () => {
         .get("/classes")
         .then(res => {
           response = res;
-        });
 
-      expect(response.status).toEqual(expectedStatusCode);
+          expect(response.status).toEqual(expectedStatusCode);
+        });
     });
 
     it("should return a JSON object fron the index route", () => {
@@ -62,9 +62,9 @@ describe("server.js", () => {
         .get("/classes")
         .then(res => {
           response = res;
-        });
 
-      expect(response.type).toEqual("application/json");
+          expect(response.type).toEqual("application/json");
+        });
     });
   });
 });
