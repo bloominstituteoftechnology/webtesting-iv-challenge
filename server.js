@@ -37,14 +37,19 @@ server.post('/', async (req, res) => {
   //   .catch(err => console.log(err));
 });
 
-server.delete('/:id', (req, res) => {
-  const delId = req.params.id;
-  const delPost = posts.filter(post => parseInt(post.id, 10) === parseInt(delId, 10));
-  if(!delPost.length) {
-    return res.status(404).json({ error: 'No post with that id' });
+server.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try{
+    const deleted = await db('posts').where({ id }).del();
+    if(deleted){
+      res.status(200).json({ id });
+    }else{
+      res.status(404).json({ error: 'Post not found' });
+    }
+  }catch(e){
+    console.log(e);
   }
-  posts = posts.filter(p => parseInt(p.id, 10) !== parseInt(delId, 10));
-  res.status(200).json({ id: delId });
 });
 
 module.exports = server;

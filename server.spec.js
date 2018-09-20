@@ -47,22 +47,22 @@ describe('server.js', () => {
 
     });//end failure tests
   });//end post requests
-  //
-  // describe('DELETE /:id', () => {
-  //   it('should return id of deleted object on success with status 200 (ok)', async () => {
-  //     const response = await request(server).delete('/2');
-  //     let { id } = response.body;
-  //     id = parseInt(id, 10);
-  //     expect(response.status).toEqual(200);
-  //     expect(id).toEqual(2);
-  //   });//end successful delete
-  //
-  //   it('should return 404 if id is not a saved post', async () => {
-  //     try{
-  //       const response = await request(server).delete('/999999999999999999999');
-  //     } catch(e) {
-  //       expect(e.status).toEqual(404);
-  //     }
-  //   })// end delete failure test
-  // });//end delete tests
+
+  describe('DELETE /:id', () => {
+    it('should return id of deleted object on success with status 200 (ok)', async () => {
+      const response = await request(server).delete('/2');
+      let { id } = response.body;
+      id = parseInt(id, 10);
+      expect(response.status).toEqual(200);
+      expect(id).toEqual(2);
+    });//end successful delete
+
+    it('should return 404 if id is not a saved post', async () => {
+      try{
+        const response = await request(server).delete('/999999999999999999999');
+      } catch(e) {
+        expect(e.status).toEqual(404);
+      }
+    })// end delete failure test
+  });//end delete tests
 });//end server.js
