@@ -3,18 +3,25 @@ const server = express();
 
 server.use(express.json());
 
+const teams = [
+  { id: 0, name: "Manchester United" },
+  { id: 1, name: "Liverpool" },
+  { id: 2, name: "Arsenal" }
+];
+
 server.get("/", (req, res) => {
   res.status(200).json({ api: "running" });
 });
 
-server.get("/hello", (req, res) => {
-  res.status(200).json({ hello: "FSW12" });
+server.get("/teams", (req, res) => {
+  res.status(200).json(teams);
 });
 
-server.post("/greet/:name", (req, res) => {
-  const first = req.params.name;
-  const last = req.body.last;
-  res.status(200).json({ hello: `${first} ${last}` });
+server.post("/teams", (req, res) => {
+  const { name } = req.body;
+  const id = teams.length;
+  teams.push({ id, name });
+  res.status(200).json(teams);
 });
 
 module.exports = server;
