@@ -20,7 +20,7 @@ describe ('get request for /', () => {
     });
 });
 
-describe(('/greet/:name', () => {
+describe('/greet/:name', () => {
     it('greets the person by name', async () => {
         let first = 'Harry';
         let last = 'Potter';
@@ -32,4 +32,4 @@ describe(('/greet/:name', () => {
         //verify that the endpoint returns the right object
         expect(response.body).toEqual({ hello: 'Harry Potter' });
     })
-}))
+})
