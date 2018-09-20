@@ -3,6 +3,13 @@ const fighters = [
   { id: "1", name: "vegeta", race: "saiyan" },
 ];
 
+const newFighter = {
+  id: "100",
+  name: "Gohan",
+  race: "Saiyan",
+};
+
 module.exports = {
   fighters,
+  newFighter,
 };

@@ -1,6 +1,6 @@
 const request = require("supertest");
 const server = require("../server.js");
-const fighters = require("../data/fighters.js");
+const fightersData = require("../data/fighters.js");
 
 describe("server.js", () => {
   it("runs the tests", () => {
@@ -33,7 +33,7 @@ describe("server.js", () => {
       it("should display a list of all fighters", async () => {
         const response = await request(server).get("/fighters");
 
-        expect(response.body).toEqual(fighters);
+        expect(response.body).toEqual(fightersData);
       });
     });
 
@@ -46,7 +46,24 @@ describe("server.js", () => {
       it("should display a list of all fighters", async () => {
         const response = await request(server).get("/fighters/0");
 
-        expect(response.body).toEqual([fighters.fighters[0]]);
+        expect(response.body).toEqual([fightersData.fighters[0]]);
+      });
+    });
+
+    describe("POST new fighter", () => {
+      it("returns a 200 (OK) status code", async () => {
+        const response = await request(server).get("/fighters");
+
+        expect(response.status).toEqual(200);
+      });
+      it("should display all fighters (including newFighter)", async () => {
+        const response = await request(server)
+          .post("/fighters")
+          .send(fightersData.newFighter);
+        const updatedFighterData = fightersData.fighters;
+        let newFighter = fightersData.newFighter;
+        newFighter.id = fightersData.fighters.length.toString();
+        expect(response.body).toEqual(updatedFighterData);
       });
     });
   });

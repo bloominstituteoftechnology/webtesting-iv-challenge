@@ -24,10 +24,16 @@ server.get("/fighters/:id", (req, res) => {
       fighter.push(fightersArray.fighters[i]);
     }
   }
-  res.status(200).send(fighter);
+  res.status(200).json(fighter);
   // res.status(200).json({ working: "Yes" });
 });
 
 // POST (create) new fighter
-
+server.post("/fighters/", (req, res) => {
+  const id = fightersArray.fighters.length.toString();
+  const { name, race } = req.body;
+  const newFighter = { id, name, race };
+  fightersArray.fighters.push(newFighter);
+  res.status(200).json(fightersArray.fighters);
+});
 module.exports = server;
