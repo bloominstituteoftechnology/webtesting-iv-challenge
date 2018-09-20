@@ -12,6 +12,10 @@ describe('server.js',()=>{
             const response=await request(server).get('/cars');
             expect(response.body).toEqual(expectedBody);
         })
+        it('should return a JSON object',async ()=>{
+            const response=await request(server).get('/cars');
+            expect(response.type).toEqual('application/json');
+        })
     })
     describe('POST /cars',()=>{
         it('returns a 201 status code',async ()=>{
@@ -22,17 +26,22 @@ describe('server.js',()=>{
             const response=await request(server).post('/cars').send({model:'Honda Accord'});
             expect(response.body.id).toEqual(3);
         })
+        it('should return a JSON object',async()=>{
+            const response=await request(server).post('/cars').send({model:'Honda Accord'});
+            expect(response.type).toEqual('application/json');
+        })
     })
     describe('DELETE /cars/:id',()=>{
-        it('returns delete count on success',async()=>{
+        it('returns delete count and status 200 on success',async()=>{
             const id=1;
             const response=await request(server).delete(`/cars/${id}`);
             expect(response.body).toEqual(1);
+            expect(response.status).toEqual(200);
         })
-        it('returns 200 status on success',async()=>{
+        it('should return a JSON object',async ()=>{
             const id=0;
             const response=await request(server).delete(`/cars/${id}`);
-            expect(response.status).toEqual(200);
+            expect(response.type).toEqual('application/json');
         })
         it('returns status 404 on fail',async()=>{
             const id=0;
