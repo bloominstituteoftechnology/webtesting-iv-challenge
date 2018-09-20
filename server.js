@@ -35,4 +35,28 @@ server.post("/classes", (req, res) => {
     });
 });
 
+server.delete("/classes/:id", (req, res) => {
+  db("classes")
+    .where({ id: req.params.id })
+    .del()
+    .then(response => {
+      res
+        .status(200)
+        .json(response)
+        .end();
+    });
+});
+
+server.put("/classes/:id", (req, res) => {
+  db("classes")
+    .where({ id: req.params.id })
+    .update(req.body)
+    .then(response => {
+      res
+        .status(200)
+        .json(response)
+        .end();
+    });
+});
+
 module.exports = server;

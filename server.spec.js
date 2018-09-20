@@ -88,7 +88,7 @@ describe("server.js", () => {
         });
     });
 
-    it("should return a JSON object fron the index route", () => {
+    it("should return an id from the post route", () => {
       let response;
       const test = {
         name: "FSW12",
@@ -102,6 +102,66 @@ describe("server.js", () => {
           response = res;
 
           expect(response.type).toEqual("application/json");
+        });
+    });
+  });
+
+  describe("put route", () => {
+    it("should return an OK status code", () => {
+      const expectedStatusCode = 200;
+
+      let response;
+      let test = { track: "iOS" };
+
+      return request(server)
+        .put("/classes/1")
+        .send(test)
+        .then(res => {
+          response = res;
+
+          expect(response.status).toEqual(expectedStatusCode);
+        });
+    });
+
+    it("should return '1'", () => {
+      let response;
+      let test = { track: "iOS" };
+
+      return request(server)
+        .put("/classes/2")
+        .send(test)
+        .then(res => {
+          response = res;
+
+          expect(response.body).toEqual(1);
+        });
+    });
+  });
+
+  describe("delete route", () => {
+    it("should return an OK status code", () => {
+      const expectedStatusCode = 200;
+
+      let response;
+
+      return request(server)
+        .delete("/classes/1")
+        .then(res => {
+          response = res;
+
+          expect(response.status).toEqual(expectedStatusCode);
+        });
+    });
+
+    it("should return '1'", () => {
+      let response;
+
+      return request(server)
+        .delete("/classes/2")
+        .then(res => {
+          response = res;
+
+          expect(response.body).toEqual(1);
         });
     });
   });
