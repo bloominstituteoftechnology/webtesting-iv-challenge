@@ -11,12 +11,14 @@ describe('server.js', () => {
 
   describe('POST /api/forms', () => {
     it('should return a Created status code (201)', async () => {
-      const res = await req(server).post('/api/forms');
+      const res = await req(server).post('/api/forms')
+        .send({ some_data: { "rowVal1": 1, "rowVal2": 2 } });
       expect(res.status).toBe(201);
     });
 
     it('should return id of newly created form', async () => {
-      const res = await req(server).post('/api/forms');
+      const res = await req(server).post('/api/forms')
+        .send({ some_data: { "rowVal1": 1, "rowVal2": 2 } });
       expect(typeof res.body).toBe('number');
     });
   });
@@ -34,7 +36,7 @@ describe('server.js', () => {
 
     it('should return a Not Found status code (404) if id not found', async () => {
       const res = await req(server).delete('/api/forms/-dos!');
-      expect(req.status).toBe(404);
+      expect(res.status).toBe(404);
     });
   });
 });
