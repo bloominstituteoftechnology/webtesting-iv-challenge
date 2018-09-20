@@ -1,5 +1,14 @@
 const request = require('supertest');
 const server = require('./server');
+const knex = require('./data/dbConfig');
+
+beforeAll(() => {
+  return knex.migrate.rollback().then(() => knex.migrate.latest().then(() => knex.seed.run()))
+});
+
+afterAll(() => {
+  return knex.migrate.rollback().then(() => knex.migrate.latest().then(() => knex.seed.run()))
+})
 
 describe('server.js', () => {
   it('runs the tests', () => {
@@ -62,6 +71,7 @@ describe('server.js', () => {
         const response = await request(server).delete('/999999999999999999999');
       } catch(e) {
         expect(e.status).toEqual(404);
+        expect(e.error).toEqual('Post not found');
       }
     })// end delete failure test
   });//end delete tests
