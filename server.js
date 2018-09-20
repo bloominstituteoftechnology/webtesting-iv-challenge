@@ -4,15 +4,11 @@ server.use(express.json());
 
 let movies = [
   { id: 0, film: "Romy and Michele Highschool Reunion" },
-  { id: 1, film: "Halloween" },
-  { id: 2, film: "Eighth Grade" }
+  { id: 1, film: "Halloween" }
 ];
 
-server.get("/", (req, res) => {
-  res.status(200).json({ api: "running" });
-});
-server.get("/hello", (req, res) => {
-  res.status(200).json({ hello: "FSW12" });
+server.get("/movies", (req, res) => {
+  res.status(200).json(movies);
 });
 server.post("/movies/:id", (req, res) => {
   const { film } = req.body;
@@ -26,7 +22,7 @@ server.delete("/movies/:title", (req, res) => {
         movies = movies.filter(movie => {
             return Number(movie.id) !== Number(id); 
         });
-        res.status(200).json(movies);
+        res.status(201).json(movies);
     }else{
         res.status(404).json({message: "id does not exist"})
     }
