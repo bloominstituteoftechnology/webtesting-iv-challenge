@@ -13,9 +13,9 @@ server.post('/', (req, res) => {
     db.insert(friend)
     .into('friends')
     .then(ids => {
-        res.status(201).json(ids);
+        res.status(201).json(ids[0]);
     })
-    .catch(err => res.staus(500).json(err));
+    .catch(err => res.status(500).json(err));
 });
 
 server.delete('/:id', (req, res) => {
@@ -30,6 +30,8 @@ server.delete('/:id', (req, res) => {
 })
 
 const port = 3300;
-server.listen(port, function() {
-    console.log(`\n=== Web API Listening on http://localhost:${port} ===\n`)
-})
+// server.listen(port, function() {
+//     console.log(`\n=== Web API Listening on http://localhost:${port} ===\n`)
+// })
+
+module.exports = server;
