@@ -10,8 +10,6 @@ server.get("/", (req, res) => {
   res.status(200).end();
 });
 
-// server.listen(8000, () => {
-//   console.log("== LISTENING ON PORT 8000 ==");
-// });
+server.get("/classes", (req, res) => {});
 
 module.exports = server;

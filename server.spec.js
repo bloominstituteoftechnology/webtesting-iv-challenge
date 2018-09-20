@@ -30,10 +30,36 @@ describe("server.js", () => {
       expect(response.body).toEqual(expectedBody);
     });
 
-    it("should return a JSON object fron the index route", async () => {
+    it("should return a JSON object fron the index route", () => {
       let response;
       return request(server)
         .get("/")
+        .then(res => {
+          response = res;
+        });
+
+      expect(response.type).toEqual("application/json");
+    });
+  });
+
+  describe("get route", () => {
+    it("should return an OK status code", () => {
+      const expectedStatusCode = 200;
+
+      let response;
+      return request(server)
+        .get("/classes")
+        .then(res => {
+          response = res;
+        });
+
+      expect(response.status).toEqual(expectedStatusCode);
+    });
+
+    it("should return a JSON object fron the index route", () => {
+      let response;
+      return request(server)
+        .get("/classes")
         .then(res => {
           response = res;
         });
