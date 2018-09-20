@@ -1,5 +1,5 @@
 const request = require('supertest');
-
+const getType = require('jest-get-type');
 const server = require('./server.js');
 
 describe('server.js', () => {
@@ -19,7 +19,7 @@ describe('server.js', () => {
     });
 
     describe('POST /api/dogs', () => {
-        it('should return JSON', async () => {
+        it('should return JSON in the response', async () => {
             let breed = 'dalmation';
             
             const response = await request(server)
@@ -28,36 +28,61 @@ describe('server.js', () => {
 
             expect(response.type).toEqual('application/json');
         });
-        it('should return a dog breed', async () => {
+        it('should return an array in the response body', async () => {
             let breed = 'dalmation';
             
             const response = await request(server)
             .post('/api/dogs')
             .send({ breed })
 
-            const expectedBody = { breed: 'dalmation' }
-            expect(response.body).toEqual(expectedBody);
+            const type = getType(response.body);
+            expect(type).toEqual('array');
+        });
+        it('should return status 400 if no breed is provided', async () => {
+            let breed = '';
+            
+            const response = await request(server)
+            .post('/api/dogs')
+            .send({ breed })
+
+            expect(response.status).toEqual(400);
+        });
+    });
+
+    describe('GET /api/dogs', () => {
+        it('should return an array in the response body', async () => {
+            const response = await request(server).get('/api/dogs');
+    
+            const type = getType(response.body);
+            expect(type).toEqual('array');
+        });
+        
+        it('matches even if received contains additional elements', async () => {
+            const response = await request(server).get('/api/dogs');
+
+            const num = expect.anything();
+            const expected = [{"breed": "dalmation", "id": num}];
+            expect(response.body).toEqual(expect.arrayContaining(expected));
         });
     });
 
     describe('DELETE /api/dogs/id', () => {
-        it('should return a 200 status code', async () => {
+        it.skip('should return a 204 status code if the id exists', async () => {
             let id = '1';
 
             const response = await request(server)
             .delete(`/api/dogs/${id}`)
 
-            expect(response.status).toEqual(200);
-        })
-        it('should return a message saying delete was successful', async () => {
+            expect(response.status).toEqual(204);
+        });
+        it('should return a 404 status code if the id does not exist', async () => {
             let id = '1';
 
             const response = await request(server)
             .delete(`/api/dogs/${id}`)
 
-            const expectedBody = { message: 'The dog with ID 1 was deleted.' }
-            expect(response.body).toEqual(expectedBody);
-        })
-    })
+            expect(response.status).toEqual(404);
+        });
+    });
     
 });
