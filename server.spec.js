@@ -14,9 +14,22 @@ describe ('get request for /', () => {
     });
     it('returns {api: "running"}', async () => {
         const expectedBody = { api: 'running'}
-
         const response = await request(server).get('/');
-
+        
         expect(response.body).toEqual(expectedBody);
     });
 });
+
+describe(('/greet/:name', () => {
+    it('greets the person by name', async () => {
+        let first = 'Harry';
+        let last = 'Potter';
+        //make a post passing last name into body
+        //first name is a url parameter
+        let response = await request(server)
+            .post(`/greet/${first}`)
+            .send({ last });
+        //verify that the endpoint returns the right object
+        expect(response.body).toEqual({ hello: 'Harry Potter' });
+    })
+}))
