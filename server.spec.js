@@ -43,14 +43,14 @@ describe("/greet/:name", () => {
 
 describe("/users", () => {
   it("should return a list of users", async () => {
-    const expectedBody = [{"id": 1, "name": "kyle"}];
+    const expectedBody = [{ id: 1, name: "kyle" }];
 
     const response = await request(server).get("/users");
 
     expect(response.body).toEqual(expectedBody);
   });
 
-  it(`should return json`, async () => {
+  it("should return json", async () => {
     const response = await request(server).get("/users");
 
     expect(response.type).toEqual("application/json");
@@ -60,4 +60,18 @@ describe("/users", () => {
 
     expect(response.status).toEqual(200);
   });
+});
+
+describe("/users", () => {
+  it("should return a user id, a 201 status code, and it should be json", async () => {
+    let name = "john";
+    const response = await request(server)
+      .post("/users")
+      .send({ name });
+    expect(response.body).toEqual([2]);
+    expect(response.status).toEqual(201);
+    expect(response.type).toEqual("application/json");
+
+  });
+
 });
