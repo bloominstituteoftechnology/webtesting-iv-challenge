@@ -30,6 +30,16 @@ describe('get request for users', () => {
     })
 })
 
+describe('users/:id', () => {
+    it('removes item based on specified id', async () => {
+        let id = '5';
+        let response = await request(server)
+            .delete(`/users/${id}`)
+            .send({message: `user ${id} successfully deleted`})
+            .expect(200)
+    })
+})
+
 describe('/greet/:name', () => {
     it('greets the person by name', async () => {
         let first = 'Harry';
@@ -43,3 +53,4 @@ describe('/greet/:name', () => {
         expect(response.body).toEqual({ hello: 'Harry Potter' });
     })
 })
+
