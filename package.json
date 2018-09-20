@@ -4,7 +4,8 @@
   "description": "Server Testing Project",
   "main": "server.js",
   "scripts": {
-    "test": "jest --watch --verbose"
+    "start": "nodemon server.js",
+    "test": "knex seed:run && jest --watch --verbose"
   },
   "jest": {
     "testEnvironment": "node"
@@ -14,7 +15,7 @@
     "url": "git+https://github.com/LambdaSchool/Server-Testing.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "John O'Rourke",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/LambdaSchool/Server-Testing/issues"
@@ -22,9 +23,13 @@
   "homepage": "https://github.com/LambdaSchool/Server-Testing#readme",
   "devDependencies": {
     "jest": "^23.6.0",
+    "nodemon": "^1.18.4",
     "supertest": "^3.3.0"
   },
   "dependencies": {
-    "express": "^4.16.3"
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "knex": "^0.15.2",
+    "sqlite3": "^4.0.2"
   }
 }
