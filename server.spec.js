@@ -86,4 +86,24 @@ describe("Server", () => {
       expect(response.type).toBe("application/json");
     });
   });
+
+  describe("DELETE /:id", () => {
+    it("should return a status code of 200 when successfully deleted", async () => {
+      const response = await request(server).delete("/1");
+      expect(response.status).toEqual(200);
+    });
+    it("should return the ID of the deleted item", async () => {
+      const expectedBody = { id: 1 };
+      const response = await request(server)
+        .delete("/1")
+        .send({ id: "1" });
+      expect(response.body).toEqual({ id: "1" });
+    });
+    it("should return a JSON object", async () => {
+      const response = await request(server)
+        .delete("/1")
+        .send({ id: "1" });
+      expect(response.type).toBe("application/json");
+    });
+  });
 });
