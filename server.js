@@ -1,31 +1,20 @@
 const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+const db = require('./data/dbConfig');
 
 const server = express();
 server.use(express.json());
+server.use(helmet());
+server.use(cors({}));
 
-let posts = [
-  {
-    id: 0,
-    text: 'Example Text'
-  },
-  {
-    id: 1,
-    text: 'Example Text'
-  },
-  {
-    id: 2,
-    text: 'Example Text'
-  },
-];
-
-let id = 3;
-
-const getId = () => {
-  return id++;
-}
-
-server.get('/', (req, res) => {
-  res.status(200).json(posts);
+server.get('/', async (req, res) => {
+  try{
+    const posts = await db('posts');
+    res.status(200).json(posts);
+  } catch (e){
+    console.log(e);
+  }  
 });
 
 server.post('/', (req, res) => {
