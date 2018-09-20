@@ -50,6 +50,7 @@ describe('server.js', () => {
 
     it("returns a count of the objects deleted, which will be 1", async () => {
       const response = await request(server).delete("/1");
+      
       expect(response.body).toEqual(1);
     });
   })

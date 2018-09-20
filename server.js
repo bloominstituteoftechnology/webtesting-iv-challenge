@@ -17,4 +17,10 @@ server.post('/', (req, res) => {
   dummyDB = [1];
 });
 
+server.delete('/:id', (req, res) => {
+  const splicedArr = dummyDB.splice(0, 1);
+  console.log(splicedArr);
+  res.status(201).json(splicedArr.length);
+  dummyDB = [1];
+})
 module.exports = server;
