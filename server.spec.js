@@ -71,7 +71,17 @@ describe("/users", () => {
     expect(response.body).toEqual([2]);
     expect(response.status).toEqual(201);
     expect(response.type).toEqual("application/json");
-
   });
-
 });
+
+describe("/users", () => {
+    it("should return a user id, a 200 status code, and it should be json", async () => {
+      let id = 2;
+      const response = await request(server)
+        .delete(`/users/${id}`)
+        .send({ id });
+      expect(response.body).toEqual(1);
+      expect(response.status).toEqual(200);
+      expect(response.type).toEqual("application/json");
+    });
+  });
