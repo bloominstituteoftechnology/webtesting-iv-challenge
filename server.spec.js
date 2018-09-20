@@ -40,3 +40,24 @@ describe("/greet/:name", () => {
     expect(response.body).toEqual({ Hello: "kyle meltzer" });
   });
 });
+
+describe("/users", () => {
+  it("should return a list of users", async () => {
+    const expectedBody = [{"id": 1, "name": "kyle"}];
+
+    const response = await request(server).get("/users");
+
+    expect(response.body).toEqual(expectedBody);
+  });
+
+  it(`should return json`, async () => {
+    const response = await request(server).get("/users");
+
+    expect(response.type).toEqual("application/json");
+  });
+  it("should return a 200 status code", async () => {
+    const response = await request(server).get("/users");
+
+    expect(response.status).toEqual(200);
+  });
+});
