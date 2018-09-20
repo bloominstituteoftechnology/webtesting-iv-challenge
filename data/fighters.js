@@ -1,6 +1,6 @@
 const fighters = [
-  { id: 1, name: "goku", race: "saiyan" },
-  { id: 2, name: "vegeta", race: "saiyan" },
+  { id: "0", name: "goku", race: "saiyan" },
+  { id: "1", name: "vegeta", race: "saiyan" },
 ];
 
 module.exports = {
