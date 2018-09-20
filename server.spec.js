@@ -20,6 +20,16 @@ describe ('get request for /', () => {
     });
 });
 
+describe('get request for users', () => {
+    it('returns a list of users', async () => {
+        let response = await request(server)
+        .get('/users')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
+    })
+})
+
 describe('/greet/:name', () => {
     it('greets the person by name', async () => {
         let first = 'Harry';

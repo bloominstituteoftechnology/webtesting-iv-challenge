@@ -4,8 +4,40 @@ const server = express();
 
 server.use(express.json());
 
+const users = {
+    user_1 : {
+        id:  '1',
+        name: 'name_1',
+        contact: 'contact_1'
+    },
+    user_2 : {
+        id:  '2',
+        name: 'name_2',
+        contact: 'contact_2'
+    },
+    user_3 : {
+        id:  '3',
+        name: 'name_3',
+        contact: 'contact_3'
+    },
+    user_4 : {
+        id:  '4',
+        name: 'name_4',
+        contact: 'contact_4'
+    },
+    user_5 : {
+        id:  '5',
+        name: 'name_5',
+        contact: 'contact_5'
+    },
+}
+
 server.get('/', (req,res)=> {
     res.status(200).json({api: 'running'});
+});
+
+server.get('/users', (req,res) => {
+    res.status(200).json({users});
 });
 
 server.post('/greet/:name', (req,res) => {
