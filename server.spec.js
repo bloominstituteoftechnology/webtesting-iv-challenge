@@ -67,4 +67,40 @@ describe("server.js", () => {
         });
     });
   });
+
+  describe("post route", () => {
+    it("should return an OK status code", () => {
+      const expectedStatusCode = 201;
+
+      let response;
+      const test = {
+        name: "FSW12",
+        track: "Full Stack Web"
+      };
+
+      return request(server)
+        .post("/classes", test)
+        .then(res => {
+          response = res;
+
+          expect(response.status).toEqual(expectedStatusCode);
+        });
+    });
+
+    it("should return a JSON object fron the index route", () => {
+      let response;
+      const test = {
+        name: "FSW12",
+        track: "Full Stack Web"
+      };
+
+      return request(server)
+        .post("/classes", test)
+        .then(res => {
+          response = res;
+
+          expect(response.type).toEqual("application/json");
+        });
+    });
+  });
 });
