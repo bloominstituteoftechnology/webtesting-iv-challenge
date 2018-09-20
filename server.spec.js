@@ -15,7 +15,7 @@ describe("server.js tests", () => {
 
     it("GET to /teams returns status code 200", async () => {
       const response = await request(server).get("/teams");
-      expect(response.status).toBe(200);
+      expect(response.status).toEqual(200);
     });
   });
 
@@ -31,7 +31,7 @@ describe("server.js tests", () => {
         { id: 2, name: "Chelsea" }
       ];
 
-      expect(response.status).toBe(200);
+      expect(response.status).toEqual(200);
       expect(response.body).toEqual(expectedBody);
     });
   });
@@ -50,7 +50,7 @@ describe("server.js tests", () => {
 
     it("should flag error when id does not exist", async () => {
       const response = await request(server).delete("/teams/5");
-      expect(response.status).toBe(400);
+      expect(response.status).toEqual(400);
     });
   });
 });
