@@ -19,6 +19,23 @@ describe("server.js tests", () => {
     });
   });
 
-  describe("POST Routes", () => {});
+  describe("POST Routes", () => {
+    it("add a new team to the teams object", async () => {
+      const response = await request(server)
+        .post("/teams")
+        .send({ name: "Chelsea" });
+
+      const expectedBody = [
+        { id: 0, name: "Manchester United" },
+        { id: 1, name: "Liverpool" },
+        { id: 2, name: "Arsenal" },
+        { id: 3, name: "Chelsea" }
+      ];
+
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual(expectedBody);
+    });
+  });
+
   describe("DELETE Routes", () => {});
 });

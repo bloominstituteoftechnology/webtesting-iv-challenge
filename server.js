@@ -24,4 +24,6 @@ server.post("/teams", (req, res) => {
   res.status(200).json(teams);
 });
 
+server.delete;
+
 module.exports = server;
