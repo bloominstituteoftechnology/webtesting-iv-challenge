@@ -12,10 +12,11 @@ server.use(cors());
 
 server.get('/users', (req, res) => {
     db('users')
-    .then(res => {
-        res.status(200).json(res)
+    .then(user => {
+        res.status(200).json(user)
     })
 })
 
+module.exports = server;
 
 
