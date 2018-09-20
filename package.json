@@ -25,6 +25,7 @@
     "supertest": "^3.3.0"
   },
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "knex": "^0.15.2"
   }
 }
