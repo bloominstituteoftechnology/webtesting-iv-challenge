@@ -1,5 +1,6 @@
 const request = require("supertest");
 const server = require("../server.js");
+const fighters = require("../data/fighters.js");
 
 describe("server.js", () => {
   it("runs the tests", () => {
@@ -20,6 +21,20 @@ describe("server.js", () => {
       const response = await request(server).get("/");
 
       expect(response.body).toEqual(expectedBody);
+    });
+  });
+  describe("DBZ Endpoints", () => {
+    describe("GET fighters", () => {
+      it("returns a 200 (OK) status code", async () => {
+        const response = await request(server).get("/fighters");
+
+        expect(response.status).toEqual(200);
+      });
+      it("should display a list of all fighters", async () => {
+        const response = await request(server).get("/fighters");
+
+        expect(response.body).toEqual(fighters);
+      });
     });
   });
 });
