@@ -31,7 +31,7 @@ server.post('/users', (req, res) => {
 
 server.delete('/users/:id', (req, res) => {
     const id = req.params.id;
-
+    
     db('users')
         .where('id', id)
         .del()
