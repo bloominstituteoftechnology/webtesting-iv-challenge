@@ -36,4 +36,16 @@ server.post("/fighters/", (req, res) => {
   fightersArray.fighters.push(newFighter);
   res.status(200).json(fightersArray.fighters);
 });
+
+// DELETE fighter
+server.delete("/fighters/:id", (req, res) => {
+  const { id } = req.params;
+  let newFightersArray = [];
+  for (let i = 0; i < fightersArray.fighters.length; i++) {
+    if (fightersArray.fighters[i].id !== id) {
+      newFightersArray.push(fightersArray.fighters[i]);
+    }
+  }
+  res.status(200).json(newFightersArray);
+});
 module.exports = server;

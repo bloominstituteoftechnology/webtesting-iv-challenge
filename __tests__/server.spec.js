@@ -66,5 +66,27 @@ describe("server.js", () => {
         expect(response.body).toEqual(updatedFighterData);
       });
     });
+
+    describe("DELETE fighter", () => {
+      it("returns a 200 (OK) status code", async () => {
+        const response = await request(server).get("/fighters");
+
+        expect(response.status).toEqual(200);
+      });
+      it("should display all fighters (excluding delete fighter)", async () => {
+        const fighterToDeleteId = "1";
+        let newFightersArray = [];
+        for (let i = 0; i < fightersData.fighters.length; i++) {
+          if (fightersData.fighters[i].id !== fighterToDeleteId) {
+            newFightersArray.push(fightersData.fighters[i]);
+          }
+        }
+        const response = await request(server).delete(
+          `/fighters/${fighterToDeleteId}`,
+        );
+
+        expect(response.body).toEqual(newFightersArray);
+      });
+    });
   });
 });
