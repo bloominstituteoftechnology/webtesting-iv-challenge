@@ -29,6 +29,21 @@ server.post('/users', (req, res) => {
         })
 })
 
+server.delete('/users/:id', (req, res) => {
+    const id = req.params.id;
+    
+    db('users')
+        .where('id', id)
+        .del()
+        .then(user => {
+            res.status(200).json({deleted: `User with ID of ${id} has been deleted!`})
+        })
+        .catch(err => {
+            res.status(500).json({error: "User could not be deleted from the table 'Users'."})
+        })
+})
+
+
 module.exports = server;
 
 
