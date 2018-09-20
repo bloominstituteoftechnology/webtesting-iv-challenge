@@ -34,4 +34,14 @@ server.delete("/:id", (req, res) => {
     res.status(200).json({ id });
   }
 });
+
+server.put("/:id", (req, res) => {
+  const { id } = req.params;
+  const { name, email } = req.body;
+  if (!(name || email)) {
+    res.status(500).end();
+  } else {
+    res.status(200).json(req.body);
+  }
+});
 module.exports = server;
