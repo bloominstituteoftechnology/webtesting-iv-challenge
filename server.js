@@ -7,14 +7,25 @@ server.get('/', (req, res) => {
 });
 
 server.post('/friends', (req, res) => {
-  const first = req.body.first;
-  const last = req.body.last;
-  res.status(201).json({ first, last });
+  let { first, last } = req.body;
+
+  if (!first || !last)
+    return res.status(400).json('Missing first or last name or both.');
+
+  return res.status(201).json({ id: 1, first, last });
 });
 
-const port = 8500;
-server.listen(port, function() {
-  console.log(`\n === Web API Listening on http://localhost:${port}===`);
+server.delete('/friends/:id', (req, res) => {
+  let id = req.params.id;
+
+  if (id < 5) return res.status(200).json(1);
+
+  return res.status(400).json(0);
 });
+
+// const port = 8500;
+// server.listen(port, function() {
+//   console.log(`\n === Web API Listening on http://localhost:${port}===`);
+// });
 
 module.exports = server;
