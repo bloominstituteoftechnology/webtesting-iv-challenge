@@ -18,5 +18,10 @@ server.post('/roster', (req, res) => {
      });
 });
 
+server.delete('/roster/:id', (req, res) => {
+    const { id } = req.params;
+    res.status(200).json({ id });
+});
+
 
 module.exports = server;

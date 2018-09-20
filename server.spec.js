@@ -35,4 +35,20 @@ describe('server.js', () => {
             expect(response.type).toEqual('application/json');
         });
     });
+
+    describe('DELETE /roster:id', () => {
+        it('should return status 200 (OK)', async () => {
+            const response = await request(server).delete('/roster/1');
+
+            expect(response.status).toBe(200);
+        });
+
+        it('should return the id of the deleted player upon successful deletion', async () => {
+            const response = await request(server)
+                .delete('/roster/1')
+                .send({ id: '1' });
+
+            expect(response.body).toEqual({ id: '1' });
+        });
+    });
 });
