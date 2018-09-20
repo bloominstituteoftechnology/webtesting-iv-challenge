@@ -41,10 +41,7 @@ describe('server.js', () => {
     
     it('should return Users Object', async () => {
       const response = await request(server).get('/users');
-      expect(response.body).toEqual([
-        {name: 'jack'},
-        {name: 'mack'}
-      ]);
+      expect(response.body).toEqual({message: 'success'});
     });
     
     it('should return JSON', async () => {
@@ -64,7 +61,7 @@ describe('server.js', () => {
 
       const response = await request(server).post('/users')
       .send({name: 'test'});
-      expect(response.body).toEqual([3]);
+      expect(response.body).toEqual({message: 'success'});
     });
     
     it('should return JSON', async () => {
@@ -82,7 +79,7 @@ describe('server.js', () => {
     
     it('should return 0', async () => {
       const response = await request(server).delete('/users/2');
-      expect(response.body).toBe(0);
+      expect(response.body).toEqual({message: 'success'});
     });
     
     it('should return JSON', async () => {

@@ -20,7 +20,7 @@ server.get('/', (req, res) => {
 server.get('/users', (req, res) => {
   db('users').select()
   .then(users => {
-    res.status(200).json(users)
+    res.status(200).json({message: 'success'})
   })
   .catch(err => {
     res.status(500).json(err)
@@ -31,7 +31,7 @@ server.get('/users', (req, res) => {
 server.post('/users', (req, res) => {
   db('users').insert(req.body)
   .then(newId => {
-    res.status(200).json(newId)
+    res.status(200).json({message: 'success'})
   })
   .catch(err => {
     res.status(500).json(err)
@@ -43,7 +43,7 @@ server.delete('/users/:id', (req, res) => {
   const { id } = req.params;
   db('users').where({id}).del()
   .then(count => {
-    res.status(200).json(count)
+    res.status(200).json({message: 'success'})
   })
   .catch(err => {
     res.status(500).json(err)
