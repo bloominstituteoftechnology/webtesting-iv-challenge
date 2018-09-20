@@ -24,7 +24,7 @@ describe("server.js", () => {
     });
   });
   describe("DBZ Endpoints", () => {
-    describe("GET fighters", () => {
+    describe("GET ALL fighters", () => {
       it("returns a 200 (OK) status code", async () => {
         const response = await request(server).get("/fighters");
 
@@ -34,6 +34,19 @@ describe("server.js", () => {
         const response = await request(server).get("/fighters");
 
         expect(response.body).toEqual(fighters);
+      });
+    });
+
+    describe("GET SINGLE fighter", () => {
+      it("returns a 200 (OK) status code", async () => {
+        const response = await request(server).get("/fighters/0");
+
+        expect(response.status).toEqual(200);
+      });
+      it("should display a list of all fighters", async () => {
+        const response = await request(server).get("/fighters/0");
+
+        expect(response.body).toEqual([fighters.fighters[0]]);
       });
     });
   });
