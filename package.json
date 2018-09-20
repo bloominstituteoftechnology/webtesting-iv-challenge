@@ -4,6 +4,7 @@
   "description": "Server Testing Project",
   "main": "server.js",
   "scripts": {
+    "debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand",
     "test": "jest --watch --verbose"
   },
   "jest": {
