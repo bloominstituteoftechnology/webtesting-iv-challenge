@@ -57,3 +57,42 @@ describe('POST /todos', () => {
       .catch(done);
   });
 });
+
+describe('DELETE /todos', () => {
+  it('deletes the todo with the specified id and returns the object', done => {
+    let data = null;
+    return request(app)
+      .post('/todos')
+      .send({ text: 'Learn testing' })
+      .then(response => {
+        data = response.body;
+        return request(app)
+          .delete('/todos/' + data.id)
+          .expect(200);
+      })
+      .then(response => {
+        expect(response.body).toEqual(data);
+        done(null);
+      })
+      .catch(done);
+  });
+
+  it('deletes the todo from the list', done => {
+    let data = null;
+    return request(app)
+      .post('/todos')
+      .send({ text: 'Learn testing' })
+      .then(response => {
+        data = response.body;
+        return request(app).delete('/todos/' + data.id);
+      })
+      .then(() => {
+        return request(app).get('/todos');
+      })
+      .then(response => {
+        expect(response.body).not.toContainEqual(data);
+        done(null);
+      })
+      .catch(done);
+  });
+});

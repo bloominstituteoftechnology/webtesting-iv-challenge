@@ -20,4 +20,11 @@ app.post('/todos', (req, res) => {
   res.status(201).json(newTodo);
 });
 
+app.delete('/todos/:id', (req, res) => {
+  const index = todos.findIndex(todo => todo.id === Number(req.params.id));
+  const deletedTodo = todos[index];
+  todos.splice(index, 1);
+  res.status(200).json(deletedTodo);
+});
+
 module.exports = app;
