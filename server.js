@@ -12,9 +12,21 @@ server.use(cors());
 
 server.get('/users', (req, res) => {
     db('users')
-    .then(user => {
-        res.status(200).json(user)
-    })
+        .then(user => {
+            res.status(200).json(user)
+        })
+})
+
+server.post('/users', (req, res) => {
+    const newUser = req.body;
+
+    db.insert(newUser).into('users')
+        .then(user => {
+            res.status(200).json({added: `${newUser.username} has been added!`})
+        })
+        .catch(err => {
+            res.status(500).json({error: "User could not be added to the table 'Users'."})
+        })
 })
 
 module.exports = server;

@@ -11,4 +11,15 @@ describe('server.js', () => {
             
         expect(response.status).toEqual(200); 
     })
+
+    it('should post a user to the table "users"', async () => {
+        const response = await request(server)
+            .post('/users')
+            .send({
+                username: 'Queen Qbert',
+                department: 'fruit loops',
+            })
+            
+        expect(response.body).toEqual({added: 'Queen Qbert has been added!'}); 
+    })
 })
