@@ -28,8 +28,7 @@ describe("server.js tests", () => {
       const expectedBody = [
         { id: 0, name: "Manchester United" },
         { id: 1, name: "Liverpool" },
-        { id: 2, name: "Arsenal" },
-        { id: 3, name: "Chelsea" }
+        { id: 2, name: "Chelsea" }
       ];
 
       expect(response.status).toBe(200);
@@ -37,5 +36,21 @@ describe("server.js tests", () => {
     });
   });
 
-  describe("DELETE Routes", () => {});
+  describe("DELETE Routes", () => {
+    it("should delete a team when passed the id", async () => {
+      const response = await request(server).delete("/teams/2");
+
+      const expectedBody = [
+        { id: 0, name: "Manchester United" },
+        { id: 1, name: "Liverpool" }
+      ];
+
+      expect(response.body).toEqual(expectedBody);
+    });
+
+    it("should flag error when id does not exist", async () => {
+      const response = await request(server).delete("/teams/5");
+      expect(response.status).toBe(400);
+    });
+  });
 });
