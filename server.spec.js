@@ -79,7 +79,8 @@ describe("server.js", () => {
       };
 
       return request(server)
-        .post("/classes", test)
+        .post("/classes")
+        .send(test)
         .then(res => {
           response = res;
 
@@ -95,7 +96,8 @@ describe("server.js", () => {
       };
 
       return request(server)
-        .post("/classes", test)
+        .post("/classes")
+        .send(test)
         .then(res => {
           response = res;
 

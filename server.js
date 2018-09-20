@@ -6,6 +6,8 @@ const dbConfig = require("./knexfile.js");
 
 const db = knex(dbConfig.development);
 
+server.use(express.json());
+
 server.get("/", (req, res) => {
   res
     .status(200)
@@ -15,12 +17,22 @@ server.get("/", (req, res) => {
 
 server.get("/classes", (req, res) => {
   db("classes").then(response => {
-    console.log(response);
     res
       .status(200)
       .json(response)
       .end();
   });
+});
+
+server.post("/classes", (req, res) => {
+  db("classes")
+    .insert(req.body)
+    .then(response => {
+      res
+        .status(201)
+        .json(response)
+        .end();
+    });
 });
 
 module.exports = server;
