@@ -18,6 +18,27 @@ app.post("/create", (req, res) => {
     .json(storage)
     return;
 });
+
+app.delete("/delete", (req,res) =>{
+  if(typeof req.body.id  === 'undefined'){
+    res
+    .status(400)
+    .json({ errorMessage: "Invalid body" })
+    return;
+  }
+  if(req.body.id > (storage.length -1) ){
+    res
+    .status(400)
+    .json({ errorMessage: "Invalid ID" })
+    return;
+  }
+  storage.splice(req.body.id, 1);
+  res
+    .status(200)
+    .json({message: 'Delete Success'})
+    return;
+
+})
 app.use("/", (req, res) =>
   res
     .status(404)

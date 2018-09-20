@@ -18,7 +18,7 @@ describe('server.js', () => {
 
 
   describe('create route', () => {
-    it('should 400', async () => {
+    it('should 400 if no body', async () => {
       const expectedStatusCode = 400;
       const response = await request(server).post('/create');
       expect(response.status).toEqual(expectedStatusCode);
@@ -40,5 +40,28 @@ describe('server.js', () => {
         species: expect.stringMatching('cat')
       }]));
     });
+  });
+
+  describe('delete route', () => {
+    it('should 400 if no body', async () => {
+      const expectedStatusCode = 400;
+      const response = await request(server).delete('/delete');
+      expect(response.status).toEqual(expectedStatusCode);
+    });
+    it('should respond with success', async () => {
+      const response = await request(server).post('/create').send({ name: 'Manny', species: 'cat' });
+        const response2 = await request(server).delete('/delete').send({id:0 });
+      
+      expect(response2.body).toEqual({message: 'Delete Success'});
+    });
+    it('should 200', async () => {
+      const expectedStatusCode = 200;
+      const response = await request(server).post('/create').send({ name: 'Manny', species: 'cat' });
+        const response2 = await request(server).delete('/delete').send({id:0 });
+      
+      expect(response2.status).toEqual(expectedStatusCode);
+    });
+    
+   
   });
 });
