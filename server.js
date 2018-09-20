@@ -3,10 +3,12 @@ const server = express();
 const port = 8000;
 
 server.use(express.json());
+server.use(express.urlencoded());
+server.use(require('cors')());
 server.use('/api', require('./api'));
 
 server.get('/', (req, res) => {
-  res.status(200).json({ server: 'running' })
+  res.status(200).json({ server: 'running' });
 });
 
 module.exports = server;
