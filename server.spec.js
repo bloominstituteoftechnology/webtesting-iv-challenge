@@ -31,8 +31,7 @@ describe('server.js', () => {
 		});
 	});
 
-
-	describe('/greet/:name', () => {
+	describe('POST to /greet/:name', () => {
 		it('should greet the person', async () => {
 			let name = 'kyle';
 			let last = 'meltzer';
@@ -54,5 +53,15 @@ describe('server.js', () => {
 		});
 	});
 
+	describe('DELETE /', () => {
+		it('returns a 201 status code', async () => {
+			const response = await request(server).delete("/1");
+			expect(response.status).toEqual(201);
+		});
 
+		it('returns a count of the objects deleted, which will be 1', async () => {
+			const response = await request(server).delete("/1");
+			expect(response.body).toEqual(1);
+		});
+	});
 });
