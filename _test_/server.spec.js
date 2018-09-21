@@ -37,20 +37,24 @@ describe('server.js', () => {
                 { id: 0, name: 'Pasta'},
                 { id: 1, name: 'Pizza'},
                 { id: 2, name: 'Soup'},
-                {id: 3 },
-                { id: 4, name: 'Fries'},
+                { id: 3, name: 'Fries'},
             ];
             expect(response.body).toEqual(expectedBody);
         });
     });
     describe(`DELETE /food`, () => {
+        it('should respond with json', async () => {
+            const response = await request(server).delete('/food/0');
+            expect(response.type).toBe('application/json');
+        });
         it('should delete the specified food by ID from the list', async () => {
-            const response = await request(server)
-            .delete('/food/0');
-            const expectedBody = {
-                message: `Food item id 0 is deleted.`
-            }
-            expect(response.body).toEqual(expectedBody);
+            const response = await request(server).delete('/food/0');
+            const expectedBody = [
+                { id: 1, name: 'Pizza'},
+                { id: 2, name: 'Soup'},
+                { id: 3, name: 'Fries'},
+        ]
+            expect(response.body).toBe(expectedBody);
         });
         it('should return status code 404 if the food ID is not found', async () => {
             const response = await request(server).delete('/food/1156400');
