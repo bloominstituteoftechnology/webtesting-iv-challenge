@@ -15,6 +15,8 @@ server.get("/", (req, res) => {
   });
 });
 
+server.use('/api/notes', require('./routes/notes'))
+
 //server.listen(3000, () => console.log(`SERVER is running`));
 
 module.exports = server
