@@ -11,7 +11,7 @@ server.post('/api/:id', (req, res) => {
 
 server.put('/api/:id', (req, res) => {
     const { id } = req.params;
-    res.status(201).send(Number(id));
+    res.status(201).send(Number(id) );
 })
 
 module.exports = server;
