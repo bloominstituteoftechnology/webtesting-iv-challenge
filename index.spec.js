@@ -26,11 +26,11 @@ describe('server', () => {
   describe('POST /students', () => {
 
     it('should return status code 201(Created) when successful', async () => {
-      const firstName = 'Casey';
-      const lastName = 'Baker';
+      const first = 'Casey';
+      const last = 'Baker';
       const house = 'Slytherin';
       
-      const student = { firstName: `${firstName}`, lastName: `${lastName}`, house: `${house}` }
+      const student = { first: `${first}`, last: `${last}`, house: `${house}` }
 
       const response = await request(server)
         .post('/students')
@@ -39,20 +39,21 @@ describe('server', () => {
       expect(response.status).toBe(201);
     })
 
-    it('should return error if missing a field', async () => {
+    it('should return error 400 if missing a field', async () => {
       const response = await request(server)
-        .post('students')
-        .send({ firstName: 'Casey' });
+        .post('/students')
+        .send({ first: 'Casey' });
 
         expect(response.status).toBe(400);
 
     })
 
     it('should return the created resource', async () => {
-      const firstName = 'Casey';
-      const lastName = 'Baker';
+      const first = 'Casey';
+      const last = 'Baker';
       const house = 'Slytherin';
-      const student = { firstName: `${firstName}`, lastName: `${lastName}`, house: `${house}` }
+      
+      const student = { first: `${first}`, last: `${last}`, house: `${house}` }
 
       const response = await request(server)
         .post('/students')
