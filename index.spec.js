@@ -23,4 +23,25 @@ describe('server', () => {
     it('can even more run run run tests', () => {
         expect(false).toBeFalsy();
     });
+
+    it('should return {message: "the line is hot"}', async () => {
+        const response = await request(server).get('/');
+
+        expect (response.body).toEqual('the line is hot');
+    });
+
+    describe('POST /:name', () => {
+        
+        it('should return name', async () => {
+            const name = 'Orioles';
+            const expected = { name };
+
+            const response = await request(server)
+            .post(`${name}`)
+            .send(`${name} is in` );
+
+            expect(response.body).toEqual(expected);
+        });
+    });
+    
 });
