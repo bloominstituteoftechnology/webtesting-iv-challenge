@@ -20,13 +20,15 @@ describe("POST /api/:book", () => {
 		expect(response.body).toEqual(expected);
 	});
 	it("should return status 201", async () => {
-		const response = await request(server).get("/api/:book");
-		expect(response.status).toBe(201);
+		const book = "Ender's Game";
+		const response = await request(server).post(`/api/${book}`);
+		expect(response.status).toEqual(201);
 	});
 });
 describe("DELETE /api/:id", () => {
 	it("should return status 200", async () => {
-		const response = await request(server).get("/api/:id");
+		const id = "0";
+		const response = await request(server).delete(`/api/${id}`);
 		expect(response.status).toBe(200);
 	});
 	it("should delete an item from their id", async () => {
