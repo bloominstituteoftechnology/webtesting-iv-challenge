@@ -26,7 +26,7 @@ server.post("/api/:todos", (req, res) => {
    if (!newToDo.name) {
     res.status(400).json({ error: "invalid todo" });
   } else {
-    posts.push(newToDo);
+    todos.push(newToDo);
      res.status(201).json({ message: "To Do added" });
   }
 });
