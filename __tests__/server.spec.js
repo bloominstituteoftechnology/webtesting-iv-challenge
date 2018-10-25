@@ -51,7 +51,7 @@ describe('~~ server.js ~~', () => {
 		});
 
 		it('should return status 400 custom JSON if one or more properties are missing from the POST', async () => {
-			const expected = statusObj('h400', `Missing name of department property.`);
+			const expected = statusObj('h400', `Missing name or department property.`);
 			const response = await request(server)
 				.post('/api/employees')
 				.send({ name: 'Braden' });

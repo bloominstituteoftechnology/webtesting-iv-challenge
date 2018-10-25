@@ -15,7 +15,7 @@ server.post('/api/employees', (req, res, next) => {
 		state[id] = { name, department };
 		res.status(201).json({ employeeId: id });
 	} else {
-		next(['h400', 'Missing name of department property.']);
+		next(['h400', 'Missing name or department property.']);
 	}
 });
 
