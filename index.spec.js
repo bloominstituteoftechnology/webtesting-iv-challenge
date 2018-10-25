@@ -63,13 +63,26 @@ describe('server', () => {
     })
   })
 
-  describe('DELETE /students/:id', () => {
+  describe('DELETE /students/:id', async () => {
     it('should return status code 200(OK) when successful', async () => {
-      //return correct status code
+      const id = 3;
+
+      const response = await request(server)
+        .delete(`/students/:${id}`)
+
+      expect(response.status).toBe(200);
+
     })
 
-    it('should return deleted item', async () => {
-      //return deleted item
+    it('should return farewell message', async () => {
+      const id = 5;
+
+      farewell = `Farewell, student #${id}`;
+     
+      const response = await request(server)
+        .delete(`/students/:${id}`)
+
+      expect(response.body).toEqual(farewell);
     })
   })
 });
