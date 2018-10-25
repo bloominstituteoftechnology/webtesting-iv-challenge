@@ -3,7 +3,7 @@ const server = require("./api/server.js");
 
 describe('server', () => {
 
-    
+
 // ===== GET server 
     describe('GET /', () => {
         it('should return { message: "server up" }', async () => {
@@ -90,7 +90,7 @@ describe("DELETE /api/users/:username", () => {
       const response = await request(server).delete(`/api/users/${username}`);
       expect(response.body).toEqual(expected);
     });
-    it("should return status code 200(OK)", async () => {
+    it("should return status 200(OK)", async () => {
       const username = "Lucas";
       const response = await request(server).delete(`/api/users/${username}`);
       expect(response.status).toBe(200);
