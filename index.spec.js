@@ -13,49 +13,57 @@ const server = require('./api/server.js');
 const request = require('supertest');
 
 describe('server', () => {
-    describe('GET /api/cities', () => {
+    describe('GET /api/people', () => {
         it('should return status code 200(OK)', async () => {
-            const response = await request(server).get('/api/cities')
+            const response = await request(server).get('/api/people')
 
             expect(response.status).toBe(200);
             });
         
         it('should return JSON', async () => {
-            const response = await request(server).get('/api/cities');
-            // console.log(response.body);
+            const response = await request(server).get('/api/people');
+    
             expect(response.type).toBe('application/json');
         })
 
-        it('should return an object with all the states cities', async () => {
-            const response = await request(server).get('/api/cities');
+        it('should return an object with the people', async () => {
+            const response = await request(server).get('/api/people');
 
-            const states = {
-                'California': {
-                    cities: ['Los Angeles', 'San Fransisco', 'Sacramento']
-                },
-                'Texas': {
-                    cities: ['Houston', 'Austin', 'Dallas']
-                },
-                'New York': {
-                    cities: ['New York', 'Albany', 'Buffalo']
-                }
-            }
+            const expected = {
+                person: "Snoop Dogg",
+                person: "Elon Musk"
+            };
 
-            expect(response.body).toEqual(states)
+            expect(response.body).toEqual(expected)
         })
     })
 
-    describe('POST /api/cities/:cityName', () => {
-        it('should return the city name from URL and the passed state name from req.body', async () => {
-            
-            const cityName = 'Los Angeles';
-            const stateName = 'California';
-            const expected = {
-                message: "Los Angeles, California"
-            }
-            const response = await request(server).post(`/api/cities/${cityName}`).send({stateName});
+    describe('POST /api/people/:person', () => {
+        it('should create and return the new person', async () => {
+            const person = "Bob Ross";
+            const response = await request(server).post(`/api/people/${person}`);
+            const expected = "Bob Ross";
             expect(response.body).toEqual(expected)
+        })
+        it('should return status 201', async () => {
+            const person = "Bob Ross";
+            const response = await request(server).post(`/api/people/${person}`);
+            expect(response.status).toEqual(201);
+        })
+    })
+
+    describe('DELETE /api/people/:id', () => {
+        it('should return status 200', async () => {
+            const id = '0';
+            const response = await request(server).delete(`/api/people/0`);
             expect(response.status).toBe(200);
         })
+
+        it('should delete an item from url param ID', async () => {
+            const id = 0;
+            const response = await request(server).delete(`/api/people/0`);
+            expect(response).toBe(id);
+        })
     })
+
 })
