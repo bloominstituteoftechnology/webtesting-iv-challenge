@@ -9,7 +9,7 @@ const errorHandler = (err, req, res, next) => {
 	const status = err[0];
 	const message = err[1];
 
-	// ruh roh. err[0] isn't in errors...
+	// ruh roh. "status" isn't in errors...
 	if (!errors.hasOwnProperty(status)) throw new Error(`Uncaught Exception! Please review:\n${err}`);
 
 	// continue as normal
