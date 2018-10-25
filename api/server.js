@@ -13,4 +13,10 @@ server.get('/', (req, res) => { // sanity check root endpoint
   res.send(`${serverName} running on port ${serverPort}<br>More information: <a href="${projectPullRequest}">n/a</a>`);
 });
 
+server.post("/api/:test", (req, res) => {
+  const { test } = req.params;
+  res.status(201).json({ message: `${test}` });
+});
+
+
 module.exports = server;
