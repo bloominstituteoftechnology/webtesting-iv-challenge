@@ -115,12 +115,12 @@ describe('DELETE: /api/deleteTrainer/:id', () => {
         await request(server).post('/api/addTrainer').send({ name: "Cool Trainer", pokemon: "Pidgeotto" });
 
         // Failing Delete Request
-        return failResponse = await request(server.delete('/api/deleteTrainer/notRealID'));
+        return failResponse = await request(server).delete('/api/deleteTrainer/notRealId');
     })
 
     it('Should respond with JSON', async () => {
         const response = await request(server).delete('/api/deleteTrainer/0');
-        expect(response.type).toBe(application/json);
+        expect(response.type).toBe('application/json');
     })
 
     // Failure Tests
@@ -143,7 +143,7 @@ describe('DELETE: /api/deleteTrainer/:id', () => {
     it('Should respond with the id of the deleted trainer if the deletion is successful', async () => {
         const trainerId = 2;
         const response = await request(server).delete(`/api/deleteTrainer/${trainerId}`);
-        expect(response.body).toBe(trainerId);
+        expect(response.body).toBe({trainerId});
     })
 
     it('Should have decreased the number of trainers by one after a successful deletion', async () => {

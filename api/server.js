@@ -10,7 +10,7 @@ server.use(express.json());
 module.exports = server;
 
 // Instantiate Resource
-const trainers = [
+let trainers = [
     { 
     id: 0,
     name: "Ash",
@@ -50,3 +50,22 @@ server.post('/api/addTrainer', (request, response) => {
 })
 
 // --- DELETE Trainer Endpoint ---
+server.delete('/api/deleteTrainer/:id', (request, response) => {
+    // Get URL Params
+    const id = request.params.id;
+    let idExists = false;
+
+    for (i = 0; i < trainers.length; i++) {
+        if (Number(trainers[i].id) === Number(id)) {
+            idExists = i;
+        }
+    }
+
+    if ( !idExists ) {
+        return response.status(404).json({errorMessage: "We were unable to delete the trainer with the provided id."})
+    }
+
+    trainers.slice(idExists, 1);
+
+    response.status(204).json({trainerId: 2});
+})
