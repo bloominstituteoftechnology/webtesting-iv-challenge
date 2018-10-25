@@ -35,4 +35,20 @@ describe('server.js', () => {
             expect(response.type).toEqual('application/json');
         });
     });
+
+    describe('DELETE /celeb:id', () => {
+      it('200 status code (OK)??', async () => {
+          const response = await request(server).delete('/celeb/1');
+
+          expect(response.status).toBe(200);
+      });
+
+      it('should return the id of the deleted celebrity', async () => {
+          const response = await request(server)
+              .delete('/celeb/1')
+              .send({ id: '1' });
+
+          expect(response.body).toEqual({ id: '1' });
+      });
+  });
 })

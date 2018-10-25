@@ -18,4 +18,9 @@ server.post('/celeb', (req, res) => {
    });
   });
 
+  server.delete('/celeb/:id', (req, res) => {
+    const { id } = req.params;
+    res.status(200).json({ id });
+});
+
 module.exports = server;

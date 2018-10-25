@@ -4,6 +4,7 @@
   "description": "Server Testing Project",
   "main": "server.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "jest --watch --verbose"
   },
   "jest": {
@@ -25,6 +26,7 @@
     "supertest": "^3.3.0"
   },
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "nodemon": "^1.18.4"
   }
 }
