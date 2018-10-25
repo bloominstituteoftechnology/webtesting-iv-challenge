@@ -90,7 +90,7 @@ describe('server.js', () => {
 				const expected = { error: `No user with id ${ id } exists.`};
 				// expect an object
 				expect(typeof(response.body)).toBe('object');
-				// expect an object with that user's info
+				// expect an object with an error message
 				expect(response.body).toEqual(expected);
 			});
 		});
@@ -144,11 +144,71 @@ describe('server.js', () => {
 			});
 
 			it('should return an error message', async () => {
-				const response = await request(server).post(`/api/users/testName`);
+				const response = await request(server).post('/api/users/testName');
 				const expected = { error: 'Last name must not be missing.'};
 				// expect an object
 				expect(typeof(response.body)).toBe('object');
-				// expect an object with that user's info
+				// expect an object with an error message
+				expect(response.body).toEqual(expected);
+			});
+		});
+	});
+
+	describe('DELETE /api/users/:id', () => {
+		// rollback, then migrate to latest and seed after each DELETE test
+		afterEach(function(done) {
+			db.migrate.rollback()
+			.then(function() {
+				db.migrate.latest()
+				.then(function() {
+					return db.seed.run()
+					.then(function() {
+						done();
+					});
+				});
+			});
+		});
+
+		describe('calling with a user id that exists', () => {
+			it('should return status 200(OK)', async () => {
+				const response = await request(server).delete('/api/users/1');
+				expect(response.status).toBe(200);
+			});
+	
+			it('should return JSON', async () => {
+				const response = await request(server).delete('/api/users/1');
+				expect(response.type).toBe('application/json');
+			});
+	
+			it('should delete the user with the given id', async () => {
+				const id = 1;
+				const response = await request(server).delete(`/api/users/${ id }`);
+				const expected = { message: `User with id ${ id } successfully deleted.` };
+				// expect an object
+				expect(typeof(response.body)).toBe('object');
+				// expect an object with message stating a successful deletion
+				expect(response.body).toEqual(expected);
+			});
+		});
+
+		describe('calling with a user id that does not exist', () => {
+			it('should return status 404(NOT FOUND)', async () => {
+				const response = await request(server).delete('/api/users/3');
+				expect(response.status).toBe(404);
+			});
+
+			it('should return JSON', async () => {
+				const response = await request(server).delete('/api/users/3');
+				expect(response.type).toBe('application/json');
+			});
+
+			it('should return an error message', async () => {
+				const id = 3;
+				const response = await request(server).delete(`/api/users/${ id }`);
+				const expected = { error: `User with id ${ id } does not exist.` };
+				// expect an object
+				expect(typeof(response.body)).toBe('object');
+				// expect an object with an error message
 				expect(response.body).toEqual(expected);
 			});
 		});
