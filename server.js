@@ -9,7 +9,10 @@ server.get('/', (req, res)=> {
 });
 
 
-
+server.post('/hello', (req, res)=> {
+    const name = req.body;
+    res.send(201).json({hello: name});
+});
 
 
 

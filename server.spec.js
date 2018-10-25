@@ -22,5 +22,12 @@ describe('server.js', ()=> {
 
     });
 
-   
+   describe('POST /hello', ()=> {
+        it('should return a 201 Created', async ()=> {
+            const name = 'Alexandra';
+            const expected = {hello: "Alexandra"};
+            const response = await request(server).post('hello');
+            expect(response.body).toEqual(expected);
+        });
+   });
 });
