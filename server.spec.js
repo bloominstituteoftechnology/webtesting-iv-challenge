@@ -19,6 +19,12 @@ describe("POST /users/:username", () => {
 
     expect(response.status).toBe(200);
   });
+  it("should return JSON", async () => {
+    const username = "Caitlin";
+    const response = await request(server).post(`/users/${username}`);
+
+    expect(response.type).toBe("application/json");
+  });
 });
 
 describe("DELETE /users/:username", () => {
@@ -37,5 +43,12 @@ describe("DELETE /users/:username", () => {
     const response = await request(server).delete(`/users/${username}`);
 
     expect(response.status).toBe(200);
+  });
+
+  it("should return JSON", async () => {
+    const username = "Caitlin";
+    const response = await request(server).delete(`/users/${username}`);
+
+    expect(response.type).toBe("application/json");
   });
 });
