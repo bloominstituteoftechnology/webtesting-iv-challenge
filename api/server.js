@@ -57,5 +57,19 @@ server.post('/api/ice-cream', (req, res) => {
     .catch(err => res.status(500).json(err));
 });
 
+server.delete('/api/ice-cream/:id', (req, res) => {
+  const { id } = req.params;
+
+  db('orders').where({ id }).del()
+    .then(response => {
+      if (response) {
+        res.status(200).json({ success: 'order deleted' });
+      } else {
+        res.status(404).json({ missingError: 'Could not find order by that ID' });
+      }
+    })
+    .catch(err => res.status(500).json(err));
+})
+
 
 module.exports = server;
