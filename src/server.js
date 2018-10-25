@@ -29,10 +29,14 @@ server.get("/clients", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-// mvp basic endpoint to simulate the working post
-server.post("/clients", (req, res) => {
-  res.status(201).json({ message: "Client added" });
+// stretch post for clients
+server.post("/clients", async (req, res) => {
+  try {
+    const clients = db("clients").insert(req.body);
+    res.status(201).json({ message: "success" });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 server.delete("/clients/:id", (req, res) => {

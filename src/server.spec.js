@@ -34,20 +34,22 @@ describe("GET for /clients", () => {
   });
 });
 
-// base mvp tests
-
-// create tests
-describe("POST /clients test", () => {
-  it("should return JSON object { message: `Client added` } when a client is successfully added and a status code of 200", async () => {
-    const response = await request(server).post("/clients");
-    // test part 1
-    expect(response.body).toEqual({ message: "Client added" });
-
-    // test part 2
+// stretch post clients tests
+describe("POST for /clients", () => {
+  // 201 code test
+  it("returns a 201 status code", async () => {
+    const response = await request(server)
+      .post("/clients")
+      .send({ name: "testclient" });
     expect(response.status).toEqual(201);
+  });
 
-    // test part 3
-    expect(response.type).toEqual("application/json");
+  // array return id test
+  it("returns an array with the correct id", async () => {
+    const response = await request(server)
+      .post("/clients")
+      .send({ name: "newTestClient" });
+    expect(response.body).toEqual({ message: "success" });
   });
 });
 
