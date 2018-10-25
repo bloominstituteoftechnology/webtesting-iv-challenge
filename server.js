@@ -33,7 +33,7 @@ server.post("/api/:todos", (req, res) => {
 
 server.delete("/api/:id", (req, res) => {
 	const { id } = req.params;
-	res.status(200).json(id);
+	return res.status(200).json(id);
 });
  
 module.exports = server;
