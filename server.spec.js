@@ -3,7 +3,7 @@ const server = require("./api/server.js");
 
 describe('server', () => {
 
-// ===== GET request
+// ===== GET server 
     describe('GET /', () => {
         it('should return status code 200(OK)', async () => {
           const response = await request(server).get('/');
@@ -22,10 +22,10 @@ describe('server', () => {
       });
 
 // ===== POST request
-describe("POST /users/:username", () => {
+describe("POST /users", () => {
   it("should add the person", async () => {
     const username = "Lucas";
-    const expected = { Username: "Lucas" };
+    const expected = { username: "Lucas" };
     const response = await request(server).post(`/users/${username}`);
     expect(response.body).toEqual(expected);
   });
@@ -49,6 +49,11 @@ describe('GET /users', () => {
       const response = await request(server).get('/users');
       expect(response.status).toBe(200);
     });
+
+    it("should return JSON", async () => {
+        const response = await request(server).get(`/users`);
+        expect(response.type).toBe("application/json");
+      });
   });
 
 
