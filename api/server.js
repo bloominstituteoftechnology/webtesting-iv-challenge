@@ -47,4 +47,16 @@ server.post('/api/users/:first_name', (req, res) => {
 		.catch(err => res.status(500).json(`Server could not insert new user: ${ err }`));
 });
 
+// delete a user from the db
+server.delete('/api/users/:id', (req, res) => {
+	const { id } = req.params;
+	return userDb
+		.remove(id)
+		.then(del => {
+			if (del) return res.status(200).json({ message: `User with id ${ id } successfully deleted.` });
+			return res.status(404).json({ error: `User with id ${ id } does not exist.` });
+		})
+		.catch(err => res.status(500).json(`Server could not delete user: ${ err }`));
+});
+
 module.exports = server;

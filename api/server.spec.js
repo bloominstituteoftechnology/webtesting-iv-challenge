@@ -97,8 +97,7 @@ describe('server.js', () => {
 	});
 
 	describe('POST /api/users/:firstname', () => {
-		// rollback, then migrate to latest and seed after each POST test
-		afterEach(function(done) {
+		afterAll(function(done) {
 			db.migrate.rollback()
 			.then(function() {
 				db.migrate.latest()
@@ -112,6 +111,19 @@ describe('server.js', () => {
 		});
 
 		describe('calling with all the required credentials', () => {
+			afterEach(function(done) {
+				db.migrate.rollback()
+				.then(function() {
+					db.migrate.latest()
+					.then(function() {
+						return db.seed.run()
+						.then(function() {
+							done();
+						});
+					});
+				});
+			});
+
 			it('should return status 201(CREATED)', async () => {
 				const response = await request(server).post('/api/users/testName').send({ last_name: 'testLastName' });
 				expect(response.status).toBe(201);
@@ -130,9 +142,31 @@ describe('server.js', () => {
 				// expect an object with that new user's info
 				expect(response.body).toEqual(expected);
 			});
+
+			it('should add the given first and last name to the db and return that new user', async () => {
+				const response = await request(server).post('/api/users/Chris').send({ last_name: 'Christonson' });
+				const expected = { 'id': 3, 'first_name': 'Chris', 'last_name': 'Christonson' };
+				// expect an object
+				expect(typeof(response.body)).toBe('object');
+				// expect an object with that new user's info
+				expect(response.body).toEqual(expected);
+			});
 		});
 
 		describe('calling without all the required credentials', () => {
+			afterEach(function(done) {
+				db.migrate.rollback()
+				.then(function() {
+					db.migrate.latest()
+					.then(function() {
+						return db.seed.run()
+						.then(function() {
+							done();
+						});
+					});
+				});
+			});
+
 			it('should return status 400(BAD REQUEST)', async () => {
 				const response = await request(server).post('/api/users/testName');
 				expect(response.status).toBe(400);
@@ -155,8 +189,7 @@ describe('server.js', () => {
 	});
 
 	describe('DELETE /api/users/:id', () => {
-		// rollback, then migrate to latest and seed after each DELETE test
-		afterEach(function(done) {
+		afterAll(function(done) {
 			db.migrate.rollback()
 			.then(function() {
 				db.migrate.latest()
@@ -170,6 +203,19 @@ describe('server.js', () => {
 		});
 
 		describe('calling with a user id that exists', () => {
+			afterEach(function(done) {
+				db.migrate.rollback()
+				.then(function() {
+					db.migrate.latest()
+					.then(function() {
+						return db.seed.run()
+						.then(function() {
+							done();
+						});
+					});
+				});
+			});
+
 			it('should return status 200(OK)', async () => {
 				const response = await request(server).delete('/api/users/1');
 				expect(response.status).toBe(200);
@@ -189,9 +235,32 @@ describe('server.js', () => {
 				// expect an object with message stating a successful deletion
 				expect(response.body).toEqual(expected);
 			});
+
+			it('should delete the user with the given id', async () => {
+				const id = 2;
+				const response = await request(server).delete(`/api/users/${ id }`);
+				const expected = { message: `User with id ${ id } successfully deleted.` };
+				// expect an object
+				expect(typeof(response.body)).toBe('object');
+				// expect an object with message stating a successful deletion
+				expect(response.body).toEqual(expected);
+			});
 		});
 
 		describe('calling with a user id that does not exist', () => {
+			afterEach(function(done) {
+				return db.migrate.rollback()
+				.then(function() {
+					return db.migrate.latest()
+					.then(function() {
+						return db.seed.run()
+						.then(function() {
+							return done();
+						});
+					});
+				});
+			});
+
 			it('should return status 404(NOT FOUND)', async () => {
 				const response = await request(server).delete('/api/users/3');
 				expect(response.status).toBe(404);
