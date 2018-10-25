@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { errorHandler } = require('./api/ErrorHandler/errorhandler');
+const { errorHandler } = require('./api/errorHandler/handlers');
 
 const server = express();
 server.use(express.json());

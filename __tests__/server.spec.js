@@ -1,19 +1,9 @@
 const request = require('supertest');
 
 const server = require('../server.js');
-const { errors } = require('../api/ErrorHandler/errorhandler');
+const { statusObj } = require('../api/errorHandler/handlers');
 
 describe('~~ server.js ~~', () => {
-	const statusObj = (status, message) => {
-		if (!errors.hasOwnProperty(status)) {
-			return console.error('Status undefined!');
-		} else {
-			let statusJson = { ...errors[status] };
-			statusJson.errorOutput = message;
-			return statusJson;
-		}
-	};
-
 	describe('~~ GET something without a route ~~', () => {
 		it('should return status 404 (not found) when browsing to "/"', async () => {
 			const response = await request(server).get('/');

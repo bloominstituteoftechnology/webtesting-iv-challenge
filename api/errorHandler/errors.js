@@ -36,19 +36,6 @@ const errors = {
 	}
 };
 
-const errorHandler = (err, req, res, next) => {
-	// err = [errorId, supplied message for errorOutput]
-
-	if (!errors.hasOwnProperty(err[0])) throw `Uncaught Exception! Please review:\n${err}`;
-
-	if (err[0] === 'h500') console.error('Error:\n', err[1]);
-
-	const error = errors[err[0]];
-	error.errorOutput = err[1];
-	res.status(error.httpStatus).json(error);
-};
-
 module.exports = {
-	errors,
-	errorHandler
+	errors
 };
