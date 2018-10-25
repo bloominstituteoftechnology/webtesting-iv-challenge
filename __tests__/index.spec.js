@@ -3,7 +3,6 @@ const server = require('../index.js');
 
 describe('basic API functionality tests', () => {
   describe('tests for GET command', () => {
-
     test('should return a list of users and check response', async () => {
       const response = await request(server).get('/api/users');
       expect((response.body.message)).toBe('Here are the requested users.');
