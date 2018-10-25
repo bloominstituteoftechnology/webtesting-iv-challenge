@@ -22,12 +22,36 @@ describe('server.js', ()=> {
 
     });
 
-   describe('POST /hello', ()=> {
-        it('should return a 201 Created', async ()=> {
-            const name = 'Alexandra';
-            const expected = {hello: "Alexandra"};
-            const response = await request(server).post('hello');
-            expect(response.body).toEqual(expected);
+    describe('POST /dinner/:entree', () => {
+        it('should tell you what dinner is today', async () => {
+          const entree = 'Spaghetti';
+          const side = 'Garlic Bread';
+          const expected = { dinner: 'Spaghetti and Garlic Bread' };
+    
+          const response = await request(server)
+            .post(`/dinner/${entree}`)
+            .send({ side });
+    
+          expect(response.body).toEqual(expected);
         });
-   });
+    
+        it('should default to salad if no side provided', async () => {
+          const entree = 'Spaghetti';
+          const expected = { dinner: 'Spaghetti and green salad' };
+    
+          const response = await request(server).post(`/dinner/${entree}`);
+    
+          expect(response.body).toEqual(expected);
+        });
+      });
+
+    describe('/DELETE /dinner/:entree', ()=> {
+      it('should delete dinner', ()=> {
+        const entree = 'Steak';
+        const expected = {message: "Dinner is canceled"};
+        const response = await request(server)
+            .remove(`/dinner/${entree}`);
+        expect(response.body).toEqual(expected);
+      });
+    });
 });
