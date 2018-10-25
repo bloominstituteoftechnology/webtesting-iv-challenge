@@ -61,19 +61,15 @@ describe('POST: /api/addTrainer', () => {
         expect(response.type).toBe('application/json');
     })
 
-    it('Should respond with a status code of 200', async () => {
-        const response = await request(server).post('/api/addTrainer').send({ name: "Brock", pokemon: "Geodude" });
-        expect(response.status).toBe('200')
-    })
-
+    // Failure Tests
     it('Should respond with a status code of 400 if not sent a name or a pokemon', async () => {
         const missingName = await request(server).post('/api/addTrainer').send({ pokemon: "Geodude" });
         const missingPokemon = await request(server).post('/api/addTrainer').send({ name: "Brock" });
         const missingBoth = await request(server).post('/api/addTrainer').send();
 
-        expect(missingName.status).toBe('400');
-        expect(missingPokemon.status).toBe('400');
-        expect(missingBoth.status).toBe('400');
+        expect(missingName.status).toBe(400);
+        expect(missingPokemon.status).toBe(400);
+        expect(missingBoth.status).toBe(400);
     })
 
     it('Should respond with an error message if not sent a name or a pokemon', async () => {
@@ -83,14 +79,28 @@ describe('POST: /api/addTrainer', () => {
         const missingPokemon = await request(server).post('/api/addTrainer').send({ name: "Brock" });
         const missingBoth =await request(server).post('/api/addTrainer').send();
 
-        expect(missingName.body).toBe(errorMessage);
-        expect(missingPokemon.body).toBe(errorMessage);
-        expect(missingBoth.body).toBe(errorMessage);
+        expect(missingName.body).toEqual(errorMessage);
+        expect(missingPokemon.body).toEqual(errorMessage);
+        expect(missingBoth.body).toEqual(errorMessage);
     })
 
-    it('Should respond with the newly created trainer after a successfull creation', async () => {
+    // Success Tests
+    it('Should respond with a status code of 200 after a successful creation', async () => {
+        const response = await request(server).post('/api/addTrainer').send({ name: "Brock", pokemon: "Geodude" });
+        expect(response.status).toBe(200)
+    })
+
+    it('Should respond with the newly created trainer after a successful creation', async () => {
         const trainer = { name: "Brockstar", pokemon: "Nidorino" };
         const response = await request(server).post('/api/addTrainer').send(trainer);
         expect(response.body).toEqual(trainer)
     })
+
+    it('Should have a response array length greater by one after a successful creation', async () => {{
+        const trainer = { name: "Emi", pokemon: "Gardevoir" };
+        const initialGetResponse = await request(server).get('/api/trainers');
+        await request(server).post('/api/addTrainer').send(trainer);
+        const finalGetResponse = await request(server).get('/api/trainers');
+        expect(finalGetResponse.body.length).toBe(initialGetResponse.body.length + 1);
+    }})
 })
