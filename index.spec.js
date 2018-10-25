@@ -55,6 +55,7 @@ describe('server', () => {
             expect(response.status).toBe(200);
         });
         it('should return JSON', async () => {
+            const character = 'Ezra';
             const response = await request(server).delete(`/players/${character}`);
 
             expect(response.type).toBe('application/json');

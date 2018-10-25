@@ -15,4 +15,10 @@ server.post('/players/:character', (req, res) => {
   res.status(200).json({ hello: `${character} the ${jobClass}` });
 });
 
+server.delete('/players/:character', (req, res) => {
+    const { character } = req.params;
+
+    res.status(200).json({ success: `Deleted ${character}` });
+})
+
 module.exports = server;
