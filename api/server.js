@@ -26,20 +26,20 @@ server.get('/users', (req, res) => {
     const {username} = req.body
     const newUser = {username, id: userId}
     if (!username) {
-        return sendUserError('USERNAME REQUIRED', res);
+        return res.send('username is required');
     }
     users.push(newUser);
     userId++;
     res.json(users)
   });
 
-// ===== POST A USER ('url')('/users/:username')
+// ===== POST A USER (url)('/users/:username')
 server.post("/users/:username", (req, res) => {
   const { username } = req.params;
   const newUser = {username, id: userId}
   res.status(200).json({ username: `${username}` });
   if (!username) {
-    return sendUserError('USERNAME REQUIRED', res);
+    return res.send('username is required');
 }
 users.push(newUser);
 userId++;
