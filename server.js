@@ -33,7 +33,4 @@ server.delete('/testserver', (req, res) => {
 		.catch(err => res.status(500).json(err));
 });
 
-const port = 5000;
-server.listen(port, () => {
-	console.log(`\n=== Listening on http://localhost:${port} ===\n`);
-});
+module.exports = server;
