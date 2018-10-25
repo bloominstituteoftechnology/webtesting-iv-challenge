@@ -18,7 +18,7 @@ describe('server', () => {
 
     describe('POST /players/:character', () => {
         it('should return JSON', async () => {
-            const response = await request(server).get('/');
+            const response = await request(server).post('/players/:character');
 
             expect(response.type).toBe('application/json');
         });
