@@ -12,7 +12,8 @@ server.use(express.json());
 server.post('/testserver', (req, res) => {
 	const { thing } = req.body;
 
-	db.insert(thing)
+	db('things')
+		.insert({ thing })
 		.then(([id]) => {
 			res.status(201).json({ message: `${thing} added with id ${id}` });
 		})
@@ -22,7 +23,8 @@ server.post('/testserver', (req, res) => {
 server.delete('/testserver', (req, res) => {
 	const { thing } = req.body;
 
-	db.delete(thing)
+	db('things')
+		.delete({ thing })
 		.then(count => {
 			if (count) {
 				res.status(204).json({ message: `${thing} deleted` });
