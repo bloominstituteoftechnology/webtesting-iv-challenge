@@ -6,11 +6,11 @@ describe("GET /", () => {
 		const response = await request(server).get("/");
 		expect(response.status).toBe(200);
 	});
-	// it("should return the books", ()=>{
-
-	//     const response = await request(server).get('/api/books');
-	//     expect(response.body).toBe()
-	// })
+	it("should return the books", async () => {
+		const expected = { book: "St. Elmos Fire" };
+		const response = await request(server).get("/api/books");
+		expect(response.body).toEqual(expected);
+	});
 });
 describe("POST /api/:book", () => {
 	it("should create a new book", async () => {
