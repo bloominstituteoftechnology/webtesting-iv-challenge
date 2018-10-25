@@ -13,8 +13,10 @@ describe('server POST', () => {
 
     it('should return the data in an array', async () => {
         const response = await request (server)
-            .get('/get')
-        expect(response.text).toContain('[' && ']');
+            .get('/get');
+
+        console.log('response', response.body);
+        expect(Array.isArray(response.body)).toBe(true);
     })
 
     it('should return a status of 201', async () => {
