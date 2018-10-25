@@ -18,6 +18,8 @@ let trainers = [
     }
 ];
 
+let id = 0;
+
 // ----- CRUD Endpoints -----
 
 // --- Test Endpoint ---
@@ -38,7 +40,9 @@ server.post('/api/addTrainer', (request, response) => {
     if (!name || !pokemon) {
         return response.status(400).json({errorMessage: "You must provide a name and a pokemon."})
     }
-    const id = trainers[trainers.length - 1].id + 1;
+    
+    id++;
+
     // Construct Trainer Object
     const trainer = { id, name, pokemon }
 
@@ -52,20 +56,19 @@ server.post('/api/addTrainer', (request, response) => {
 // --- DELETE Trainer Endpoint ---
 server.delete('/api/deleteTrainer/:id', (request, response) => {
     // Get URL Params
-    const id = request.params.id;
+    const trainerId = request.params.id;
     let idExists = false;
 
     for (i = 0; i < trainers.length; i++) {
-        if (Number(trainers[i].id) === Number(id)) {
+        if (Number(trainers[i].id) === Number(trainerId)) {
             idExists = i;
         }
     }
 
-    if ( !idExists ) {
+    if ( !idExists && idExists !== 0 ) {
         return response.status(404).json({errorMessage: "We were unable to delete the trainer with the provided id."})
     }
 
-    trainers.slice(idExists, 1);
-
-    response.status(204).json({trainerId: 2});
+    trainers = trainers.slice(0, idExists).concat(trainers.slice(idExists + 1, trainers.length));
+    response.status(200).json({ trainerId });
 })

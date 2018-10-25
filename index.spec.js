@@ -137,13 +137,13 @@ describe('DELETE: /api/deleteTrainer/:id', () => {
     it('Should respond with a status code of 204 if the deletion is successful', async () => {
         const trainerId = 1;
         const response = await request(server).delete(`/api/deleteTrainer/${trainerId}`);
-        expect(response.status).toBe(204);
+        expect(response.status).toBe(200);
     })
 
     it('Should respond with the id of the deleted trainer if the deletion is successful', async () => {
         const trainerId = 2;
         const response = await request(server).delete(`/api/deleteTrainer/${trainerId}`);
-        expect(response.body).toBe({trainerId});
+        expect(response.body).toEqual({trainerId:`${trainerId}`});
     })
 
     it('Should have decreased the number of trainers by one after a successful deletion', async () => {
