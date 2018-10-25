@@ -4,8 +4,9 @@ const server = express();
 server.use(express.json());
 
 let users = [
-    {   id: 0,
-        username: 'Lucas'
+    {   
+        username: 'Lucas',
+        id: 0
     },
 ]
 
