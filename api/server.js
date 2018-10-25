@@ -11,8 +11,11 @@ module.exports = server;
 
 // Instantiate Resource
 const trainers = [
-    { name: "Ash",
-pokemon: "Pikachu" }
+    { 
+    id: 0,
+    name: "Ash",
+    pokemon: "Pikachu" 
+    }
 ];
 
 // ----- CRUD Endpoints -----
@@ -35,13 +38,15 @@ server.post('/api/addTrainer', (request, response) => {
     if (!name || !pokemon) {
         return response.status(400).json({errorMessage: "You must provide a name and a pokemon."})
     }
-
+    const id = trainers[trainers.length - 1].id + 1;
     // Construct Trainer Object
-    const trainer = { name, pokemon }
+    const trainer = { id, name, pokemon }
 
     // Add Trainer Object to the trainers array
     trainers.push(trainer);
 
     // Response with created trainer 
-    response.status(200).json(trainer);
+    response.status(201).json(trainer);
 })
+
+// --- DELETE Trainer Endpoint ---
