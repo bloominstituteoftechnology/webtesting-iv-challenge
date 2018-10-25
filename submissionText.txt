@@ -1,0 +1,8 @@
+
+### Requirements
+-[x] use jest and supertest to write the tests.
+-[x] Your API must be able to create and delete a resource of your choosing.
+-[x] Write a minimum of two tests per route handler.
+-[x] Add logic on the route handlers to validate request data and return the correct HTTP status code.
+-[x] Add tests to verify that the endpoints return the correct HTTP status codes.
+-[x] Write the tests BEFORE writing the route handlers.
