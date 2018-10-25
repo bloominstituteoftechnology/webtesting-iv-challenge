@@ -9,7 +9,6 @@ describe('test setup is working', () => {
 })
 
 describe('POST /users', function() {
-
   it('responds with json', function(done) {
     request(server)
       .post('/users')
