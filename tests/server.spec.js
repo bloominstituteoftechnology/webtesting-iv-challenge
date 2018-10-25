@@ -9,10 +9,4 @@ describe('server', () => {
       expect(response.status).toBe(200);
     });
   });
-  it('can run tests', () => {
-    expect(true).toBeTruthy();
-  });
-  it('can run more tests', () => {
-    expect(true).toBeTruthy();
-  });
 });
