@@ -6,13 +6,13 @@ server.use(express.json());
 server.get("/", (req, res) => {
 	res.status(200).json({ message: "server is up and running" });
 });
-server.post("/hello/:firstName", (req, res) => {
-	const { lastName } = req.body;
-	const { firstName } = req.params;
-	if (lastname === "") {
-		res.status(200).json({ hello: `${firsName} Stranger` });
-	}
-	res.status(200).json({ hello: `${firstName} ${lastName}` });
+server.post("/api/:book", (req, res) => {
+	const { book } = req.params;
+	res.status(201).json(book);
+});
+server.delete("/api/:id", (req, res) => {
+	const { id } = req.params;
+	res.status(200).json(id);
 });
 
 module.exports = server;
