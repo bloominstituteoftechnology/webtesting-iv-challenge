@@ -13,6 +13,12 @@ describe("spinup server tests", () => {
   });
 });
 
+describe('GET for /clients', () => {
+  it('returns 200 on a get request', async () => {
+    const response = await request(server).get('/clients');
+    expect(response.status).toEquals(200);
+  });
+
 // base mvp tests
 
 // create tests
