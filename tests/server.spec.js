@@ -8,7 +8,7 @@ describe('server.js', () => {
       expect(response.status).toBe(200);
     });
   });
-  describe('POST /', () => {
+  describe('POST /api', () => {
     it('should return status code 201(OK)', async () => {
       const name = "test";
       const response = await request(server).post(`/api/${name}`);
@@ -21,4 +21,32 @@ describe('server.js', () => {
       expect(response.body).toEqual(expected);
     })
   })
+  describe("DELETE /api", () => {
+    it("should send back 404 if sent nothing", async () => {
+      const name = "";
+      const expected = {};
+      const response = await request(server).delete(`/api/${name}`);
+      expect(response.body).toEqual(expected);
+      expect(response.status).toBe(404);
+    });
+    it("should return status code 204", async () => {
+      const name = "test";
+      const response = await request(server).delete(`/api/${name}`);
+      expect(response.status).toBe(204);
+    });
+  });
+  describe('PUT /api', () => {
+    it("should send back 404 if sent nothing", async () => {
+      const name = "";
+      const expected = {};
+      const response = await request(server).put(`/api/${name}`);
+      expect(response.body).toEqual(expected);
+      expect(response.status).toBe(404);
+    });
+    it("should return status code 204", async () => {
+      const name = "test";
+      const response = await request(server).put(`/api/${name}`);
+      expect(response.status).toBe(204);
+    });
+  });
 });

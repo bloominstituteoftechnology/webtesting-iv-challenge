@@ -18,5 +18,14 @@ server.post("/api/:test", (req, res) => {
   res.status(201).json({ message: `${test}` });
 });
 
+server.delete("/api/:test", (req, res) => {
+  const { test } = req.params;
+  res.status(204).json({ message: `${test}` });
+})
+
+server.put("/api/:test", (req, res) => {
+  const { test } = req.params;
+  res.status(204).json({ message: `${test}` });
+})
 
 module.exports = server;
