@@ -74,7 +74,7 @@ describe('~~ server.js ~~', () => {
 		it('should return {employeeId: 3} the third time it is DELETEd to', async () => {
 			const expected = { employeeId: 3 };
 			const response = await request(server).delete('/api/employees/3');
-			expect(response).toEqual(expected);
+			expect(response.body).toEqual(expected);
 		});
 
 		it("should return status 404 custom JSON if employee ID doesn't exist", async () => {
