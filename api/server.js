@@ -19,9 +19,6 @@ server.post('/students', (req, res) => {
 })
 
 server.delete('/students/:id', (req, res) => {
-  let { id } = req.params;
-
-
   return res.status(200).json({ message: `Farewell!`});
 })
 

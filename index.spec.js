@@ -74,7 +74,7 @@ describe('server', () => {
 
     })
 
-    it('should return farewell message', async () => {
+    it('should return farewell message when successful', async () => {
       const id = 5;
      
       const response = await request(server)
