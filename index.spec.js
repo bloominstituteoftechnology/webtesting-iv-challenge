@@ -28,15 +28,15 @@ describe('server', () => {
       });
     });
   
-    describe('POST /hello/:name', () => {
-      it('should greet the person', async () => {
-        const name = 'Patrick';
-        const lastName = 'Thompson';
-        const expected = { hello: 'Patrick Thompson' };
+    describe('POST /api/notes', () => {
+      it('should return joke title', async () => {
+        const testTitle = 'Here is a funny joke';
+        
+        const expected = { title: 'Here is a funny joke' };
   
         const response = await request(server)
-          .post(`/hello/${name}`)
-          .send({ lastName });
+          .post(`/api/notes`)
+          .send({ testTitle });
   
         expect(response.body).toEqual(expected);
       });

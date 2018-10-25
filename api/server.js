@@ -8,11 +8,11 @@ server.get('/', (req, res) => {
   res.status(200).json({ message: 'server is running' });
 });
 
-server.post('/hello/:name', (req, res) => {
-  const { name } = req.params;
-  const lastName = req.body.lastName || 'Doe';
+server.post('/api/notes', (req, res) => {
+  const note = req.body; //{ noteTitle: 'some title', noteBody: 'someBody' }
+  const title = req.body.noteTitle;
 
-  res.status(200).json({ hello: `${name} ${lastName}` });
+  res.status(200).json({ newNote: req.body.noteTitle });
 });
 
 module.exports = server;
