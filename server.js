@@ -26,16 +26,18 @@ server.post('/testserver', (req, res) => {
 		});
 });
 
-server.delete('/testserver', (req, res) => {
-	const { thing } = req.body;
+server.delete('/testserver/:id', (req, res) => {
+	const { id } = req.params;
+	console.log(id);
 
 	db('things')
-		.delete({ thing })
+		.where({ id })
+		.del()
 		.then(count => {
 			if (count) {
-				res.status(204).json({ message: `${thing} deleted` });
+				res.status(200).json({ message: `thing with id ${id} deleted` });
 			} else {
-				res.status(404).json({ message: `no ${thing} to delete` });
+				res.status(404).json({ message: `no thing with id ${id} to delete` });
 			}
 		})
 		.catch(err => res.status(500).json(err));
