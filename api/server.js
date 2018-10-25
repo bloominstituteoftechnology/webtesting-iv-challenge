@@ -24,4 +24,16 @@ server.get('/api/users/', (req, res) => {
 		.catch(err => res.status(500).json(`Server could not retrieve users information: ${ err }`));
 });
 
+// get a user in db with given id
+server.get('/api/users/:id', (req, res) => {
+	const { id } = req.params;
+	return userDb
+		.get(id)
+		.then(user => {
+			if (user) return res.status(200).json(user);
+			return res.status(404).json({ error: `No user with id ${ id } exists.`});
+		})
+		.catch(err => res.status(500).json(`Server could not retrieve users information: ${ err }`));
+});
+
 module.exports = server;
