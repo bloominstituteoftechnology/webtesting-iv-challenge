@@ -11,7 +11,7 @@ describe('server', () => {
 
 		it('should add thing to the database', async () => {
 			const thing = 'thing';
-			const expected = { message: 'thing added with id 1' };
+			const expected = { message: `${thing} added with id 1` };
 
 			const response = await request(server)
 				.post(`/testserver`)
@@ -22,7 +22,7 @@ describe('server', () => {
 
 		it('should return an error when thing already exists', async () => {
 			const thing = 'thing';
-			const expected = { error: 'thing already exists' };
+			const expected = { error: `${thing} already exists` };
 
 			const response = await request(server)
 				.post(`/testserver`)
@@ -59,13 +59,40 @@ describe('server', () => {
 			// reset database here
 		});
 
-		it('should delete thing by id from the database', async () => {
-			const id = 1;
-			const expected = { message: `thing with id 1 deleted` };
+		it('should delete thing with id from the database', async () => {
+			const id = 3;
+			const expected = { message: `thing with id ${id} deleted` };
 
 			const response = await request(server).delete(`/testserver/${id}`);
 
 			expect(response.body).toEqual(expected);
+		});
+
+		it("should return an error when thing with id doesn't exist", async () => {
+			const id = 3;
+			const expected = { error: `no thing with id ${id} to delete` };
+
+			const response = await request(server).delete(`/testserver/${id}`);
+
+			expect(response.body).toEqual(expected);
+		});
+
+		it('should return 200 status code after deleting thing with id', async () => {
+			const id = 4;
+			const expected = 200;
+
+			const response = await request(server).delete(`/testserver/${id}`);
+
+			expect(response.status).toEqual(expected);
+		});
+
+		it("should return 404 status code when thing with id doesn't exist", async () => {
+			const id = 4;
+			const expected = 404;
+
+			const response = await request(server).delete(`/testserver/${id}`);
+
+			expect(response.status).toEqual(expected);
 		});
 	});
 });
