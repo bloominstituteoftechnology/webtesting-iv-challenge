@@ -5,17 +5,14 @@
 	"main": "server.js",
 	"scripts": {
 		"test": "jest --watch --verbose",
-		"dev": "nodemon index.js"
+		"start": "nodemon index.js"
 	},
 	"jest": {
 		"testEnvironment": "node"
 	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/LambdaSchool/Server-Testing.git"
-	},
+	"repository": "git+https://github.com/LambdaSchool/Server-Testing.git",
 	"keywords": [],
-	"author": "",
+	"author": "travis-russell <russell.travis@yahoo.com>",
 	"license": "ISC",
 	"bugs": {
 		"url": "https://github.com/LambdaSchool/Server-Testing/issues"
