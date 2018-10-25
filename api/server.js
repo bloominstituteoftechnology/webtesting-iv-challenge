@@ -10,8 +10,9 @@ server.get('/', (req, res) => {
 
 server.post('/players/:character', (req, res) => {
   const { character } = req.params;
+  const jobClass = req.body.jobClass || 'Peasant';
 
-  res.status(200).json({ hello: `${character}` });
+  res.status(200).json({ hello: `${character} the ${jobClass}` });
 });
 
 module.exports = server;
