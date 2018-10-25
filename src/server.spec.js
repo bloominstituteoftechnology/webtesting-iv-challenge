@@ -11,7 +11,8 @@ describe("spinup server tests", () => {
 
 // base mvp tests
 
-describe("POST /clients/:id test", () => {
+// create tests
+describe("POST /clients test", () => {
   it("should return JSON object { message: `Client added` } when a client is successfully added and a status code of 200", async () => {
     const response = await request(server).post("/clients");
     // test part 1
@@ -19,5 +20,18 @@ describe("POST /clients/:id test", () => {
 
     // test part 2
     expect(response.status).toEqual(201);
+  });
+});
+
+// delete tests
+describe("DELETE /clients/:id", () => {
+  it("should return { message: `Client deleted` } when a client is successfully deleted", async () => {
+    const response = await request(server).delete("/cleient/1");
+
+    // test part 1
+    expect(response.body).toEqual({ message: "client with id 1 deleted." });
+
+    // test part 2
+    expect(response.status).toEqual(200);
   });
 });
