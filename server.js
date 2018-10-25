@@ -7,6 +7,9 @@ const db = knex(knexConfig.development);
 
 const server = express();
 
+server.get('/', (req, res)=> {
+    res.status(200).json({message: "Hi :)"});
+});
 
 
 
@@ -14,3 +17,5 @@ const server = express();
 
 
 module.exports = server;
+
+// server.listen(3300, ()=> console.log(`API running on port 3300`));
