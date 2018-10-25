@@ -4,10 +4,12 @@ const server = express();
 
 server.use(express.json());
 
-server.post("/users/:username", (req, res) => {
-  const { username } = req.params;
+server.post("/users", (req, res) => {
+  const { username, age, height } = req.body;
 
-  res.status(200).json({ Username: `${username}` });
+  res
+    .status(200)
+    .json({ username: `${username}`, age: `${age}`, height: `${height}` });
 });
 
 server.delete("/users/:username", (req, res) => {
