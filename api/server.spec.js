@@ -31,8 +31,36 @@ describe('server.js', () => {
 		});
 
 		it('should return list of all users in the db', async () => {
-			// const response = await request(server).get('/');
-			// expect(response.body).toBe('Server is running.');
+			const response = await request(server).get('/api/users');
+			const expected = [
+				{ 'id': 1, 'first_name': 'Alice', 'last_name': 'Alison' },
+				{ 'id': 2, 'first_name': 'Bob', 'last_name': 'Barley' },
+			];
+			// expect 2 users
+			expect(response.body.length).toBe(2);
+			// expect an array of the users
+			expect(response.body).toEqual(expected);
+		});
+	});
+
+	describe('POST /api/users/:firstname', () => {
+		it('should return status 200(OK)', async () => {
+			const response = await request(server).get('/api/users/testName');
+			expect(response.status).toBe(201);
+		});
+
+		it('should return JSON', async () => {
+			const response = await request(server).get('/api/users/testName');
+			expect(response.type).toBe('application/json');
+		});
+
+		it('should add the given first and last name to the db and return that new user', async () => {
+			const response = await request(server).get('/api/users/Carol').send({ last_name: 'Carolyn' });
+			const expected = { 'id': 3, 'first_name': 'Carol', 'last_name': 'Carolyn' };
+			// expect 1 user
+			expect(response.body.length).toBe(3);
+			// expect an object with that user's info
+			expect(response.body).toEqual(expected);
 		});
 	});
 });

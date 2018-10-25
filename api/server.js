@@ -20,9 +20,8 @@ server.get('/', (req, res) => {
 server.get('/api/users/', (req, res) => {
 	return userDb
 		.get()
-		.then()
-		.catch()
-	return res.status(200).json('Server is running.');
+		.then(users => res.status(200).json(users))
+		.catch(err => res.status(500).json(`Server could not retrieve users information: ${ err }`));
 });
 
 module.exports = server;
