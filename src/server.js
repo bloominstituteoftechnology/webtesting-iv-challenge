@@ -20,4 +20,9 @@ server.get("/", (req, res) => {
   res.status(200).send("Spinup Test Working");
 });
 
+// mvp basic endpoint to simulate the working post
+server.post("/clients", (req, res) => {
+  res.status(201).json({ message: "Client added" });
+});
+
 module.exports = server;
