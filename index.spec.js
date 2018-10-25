@@ -8,7 +8,13 @@ describe('server POST', () => {
             .post('/create')
             .send({ name });
 
-        expect(response.body).toEqual({user: 'clint'});
+        expect(response.body).toEqual({name: 'clint'});
+    })
+
+    it('should return the data in an array', async () => {
+        const response = await request (server)
+            .get('/get')
+        expect(response.text).toContain('[' && ']');
     })
 
     it('should return a status of 201', async () => {
@@ -21,6 +27,12 @@ describe('server POST', () => {
         const response = await request(server).post('/create')
 
         expect(response.type).toBe('application/json');
+    })
+
+    it('should return an error of 422 if no name is included', async () => {
+        const response = await request(server).post('/make')
+
+        expect(response.status).toBe(422);
     })
 })
 
