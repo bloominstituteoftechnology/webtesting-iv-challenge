@@ -49,9 +49,10 @@ describe('server', () => {
     });
 
     it('should return { success: `order deleted` } ', async () => {
-      const id = 8;
-      const response = await request(server).delete(`/api/ice-cream/${id}`);
+      const id = 10;
+      // const response = await request(server).delete(`/api/ice-cream/${id}`);
       // expect(response.body).toEqual({ success: 'order deleted' });
     });
   });
+
 });
