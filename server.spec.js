@@ -38,12 +38,19 @@ describe('POST /users', function() {
 describe('Delete /users/:id', function() {
 	it('deletes a user', function(done) {
 		request(server)
-			.del('/users/4')
-			.expect(200)
+			.post('/users')
+			.send({username: 'sam', email: 'sam@yahoo.com'})
+			.set('Accept', 'application/json')
 			.end(function(err, res){
-				if (err) return done(err);
-				done()
-			});
+				const url = res.text
+				request(server)
+					.del(`/users/${url}`)
+					.expect(200)
+					.end(function(err, res){
+						if (err) return done(err);
+						done()
+					})
+			})
 	})
 	it('response with 404 no user found to delete', function(done){
 		request(server)
@@ -55,9 +62,3 @@ describe('Delete /users/:id', function() {
 			});
 	})
 })
-
-
-
-
-
-
