@@ -27,5 +27,29 @@ describe('~~ server.js ~~', () => {
 		});
 	});
 
-	describe('~~ POST ~~', () => {});
+	describe('~~ POST ~~', () => {
+		it('should return status 201 (created) when POSTed to', async () => {
+			const response = await request(server)
+				.post('/api/employees')
+				.send({ name: 'Vera Simon', department: 'EIT' });
+			expect(response.status).toBe(201);
+		});
+
+		it('should return JSON when POSTed to', async () => {
+			const response = await request(server)
+				.post('/api/employees')
+				.send({ name: 'Heather Simon', department: 'EPM' });
+			expect(response.type).toBe('application/json');
+		});
+
+		it('should return {employeeId: 3} the third time it is POSTed to', async () => {
+			const expected = { employeeId: 3 };
+			const response = await request(server)
+				.post('/api/employees')
+				.send({ name: 'John Doe', department: '???' });
+			expect(response).toEqual(expected);
+		});
+	});
+
+	describe('~~ DELETE ~~', () => {});
 });

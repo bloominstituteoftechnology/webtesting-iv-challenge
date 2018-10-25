@@ -1,3 +1,4 @@
+// "errorOutput" on each object should be defined by the handler.
 const errors = {
 	h400: {
 		httpStatus: 400,
