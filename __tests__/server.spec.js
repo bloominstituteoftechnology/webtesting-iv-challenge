@@ -47,7 +47,7 @@ describe('~~ server.js ~~', () => {
 			const response = await request(server)
 				.post('/api/employees')
 				.send({ name: 'John Doe', department: '???' });
-			expect(response).toEqual(expected);
+			expect(response.body).toEqual(expected);
 		});
 	});
 
