@@ -44,4 +44,37 @@ describe('server', () => {
       expect(response.body).toEqual({ mensaje: 'El perro fue creado!' });
     })
   })
+
+  describe('DELETE /dogs/:id route', async () => {
+    it('returns a status code of 202', async () => {
+      const response = await request(server).delete('/dogs/1')
+      expect(response.status).toBe(202);
+    })
+    it('returns JSON format', async () => {
+      const response = await request(server).delete('/dogs/1')
+      expect(response.type).toBe('application/json');
+    })
+    it('returns as an object', async () => {
+      const response = await request(server).delete('/dogs/1')
+      expect(typeof response.body).toEqual('object');
+    })
+    // it('returns new array without deleted dog', async () => {
+    //   const response = await request(server).delete('/dogs/1')
+    //   const expected = [
+    //     {
+    //       "id": 2,
+    //       "name": "Lulu",
+    //       "breed": "Samoyed",
+    //       "age": 4
+    //     },
+    //     {
+    //       "id": 3,
+    //       "name": "Icy",
+    //       "breed": "Pomeranian",
+    //       "age": 2
+    //     }
+    //   ]
+    //   expect(response.body).toEqual(expected);
+    // })
+  })
 })
