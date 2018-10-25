@@ -78,7 +78,7 @@ describe('Server', () => {
         });
     });
 
-    describe('DELETE /users', () => {
+    describe('DELETE /users/:id', () => {
         it('returns list of users after deletion', async () => {
             const expected = [
                 {

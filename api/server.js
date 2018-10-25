@@ -36,9 +36,7 @@ server.delete('/users/:id', (req, res) => {
     const arr = [1,2,3,4,5,6];
     const {id} = req.params;
 
-    let newDb = userDB.filter( function (el) {
-        return el.id !== Number(id);
-    });
+    let newDb = userDB.filter( el => el.id !== Number(id));
 
     res.status(200).json({users: newDb});
 });
