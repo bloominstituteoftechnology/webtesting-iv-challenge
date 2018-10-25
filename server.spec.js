@@ -3,6 +3,7 @@ const server = require("./api/server.js");
 
 describe('server', () => {
 
+    
 // ===== GET server 
     describe('GET /', () => {
         it('should return { message: "server up" }', async () => {
@@ -19,6 +20,7 @@ describe('server', () => {
         });
       });
 
+
 // ===== GET USER-LIST
 describe('GET /api/users', () => {
     it('should return user-list', async () => {
@@ -34,6 +36,7 @@ describe('GET /api/users', () => {
         expect(response.type).toBe("application/json");
       });
   });
+
 
 // ===== POST request using JSON OBJECT
 describe("POST /api/users", () => {
@@ -54,6 +57,7 @@ describe("POST /api/users", () => {
     expect(response.type).toBe("application/json");
   });
 });
+
 
 // ===== POST using '/users/:username'
 describe("POST /api/users/:username", () => {
@@ -77,8 +81,9 @@ describe("POST /api/users/:username", () => {
     });
   });
 
+
 // ===== DELETE using ID
-describe("DELETE /api/users", () => {
+describe("DELETE /api/users/:username", () => {
     it("should delete the user", async () => {
       const username = "Lucas";
       const expected = { deleted: `${username}` };

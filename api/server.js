@@ -48,10 +48,17 @@ res.json(users)
 });
 
 
+
 // ===== DELETE A USER
 server.delete("/api/users/:username", (req, res) => {
     const { username } = req.params;
-    res.status(200).json({ deleted: `${username}` });
+    const foundUser = users.find(user => user.username === username);
+        if (foundUser) {
+            users = users.filter(user => user.username != username);
+            res.status(200).json({ deleted: `${username}` });
+        } else {
+            res.status(200).json({ dessage: 'No user found by that username'});
+        }
   });
 
 module.exports = server;
