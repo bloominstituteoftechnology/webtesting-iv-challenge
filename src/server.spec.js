@@ -26,6 +26,12 @@ describe("GET for /clients", () => {
     const response = await request(server).get("/clients");
     expect(response.body).toEqual({ message: "success" });
   });
+
+  // return json object type
+  it("returns a JSON object", async () => {
+    const response = await request(server).get("/clients");
+    expect(response.type).toEqual("application/json");
+  });
 });
 
 // base mvp tests
