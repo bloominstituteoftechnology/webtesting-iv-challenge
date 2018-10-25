@@ -11,6 +11,14 @@ describe("POST /users/:username", () => {
 
     expect(response.body).toEqual(expected);
   });
+
+  it("should return status code 200(OK)", async () => {
+    const username = "Caitlin";
+
+    const response = await request(server).post(`/users/${username}`);
+
+    expect(response.status).toBe(200);
+  });
 });
 
 describe("DELETE /users/:username", () => {
@@ -21,5 +29,13 @@ describe("DELETE /users/:username", () => {
     const response = await request(server).delete(`/users/${username}`);
 
     expect(response.body).toEqual(expected);
+  });
+
+  it("should return status code 200(OK)", async () => {
+    const username = "Caitlin";
+
+    const response = await request(server).delete(`/users/${username}`);
+
+    expect(response.status).toBe(200);
   });
 });
