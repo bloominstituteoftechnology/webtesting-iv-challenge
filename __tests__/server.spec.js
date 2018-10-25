@@ -51,5 +51,22 @@ describe('~~ server.js ~~', () => {
 		});
 	});
 
-	describe('~~ DELETE ~~', () => {});
+	describe('~~ DELETE ~~', () => {
+		// request(app).del('/path').end(fn)
+		it('should return status 200 (OK) when DELETEd to', async () => {
+			const response = await request(server).delete('/api/employees/1');
+			expect(response.status).toBe(200);
+		});
+
+		it('should return JSON when DELETEd to', async () => {
+			const response = await request(server).delete('/api/employees/2');
+			expect(response.type).toBe('application/json');
+		});
+
+		it('should return {employeeId: 3} the third time it is DELETEd to', async () => {
+			const expected = { employeeId: 3 };
+			const response = await request(server).delete('/api/employees/3');
+			expect(response).toEqual(expected);
+		});
+	});
 });
