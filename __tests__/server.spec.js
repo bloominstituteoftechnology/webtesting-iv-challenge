@@ -49,6 +49,14 @@ describe('~~ server.js ~~', () => {
 				.send({ name: 'John Doe', department: '???' });
 			expect(response.body).toEqual(expected);
 		});
+
+		it('should return status 400 custom JSON if one or more properties are missing from the POST', async () => {
+			const expected = statusObj('h400', `Missing name of department property.`);
+			const response = await request(server)
+				.post('/api/employees')
+				.send({ name: 'Braden' });
+			expect(response.body).toEqual(expected);
+		});
 	});
 
 	describe('~~ DELETE ~~', () => {
@@ -67,6 +75,12 @@ describe('~~ server.js ~~', () => {
 			const expected = { employeeId: 3 };
 			const response = await request(server).delete('/api/employees/3');
 			expect(response).toEqual(expected);
+		});
+
+		it("should return status 404 custom JSON if employee ID doesn't exist", async () => {
+			const expected = statusObj('h404', `Employee with ID '7' doesn't exist.`);
+			const response = await request(server).delete('/api/employees/7');
+			expect(response.body).toEqual(expected);
 		});
 	});
 });
