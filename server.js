@@ -7,20 +7,17 @@ let database = [
   {
     id: 1,
     name: 'Brian',
-    breed: 'Labrador',
-    age: 8,
+    breed: 'black labrador',
   },
   {
     id: 2,
     name: 'Lulu',
-    breed: 'Samoyed',
-    age: 4,
+    breed: 'samoyed',
   },
   {
     id: 3,
     name: 'Icy',
-    breed: 'Pomeranian',
-    age: 2,
+    breed: 'pomeranian',
   }
 ];
 
@@ -29,8 +26,8 @@ server.route('/')
 
 server.route('/dogs')
   .post((req, res) => {
-    const { name, breed, age } = req.body;
-    database.push({ name, breed, age })
+    const { id, name, breed } = req.body;
+    database.push({ id, name, breed })
     res.status(201).json({ mensaje: 'El perro fue creado!' })
   })
 

@@ -28,26 +28,26 @@ describe('server', () => {
     it('returns status code of 201', async () => {
       const response = await request(server)
         .post('/dogs')
-        .send({ name: 'sam', breed: 'black labrador', age: 5 });
+        .send({ id: 4, name: 'sam', breed: 'black labrador' });
       expect(response.status).toBe(201);
     })
     it('returns JSON format', async () => {
       const response = await request(server)
         .post('/dogs')
-        .send({ name: 'sam', breed: 'black labrador', age: 5 });
+        .send({ id: 5, name: 'sam', breed: 'black labrador' });
       expect(response.type).toBe('application/json');
     })
     it('returns correct content', async () => {
       const response = await request(server)
         .post('/dogs')
-        .send({ name: 'sam', breed: 'black labrador', age: 5 });
+        .send({ id: 6, name: 'sam', breed: 'black labrador' });
       expect(response.body).toEqual({ mensaje: 'El perro fue creado!' });
     })
   })
 
   describe('DELETE /dogs/:id route', async () => {
     it('returns a status code of 202', async () => {
-      const response = await request(server).delete('/dogs/1')
+      const response = await request(server).delete(`/dogs/1`)
       expect(response.status).toBe(202);
     })
     it('returns JSON format', async () => {
@@ -58,23 +58,16 @@ describe('server', () => {
       const response = await request(server).delete('/dogs/1')
       expect(typeof response.body).toEqual('object');
     })
-    // it('returns new array without deleted dog', async () => {
-    //   const response = await request(server).delete('/dogs/1')
-    //   const expected = [
-    //     {
-    //       "id": 2,
-    //       "name": "Lulu",
-    //       "breed": "Samoyed",
-    //       "age": 4
-    //     },
-    //     {
-    //       "id": 3,
-    //       "name": "Icy",
-    //       "breed": "Pomeranian",
-    //       "age": 2
-    //     }
-    //   ]
-    //   expect(response.body).toEqual(expected);
-    // })
+    it('returns new array without deleted dog', async () => {
+      const response = await request(server).delete('/dogs/1')
+      const expected = [
+        { "breed": "samoyed", "id": 2, "name": "Lulu" },
+        { "breed": "pomeranian", "id": 3, "name": "Icy" },
+        { "breed": "black labrador", "id": 4, "name": "sam" },
+        { "breed": "black labrador", "id": 5, "name": "sam" },
+        { "breed": "black labrador", "id": 6, "name": "sam" }
+      ]
+      expect(response.body).toEqual(expected);
+    })
   })
 })
