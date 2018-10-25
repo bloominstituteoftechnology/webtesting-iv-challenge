@@ -5,7 +5,11 @@ describe("spinup server tests", () => {
   it("returns a status code of 200", async () => {
     const response = await request(server).get("/");
 
+    // test part 1
     expect(response.status).toEqual(200);
+
+    // test part 3
+    expect(response.type).toEqual("text/html");
   });
 });
 
@@ -20,6 +24,9 @@ describe("POST /clients test", () => {
 
     // test part 2
     expect(response.status).toEqual(201);
+
+    // test part 3
+    expect(response.type).toEqual("application/json");
   });
 });
 
@@ -33,5 +40,8 @@ describe("DELETE /clients/:id", () => {
 
     // test part 2
     expect(response.status).toEqual(200);
+
+    // test part 3
+    expect(response.type).toEqual("application/json");
   });
 });
