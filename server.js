@@ -17,7 +17,13 @@ server.post('/testserver', (req, res) => {
 		.then(([id]) => {
 			res.status(201).json({ message: `${thing} added with id ${id}` });
 		})
-		.catch(err => res.status(500).json(err));
+		.catch(err => {
+			if (err.code === 'SQLITE_CONSTRAINT') {
+				res.status(409).json({ error: `${thing} already exists` });
+			} else {
+				res.status(500).json(err);
+			}
+		});
 });
 
 server.delete('/testserver', (req, res) => {
