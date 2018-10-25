@@ -6,7 +6,7 @@ module.exports = {
     },
     useNullAsDefault: true,
     migrations: {
-      directory: "./ata/migrations"
+      directory: "./data/migrations"
     },
     seeds: {
       directory: "./data/seeds"
