@@ -52,4 +52,17 @@ server.post('/game', (req, res) => {
   }
 });
 
+server.delete('/game/:name', (req, res) => {
+  const { name } = req.params;
+
+  const cut = gamesList
+    .map(game => {
+      return game.name;
+    })
+    .indexOf(name);
+  gamesList = [...gamesList.slice(0, cut), ...gamesList.slice(cut + 1)];
+
+  res.status(202).send('Deleted');
+});
+
 module.exports = server;

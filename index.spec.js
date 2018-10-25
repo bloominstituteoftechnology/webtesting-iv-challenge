@@ -40,6 +40,22 @@ describe('server', () => {
     });
   });
 
+  describe('Delete /game/:name', () => {
+    it('delete sends status code for success 202(Accepted)', async () => {
+      const response = await request(server).delete('/game/Halo');
+
+      expect(response.status).toBe(202);
+    });
+
+    it('should delete the game from the url', async () => {
+      const name = 'Minecraft';
+
+      const response = await request(server).delete(`/game/${name}`);
+
+      expect(response.text).toBe('Deleted');
+    });
+  });
+
   describe('Server running', () => {
     it('server running', () => {
       expect(true).toBeTruthy();
