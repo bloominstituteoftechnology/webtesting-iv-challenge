@@ -19,8 +19,6 @@ server.post('/api/employees', (req, res, next) => {
 	}
 });
 
-console.log('state:', state);
-
 server.delete('/api/employees/:id', (req, res, next) => {
 	const { id } = req.params;
 	if (state.hasOwnProperty(id)) {
