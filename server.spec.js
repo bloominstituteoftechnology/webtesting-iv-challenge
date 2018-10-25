@@ -13,7 +13,7 @@ describe('POST /users', function() {
   it('responds with json', function(done) {
     request(server)
       .post('/users')
-      .send({username: 'fred', 'email': 'fred@yahoo.com'})
+      .send({username: 'testuser', 'email': 'testuser@yahoo.com'})
       .set('Accept', 'application/json')
       .expect(201)
       .end(function(err, res) {
@@ -39,7 +39,7 @@ describe('Delete /users/:id', function() {
 	it('deletes a user', function(done) {
 		request(server)
 			.post('/users')
-			.send({username: 'sam', email: 'sam@yahoo.com'})
+			.send({username: 'userdelete', email: 'userdelete@yahoo.com'})
 			.set('Accept', 'application/json')
 			.end(function(err, res){
 				const url = res.text
@@ -62,3 +62,9 @@ describe('Delete /users/:id', function() {
 			});
 	})
 })
+
+
+
+
+
+
