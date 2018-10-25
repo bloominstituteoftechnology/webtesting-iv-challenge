@@ -1,11 +1,3 @@
-const express = require('express');
-
-const server = express();
-
-server.use(express.json());
-
-server.get('/', (req, res) => {
-    res.send('the line is hot');
-});
+const server = require('./api/server.js');
 
 server.listen(8000, () => console.log(`\nserver up on port 8000`));
