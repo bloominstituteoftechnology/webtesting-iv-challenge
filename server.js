@@ -31,9 +31,9 @@ server.post("/api/:todos", (req, res) => {
   }
 });
 
-server.delete("/api/:id", (req, res) => {
+server.delete("/api/todos/:id", (req, res) => {
 	const { id } = req.params;
-	return res.status(200).json(id);
+	res.status(202).json(id);
 });
  
 module.exports = server;
