@@ -1,5 +1,6 @@
 const server = require('./server.js');
 const request = require('supertest');
+const db = require('../data/dbConfig.js');
 
 describe('server.js', () => {
 	describe('GET /', () => {
@@ -95,24 +96,61 @@ describe('server.js', () => {
 		});
 	});
 
-	// describe('POST /api/users/:firstname', () => {
-	// 	it('should return status 200(OK)', async () => {
-	// 		const response = await request(server).get('/api/users/testName');
-	// 		expect(response.status).toBe(201);
-	// 	});
+	describe('POST /api/users/:firstname', () => {
+		// rollback, then migrate to latest and seed after each POST test
+		afterEach(function(done) {
+			db.migrate.rollback()
+			.then(function() {
+				db.migrate.latest()
+				.then(function() {
+					return db.seed.run()
+					.then(function() {
+						done();
+					});
+				});
+			});
+		});
 
-	// 	it('should return JSON', async () => {
-	// 		const response = await request(server).get('/api/users/testName');
-	// 		expect(response.type).toBe('application/json');
-	// 	});
+		describe('calling with all the required credentials', () => {
+			it('should return status 201(CREATED)', async () => {
+				const response = await request(server).post('/api/users/testName').send({ last_name: 'testLastName' });
+				expect(response.status).toBe(201);
+			});
+	
+			it('should return JSON', async () => {
+				const response = await request(server).post('/api/users/testName').send({ last_name: 'testLastName' });
+				expect(response.type).toBe('application/json');
+			});
+	
+			it('should add the given first and last name to the db and return that new user', async () => {
+				const response = await request(server).post('/api/users/Carol').send({ last_name: 'Carolyn' });
+				const expected = { 'id': 3, 'first_name': 'Carol', 'last_name': 'Carolyn' };
+				// expect an object
+				expect(typeof(response.body)).toBe('object');
+				// expect an object with that new user's info
+				expect(response.body).toEqual(expected);
+			});
+		});
 
-	// 	it('should add the given first and last name to the db and return that new user', async () => {
-	// 		const response = await request(server).get('/api/users/Carol').send({ last_name: 'Carolyn' });
-	// 		const expected = { 'id': 3, 'first_name': 'Carol', 'last_name': 'Carolyn' };
-	// 		// expect 1 user
-	// 		expect(response.body.length).toBe(3);
-	// 		// expect an object with that user's info
-	// 		expect(response.body).toEqual(expected);
-	// 	});
-	// });
+		describe('calling without all the required credentials', () => {
+			it('should return status 400(BAD REQUEST)', async () => {
+				const response = await request(server).post('/api/users/testName');
+				expect(response.status).toBe(400);
+			});
+
+			it('should return JSON', async () => {
+				const response = await request(server).post('/api/users/testName');
+				expect(response.type).toBe('application/json');
+			});
+
+			it('should return an error message', async () => {
+				const response = await request(server).post(`/api/users/testName`);
+				const expected = { error: 'Last name must not be missing.'};
+				// expect an object
+				expect(typeof(response.body)).toBe('object');
+				// expect an object with that user's info
+				expect(response.body).toEqual(expected);
+			});
+		});
+	});
 });

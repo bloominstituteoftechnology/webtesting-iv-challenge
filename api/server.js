@@ -36,4 +36,15 @@ server.get('/api/users/:id', (req, res) => {
 		.catch(err => res.status(500).json(`Server could not retrieve users information: ${ err }`));
 });
 
+// insert a new user into the db and return that newly inserted user's info
+server.post('/api/users/:first_name', (req, res) => {
+	const { first_name } = req.params;
+	const { last_name } = req.body;
+	if (!last_name) return res.status(400).json({ error: 'Last name must not be missing.' });
+	return userDb
+		.insert({ first_name, last_name })
+		.then(user => res.status(201).json(user))
+		.catch(err => res.status(500).json(`Server could not insert new user: ${ err }`));
+});
+
 module.exports = server;
