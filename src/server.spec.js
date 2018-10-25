@@ -15,9 +15,16 @@ describe("spinup server tests", () => {
 
 // stretch clients get passing test
 describe("GET for /clients", () => {
+  // return status 200
   it("returns 200 on a get request", async () => {
     const response = await request(server).get("/clients");
     expect(response.status).toEqual(200);
+  });
+
+  // return a client object
+  it("returns clients Object", async () => {
+    const response = await request(server).get("/clients");
+    expect(response.body).toEqual({ message: "success" });
   });
 });
 
