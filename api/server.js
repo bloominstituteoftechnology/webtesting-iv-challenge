@@ -9,7 +9,7 @@ server.post('/api/:id', (req, res) => {
     res.status(200).json(Number(id));
 })
 
-server.put('/api/:id', (req, res) => {
+server.delete('/api/:id', (req, res) => {
     const { id } = req.params;
     res.status(201).send(Number(id) );
 })
