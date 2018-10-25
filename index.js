@@ -21,7 +21,7 @@ server.get('/api', (req, res) => {
 server.get('/api/users', (req, res) => {
 
   db('users')
-    .then(users => res.status(200).json(users))
+    .then(users => res.status(200).json({ message: 'Here are the requested users.', users }))
     .catch(err => res.status(500).json(err.message));
 })
 
@@ -53,8 +53,8 @@ server.put('/api/users/:id', (req, res) => {
     .where({ id })
     .first()
     .update(user)
-    .then(updated => {res.status(200).json({ message: 'User updated successfully. '})
-    })
+    .then(updated => res.status(200).json({ message: 'User updated successfully.'})
+    )
     .catch(err => res.status(500).json(err.message));
 });
 
@@ -77,3 +77,5 @@ server.delete('/api/users/:id', (req, res) => {
 const port = 8000;
 
 server.listen(port, () => console.log('Server listening on port 8000.'));
+
+module.exports = server;
