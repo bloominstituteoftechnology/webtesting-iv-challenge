@@ -5,7 +5,12 @@ describe("GET /", () => {
 	it("should return status 200", async () => {
 		const response = await request(server).get("/");
 		expect(response.status).toBe(200);
-	});
+    });
+    // it("should return the books", ()=>{
+        
+    //     const response = await request(server).get('/api/books');
+    //     expect(response.body).toBe()
+    // })
 });
 describe("POST /api/:book", () => {
 	it("should return status 200", async () => {
@@ -23,5 +28,10 @@ describe("DELETE /api/:id", () => {
 	it("should return status 200", async () => {
 		const response = await request(server).get("/api/:id");
 		expect(response.status).toBe(200);
-	});
+    });
+    it("should delete an item from their id", ()=>{
+        const id = 0;
+        const response = await request(server).delete(`/api/${id}`);
+        expect(response.body).toBe(id);
+    })
 });
