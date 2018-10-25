@@ -38,21 +38,23 @@ describe('server', ()=>{
     describe('Delete /hello/:name',()=>{
         it('should return status code 200(OK)', async ()=>{
             const response = await request(server).delete('/hello/:name');
-            expect(response.status).toBe(200);
+            expect(response.status).toBe(201);
         })
         it('should return JSON', async ()=>{
+            const name = 'Tsai';
             const response = await request(server).delete(`/hello/${name}`);
             expect(response.type).toBe('application/json');
         })
 
-        // it('should confirm person deleted', async ()=>{
-        //     const name = 'Tsai';
-        //     const lastName = 'Huang';
-        //     const expected = { deleted: 'Tsai Huang'};
+        it('should confirm if the person has been deleted', async ()=>{
+            const name = 'Tsai';
+            // const lastName = 'Huang';
+            const expected = { deleted: 'Tsai'};
 
-        //     const response = await request(server).delete(`/hello/${name}`).send({ lastName});
-        //     expect(response.body).toEqual(expected);
-        // })
+            const response = await request(server).delete(`/hello/${name}`);
+            //.send({ lastName});
+            expect(response.body).toEqual(expected);
+        })
       
     })
     

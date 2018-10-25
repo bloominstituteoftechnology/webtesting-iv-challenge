@@ -13,4 +13,10 @@ server.post('/hello/:name', (req,res)=>{
     res.status(201).json({hello: `${name} ${lastName}`});
 })
 
+server.delete('/hello/:name', (req,res)=>{
+    const {name} = req.params;
+    // const lastName = req.body.lastName;
+    res.status(201).json({deleted: `${name}`});
+})
+
 module.exports = server;
