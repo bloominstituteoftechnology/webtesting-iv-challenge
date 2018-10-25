@@ -17,12 +17,16 @@ server.use(helmet());
 
 // spinup test endpoint
 server.get("/", (req, res) => {
-  res.status(200).send("Spinup Test Working");
+  return res.status(200).json({ message: "Spinup Test Working" });
 });
 
 // mvp basic endpoint to simulate the working post
 server.post("/clients", (req, res) => {
   res.status(201).json({ message: "Client added" });
+});
+
+server.delete("/clients/:id", (req, res) => {
+  res.status(200).json({ message: "client deleted" });
 });
 
 module.exports = server;

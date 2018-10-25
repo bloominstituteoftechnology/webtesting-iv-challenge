@@ -9,7 +9,7 @@ describe("spinup server tests", () => {
     expect(response.status).toEqual(200);
 
     // test part 3
-    expect(response.type).toEqual("text/html");
+    expect(response.type).toEqual("application/json");
   });
 });
 
@@ -32,11 +32,11 @@ describe("POST /clients test", () => {
 
 // delete tests
 describe("DELETE /clients/:id", () => {
-  it("should return { message: `Client deleted` } when a client is successfully deleted", async () => {
-    const response = await request(server).delete("/cleient/1");
+  it("should return { message: `client deleted` } when a client is successfully deleted", async () => {
+    const response = await request(server).delete("/clients/1");
 
     // test part 1
-    expect(response.body).toEqual({ message: "client with id 1 deleted." });
+    expect(response.body).toEqual({ message: "client deleted" });
 
     // test part 2
     expect(response.status).toEqual(200);
