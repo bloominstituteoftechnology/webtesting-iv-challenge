@@ -76,13 +76,11 @@ describe('server', () => {
 
     it('should return farewell message', async () => {
       const id = 5;
-
-      farewell = `Farewell, student #${id}`;
      
       const response = await request(server)
         .delete(`/students/:${id}`)
 
-      expect(response.body).toEqual(farewell);
+      expect(response.body).toEqual({message: `Farewell!`});
     })
   })
 });
