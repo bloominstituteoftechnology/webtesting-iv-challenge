@@ -15,8 +15,65 @@ describe('Server', () => {
         });
 
         it('returns {message: "Server is up"', async () => {
-             const res = await request(server).get('/');
-             expect(res.body).toEqual({message: 'Server is up'});
+            const res = await request(server).get('/');
+            expect(res.body).toEqual({message: 'Server is up'});
+        });
+    });
+
+    describe('POST /users', () => {
+        it('posts a user to the database', async () => {
+        const user = {
+            "id": 4,
+                "username": "May",
+                "password": "pass"
+        }
+
+        const expected = [
+            {
+                "id": 1,
+                "username": "John",
+                "password": "pass"
+            },
+            {
+                "id": 2,
+                "username": "Jack",
+                "password": "pass"
+            },
+            {
+                "id": 3,
+                "username": "Joe",
+                "password": "pass"
+            },
+            {
+                "id": 4,
+                "username": "May",
+                "password": "pass"
+            },
+        ]
+        const res = await request(server).post('/users').send({user});
+        expect(res.body.users).toEqual(expected);
+        });
+
+        it('returns status code 201(CREATED)', async () => {
+            const user = {
+                "id": 5,
+                 "username": "Max",
+                 "password": "pass"
+            }
+
+            const res = await request(server).post('/users').send({user});
+            expect(res.status).toBe(201);
+        });
+
+        it('returns JSON', async () => {
+            const user = {
+                "id": 5,
+                 "username": "Max",
+                 "password": "pass"
+            }
+
+            const res = await request(server).post('/users').send({user});
+            expect(res.type).toBe('application/json');
         });
     });
 });
