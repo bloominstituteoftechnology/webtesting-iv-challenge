@@ -1,0 +1,39 @@
+/*
+Tasks
+- configure jest to be in "node" mode.
+- check for correct http status code
+- check for correct content inside response.body
+- check for correct format of response
+*/
+
+// ~~~ package.json ~~~ //
+"jest": {
+	// defaults to jsdom
+	"testEnvironment": "node"
+}
+
+// ~~~ server.js ~~~ //
+server.post('/hello/:firstName', (req, res, next) => {
+	const name = req.params.firstName + ' ' + (req.body.lastName || 'Doe');
+	res.status(200).json({ hello: `${name}` });
+});
+
+// ~~~ index.spec.js ~~~ //
+	// POST /hello/:firstname, passing the lastName inside the request body
+	// should return { hello: "firstName lastName"}, the first name is read from the url and the lastName from the body
+	it('should return JSON {hello: "firstName lastName"} when a proper POST is submitted', async () => {
+		const firstName = 'Vera';
+		const lastName = 'Simon';
+		expected = { hello: `${firstName} ${lastName}` };
+		const response = await request(server)
+			.post(`/hello/${firstName}`)
+			.send({ lastName: `${lastName}` });
+		expect(response.body).toEqual(expected);
+	});
+
+	it('should return JSON {hello: "firstName Doe"} when a POST is submitted without lastName', async () => {
+		const firstName = 'Vera';
+		expected = { hello: `${firstName} Doe` };
+		const response = await request(server).post(`/hello/${firstName}`);
+		expect(response.body).toEqual(expected);
+	});
