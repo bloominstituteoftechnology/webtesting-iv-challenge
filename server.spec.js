@@ -39,18 +39,19 @@ describe('server.js', ()=> {
           const entree = 'Spaghetti';
           const expected = { dinner: 'Spaghetti and green salad' };
     
-          const response = await request(server).post(`/dinner/${entree}`);
+          const response = await request(server).post(`/dinner/:entree`);
     
           expect(response.body).toEqual(expected);
         });
+
       });
 
     describe('/DELETE /dinner/:entree', ()=> {
-      it('should delete dinner', ()=> {
+      it('should delete dinner', async ()=> {
         const entree = 'Steak';
         const expected = {message: "Dinner is canceled"};
         const response = await request(server)
-            .remove(`/dinner/${entree}`);
+            .del(`/dinner/${entree}`);
         expect(response.body).toEqual(expected);
       });
     });
