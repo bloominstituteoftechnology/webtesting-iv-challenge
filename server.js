@@ -31,6 +31,17 @@ server.post('/api/employees', (req, res, next) => {
 	}
 });
 
+server.put('/api/employees/:id', (req, res, next) => {
+	const { id } = req.params;
+	if (req.body.name && req.body.department) {
+		const { name, department } = req.body;
+		state[id] = { ...state[id], name, department };
+		res.status(200).json({ id: Number(id), ...state[id] });
+	} else {
+		next(['h400', 'Missing name or department property.']);
+	}
+});
+
 server.delete('/api/employees/:id', (req, res, next) => {
 	const { id } = req.params;
 	if (state.hasOwnProperty(id)) {

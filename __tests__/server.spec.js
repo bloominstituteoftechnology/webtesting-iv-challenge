@@ -100,8 +100,39 @@ describe('~~ server.js ~~', () => {
 		});
 	});
 
+	describe('~~ PUT /api/employees/:id ~~', () => {
+		it('should return status 200 (created) when PUTed to', async () => {
+			const response = await request(server)
+				.put('/api/employees/1')
+				.send({ name: 'Vera Simon', department: 'DEV' });
+			expect(response.status).toBe(200);
+		});
+
+		it('should return JSON when PUTed to', async () => {
+			const response = await request(server)
+				.put('/api/employees/2')
+				.send({ name: 'Heather Simon', department: 'CTO' });
+			expect(response.type).toBe('application/json');
+		});
+
+		it('should return {employeeId: 3} the third time it is POSTed to', async () => {
+			const expected = { id: 3, name: 'John Doe', department: 'Helpdesk' };
+			const response = await request(server)
+				.put('/api/employees/3')
+				.send({ name: 'John Doe', department: 'Helpdesk' });
+			expect(response.body).toEqual(expected);
+		});
+
+		it('should return status 400 custom JSON if one or more properties are missing from the POST', async () => {
+			const expected = statusObj('h400', 'Missing name or department property.');
+			const response = await request(server)
+				.put('/api/employees/3')
+				.send({ name: 'Braden' });
+			expect(response.body).toEqual(expected);
+		});
+	});
+
 	describe('~~ DELETE /api/employees/:id ~~', () => {
-		// request(app).del('/path').end(fn)
 		it('should return status 200 (OK) when DELETEd to', async () => {
 			const response = await request(server).delete('/api/employees/1');
 			expect(response.status).toBe(200);
