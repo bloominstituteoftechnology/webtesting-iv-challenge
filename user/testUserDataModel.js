@@ -22,7 +22,7 @@ function findUsernames(){
 
 function register(user){
     const {username,password} = user
-    return db(table).insert({username: "Alex", password: "password"})
+    return db(table).insert({username, password}).into('user')
 }
 
 function deleteUser(id){
