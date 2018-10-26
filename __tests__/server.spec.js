@@ -27,7 +27,14 @@ describe('~~ server.js ~~', () => {
 		});
 	});
 
-	describe('~~ POST ~~', () => {
+	describe('~~ GET /api/employees pt1', () => {
+		it('should return status 204 when there are no employees in memory', async () => {
+			const response = await request(server).get('/api/employees');
+			expect(response.status).toBe(204);
+		});
+	});
+
+	describe('~~ POST /api/employees ~~', () => {
 		it('should return status 201 (created) when POSTed to', async () => {
 			const response = await request(server)
 				.post('/api/employees')
@@ -59,7 +66,41 @@ describe('~~ server.js ~~', () => {
 		});
 	});
 
-	describe('~~ DELETE ~~', () => {
+	describe('~~ GET /api/employees pt2 ~~', () => {
+		it('should return status 200 (OK) when browsing to "/api/employees"', async () => {
+			const response = await request(server).get('/api/employees');
+			expect(response.status).toBe(200);
+		});
+
+		it('should return JSON', async () => {
+			const response = await request(server).get('/api/employees');
+			expect(response.type).toBe('application/json');
+		});
+
+		it('should return an array of employee objects when GET "/api/employees"', async () => {
+			const expected = [
+				{
+					id: 1,
+					name: 'Vera Simon',
+					department: 'EIT'
+				},
+				{
+					id: 2,
+					name: 'Heather Simon',
+					department: 'EPM'
+				},
+				{
+					id: 3,
+					name: 'John Doe',
+					department: '???'
+				}
+			];
+			const response = await request(server).get('/api/employees');
+			expect(response.body).toEqual(expected);
+		});
+	});
+
+	describe('~~ DELETE /api/employees/:id ~~', () => {
 		// request(app).del('/path').end(fn)
 		it('should return status 200 (OK) when DELETEd to', async () => {
 			const response = await request(server).delete('/api/employees/1');

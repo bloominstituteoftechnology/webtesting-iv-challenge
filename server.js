@@ -8,6 +8,18 @@ server.use(express.json());
 let id = 0;
 let state = {};
 
+server.get('/api/employees', (req, res, next) => {
+	if (Object.keys(state).length === 0 && state.constructor === Object) {
+		res.status(204).json([]);
+	} else {
+		let arr = [];
+		for (let id in state) {
+			arr.push({ id: Number(id), ...state[id] });
+		}
+		res.status(200).json(arr);
+	}
+});
+
 server.post('/api/employees', (req, res, next) => {
 	if (req.body.name && req.body.department) {
 		const { name, department } = req.body;
