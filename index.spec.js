@@ -2,6 +2,11 @@ const request = require('supertest');
 
 const server = require('./api/apiRoutes');
 
+const knex = require('knex');
+
+const knexConfig = require('./knexfile');
+const db = knex(knexConfig.development);
+
 describe('server', () => {
     describe('initial tests', () => {
         it('should return true', () => {
@@ -12,6 +17,46 @@ describe('server', () => {
         });
     });
     describe('route handlers', () => {
+        beforeAll(function(done) {
+            db.migrate.latest()
+            .then(function() {
+                return db.seed.run()
+                .then(function() {
+                    done();
+                });
+            });
+        });
+
+        beforeEach(function(done) {
+            db.migrate.rollback()
+            .then(function() {
+                db.migrate.latest()
+                .then(function() {
+                    return db.seed.run()
+                    .then(function() {
+                        done();
+                    });
+                });
+            });
+        });
+
+        afterEach(function(done) {
+            db.migrate.rollback()
+            .then(function() {
+                done();
+            });
+        });
+
+        afterAll(function(done) {
+            db.migrate.latest()
+            .then(function() {
+                return db.seed.run()
+                .then(function() {
+                    done();
+                });
+            });
+        });
+
         describe('GET /api', () => {
             it('should return 200 OK', async () => {
                 const response = await request(server).get('/api');
@@ -38,6 +83,11 @@ describe('server', () => {
                 .expect('Content-Type', /json/)
                 .expect(200, done);
             });
+            it('should not return text/html', async () => {
+                const response = await request(server).get('/api/students');
+
+                expect(response.type).not.toBe('text/html');
+            });
         });
 
         describe('GET /api/students/:id', () => {
@@ -53,6 +103,7 @@ describe('server', () => {
                 .get('/api/students/59')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
+                // 500
                 .expect(200)
                 .end((err) => {
                     if (err) return done(err);
@@ -80,7 +131,46 @@ describe('server', () => {
                 .send({ "class": "iOS1" })
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
-                .expect(400)
+                .expect(500)
+                .end((err) => {
+                    if (err) return done(err);
+                    done();
+                });
+            });
+        });
+
+        describe('PUT /api/students/:id', () => {
+            it('should update a student', (done) => {
+                request(server)
+                .put('/api/students/3')
+                .send({ "class": "UX5" })
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(200, done);
+            });
+            it('should not update', (done) => {
+                request(server)
+                .put('/api/students/3')
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(500, done);
+            });
+        });
+
+        describe('DELETE /api/students/:id', () => {
+            it('should remove a student', (done) => {
+                request(server)
+                .delete('/api/students/2')
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(200, done);
+            });
+            it('should return not found', (done) => {
+                request(server)
+                .delete('/api/students/8')
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(404)
                 .end((err) => {
                     if (err) return done(err);
                     done();
