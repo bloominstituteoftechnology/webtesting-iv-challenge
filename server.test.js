@@ -45,16 +45,17 @@ describe('GET /club', () => {
     });
   });
   describe('DELETE /club/:id', () => {
-    it('should delete sport club with passed id', async () => {
+    it('should delete club with passed id', async () => {
       const response = await request(server).delete('/club/2');
       const expectedBody = [
-        { id: 0, name: 'Manchester United' },
+        { id: 0, name: 'Manchester United' }, 
         { id: 1, name: 'Chelsea FC' }
       ];
-      expect(response.body).toEqual(expectedBody);
+      expect(response.body).toEqual({expectedBody});
     });
     it('should return 404 when passed id does not exist', async () => {
-      const response = await request(server).delete('/club/55');
+      const response = await request(server).delete('/club/10000');
       expect(response.status).toBe(404);
     });
   });
+
