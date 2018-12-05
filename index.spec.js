@@ -36,6 +36,12 @@ describe('server.js', () => {
             .delete(`/flavor/${flavor}`)
             expect(response.body).toEqual(expected)
         }); // should remove the flavor
+        it("should return 201 after flavor was deleted successfully", async () => {
+            const flavor = "Strawberry";
 
+            const response = await request(server)
+            .delete(`/flavor/${flavor}`);
+            expect(response.status).toBe(200);
+          }); //should return 201 after flavor was deleted successfully
     }); // delete
 }); // server.js
