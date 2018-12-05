@@ -70,4 +70,84 @@ describe('Server', () => {
             expect(res.type).toBe('application/json');
         });
     });
+    describe('DELETE /users', () => {
+        it('returns list of users after deletion', async () => {
+            const expected = [
+                {
+                    "id": 1,
+                    "username": "Hunter",
+                    "password": "1234"
+                },
+                {
+                    "id": 2,
+                    "username": "Sandwich",
+                    "password": "1234"
+                },
+                {
+                    "id": 3,
+                    "username": "Yogurt",
+                    "password": "1234"
+                },
+                {
+                    "id": 4,
+                     "username": "Steve",
+                     "password": "1234"
+                },
+                {
+                    "id": 5,
+                     "username": "Max",
+                     "password": "1234"
+                }
+            ]
+             const res = await request(server).delete('/users/6');
+            expect(res.body.users).toEqual(expected);
+        });
+         it('returns status code 200(OK)', async () => {
+            const expected = [
+                {
+                    "id": 1,
+                    "username": "Hunter",
+                    "password": "1234"
+                },
+                {
+                    "id": 2,
+                    "username": "Sandwich",
+                    "password": "1234"
+                },
+                {
+                    "id": 3,
+                    "username": "Yogurt",
+                    "password": "1234"
+                },
+                {
+                    "id": 5,
+                     "username": "Max",
+                     "password": "1234"
+                },
+            ]
+             const res = await request(server).delete('/users/4');
+            expect(res.status).toBe(200);
+        });
+         it('returns JSON', async () => {
+            const expected = [
+                {
+                    "id": 1,
+                    "username": "Hunter",
+                    "password": "1234"
+                },
+                {
+                    "id": 2,
+                    "username": "Sandwich",
+                    "password": "1234"
+                },
+                {
+                    "id": 3,
+                    "username": "Yogurt",
+                    "password": "1234"
+                },
+            ]
+             const res = await request(server).delete('/users/5')
+            expect(res.type).toBe('application/json');
+        });
+    });
 });
