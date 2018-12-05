@@ -4,10 +4,9 @@ const server = require('./server');
 describe('server.js', () => {
     it('runs tests', () => {
         expect(true).toBeTruthy();
-    });
+    }); // run tests
   
-    describe('post /flavor/:id', () => {
-        
+    describe('post', () => {
         it('should post to /flavor/:id', async () => {
             const flavor = 'Strawberry';
             const dessert = "Shortcake"
@@ -17,8 +16,6 @@ describe('server.js', () => {
             .post(`/flavor/${flavor}`)
             .send({ dessert })
 			expect(response.body).toEqual(expected);
-        });
-    
-    })
-
-})
+        }); // post to /flavor/:id
+    }); // post
+}); // server.js
