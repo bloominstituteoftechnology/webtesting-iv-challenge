@@ -17,5 +17,13 @@ describe('server.js', () => {
             .send({ dessert })
 			expect(response.body).toEqual(expected);
         }); // post to /flavor/:id
+
+        it("should return 201 after flavor was added successfully", async () => {
+            const flavor = "Strawberry";
+            
+            const response = await request(server)
+            .post(`/flavor/${flavor}`);
+            expect(response.status).toBe(201);
+          }); // // should return 201 after flavor was added successfully
     }); // post
 }); // server.js
