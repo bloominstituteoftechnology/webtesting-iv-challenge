@@ -1,17 +1,24 @@
 const request = require('supertest');
-const server = require('./server.js');
+const server = require('./server');
 
-describe('index.js', () => {
+describe('server.js', () => {
     it('runs tests', () => {
         expect(true).toBeTruthy();
     });
+  
+    describe('post /flavor/:id', () => {
+        
+        it('should post to /flavor/:id', async () => {
+            const flavor = 'Strawberry';
+            const dessert = "Shortcake"
+            const expected = { message: "Me likey Strawberry Shortcake" };
 
-    describe('post', () => {
-        it('should post', async () => {
-            const id = 97;
-            const response = await request(server).post(`/test/${id}`).send({ test: Philosophy });
-            expect(response.body).toEqual(id);
-        })
+            const response = await request(server)
+            .post(`/flavor/${flavor}`)
+            .send({ dessert })
+			expect(response.body).toEqual(expected);
+        });
+    
     })
 
 })
