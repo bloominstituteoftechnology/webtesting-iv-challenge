@@ -1,6 +1,14 @@
 const request = require('supertest');
 
+const db = require('./data/dbConfig.js');
+
+const names = require('./data/namesModal.js');
+
 const server = require('./server.js');
+
+beforeEach(async () => {
+    await db('names').truncate();
+  });
 
 describe('server.js', () => {
   describe('/ route', () => {
@@ -24,8 +32,18 @@ describe('server.js', () => {
   });
 
   describe('create user', () => {
-    it('should return status code 200', async () => {
-    
+    it('should insert provided name', async () => {
+        let rows = await db('names').where({ name: 'sam' });
+        expect(rows).toHaveLength(0);
+
+        await names.insert({ name: 'sam' });
+        await names.insert({ name: 'frodo' });
+
+        rows = await db('names').where({ name: 'sam' });
+        expect(rows).toHaveLength(1);
+
+        rows = await db('names');
+        expect(rows).toHaveLength(2);
     });
   });
 
