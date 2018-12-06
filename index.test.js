@@ -20,7 +20,7 @@ describe('Test API Server', () => {
         //
         beforeEach(async function () {
             await resourceManager.clear();
-            await resourceManager.create({
+            await resourceManager.insert({
                 [config.FIELD_NAME]: 'Test Resource',
                 [config.FIELD_DATA]: 'Test Data'    ,
             });
