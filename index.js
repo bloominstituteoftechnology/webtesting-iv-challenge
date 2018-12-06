@@ -1,14 +1,5 @@
-const express = requires('express');
+const server = require('./api/server');
 
-const server = express();
-
-server.use(express.json());
-
-server.get('/', (req,res) => {
-    res.status(200).json({api: 'up'});
-});
-
-const port = 9000;
-server.listen(port, () => {
+server.listen(9000, () => {
     console.log('listening on port 9000');
 })
