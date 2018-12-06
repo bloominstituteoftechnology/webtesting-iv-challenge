@@ -20,4 +20,22 @@ describe('server.js', () => {
         });
 
     });
+
+    describe('create user routes', () => {
+        it('should add a new user to the db', async () => {
+            let response = await request(server)
+                .post('/register')
+                .send({ name: 'sean', department: 'admin' });
+            
+            expect(response.body).toEqual({ message: `welcome to the club sean!`});
+        });
+
+        it('should return JSON data', async () => {
+            const response = await request(server)
+                .post('/register')
+                .send({ name: 'sean', department: 'admin' });
+            
+            expect(response.type).toBe('application/json');
+        })
+    });
 })
