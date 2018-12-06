@@ -1,6 +1,6 @@
 const express = require('express');
 const server = express();
-let db = require("../data/animalsModel");
+let db = require("../data/animalsDB");
 
 server.use(express.json());
 

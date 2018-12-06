@@ -1,10 +1,6 @@
 const request = require('supertest');
 let server = require('./api/server.js');
 
-beforeEach(() => {
-    db = []
-  });
-
 describe('server.js', () => {
   describe('/ route', () => {
     it('should return status code 200', async () => {
