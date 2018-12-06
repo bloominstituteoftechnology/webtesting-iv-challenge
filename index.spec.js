@@ -44,9 +44,23 @@ describe('server.js', () => {
         })
 
         /*it('POST /greet should return 400 status code if no body is sent', async () => {
-                const response = await request(server).post('/greet');
+                const response = await request(server).post('/greet').send({});
                 expect(response.status).toEqual(400);
         });*/
     });
+
+    //TEST FOR DELETE ROUTE '/delete'
+    describe('DELETE /user/:id endpoint', () => {
+        it('should delete data for given id', async() => {
+            let response = await request(server)
+                                       .delete('/user/:id');           
+            expect(response.status).toBe(202);
+        });
+
+        it("DELTE /user/:id endpoint should return JSON", async () => {
+             const response = await request(server).delete('/user/:id');
+             expect(response.type).toEqual('application/json');
+        });
+    })
 
 });
