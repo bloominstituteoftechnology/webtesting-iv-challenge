@@ -48,3 +48,16 @@ describe('POST /api/library', () => {
     expect(response.body).toEqual(entry)
   })
 })
+describe('DELETE /api/library/:id', async () => {
+  it('should return 200(OK) if the entry is successfully deleted', async () => {
+    const id = 2
+    const response = await request(server).delete(`/api/library/:${id}`)
+    expect(response.status).toBe(200)
+  })
+  it('should return a message to the client when deleted', async () => {
+    const id = 7
+
+    const response = await request(server).delete(`/api/library/:${id}`)
+    expect(response.body).toEqual({ message: `The entry was successfully deleted` })
+  })
+})
