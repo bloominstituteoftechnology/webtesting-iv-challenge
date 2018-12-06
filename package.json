@@ -4,7 +4,8 @@
   "description": "Server Testing Project",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch --verbose"
+    "test": "jest --watch --verbose",
+    "server": "nodemon index.js"
   },
   "jest": {
     "testEnvironment": "node"
