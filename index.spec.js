@@ -7,8 +7,8 @@ describe('server.js', () => {
         it('should return a status code 200', async () => {
             let response = await request(server).get('/');
 
-            //expect(response.status).toBe(200);
-            expect(response.status).toBe(500);
+            expect(response.status).toBe(200);
+            //expect(response.status).toBe(500);
         });
 
         it('should return JSON', async () => {
@@ -27,4 +27,11 @@ describe('server.js', () => {
             expect(response.body).toEqual({ Added: 'Shawn Antonucci' });
         });
     });
+
+    describe('delete / endpoint', () => {
+        it('should delete a user', async () => {
+
+        });
+    });
+
 });
