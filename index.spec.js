@@ -42,8 +42,18 @@ describe('server.js', () => {
         });
 
         it('should delete a user', async () => {
+            let response = await request(server).get('/users');
+            expect(response.body).toHaveBeenCalled();
+        });
 
+        it('should return a JSON object fron the index route', async () => {
+            const expectedBody = { count: '1' };
+
+            const response = await request(server).get('/users');
+
+            expect(response.body).toEqual(expectedBody);
         });
     });
+
     
 });
