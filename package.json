@@ -2,7 +2,7 @@
   "name": "testingserver",
   "version": "1.0.0",
   "description": "Server Testing Project",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "jest --watch --verbose",
     "server": "nodemon"
