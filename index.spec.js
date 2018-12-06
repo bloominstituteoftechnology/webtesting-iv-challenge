@@ -19,6 +19,12 @@ describe('server.js', () => {
     });
 
     describe('POST /addUser endpoint', () => {
+        it('should return a status code 404', async () => {
+            let response = await request(server).get('/addUser');
+
+            expect(response.status).toBe(404);
+        });
+
         it('should add a user', async () => {
             let response = await request(server)
                 .post('/addUser')
@@ -29,9 +35,15 @@ describe('server.js', () => {
     });
 
     describe('delete / endpoint', () => {
+        it('should return a status code 200', async () => {
+            let response = await request(server).get('/users');
+
+            expect(response.status).toBe(200);
+        });
+
         it('should delete a user', async () => {
 
         });
     });
-
+    
 });

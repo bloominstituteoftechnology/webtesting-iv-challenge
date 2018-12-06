@@ -19,7 +19,9 @@ function addUser(user) {
         .into("users");
 }
 
-/* async function addUser(user) {
+/* 
+    
+    async function addUser(user) {
 
     const { firstName, lastName } = await db('users').insert(user);
 

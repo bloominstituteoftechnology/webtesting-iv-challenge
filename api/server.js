@@ -18,7 +18,7 @@ server.get('/users', (req, res) => {
     users
         .getUsers()
         .then(user => {
-            res, status(200).json(user);
+            res.status(200).json(user);
         }).catch(error => {
             console.log(user)
             res.status(500).json({ error: 'Can not find the users' });
@@ -44,7 +44,7 @@ server.post('/addUser', (req, res) => {
         });
 })
 
-server.delete('/users/:userid', (req, res) => {
+server.delete('/users/:id', (req, res) => {
     const { id } = req.params;
 
     db('users')
