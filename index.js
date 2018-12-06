@@ -27,7 +27,7 @@ server.post("/", (req, res) => {
   }
   const newUser = { name, id: userId };
   users.push(newUser);
-  res.json(newUser);
+  res.status(201).json(newUser);
   userId++;
 });
 
@@ -39,7 +39,7 @@ server.delete("/", (req, res) => {
     return;
   }
   users.filter(user => user !== foundUser);
-  res.json(foundUser);
+  res.status(200).json(foundUser);
 });
 
 server.listen(9000, () => {
