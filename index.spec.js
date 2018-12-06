@@ -2,9 +2,11 @@ const request = require("supertest");
 const server = require("./API/server");
 
 describe("server", () => {
-  describe("POST /greet endpoint", () => {
+  describe("POST /users endpoint", () => {
     it("should return status 201", async () => {
-      let response = await request(server).post("/users");
+      let response = await request(server)
+        .post("/users")
+        .send({ firstName: "Adam", lastName: "Hinckley" });
 
       expect(response.status).toBe(201);
     });
