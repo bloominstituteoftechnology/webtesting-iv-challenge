@@ -10,9 +10,9 @@ server.get('/', (req, res) => {
 });
 
 server.post('/greet', (req, res) => {
-  const { firstName, lastName } = req.body;
-
-  res.status(200).json({ hello: `${firstName} ${lastName}` });
+  const { name } = req.body;
+  localStorage.setItem('name', name);
+  res.status(200).json({ hello: localStorage.getItem('name') });
   // res.status(200).json({ hello: 'Ryan Clausen' });
 });
 
