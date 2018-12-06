@@ -4,7 +4,7 @@
 	"description": "Server Testing Project",
 	"main": "server.js",
 	"scripts": {
-		"test": "jest --watch --verbose"
+		"test": "jest --watch --verbose  --runInBand"
 	},
 	"jest": {
 		"testEnvironment": "node"

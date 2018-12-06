@@ -64,13 +64,31 @@ describe('server.js', () => {
 
     })
 
-    // describe('DELETE should delete a user', () => {
+    describe('DELETE should delete a user', () => {
 
-    //     it('should return status code 200', async () => {
-    //         const response = await request(server).get('/:user')
-    //         expect(response.status).toBe(202)
-    //     })
+        it('should return status code 202', async () => {
+            
+            await users.insert({ name: 'conner' })
 
-    // })
+            const response = await request(server)
+            .delete('/:user')
+            .send('conner')
+            expect(response.status).toBe(202)
+        })
+
+        it('should delete a user', async () => {
+            await users.insert({ name: 'conner' })
+
+            let doesExist = await db('users').where({ name: 'conner' })
+           expect(doesExist).toHaveLength(1)
+           
+           await users.remove('conner')
+
+           doesExist = await db('users').where({ name: 'conner' })
+           expect(doesExist).toHaveLength(0)
+
+        })
+
+    })
 
 })

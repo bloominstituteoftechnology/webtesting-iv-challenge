@@ -16,12 +16,26 @@ server.post('/hello', (req, res) => {
 })
 
 server.post('/user', (req, res) => {
-    const name   = req.body
+    const name = req.body
 
     db('users')
     .insert(name)
     .then(id => {
         res.status(201).json(id)
+    })
+    .catch(err => {
+        res.status(500).json({ err })
+    })
+})
+
+server.delete('/:user', (req, res) => {
+    const { user } = req.params
+
+    db('users')
+    .where({ name: user })
+    .del()
+    .then(count => {
+        res.status(202).json({ count })
     })
     .catch(err => {
         res.status(500).json({ err })
