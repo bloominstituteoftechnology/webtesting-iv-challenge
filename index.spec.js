@@ -21,4 +21,18 @@ describe('server.js', () => {
             expect(response.body).toEqual({message: 'user Tom created'})
         })
     })
+
+    describe('Delete /users/:id', () => {
+        it('should return status code 200', async () => {
+            let response = await request(server).delete('/users/:id');
+            expect(response.status).toBe(200);
+        })
+
+        it('should delete a user', async () => {
+            let response = await request(server)
+                .delete('/users/:id')
+                .send({_id: 1, name: 'yanrong'});
+            expect(response.body).toEqual({message: 'user deleted'});
+        })
+    })
 })
