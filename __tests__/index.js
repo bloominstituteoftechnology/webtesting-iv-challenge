@@ -17,30 +17,28 @@ describe('server.js', () => {
             expect(response.body).toEqual({ api: 'up' });
         });
     });
+
+    describe('/greet post endpoint', () => {
+        test('returns JSON', async () => {
+            let response = await request(server)
+                .post('/greet')
+                .send(({ firstName: 'Yusuf' }));
+            expect(response.type).toBe('application/json');
+        });
+        test('greets user', async () => {
+            let response = await request(server)
+                .post('/greet')
+                .send({ firstName: 'Yusuf', lastName: 'Nafey' });
+            expect(response.body).toEqual({ hello: 'Yusuf Nafey' });
+        });
+    });
+
+    describe('/:id delete endpoint', () => {
+        test('', async () => {
+
+        });
+        test('', async () => {
+
+        });
+    })
 });
-
-
-  
-    //   it('should return with a body like: { api: "up" }', async () => {
-    //     let response = await request(server).get('/');
-  
-    //     expect(response.body).toEqual({ api: 'up' });
-    //   });
-    // });
-  
-    // describe('POST /greet endpoint', () => {
-    //   it('should greet the person', async () => {
-    //     let response = await request(server)
-    //       .post('/greet')
-    //       .send({ firstName: 'Ryan', lastName: 'Clausen' });
-  
-    //     expect(response.body).toEqual({ hello: 'Ryan Clausen' });
-  
-    //     response = await request(server)
-    //       .post('/greet')
-    //       .send({ firstName: 'Brian', lastName: 'Williams' });
-    //     expect(response.body).toEqual({ hello: 'Brian Williams' });
-    //   });
-//     });
-//   });
-  
