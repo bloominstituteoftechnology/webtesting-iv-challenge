@@ -26,8 +26,8 @@ describe('server', () => {
     describe('DELETE /users/:id route', () => {
         it('should delete a user', async () => {
             const id = 1;
-            const response = await request(server).delete(`/users:${id}`);
-            expect(response.body).toEqual({deletedUser: `${id}`});
+            const response = await request(server).delete(`/users/${id}`);
+            expect(response.body).toEqual({ deleted: `${id}` });
         })
         it('should return status code 200', async () => {
             const id = 1;
