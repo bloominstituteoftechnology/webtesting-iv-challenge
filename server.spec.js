@@ -13,10 +13,10 @@ describe('server.js', () => {
         let response = await request(server).get('/artists');
         expect(response.type).toBe('application/json');
       });
-      // it('should return a body of artists', async () => {
-      //   let response = await request(server).get('/artists');
-      //   expect(response.body).toBe('application/json');
-      // });
+      it('should return a body of artists', async () => {
+        let response = await request(server).get('/artists');
+        expect(response.body).toEqual(artists);
+      });
     });
     describe('POST', () => {
       it('should add a new artist to the array', async () => {
