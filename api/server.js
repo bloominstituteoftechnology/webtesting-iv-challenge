@@ -9,4 +9,12 @@ server.get('/', (req, res) => {
        res.status(200).json({Message:  'SERVER  RUNNING.'});
 })
 
+server.post('/greet', (req, res) => {
+       if(req.body) {
+              res.status(200).json({Hello : `${req.body.firstName} ${req.body.lastName}`})
+       } else {
+              res.status(400).json({message : "Bad request.."});
+       }
+})
+
 module.exports = server;
