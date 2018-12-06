@@ -6,4 +6,11 @@ describe("Test the root path", () => {
         let response = await request(server).get('/');
         expect(response.status).toBe(200);
     })
+
+    describe('POST /create', () => {
+        it('should return status code 201', async () => {
+            let response = await request(server).post('/create')
+            expect(response.status).toBe(201);
+        })
+    })
 })
