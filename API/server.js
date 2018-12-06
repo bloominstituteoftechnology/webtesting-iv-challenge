@@ -7,11 +7,21 @@ server.use(express.json());
 
 server.post("/users", (req, res) => {
   const { firstName, lastName } = req.body;
-  res.status(201).json({ hello: `${firstName} ${lastName}` });
+  db("users")
+    .insert({ firstName, lastName })
+    .then(() => {
+      res.status(201).json({ hello: `${firstName} ${lastName}` });
+    });
 });
 
 server.delete("/users/:id", (req, res) => {
-  res.status(200).json({ message: "user deleted" });
+  const { id } = req.params;
+  db("users")
+    .where({ id: id })
+    .del()
+    .then(() => {
+      res.status(200).json({ message: "user deleted" });
+    });
 });
 
 module.exports = server;
