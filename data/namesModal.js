@@ -14,12 +14,10 @@ async function insert(name) {
     .first();
 }
 
-async function remove(name) {
-    // [ 1 ]
-    const [id] = await db('names').del(name);
-  
+async function remove(id) {
     return db('names')
-      .where('id', id );
+      .where('id', id)
+      .del();
   }
 
 
