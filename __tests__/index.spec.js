@@ -10,4 +10,20 @@ describe('server.js', () => {
       expect(response.status).toBe(200);
     })
   })
+
+  it('should return JSON', async () => {
+    let response = await request(server).get('/')
+    expect(response.type).toBe('application/json');
+    // expect(response.type).toBe('application/xml'); // RED TEST 
+    // why application ?
+  })
+
+  it('should return should return a JSON object from the index route', async () => {
+    const expectedBody = { api: 'up' };
+    // const redTestExpectedBody = { api: 'running' } // RED TEST
+    const response = await request(server).get('/')
+    expect(response.body).toEqual(expectedBody);
+    // expect(response.body).toEqual(redTestExpectedBody); // RED TEST
+  })
+  
 })
