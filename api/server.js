@@ -10,7 +10,7 @@ server.get('/', (req, res) => {
 
 server.post('/submit', (req, res) => {
   const { name, title } = req.body;
-  res.status(200).json({ submitted: `${name} ${title}` });
+  res.status(200).json({ submitted: `${name} - ${title}` });
 });
 
 module.exports = server;
