@@ -7,9 +7,9 @@ module.exports = {
     // getAll,
 };
 
-async function insert(hobbit) {
-    const [id] = await db('hobbits').insert(hobbit);
-    return db('hobbits')
+async function insert(user) {
+    const [id] = await db('users').insert(hobbit);
+    return db('users')
         .where({ id })
         .first();
 }

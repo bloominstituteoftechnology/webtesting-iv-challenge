@@ -28,4 +28,16 @@ describe('Server.JS', () => {
             expect(response.body).toEqual([1]);
         });
     });
+    //needs edits
+    describe('/delete-user/:id', () => {
+        it('should return json', async () => {
+            let response = await request(server)
+            .delete('/delete-user/1')
+            expect(response.type).toEqual('application/json')
+        })
+        it('Returns a Count of the users deleted', async () => {
+            let response = await request(server).delete('/delete-user/1')
+            expect(response.body).toEqual({message : `1 user was deleted`, id : `1`})
+        })
+    })
 })
