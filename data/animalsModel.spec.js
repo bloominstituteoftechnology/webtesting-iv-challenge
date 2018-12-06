@@ -6,7 +6,7 @@ beforeEach(() => {
   });
 
 describe('animals db', () => {
-    it('should add the animal to the database', async () => {
+    it('should add the animal to the database', () => {
         expect(db).toHaveLength(0);
     //   let response = await request(server)
     //     .post('/animal')
@@ -21,7 +21,7 @@ describe('animals db', () => {
         expect(db).toHaveLength(2);
     });
 
-    it('should delete the animal from the database', async () => {
+    it('should delete the animal from the database', () => {
         expect(db).toHaveLength(0);
         insert(db, { id: 1, name: "Bear" });
         expect(db).toHaveLength(1);
