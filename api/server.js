@@ -1,12 +1,13 @@
 const express = require('express');
 
+const configureMiddleware = require('../config/middleware.js');
+
 const server = express();
 
-server.use(express.json());
+configureMiddleware(server);
 
-// server running check
 server.get('/', (req, res) => {
-  res.status(200).json({ api: 'running' });
+    res.status(200).json({ api: 'running' });
 });
 
 module.exports = server;
