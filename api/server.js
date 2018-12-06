@@ -1,5 +1,5 @@
 //bring in dependencies
-const express = require('express');;
+const express = require('express');
 const server = express();
 
 //start up server
