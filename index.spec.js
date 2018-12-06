@@ -25,7 +25,9 @@ describe('server.js', () => {
   describe('DELETE /items', () => {
     it('should return 200 if good request is sent', async () => {
       const item = 'walrus'
-      let response = await request(server).delete(`/items/${item}`)
+      let response = await request(server)
+        .delete(`/items/`)
+        .send({ item })
       expect(response.status).toBe(200)
     })
 

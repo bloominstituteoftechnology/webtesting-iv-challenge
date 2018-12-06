@@ -4,30 +4,28 @@ const server = express()
 
 server.use(express.json())
 
-const items = []
+let items = []
 
 server.post('/items', (req, res) => {
   const { item } = req.body
 
   if (item) {
     items.push(item)
-    req.status(201)
+    res.status(201).send()
   } else {
-    req.status(400)
+    res.status(400).send()
   }
 })
 
-server.post('/items', (req, res) => {
+server.delete('/items', (req, res) => {
   const { item } = req.body
 
   if (item) {
-    items.filer(x => x !== item)
-    req.status(200)
+    items = [...items.filter(x => x !== item)]
+    res.status(200).send()
   } else {
-    req.status(400)
+    res.status(400).send()
   }
 })
-
-const port = process.env.PORT || 9000
 
 module.exports = server
