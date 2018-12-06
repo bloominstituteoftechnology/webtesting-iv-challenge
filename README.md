@@ -12,9 +12,9 @@ For this project you will use `Test Driven Development` to create a RESTful API 
 
 ## Download Project and Install Dependencies
 
-1.  fork and clone this repository.
-1.  **CD into the folder** where you downloaded the repository.
-1.  run `yarn` or `npm i` to download all dependencies.
+1. ### fork and clone this repository.
+1. ### **CD into the folder** where you downloaded the repository.
+1. ### run `yarn` or `npm i` to download all dependencies.
 1.  type `yarn test` or `npm test` to run the tests. The `test` script is already configured.
 
 ## Requirements
