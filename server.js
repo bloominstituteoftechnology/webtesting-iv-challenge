@@ -4,23 +4,7 @@ const server = express();
 
 server.use(express.json());
 
-const artists = [
-  {
-    name: 'The Sidekicks'
-  },
-  {
-    name: 'Radiohead'
-  },
-  {
-    name: 'PUP'
-  },
-  {
-    name: 'Tom Petty and the Heartbreakers'
-  },
-  {
-    name: 'Vulfpeck'
-  }
-];
+const artists = require('./db');
 
 server.get('/', (req, res) => {
   res.json({ api: 'Working' });
@@ -33,6 +17,15 @@ server.get('/artists', (req, res) => {
 server.post('/artists', (req, res) => {
   artists.push(req.body);
   res.status(201).json(artists);
+});
+
+server.delete('/artists', (req, res) => {
+  const deletedArtist = req.body;
+  const newArtists = [...artists];
+  const filteredArtists = newArtists.filter(
+    artist => artist.name !== deletedArtist.name
+  );
+  res.status(200).json(filteredArtists);
 });
 
 module.exports = server;

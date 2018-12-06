@@ -1,6 +1,6 @@
 const request = require('supertest');
-
 const server = require('./server.js');
+const artists = require('./db');
 
 describe('server.js', () => {
   describe('/artists route', () => {
@@ -23,6 +23,18 @@ describe('server.js', () => {
         let response = await request(server)
           .post('/artists')
           .send({ name: 'Mitski' });
+        expect(response.body).toEqual(artists);
+      });
+      it('should return a status of 201', async () => {
+        let response = await request(server).post('/artists');
+        expect(response.status).toBe(201);
+      });
+    });
+    describe('DELETE', () => {
+      it('should delete an artist from the array', async () => {
+        let response = await request(server)
+          .delete('/artists')
+          .send({ name: 'Mitski' });
         expect(response.body).toEqual([
           {
             name: 'The Sidekicks'
@@ -39,12 +51,12 @@ describe('server.js', () => {
           {
             name: 'Vulfpeck'
           },
-          { name: 'Mitski' }
+          {}
         ]);
       });
-      it('should return a status of 201', async () => {
-        let response = await request(server).post('/artists');
-        expect(response.status).toBe(201);
+      it('should return a status of 200', async () => {
+        let response = await request(server).delete('/artists');
+        expect(response.status).toBe(200);
       });
     });
   });
