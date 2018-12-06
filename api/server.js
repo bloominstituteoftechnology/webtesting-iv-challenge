@@ -18,6 +18,18 @@ server.post('/create-user',(req,res) => {
     })
 })
 
+server.delete('/delete-user/:id', (req,res) => {
+    const { id } = req.params;
+
+    db('users').remove(id)
+        .then(count => {
+            res.status(201).json({message : `${count} user was deleted`, id : `${id}`})
+        })
+        .catch(error => {
+            res.status(500).json({error : `there was an error deleting the user : ${error}`})
+        })
+})
+
 
 
 module.exports = server;

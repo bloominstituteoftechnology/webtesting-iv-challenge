@@ -3,7 +3,7 @@ const server = require('./api/server.js');
 const db = require('./database/dbConfig');
 
 beforeEach(async () => {
-    await db('users').truncate();
+    await db('users').truncate();//deletes everything from the user database including id's
 });
 
 describe('Server.JS', () => {
