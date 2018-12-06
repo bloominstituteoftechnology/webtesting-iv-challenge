@@ -19,34 +19,34 @@ describe('server.js', () => {
         })
     })
 
-    describe('POST /hello/:name', () => {
+    describe('POST /hello', () => {
 
         it('should greet the person', async () => {
-            const expected = { hello: 'Conner Hoessly' }
-            const name = 'Conner Hoessly'
-            const response = await request(server).post(`/hello/${name}`).send({ name })
+            let response = await request(server)
+            .post(`/hello`)
+            .send({ firstName: 'Conner', lastName: 'Hoessly' })
 
-            expect(response.body).toEqual(expected)
+            expect(response.body).toEqual({ hello: 'Conner Hoessly' })
         })
 
     })
 
-    describe('POST should create a user', () => {
+    // describe('POST should create a user', () => {
 
-        it('should return status code 200', async () => {
-            const response = await request(server).get('/user')
-            expect(response.status).toBe(201)
-        })
+    //     it('should return status code 200', async () => {
+    //         const response = await request(server).get('/user')
+    //         expect(response.status).toBe(201)
+    //     })
 
-    })
+    // })
 
-    describe('DELETE should delete a user', () => {
+    // describe('DELETE should delete a user', () => {
 
-        it('should return status code 200', async () => {
-            const response = await request(server).get('/:user')
-            expect(response.status).toBe(202)
-        })
+    //     it('should return status code 200', async () => {
+    //         const response = await request(server).get('/:user')
+    //         expect(response.status).toBe(202)
+    //     })
 
-    })
+    // })
 
 })
