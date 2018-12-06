@@ -18,16 +18,21 @@ describe('server.js', () => {
       let response = await request(server).post('/characters');
       expect(response.status).toBe(201);
     });
+
+    it('should notify character added', async () => {
+      let response = await request(server).post('/characters');
+      expect(response.body).toEqual({ message: 'character added' });
+    });
   });
 
   describe('delete character endpoint', () => {
     it('should return status 200', async () => {
-      let response = await request(server).delete('characters/1');
+      let response = await request(server).delete('/characters/1');
       expect(response.status).toBe(200);
     });
 
     it('should notify character deleted', async () => {
-      let response = await request(server).delete('characters/1');
+      let response = await request(server).delete('/characters/1');
       expect(response.body).toEqual({ message: 'character deleted' });
     });
   });
