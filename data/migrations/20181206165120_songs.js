@@ -2,7 +2,8 @@ exports.up = function(knex, Promise){
   return knex.schema.createTable('songs', songs => {
     songs.increments()
     songs.string('song', 255).notNullable().unique()
-    songs.foreign('id').references('library.id')
+    songs.integer('artist_id').unsigned().notNullable()
+    songs.foreign('artist_id').references('library.id')
   })
 }
 

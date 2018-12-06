@@ -10,6 +10,13 @@ exports.seed = function(knex, Promise){
         description: 'blah',
   
       },
+      {
+        id: 2,
+        artist: 'the Dead',
+        album: 'Casey Jones',
+        description: 'watch yo speed',
+  
+      },
     ])
   })
 }

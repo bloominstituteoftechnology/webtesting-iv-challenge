@@ -5,6 +5,7 @@ exports.up = function(knex, Promise){
     library.string('artist', 128).notNullable().unique()
     library.string('album', 255).notNullable().unique()
     library.string('description').notNullable()
+   
   })
 }
 

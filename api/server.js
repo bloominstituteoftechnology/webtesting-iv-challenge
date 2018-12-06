@@ -17,7 +17,7 @@ server.get('/', (req, res) => {
 
 server.get('/api/library', async (req, res) => {
   try {
-    const library = await db('library')
+    const library = await db('songs').leftJoin('library', 'library.id', 'songs.artist_id').groupBy('library.artist', 'songs.song')
     res.status(200).json(library)
   } catch (error) {
     console.log(error)
