@@ -28,5 +28,25 @@ describe('xfiles model', () => {
     //check for the number of records again
     rows = await db('xfiles');
     expect(rows).toHaveLength(3);
+  });
+  it('should delete the specified record', async () => {
+    //check that there is nothing in the database
+    let rows = await db('xfiles');
+    expect(rows).toHaveLength(0);
+    // insert records
+    await xfiles.insert({ name: 'Fox Mulder' });
+    await xfiles.insert({ name: 'Walter Skinner' });
+    await xfiles.insert({ name: 'Dana Scully' });
+    //check that the record was inserted
+    rows = await db('xfiles').where({ name: 'Dana Scully' });
+    expect(rows).toHaveLength(1);
+    //remove the record
+    await xfiles.remove(3);
+    //check that the record was removed
+    rows = await db('xfiles').where({ name: 'Dana Scully' });
+    expect(rows).toHaveLength(0);
+    //check that the other records remain
+    rows = await db('xfiles');
+    expect(rows).toHaveLength(2);
   })
 })
