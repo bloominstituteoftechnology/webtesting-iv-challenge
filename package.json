@@ -4,7 +4,7 @@
 	"description": "Server Testing Project",
 	"main": "index.js",
 	"scripts": {
-		"test": "jest --watch --verbose"
+		"test": "jest --watch --verbose --runInBand"
 	},
 	"jest": {
 		"testEnvironment": "node"
@@ -26,6 +26,7 @@
 	},
 	"dependencies": {
 		"express": "^4.16.4",
-		"knex": "^0.15.2"
+		"knex": "^0.15.2",
+		"sqlite3": "^4.0.4"
 	}
 }
