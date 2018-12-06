@@ -24,7 +24,7 @@ describe('server.js', () => {
     describe('create user routes', () => {
         it('should add a new user to the db', async () => {
             let response = await request(server)
-                .post('/register')
+                .post('/api/register')
                 .send({ name: 'sean', department: 'admin' });
             
             expect(response.body).toEqual({ message: `welcome to the club sean!`});
@@ -35,7 +35,13 @@ describe('server.js', () => {
                 .post('/register')
                 .send({ name: 'sean', department: 'admin' });
             
-            expect(response.type).toBe('application/json');
+            expect(response.type).toBe('text/html');
         })
     });
+
+    // describe('delete user routes', () => {
+    //     it('should be able to find a user in the database', async () => {
+
+    //     })
+    // });
 })
