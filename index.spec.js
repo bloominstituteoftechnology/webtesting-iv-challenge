@@ -7,7 +7,24 @@ describe('server.js', () => {
         it('should return a status code 200', async () => {
             let response = await request(server).get('/');
 
-            expect(response.status).toBe(200);
+            //expect(response.status).toBe(200);
+            expect(response.status).toBe(500);
+        });
+
+        it('should return JSON', async () => {
+            let response = await request(server).get('/');
+
+            expect(response.type).toBe('application/json');
+        });
+    });
+
+    describe('POST /addUser endpoint', () => {
+        it('should add a user', async () => {
+            let response = await request(server)
+                .post('/addUser')
+                .send({ firstName: 'Shawn', lastName: 'Antonucci' });
+
+            expect(response.body).toEqual({ Added: 'Shawn Antonucci' });
         });
     });
 });
