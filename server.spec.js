@@ -27,6 +27,10 @@ describe('Server.JS', () => {
     
             expect(response.body).toEqual([1]);
         });
+        it('Return status 200', async () => {
+            const response = await request(server).post('/create-user').send({name : "test"})
+            expect(response.status).toBe(200)
+        })
     });
     //needs edits
     describe('/delete-user/:id', () => {
