@@ -1,5 +1,11 @@
 const request = require('supertest')
 const server = require('./server.js')
+const users = require('./usersModel.js')
+const db = require('./data/dbConfig.js')
+
+beforeEach(async () => {
+    await db('users').truncate()
+})
 
 describe('server.js', () => {
 
@@ -31,14 +37,32 @@ describe('server.js', () => {
 
     })
 
-    // describe('POST should create a user', () => {
+    describe('POST should create a user', () => {
 
-    //     it('should return status code 200', async () => {
-    //         const response = await request(server).get('/user')
-    //         expect(response.status).toBe(201)
-    //     })
+        it('should return status code 200', async () => {
 
-    // })
+            const response = await request(server)
+            .post('/user')
+            .send({ name: 'bryan' })
+            expect(response.status).toBe(201)
+
+        })
+
+        it('should insert user', async () => {
+           let doesExist = await db('users').where({ name: 'conner' })
+           expect(doesExist).toHaveLength(0) 
+
+           await users.insert({ name: 'conner' })
+           await users.insert({ name: 'tim' })
+
+           doesExist = await db('users').where({ name: 'conner' })
+           expect(doesExist).toHaveLength(1)
+
+           doesExist = await db('users')
+           expect(doesExist).toHaveLength(2)
+        })
+
+    })
 
     // describe('DELETE should delete a user', () => {
 
