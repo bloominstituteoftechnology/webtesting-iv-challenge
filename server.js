@@ -10,7 +10,8 @@ const resourceManager = require('./resource_manager.js');
 //-- Server Configuration & Exports --------------
 const server = module.exports = express();
 server.use(express.json());
-server.get(`${config.URL_API_RESOURCE}/:id`, handleGet)
+server.get (`${config.URL_API_RESOURCE}/:id`, handleGet   );
+server.post(   config.URL_API_RESOURCE      , handleCreate);
 
 
 //== Route Handlers ============================================================
@@ -29,4 +30,21 @@ async function handleGet(request, response, next) {
     }
     //
     response.status(200).json(resource);
+}
+
+//-- Create Resource -----------------------------
+async function handleCreate(request, response, next) {
+    try {
+        let result = await resourceManager.insert(request.body);
+        response.status(201).json({
+            [config.FIELD_ID]: result,
+        });
+    } catch(error){
+        response.status(400).json({
+            message: `Must submit ${config.FIELD_NAME} and ${config.FIELD_DATA}`,
+            error: error.message,
+        });
+    } finally {
+        next();
+    }
 }
