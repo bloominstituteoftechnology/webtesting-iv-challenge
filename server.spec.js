@@ -13,4 +13,14 @@ describe('Server.JS', () => {
             expect(result.body).toEqual(expected);
         })
     })
+
+    describe('/create-user', () => {
+        it('should return welcome user', async () => {
+            let response = await request(server)
+            .post('/create-user')
+            .send({name : 'Drew'});
+    
+            expect(response.body).toEqual({ UserCreated : 'Drew' });
+        });
+    });
 })
