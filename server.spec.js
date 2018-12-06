@@ -1,5 +1,10 @@
 const request = require('supertest');
 const server = require('./api/server.js');
+const db = require('./database/dbConfig');
+
+beforeEach(async () => {
+    await db('users').truncate();
+});
 
 describe('Server.JS', () => {
     describe('"/" Route', () => {
@@ -20,7 +25,7 @@ describe('Server.JS', () => {
             .post('/create-user')
             .send({name : 'Drew'});
     
-            expect(response.body).toEqual({ UserCreated : 'Drew' });
+            expect(response.body).toEqual([1]);
         });
     });
 })
