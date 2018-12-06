@@ -31,6 +31,41 @@ describe('server', () => {
                 .send({ firstName: 'jim', lastName: 'Smith', password: 'fdsaa' });
             expect(response.status).toBe(200);
             expect(response.body).toEqual({ message: 'jim Smith' });
+
+            response = await request(server)
+                .post('/user')
+                .send({ firstName: 'jim', lastName: '', password: 'fdsaa' });
+            expect(response.status).toBe(404);
         });
+    });
+
+    describe('DELETE /users/:id', async () => {
+        it('should delete user', async () => {
+            let id = 1;
+            let response = await request(server)
+
+                .delete(`/users/${id}`)
+                .send({ id });
+            expect(response.status).toBe(200);
+            expect(response.body).toEqual({ message: '1' });
+
+        });
+
+        it('should delete user', async () => {
+            let id = 2;
+            response = await request(server)
+                .delete(`/users/${id}`)
+                .send({ id });
+            expect(response.status).toBe(200);
+            expect(response.body).toEqual({ message: '2' });
+        });
+
+        it('should return error 404', async () => {
+            let id = '';
+            response = await request(server)
+                .delete(`/users/${id}`)
+                .send({ id });
+            expect(response.status).toBe(404);
+        })
     });
 });
