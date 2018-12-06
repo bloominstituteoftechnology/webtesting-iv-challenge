@@ -1,5 +1,5 @@
 const request = require('supertest');
-
+const users = require('./users.js');
 const server = require('./api/server.js');
 
 describe('server.js', () => {
@@ -34,24 +34,17 @@ describe('server.js', () => {
         });
     });
 
-    describe('delete / endpoint', () => {
-        it('should return a status code 200', async () => {
-            let response = await request(server).get('/users');
-
-            expect(response.status).toBe(200);
-        });
-
-        it('should delete a user', async () => {
-            let response = await request(server).get('/users');
-            expect(response.body).toHaveBeenCalled();
-        });
+    describe('DELETE / endpoint', () => {
 
         it('should return a JSON object fron the index route', async () => {
-            const expectedBody = { count: '1' };
+            const ids = await users.addUser({ firstName: 'test', lastName: '123' });
+ 
+            const expectedBody = { count: 1 };
 
-            const response = await request(server).get('/users');
+            const response = await request(server).del(`/users/${ids[0]}`);
 
             expect(response.body).toEqual(expectedBody);
+            expect(response.status).toBe(200);
         });
     });
 

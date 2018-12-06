@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\api",
+    "\\data",
+    "\\data\\migrations"
   ],
-  "SelectedNode": "\\README.md",
+  "SelectedNode": "\\users.js",
   "PreviewInSolutionExplorer": false
 }
