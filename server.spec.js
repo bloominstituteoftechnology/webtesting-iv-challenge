@@ -1,24 +1,26 @@
-const daServa = require('./index');
+const daServa = require('./server');
 const request = require('supertest');
 const db = require('./knexConfig');
 
+beforeEach(async () => {
+    await db('users').truncate();
+    })
+    
 describe('index.js', ()=>{
     
     describe('POST method', ()=>{
     
-    
-        it('returns proper status code', ()=>{
-            const request = request(server).post('/users')
+        it('returns status code', ()=>{
 
-            expect(request.status).toBe(200)
+
         })
         
         it('successfully posts a new user', async ()=>{
-            const user = {name: 'Avicenna'}
-            const request = request(server).post('/users').send(userPost)
-            const userPost = await db('users').insert({user})
-            expect(request.status).toBe(200)
-            expect(request.body).toBe(userPost)
+            const user = {username: 'Avicenna'}
+            const response = await request(daServa).post('/users').send(user)
+            
+            expect(response.status).toBe(200) //TEST 1
+            expect(response.body).toEqual([1]) //TEST 2
         })
 
 
