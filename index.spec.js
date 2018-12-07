@@ -15,9 +15,23 @@ describe('server.js', () => {
             let response = await request(server).get('/');
             expect(response.status).toBe(200);
         });
-        it('should return JSON', async => {
+        it('should return JSON', async () => {
             let response = await request(server).get('/');
             expect(response.type).toBe('application/json');
         });
+        it('should return a body with this object: {api: "sanity check" }', async () => {
+            let response = await request(server).get('/');
+            expect(response.body).toEqual({ api: 'sanity check' });
+        });
+    })
+
+    describe('POST /greet endpoint', () => {
+        it('should greet someone', async () => {
+            let response = await request(server)
+                .post('/greet')
+                .send({ firstName: 'Worldy', lastName: 'McWorld' });
+            expect(response.body).toEqual({ hello: 'Worldy McWorld' });
+            
+        })
     })
 })
