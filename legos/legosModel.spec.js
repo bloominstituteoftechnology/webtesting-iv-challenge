@@ -1,5 +1,5 @@
 const db = require('../data/dbConfig.js');
-const hobbits = require('./legosModel.js');
+const legos = require('./legosModel.js');
 
 beforeEach(async () => {
   await db('lego-themes').truncate();
@@ -12,8 +12,13 @@ describe('lego themes model', () => {
     let rows = await db('lego-themes').where({ parent_id: 1, name: 'Juniors' })
     expect(rows).toHaveLength(0);
     // Insert a test record
-    await hobbits.insert({ parent_id: 1, name: 'Juniors' })
+    await legos.insert({ parent_id: 1, name: 'Juniors' })
+    await legos.insert({ parent_id: 2, name: 'Star Wars' })
 
+    rows = await db('lego-themes').where({ parent_id: 1, name: 'Juniors' })
+    expect(rows).toHaveLength(1);
+    rows = await db('lego-themes');
+    expect(rows).toHaveLength(2);
   })
 
   // it('should update a record', () => {
