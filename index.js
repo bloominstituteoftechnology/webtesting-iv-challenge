@@ -25,16 +25,25 @@ server.post("/api/thing", async (req, res) => {
   }
 });
 
-server.delete('/api/thing/:id', async (req,res) =>{
+server.delete('/api/thing/:thing', async (req,res) =>{
     try{
-        const {id} = req.params
-        const count = await db('thing').where({id}).del()
+        const  {thing}  = req.params
+        const count = await db('thing').where({this:thing}).first().del()
         if (count){
             res.status(200).send('deleted')
         }
     }catch(err){
             res.status(500).send("<h1>ya broke</h1>");
         }
+}) 
+
+server.get('/api/ids', async(req,res) =>{
+    try{
+        const ids = await db.select('id').from('thing')
+        res.status(200).send(ids.map(id=>id.id))
+    }catch(err){
+        res.status(500).send('ya broke')
+    }
 })
 server.listen(port, () => console.log(`we hear you ${port}`));
 
