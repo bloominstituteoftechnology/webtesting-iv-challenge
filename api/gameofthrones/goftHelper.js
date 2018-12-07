@@ -14,5 +14,10 @@ module.exports = {
     return db('gameofthrones')
       .insert(character)
       .then(ids => ({ id: ids[0] }));
+  },
+  deleteCharacter: function(id) {
+    return db('gameofthrones')
+      .where('id', id)
+      .del();
   }
 };

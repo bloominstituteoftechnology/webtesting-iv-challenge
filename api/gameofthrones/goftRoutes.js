@@ -17,6 +17,7 @@ const goftDb = require('./goftHelper');
 // GAME OF THRONES ROUTES
 // ==============================================
 router.post('/characters', addCharacter);
+router.delete('/characters/:id', deleteCharacter);
 
 // CALLBACK FUNCTIONS
 // ==============================================
@@ -30,6 +31,17 @@ async function addCharacter(req, res) {
       await goftDb.addCharacter(character);
       res.status(201).json({ message: 'Sucessfully added character.' });
     }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}
+
+async function deleteCharacter(req, res) {
+  try {
+    const count = await goftDb.deleteCharacter(req.params.id);
+    count
+      ? res.status(200).json({ message: 'Successfully deleted character.' })
+      : res.status(404).json({ error: 'The character with the specified ID does not exist.' });
   } catch (err) {
     res.status(500).json(err);
   }
