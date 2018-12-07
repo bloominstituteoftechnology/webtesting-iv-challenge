@@ -2,7 +2,7 @@ const request = require('supertest')
 const server = require('./server')
 
 const db = require('./jsonDBLayer')
-
+const testData = require('./testData')
 describe('Server endpoints', () => {
 
   describe('/ route', () => {
@@ -39,13 +39,19 @@ describe('Server endpoints', () => {
         it('should return all users', async () => {
           const response = await request(server).get(url)
 
-          expect(response.body).toEqual(db);
+          expect(response.body).toEqual(testData);
         })
 
         it('should return status code 500 for non-existent users', async () => {
           const response = await request(server).get(url + '/51')
 
           expect(response.status).toBe(500)
+        });
+
+        it('should return 200 for getting users that exist', async () => {
+          const response = await request(server).get(url + '/1')
+          const expected = {"age": 39, "firstName": "Yancey", "id": 1}; 
+          expect(response.body).toEqual(expected);
         });
 
         const userObj = {
@@ -59,10 +65,10 @@ describe('Server endpoints', () => {
             .send(userObj)
 
           expect(response.status).toBe(201);
-          expect(response.body).toEqual([ 1 ]);
+          expect(response.body).toEqual([ 51 ]);
         });
 
-        it('should return 200 for getting users that exist', async () => {
+        it('should return 200 for new user', async () => {
           const response = await request(server).get(url + '/51')
 
           expect(response.body).toEqual({ id: 51, });
