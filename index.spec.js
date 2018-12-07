@@ -1,17 +1,19 @@
-// DEPENDENCIES
+// NODE MODULES, FILE IMPORTS
 // ==============================================
 const req = require('supertest');
 
 const app = require('./index.js');
 
+// TESTS
+// ==============================================
 describe('index.js', () => {
   describe('/ route', () => {
     it('should return a status code of 200', async () => {
-      let res = await req(app).get('/');
+      const res = await req(app).get('/');
       expect(res.status).toBe(200);
     });
 
-    it('should return in JSON syntax', async () => {
+    it('should return in JSON', async () => {
       let res = await req(app).get('/');
       expect(res.type).toBe('application/json');
     });
@@ -19,6 +21,22 @@ describe('index.js', () => {
     it('should return with a body like: { you: "up?" }', async () => {
       let res = await req(app).get('/');
       expect(res.body).toEqual({ you: 'up?' });
+    });
+  });
+
+  describe('/api/characters route', () => {
+    it('should return in JSON', async () => {
+      let res = await req(app)
+        .post('/api/characters')
+        .send({ name: 'Theon Greyjoy', house: 'Greyjoy' });
+      expect(res.type).toBe('application/json');
+    });
+
+    it('should add a character', async () => {
+      let res = await req(app)
+        .post('/api/characters')
+        .send({ name: 'Ellaria Sand', house: 'Sand' });
+      expect(res.body).toEqual({ message: 'Sucessfully added character.' });
     });
   });
 });
