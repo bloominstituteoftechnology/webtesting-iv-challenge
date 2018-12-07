@@ -25,5 +25,20 @@ describe('server.js', () => {
     expect(response.body).toEqual(expectedBody);
     // expect(response.body).toEqual(redTestExpectedBody); // RED TEST
   })
-  
+})
+
+describe('POST /addTheme endpoint', () => {
+  it('should add a color to the theme', async () => {
+
+    let response = await request(server)
+    .post('/addTheme')
+    .send({ color: 'LightSeaGreen' })
+    
+    expect(response.body).toEqual({ newColor: 'LightSeaGreen' });
+
+    response = await request(server)
+      .post('/addTheme')
+      .send({ color: 'DarkOrange' });
+    expect(response.body).toEqual({ newColor: 'DarkOrange' });
+  })
 })

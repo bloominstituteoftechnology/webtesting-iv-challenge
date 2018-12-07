@@ -1,22 +1,50 @@
+require('dotenv').config();
 const db = require('../data/dbConfig.js');
+const express = require('express');
+const server = express();
+server.use(express.json());
+const axios = require('axios');
 
+
+
+module.exports = server => {
+  server.get('/api/themes', getThemes);
+}
 module.exports = {
-  insert,
+  // insert,
   // update,
   // remove,
   // getAll,
   // findById,
+  // getByTheme,
 }
 
-// Not async version
-// function insert(hobbit) {
-//   return db('hobbits').insert(hobbits);
+// function insert(legoTheme) {
+//   const [ id ] = db('lego-themes').insert(legoTheme);
+
+//   return db('lego-themes')
+//     .where({ id })
+//     .first()
+              // .then(ids => {
+              //   res.status(201).json({ id: ids[0]});
+              // })
+              // .catch(err => {
+              //   res.status(500).json({ message: 'Error inserting Lego theme', err })
+              // })
 // };
 
-async function insert(legoTheme) {
-  const [ id ] = await db('lego-themes').insert(legoTheme);
+// function getThemes(req, res) {
+//   console.log(req)
 
-  return db('lego-themes')
-    .where({ id })
-    .first();
-};
+//   const url = process.env.url;
+//   axios
+//    .get(`${url}`)
+//     // .where({ name: 'Juniors' })
+//     .then(response => {
+//       res.status(200).json(response);
+//     })
+//     .catch(err => {
+//       res.status(500).json({ message: 'Finding Lego by theme', err })
+//     })
+// };
+
