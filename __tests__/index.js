@@ -18,27 +18,34 @@ describe('server.js', () => {
         });
     });
 
-    describe('/greet post endpoint', () => {
+    describe('post endpoint', () => {
         test('returns JSON', async () => {
             let response = await request(server)
-                .post('/greet')
-                .send(({ firstName: 'Yusuf' }));
+                .post('/')
+                .send(({ userName: 'Yusuf' }));
             expect(response.type).toBe('application/json');
         });
-        test('greets user', async () => {
+        // test('returns status code 201 if successful', async () => {
+        //     let response = await request(server)
+        //         .post('/')
+        //         .send({ userName: 'Yusuf Nafey' })
+        //     expect(response.status).toBe(201);
+        // });
+        test('returns status code 500 if failed', async () => {
             let response = await request(server)
-                .post('/greet')
-                .send({ firstName: 'Yusuf', lastName: 'Nafey' });
-            expect(response.body).toEqual({ hello: 'Yusuf Nafey' });
+                .post('/')
+                .send();
+            expect(response.status).toBe(500);
         });
     });
 
-    describe('/:id delete endpoint', () => {
-        test('', async () => {
+    // describe('/:id delete endpoint', () => {
+    //     test('returns status code 200', async () => {
+    //         let response = await request(server).delete('/1');
+    //         expect(response.status).toBe(200)
+    //     });
+    //     test('', async () => {
 
-        });
-        test('', async () => {
-
-        });
-    })
+    //     });
+    // })
 });
