@@ -30,18 +30,24 @@ describe('server.js', () => {
     });
   });
 
-  // describe('POST /greet endpoint', () => {
-  //   it('should greet the person', async () => {
-  //     let response = await request(server)
-  //       .post('/greet')
-  //       .send({ firstName: 'Ryan', lastName: 'Clausen' });
+  describe('POST /greet endpoint', () => {
+    it('should greet the person', async () => {
+      let response = await request(server)
+        .post('/greet')
+        .send({ firstName: 'Turkey', lastName: 'Turkeyton' });
 
-  //     expect(response.body).toEqual({ hello: 'Ryan Clausen' });
+      expect(response.body).toEqual({ hello: 'Turkey Turkeyton' });
 
-  //     response = await request(server)
-  //       .post('/greet')
-  //       .send({ firstName: 'Brian', lastName: 'Williams' });
-  //     expect(response.body).toEqual({ hello: 'Brian Williams' });
-  //   });
-  // });
+      response = await request(server)
+        .post('/greet')
+        .send({ firstName: 'Mario', lastName: 'Bananas' });
+      expect(response.body).toEqual({ hello: 'Mario Bananas' });
+    });
+
+    it('should return JSON', async () => {
+      let response = await request(server).get('/');
+
+      expect(response.type).toBe('application/json');
+    });
+  });
 });
