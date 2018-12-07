@@ -14,7 +14,8 @@ server.post('/towns', async (req,res) => {
 })
 
 server.delete('/towns', async (req,res) => {
-    townDB.remove(req.body)
+    const {name} = req.body;
+    townDB.remove(name)
     .then(num => {
         res.status(200).json(num)
     })

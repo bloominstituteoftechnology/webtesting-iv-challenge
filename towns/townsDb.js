@@ -11,8 +11,8 @@ function create(town) {
     .returning('id')
 }
 
-function remove(town) {
+function remove(name) {
     return db('town')
-    .where('name', '=', town)
+    .where('name', '=', name)
     .del();
 }
