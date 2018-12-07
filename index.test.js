@@ -30,6 +30,12 @@ describe('Test API Server', () => {
             let response = await request(server).get(testUrl);
             expect(response.status).toBe(200);
         });
+        test('responds with status code 404', async function () {
+            let response = await request(server).get(
+                `${config.URL_API_RESOURCE}/2`,
+            );
+            expect(response.status).toBe(404);
+        });
         test('responds with JSON object', async function () {
             let response = await request(server).get(testUrl);
             expect(response.type).toBe('application/json');
@@ -57,6 +63,11 @@ describe('Test API Server', () => {
         test('responds with status code 201', async function () {
             let response = await request(server).post(testUrl).send(testData);
             expect(response.status).toBe(201);
+        });
+        test('responds with status code 400', async function () {
+            // Malformed request, no name or data
+            let response = await request(server).post(testUrl).send({});
+            expect(response.status).toBe(400);
         });
         test('responds with JSON object', async function () {
             let response = await request(server).post(testUrl).send(testData);
