@@ -1,0 +1,26 @@
+{
+  "name": "servertesting",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon",
+    "test": "jest --watch --verbose"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "knex": "^0.15.2",
+    "sqlite3": "^4.0.4"
+  },
+  "devDependencies": {
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.7",
+    "supertest": "^3.3.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
