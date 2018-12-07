@@ -1,28 +1,34 @@
 const express = require("express");
+const db = require("../data/dbConfig");
 const server = express();
 server.use(express.json());
-
-let mockDB = [{ name: "Samwise" }];
 
 // sanity check
 server.get("/", (req, res) => {
   res.status(200).json({ api: "running" });
 });
 
-server.get("/hobbits", (req, res) => {
-  res.status(200).json(mockDB);
+server.post("/scrubs", (req, res) => {
+  const character = req.body;
+  db("characters")
+    .insert(character)
+    .then(id => {
+      res.status(201).json({ id });
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    });
 });
 
-server.post("/hobbits", (req, res) => {
-  const hobbit = req.body;
-  hobbit !== {} ? (mockDB = [...mockDB, hobbit]) : null;
-  res.status(201).json(mockDB.length);
-});
-
-server.delete("/hobbits", (req, res) => {
-  const hobbitName = req.body.name;
-  mockDB = mockDB.filter(hobbit => hobbit.name !== hobbitName);
-  res.status(200).json(mockDB);
+server.delete("/scrubs/:id", (req, res) => {
+  const charId = req.params.id;
+  db("characters")
+    .where({ id: charId })
+    .del()
+    .then(count => {
+      count ? res.status(200).json(count) : res.status(404);
+    })
+    .catch(err => res.status(500));
 });
 
 const port = process.env.PORT || 7000;
