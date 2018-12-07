@@ -1,0 +1,1 @@
+const animals = require("./animalsModel");
