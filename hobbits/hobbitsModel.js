@@ -13,9 +13,8 @@ async function insert(hobbit) {
         .first();
 };
 
-async function remove(hobbit) {
-    const [id] = await db('hobbits').delete(hobbit);
+function remove(id) {
     return db('hobbits')
-        .where({ id })
-        .first();
+        .where('id', Number(id))
+        .del();
 }
