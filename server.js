@@ -17,6 +17,15 @@ server.post('/api/names', async (req, res) => {
       } 
 })
 
+server.get('/api/names', async (req, res) => {
+    try {
+        let response = await names.get(req.params.id)
+        res.status(200).json(response)
+    } catch(err) {
+        console.log(err);
+    }
+});
+
   server.delete('/api/names/:id', async (req, res) => {
     const {id} = req.params;
     try {

@@ -27,6 +27,34 @@ describe('server.js', () => {
             expect(response.body).toEqual({ api: 'alive' });
         });
     });
+
+    describe('/api/names get route', () => {
+        it('should return status code 200', async () => {
+            let response = await request(server).get('/api/names');
+            
+            expect(response.status).toBe(200);
+        });
+        
+        it('should return JSON', async () => {
+            let response = await request(server).get('/api/names');
+            
+            expect(response.type).toBe('application/json');
+        });
+    });
+
+    describe('/api/names/:id delete route', () => {
+        it('should return status code 200', async () => {
+            let response = await request(server).delete('/api/names/:id');
+            
+            expect(response.status).toBe(200);
+        });
+        
+        it('should return JSON', async () => {
+            let response = await request(server).delete('/api/names/:id');
+            
+            expect(response.type).toBe('application/json');
+        });
+    });
     
     beforeEach(async () => {
         await db('names').truncate();

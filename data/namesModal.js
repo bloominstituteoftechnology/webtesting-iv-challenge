@@ -3,6 +3,7 @@ const db = require('../data/dbConfig.js');
 module.exports = {
   insert,
   remove,
+  get
 };
 
 async function insert(name) {
@@ -18,6 +19,14 @@ async function remove(id) {
     return db('names')
       .where('id', id)
       .del();
+  }
+
+  async function get(id) {
+    let query = db('names');
+    if (id) {
+      query.where('id', Number(id)).first();
+    }
+    return query;
   }
 
 
