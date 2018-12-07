@@ -56,4 +56,19 @@ router.post('', (req, res) => {
     }
 });
 
+// [DELETE] /api/books/:id
+router.delete('/:id', (req, res) => {
+    bookDb.removeBook(req.params.id)
+        .then(recordsDeleted => {
+            if (recordsDeleted) {
+                res.status(200).json({ recordsDeleted: recordsDeleted, successMessage: 'Successfully deleted book' });
+            } else {
+                res.status(404).json({ errorMessage: 'Error deleting book, book id does not exist' })
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ error: err, errorMessage: 'Error deleting book' })
+        });
+});
+
 module.exports = router;

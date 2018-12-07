@@ -3,7 +3,8 @@ const db = require('../dbConfig.js');
 module.exports = {
     getBook,
     getBooks,
-    addBook
+    addBook,
+    removeBook
 };
 
 // returns all books in table
@@ -22,4 +23,11 @@ function addBook(book) {
     return db('books')
         .insert(book)
         .then(id => { return {id: id[0] }});
+};
+
+// remove book from table, return number of records deleted
+function removeBook(id) {
+    return db('books')
+        .where('id', Number(id))
+        .del();
 };

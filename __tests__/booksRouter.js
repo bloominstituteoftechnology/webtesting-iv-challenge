@@ -41,7 +41,17 @@ describe('booksRouter.js', () => {
         });
 
         it('[GET] - should return 404 for id that does not exist', async () => {
-            let response = await request(server).get('/api/book/2');
+            let response = await request(server).get('/api/books/2');
+            expect(response.status).toBe(404);
+        });
+
+        it('[DELETE] - should return 200 for successfully deleted book', async () => {
+            let response = await request(server).delete('/api/books/1');
+            expect(response.status).toBe(200);
+        });
+
+        it('[DELETE] - should return 404 for attempting to delete id that does not exist', async () => {
+            let response = await request(server).delete('/api/books/2');
             expect(response.status).toBe(404);
         });
 
