@@ -34,7 +34,7 @@ describe('server.js', () => {
             });
         }) //end Dune post describe
 
-        describe('DELETE /:id route', () => {
+        describe('DELETE chars/:id route', () => {
             it('should return a status code of 200', async () => {
                 //add a record to delete
                 let add = await request(server).post('/chars').send({ name: 'Paul Atreides' });
@@ -52,9 +52,18 @@ describe('server.js', () => {
                 expect(add.body.id).toEqual(1);
                 //request to delete the record
                 let response = await request(server).delete('/chars/1').send();
-                //check status code
+                //check content of response
                 expect(response.body).toBe(1);
             })
         }) //end delete route describe
+
+        describe('GET /chars route', () => {
+            it('should return all characters', async () => {
+                await request(server).post('/chars').send({ name: 'Paul Atreides' });
+                await request(server).post('/chars').send({ name: 'Vladimir Harkonnen' });
+                let response = await request(server).get('/chars').send();
+                expect(response.body).toHaveLength(2);
+            })
+        })
     }) //end Dune routes describe
 }) //end server.js describe
