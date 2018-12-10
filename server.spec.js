@@ -32,16 +32,18 @@ describe('server.js', () => {
 
         it('should return JSON data', async () => {
             const response = await request(server)
-                .post('/register')
+                .post('/api/register')
                 .send({ name: 'sean', department: 'admin' });
-            
-            expect(response.type).toBe('text/html');
+                
+            expect(response.type).toBe('application/json');
+            })
+        });
+        
+    describe('delete user routes', () => {
+        it('delete user from database', async () => {
+            const response = await request(server)
+                .delete('/api/delete/1')
+            expect(response.body).toEqual({ message: 'user id of 1 has been deleted'});
         })
     });
-
-    // describe('delete user routes', () => {
-    //     it('should be able to find a user in the database', async () => {
-
-    //     })
-    // });
 })

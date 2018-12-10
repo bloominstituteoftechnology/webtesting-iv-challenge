@@ -12,4 +12,9 @@ server.post('/api/register', (req, res) => {
     res.status(200).json({ message: `welcome to the club ${body.name}!`});
 })
 
+server.delete('/api/delete/:id', (req, res) => {
+    const id = req.params.id;
+    res.status(201).json({ message: `user id of ${id} has been deleted`});
+})
+
 module.exports = server;
