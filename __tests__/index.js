@@ -25,12 +25,6 @@ describe('server.js', () => {
                 .send(({ userName: 'Yusuf' }));
             expect(response.type).toBe('application/json');
         });
-        // test('returns status code 201 if successful', async () => {
-        //     let response = await request(server)
-        //         .post('/')
-        //         .send({ userName: 'Yusuf Nafey' })
-        //     expect(response.status).toBe(201);
-        // });
         test('returns status code 500 if failed', async () => {
             let response = await request(server)
                 .post('/')
@@ -39,13 +33,16 @@ describe('server.js', () => {
         });
     });
 
-    // describe('/:id delete endpoint', () => {
-    //     test('returns status code 200', async () => {
-    //         let response = await request(server).delete('/1');
-    //         expect(response.status).toBe(200)
-    //     });
-    //     test('', async () => {
-
-    //     });
-    // })
+    describe('/:id delete endpoint', () => {
+        test('returns status code 500', async () => {
+            let response = await request(server).delete('/:id');
+            expect(response.status).toBe(500)
+        });
+        test('deletes user', async () => {
+            let response = await request(server)
+                .delete('/:id')
+                .send({ _id: 5, name: 'joe' })
+            expect(response.body).toEqual({ message: 'user has been deleted' });
+        });
+    });
 });

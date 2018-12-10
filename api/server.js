@@ -26,10 +26,12 @@ server.post('/', (req, res) => {
     });
 });
 
-// server.delete('/:id', (req, res) => {
-//   const { id } = req.params;
-
-//   res.status(200).json
-// })
+server.delete('/:id', (req, res) => {
+  const { id } = req.params;
+  db = db.filter(user => {
+    user._id !== Number(id)
+  });
+  res.status(200).json({ message: 'user has been deleted' });
+});
 
 module.exports = server;
