@@ -27,3 +27,8 @@ describe('POST /users endpoint', () => {
       expect(response.status).toBe(400);
     });
   });
+
+describe('DELETE /users/:id endpoint', () => {
+    
+
+});
