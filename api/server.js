@@ -20,15 +20,31 @@ server.get('/users', async (req, res) => {
 server.post('/users', async (req, res) => {
   const user = req.body;
   try{
-      if (user) {
+      if (user.name && user.favorite_movie) {
         const newUser = await users.add(user);
         res.status(201).json(newUser);
       } else {
-        res.status(400).json({message: "Please try againg"});
+        res.status(400).json({message: "Please enter name and favorite movie of the user"});
       }
   } catch (err){
       res.status(500).json({message: "There was an error trying to add a user"})
   }
 });
+
+server.delete('/users/:id', async (req, res) => {
+    try {
+      const {id} = req.params;
+      const count = await users.remove(id);
+  
+      if(!count || count < 1){
+          res.status(404).json({message: "User was not found to be removed"})
+      } else{
+          res.status(200).json(count);
+      }
+    }
+    catch (err) {
+      res.status(500).json({message: "There was an error while trying to delete a user from the data base"});
+      }
+  });
 
 module.exports = server;
