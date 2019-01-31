@@ -11,7 +11,7 @@ describe('POST /users endpoint', () => {
         .post('/users')
         .send(body);
 
-      expect(response.body).toEqual([11]);
+      expect(response.status).toBe(201);
 
     });
 
@@ -33,7 +33,7 @@ describe('DELETE /users/:id endpoint', () => {
     it('should delete a user from the database', async () => {
         
         let response = await request(server)
-        .delete(`/users/:1`);
+        .delete(`/users/1`);
 
         expect(response.status).toBe(200);
         
