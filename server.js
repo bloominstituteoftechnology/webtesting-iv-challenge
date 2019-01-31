@@ -14,7 +14,7 @@ server.post("/smurfs", (req, res) => {
 		});
 	}
 
-	return res.json({ id: 1, name: "laruen smurf", role: "jerkface" });
+	return res.json({ id: 1, name: "Lauren smurf", role: "jerkface" });
 });
 
 server.delete("/smurfs", (req, res) => {
