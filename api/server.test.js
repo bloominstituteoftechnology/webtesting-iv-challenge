@@ -14,3 +14,19 @@ describe("POST/movies endpoint", () => {
     expect(res.body).toEqual([1]);
   });
 });
+
+describe("DELETE /movies/:id endpoint", () => {
+  it("should delete a user from the database", async () => {
+    let response = await request(server).delete(`/movies/1`);
+
+    expect(response.status).toBe(200);
+  });
+
+  it("should return the number of item deleted", async () => {
+    let res = await request(server)
+      .post("/movies")
+      .send({ movie: "The Godfather" });
+    res = await request(server).delete("/movies/1");
+    expect(res.body).toBe(1);
+  });
+});
