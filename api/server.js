@@ -9,4 +9,15 @@ server.get("/", (req, res) => {
   res.status(200).json({ users: [{ username: "joseph" }] });
 });
 
+// POST REQUEST TO '/'
+server.post("/", async (req, res) => {
+  const body = req.body;
+  if (body.username) {
+    const user = await helpers.insert(body);
+    res.status(201).json(user);
+  } else {
+    res.status(400).json({ error: "no user created" });
+  }
+});
+
 module.exports = server;

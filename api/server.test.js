@@ -1,6 +1,7 @@
 const request = require("supertest");
 
 const server = require("./server");
+const db = require("../data/dbConfig");
 
 describe("ROUTE HANDLERS", () => {
   describe("get /", () => {
@@ -26,6 +27,28 @@ describe("ROUTE HANDLERS", () => {
       const response = await request(server).get("/");
 
       expect(response.body).toEqual({ users: [{ username: "joseph" }] });
+    });
+  });
+  describe("post /", () => {
+    afterEach(async () => {
+      await db("users").truncate();
+    });
+    it("responds with 201 when body correct", async () => {
+      const body = { username: "jimmy" };
+      const response = await request(server)
+        .post("/")
+        .send(body);
+
+      expect(response.status).toBe(201);
+    });
+
+    it("responds with 400 when body incorrect", async () => {
+      const body = {};
+      const response = await request(server)
+        .post("/")
+        .send(body);
+
+      expect(response.status).toBe(400);
     });
   });
 });
