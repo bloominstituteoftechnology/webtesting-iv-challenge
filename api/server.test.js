@@ -12,7 +12,7 @@ describe("ROUTE HANDLERS", () => {
 
     it("recieves a 400 status code", async () => {
       const response = await request(server).get("/");
-      response.status(400);
+      response.status = 400;
       expect(response.status).toBe(400);
     });
 
@@ -20,6 +20,12 @@ describe("ROUTE HANDLERS", () => {
       const response = await request(server).get("/");
 
       expect(response.type).toMatch(/json/i);
+    });
+
+    it("should return proper object", async () => {
+      const response = await request(server).get("/");
+
+      expect(response.body).toEqual({ users: [{ username: "joseph" }] });
     });
   });
 });
