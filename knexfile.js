@@ -5,28 +5,28 @@ module.exports = {
   development: {
     client: 'sqlite3',
     connection: {
-      filename: './dev.sqlite3'
+      filename: './data/dev.sqlite3'
     },
     useNullAsDefault: true,
     migrations: {
-      directory: "./data/dev/migrations",
+      directory: "./data/migrations",
     },
     seeds: {
-      directory: "./data/dev/seeds"
+      directory: "./data/seeds"
     },
   },
 
   testing: {
     client: 'sqlite3',
     connection: {
-      filename: './test.sqlite3'
+      filename: './data/test.sqlite3'
     },
     useNullAsDefault: true,
     migrations: {
-      directory: "./data/test/migrations",
+      directory: "./data/migrations",
     },
     seeds: {
-      directory: "./data/test/seeds"
+      directory: "./data/seeds"
     },
   },
 };
