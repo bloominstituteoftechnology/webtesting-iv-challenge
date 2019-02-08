@@ -2,7 +2,7 @@ const request = require('supertest');
 
 const server = require('./api/server.js');
 
-//TEST  FOR BASIC ROUTE '/'
+//TEST  FOR Server.js '/'
 describe('server.js', () => {
 
     describe('/ route', () => {
@@ -10,5 +10,36 @@ describe('server.js', () => {
             let response = await request(server).get('/');
             expect(response.status).toBe(200);
         })
+
+        it('should get response in JSON format..', () => {
+            request(server)
+                .get('/')
+                .then(response => {
+                    expect(response.type).toBe('application/json')    
+                })    
+        })
+
+        it('should return with a body like: {Message:  "SERVER  RUNNING."', async () => {
+            let response = await request(server).get('/');
+            expect(response.body).toEqual({Message:  'SERVER  RUNNING.'});
+        });
     })
-}) 
+
+    //TEST FOR CREATE  POST-ROUTE '/greet'
+    describe('POST /greet endpoint', () => {
+        it('should greet the person', async () => {
+            let response = await request(server)
+                .post('/greet')
+                .send({ firstName : "ABC", lastName : "XYZ"});    
+            expect(response.body).toEqual({Hello : "ABC XYZ"});
+        })
+
+        it('should get response in JSON format..', () => {
+            request(server)
+                .post('/greet')
+                .then(response => {
+                    expect(response.type).toBe('application/json')    
+                })    
+        })
+    })    
+})
