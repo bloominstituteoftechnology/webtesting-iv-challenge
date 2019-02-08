@@ -8,9 +8,13 @@ const carsData = require(filename);
 //built-in & 3rd party middleware
 server.use(express.json());
 
-//route handlers
+//testing route handler
 server.get('/',(req, res)=>{
   res.status(200).json(carsData);
+})
+
+server.get('/cars', (req, res)=>{
+  res.status(200).json({carsData})
 })
 
 //export the server
