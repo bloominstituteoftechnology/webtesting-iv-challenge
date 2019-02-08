@@ -18,9 +18,15 @@ describe('The route handlers', () => {
 
     describe('post /character', () => {
         it('responds with 201', async () => {
-            const reponse = await request(server).get('/character');
+            const response = await request(server).get('/character');
 
             expect(response.status).toBe(201);
         });
+    });
+
+    it('responds with the id', async () => {
+        const response = await request(server).get('/character');
+
+        expect(response.body).toBeDeFined();
     });
 });
