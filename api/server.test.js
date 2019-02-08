@@ -43,11 +43,11 @@ describe('The route handlers function...', () => {
     });
 
     describe('Puts to /api/notes', () => { 
-        it('Returns server code 201 on success', async () => {
+        it('Returns server code 200 on success', async () => {
             const body = {author: 'Seneca',
                 text: 'Luck is what happens when preparation meets opportunity.'}
             const response = await request(server).put('/api/notes/0').send(body);
-            expect(response.status).toBe(201);
+            expect(response.status).toBe(200);
         });
         test('Returns server code 400 on missing body.', async () => {
             const response = await request(server).put('/api/notes/0');
@@ -56,9 +56,9 @@ describe('The route handlers function...', () => {
     });
 
     describe('Deletes to /api/notes/:id', () => { 
-        it('Returns server code 201 on success', async () => {
+        it('Returns server code 200 on success', async () => {
             const response = await request(server).delete('/api/notes/0');
-            expect(response.status).toBe(201);
+            expect(response.status).toBe(200);
         });
         test('Fails and responds with server code 404 with a wrong id.', async () => {
             const response = await request(server).delete('/api/notes/432542592402856248638035');
