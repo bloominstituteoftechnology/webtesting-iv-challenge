@@ -11,9 +11,30 @@ server.get('/', async (req, res) => {
     res
         .status(200)
         .json({ API: 'working' });
-})
+});
+
+server.get('/users', async (req, res) => {
+    const rows = await users.getAll();
+    res
+        .status(200)
+        .json(rows);
+});
+
+server.post('/users', async (req, res) => {
+    const userData = req.body;
+    if (userData.name) {
+        const ids = await users.insert(userData);
+        res
+            .status(201)
+            .json(ids);
+    } else {
+        res
+            .status(400)
+            .json({ message: 'must enter name' });
+    }
+});
 
 module.exports = {
     server,
     PORT
-}
+};
