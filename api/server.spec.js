@@ -1,5 +1,11 @@
+const db = require('../data/dbConfig');
 const request = require("supertest");
 const server = require("./server.js");
+
+
+afterEach(async () => {
+    await db("users").truncate();
+  });
 
 describe("the route handlers", () => {
   describe("get /users", () => {
@@ -13,24 +19,7 @@ describe("the route handlers", () => {
     });
     it("sends the correct response object", async () => {
       const response = await request(server).get("/users");
-      expect(response.body).toEqual([
-        {
-          id: 1,
-          name: "Anne"
-        },
-        {
-          id: 2,
-          name: "Fiona"
-        },
-        {
-          id: 3,
-          name: "Shannon"
-        },
-        {
-          id: 4,
-          name: "Reid"
-        }
-      ]);
+      expect(response.body).toEqual([]);
     });
   });
   describe("post /users", () => {
@@ -76,6 +65,7 @@ describe("the route handlers", () => {
   describe("delete /users/:id", () => {
     it("responds with 200 when successful", async () => {
       const id = 1;
+      const user = await request(server).post("/users").send({name: "Jackie"})
       const response = await request(server).delete(`/users/${id}`)
     expect(response.status).toBe(200);
     })
@@ -85,12 +75,14 @@ describe("the route handlers", () => {
     expect(response.status).toBe(404);
     })
     it("responds with json", async () => {
-      const id = 2;
+      const id = 1;
+      const user = await request(server).post("/users").send({name: "Jackie"})
       const response = await request(server).delete(`/users/${id}`);
       expect(response.type).toMatch(/json/i);
     });
     it("sends the correct response object", async () => {
-      const id = 3;
+      const id = 1;
+      const user = await request(server).post("/users").send({name: "Jackie"})
       const response = await request(server).delete(`/users/${id}`);
       expect(response.body).toEqual(1);
     })
