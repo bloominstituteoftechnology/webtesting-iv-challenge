@@ -2,7 +2,7 @@
 
 ## Topics
 
-- automated testing.
+- automated testing..
 - jest testing framework.
 - supertest module.
 
