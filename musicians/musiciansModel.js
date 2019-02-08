@@ -12,7 +12,7 @@ async function insert(musician) {
 }
 
 async function remove(id) {
-  return db('musicians').where(id).del();
+  return db('musicians').where('id', id).del();
 }
 
 function getAll() {
@@ -20,5 +20,5 @@ function getAll() {
 }
 
 function findById(id) {
-  return db('musicians').where(id)
+  return db('musicians').where('id', id);
 }

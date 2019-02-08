@@ -67,3 +67,34 @@ describe('post /musicians', () => {
 
 })
 
+describe('delete /musicians/:id', () => {
+
+  afterEach(async () => {
+    await db('musicians').truncate();
+  });
+
+  it('responds with 404 when musician ID is not available', async () => {
+    const id = 1;
+    const response = await request(server).delete(`/musicians/${id}`);
+
+    expect(response.status).toBe(404);
+  })
+
+  it('responds with 200, when musician is deleted', async () => {
+    const id = 1;
+    const body = await request(server).post("/musicians").send({ name: "Mykael"});
+    const response = await request(server).delete(`/musicians/${id}`);
+
+    expect(response.status).toBe(200);
+  })
+
+  it('sends correct response object', async () => {
+    const id = 1;
+    const body = await request(server).post("/musicians").send({ name: "Mykael"});
+    const response = await request(server).delete(`/musicians/${id}`);
+
+    expect(response.body).toEqual(1);
+  })
+
+})
+

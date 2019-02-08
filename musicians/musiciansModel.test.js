@@ -1,4 +1,4 @@
-const hobbits = require('./musiciansModel');
+const musicians = require('./musiciansModel');
 const db = require('../data/dbConfig');
 
 describe('the musicians model', () => {

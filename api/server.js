@@ -27,8 +27,18 @@ server.post('/musicians', async (req, res) => {
   }
 });
 
-server.delete('/musicians', async (req, res) => {
-  
+server.delete('/musicians/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const ids = await musicians.remove(id);
+    if ( ids < 1 ) {
+      res.status(404).json({ error: 'Musician not available' })
+    } else {
+      res.status(200).json(ids);
+    }
+  } catch (err) {
+    res.status(500).json({ error: 'Database go boom' });
+  }
 })
 
 module.exports = server;
