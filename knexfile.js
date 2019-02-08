@@ -12,5 +12,5 @@ module.exports = {
       directory: './data/migrations'
     }
   }
-
+  
 };
