@@ -42,4 +42,24 @@ describe("the route handlers", () => {
       });
    });
 
+   describe("post /users", () => {
+      it("responds with 201 when body is correct", async () => {
+         const body = {name: "mike"}
+         const response = await request(server).post("/users").send(body);
+
+         expect(response.status).toBe(200);
+      });
+      it("responds with 400 when body is missing", async () => {
+         const body = {}
+         const response = await request(server).post("/users").send(body);
+
+         expect(response.type).toMatch(/json/i);
+      });
+      it("responds with an array containing new id", async () => {
+         const body = { name: "mike"}
+         const response = await request(server).post("/users").send(body);
+
+         expect(response.body.length).toBe(1);
+      });
+   });
 });
