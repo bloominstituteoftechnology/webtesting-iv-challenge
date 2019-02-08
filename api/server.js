@@ -21,19 +21,11 @@ server.post("/", async (req, res) => {
 });
 
 server.delete("/", async (req, res) => {
-<<<<<<< HEAD
   const user = req.body;
   if (user.username) {
     const deleted = await helpers.deleteUser(user);
     res.status(200).json({ deleted });
   } else res.status(400).json({ user });
-=======
-  const { count } = req.body;
-
-  if (count) {
-    res.json({ count });
-  } else res.status(400).json({ error: "user not deleted" });
->>>>>>> 0fc751f76f85856a16e56fc2a8e2407b4847ed78
 });
 
 module.exports = server;
