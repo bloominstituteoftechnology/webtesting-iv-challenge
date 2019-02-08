@@ -20,4 +20,12 @@ server.post("/", async (req, res) => {
   }
 });
 
+server.delete("/", async (req, res) => {
+  const { count } = req.body;
+
+  if (count) {
+    res.json({ count });
+  } else res.status(400).json({ error: "user not deleted" });
+});
+
 module.exports = server;
