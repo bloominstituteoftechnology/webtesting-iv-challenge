@@ -1,7 +1,4 @@
-const knex = require('knex');
-const config = require('../knexfile.js');
-
-const db = knex(config['development']);
+const db = require('../data/dbConfig.js');
 
 module.exports = {
     getUsers,
@@ -14,6 +11,5 @@ async function getUsers() {
 
 async function addUser(newUser) {
     return db('users')
-        .insert(newUser)
-        .then(ids => ({id: ids[0]}))
+        .insert(newUser);
 }

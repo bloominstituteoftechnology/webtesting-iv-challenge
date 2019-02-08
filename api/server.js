@@ -14,17 +14,17 @@ server.get('/users', async (req, res) => {
 });
 
 server.post('/users', async (req, res) => {
-    const userData = req.body;
-    if (userData.username && userData.password) {
-        const ids = await db.addUser(userData);
+    const newUser = req.body;
+    if (newUser.username && newUser.password) {
+        const ids = await db.addUser(newUser);
         res
             .status(201)
-            .json(id);
+            .json(ids);
     } 
     else {
         res
             .status(400)
-            .json({error: 'missing username or password'})
+            .json({error: 'missing username or password'});
     }
 });
 

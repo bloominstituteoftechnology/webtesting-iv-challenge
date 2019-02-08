@@ -30,6 +30,10 @@ describe('The route handlers', () => {
     });
 
     describe('post /users', () => {
+        afterEach(async () => {
+            await database('users').truncate();
+        });
+
         it('responds with status code 201', async () => {
             const body = { username: 'bruce', password: 'password'};
             const response = await request(server).post('/users').send(body);
@@ -45,10 +49,10 @@ describe('The route handlers', () => {
         });
 
         it('responds with an array containing a new id', async () => {
-            const body = { name: 'bilbo' };
-            const response = await(server).post('/users').send(body);
+            const body = { username: 'bilbo', password: 'baggins' };
+            const response = await request(server).post('/users').send(body);
 
-            expect(response.body.length.toBe(1));
+            expect(response).toBe(1);
         });
     })
 })
