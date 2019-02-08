@@ -66,5 +66,13 @@ describe('The route handlers', () => {
             expect(response.status).toBe(404);
             db('characters').truncate();
         });
+
+        it('responds with 400 when body is missing data', async () => {
+            const body = {}
+            const response = await request(server).delete('/character').send(body);
+
+            expect(response.status).toBe(400);
+            db('characters').truncate();
+        });
     });
 });
