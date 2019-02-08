@@ -8,5 +8,11 @@ describe('The route handlers', () => {
 
             expect(response.status).toBe(200);
         });
+
+        it('responds with json', async () => {
+            const response = await request(server).get('/');
+
+            expect(response.type).toMatch(/json/i);
+        });
     });
 });
