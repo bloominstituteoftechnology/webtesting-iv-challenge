@@ -17,8 +17,9 @@ describe('The route handlers', () => {
     });
 
     describe('post /character', () => {
-        it('responds with 201', async () => {
-            const response = await request(server).get('/character');
+        it('responds with 201 if body is correct', async () => {
+            const body = {name: 'David'}
+            const response = await request(server).post('/character').send(body);
 
             expect(response.status).toBe(201);
         });
