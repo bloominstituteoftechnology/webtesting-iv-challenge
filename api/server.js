@@ -1,6 +1,6 @@
 const express = require('express');
 
-const musicians = require('../musicians/musicians.js');
+const musicians = require('../musicians/musiciansModel.js');
 
 const server = express();
 
@@ -11,7 +11,7 @@ server.get('/', async (req, res) => {
 });
 
 server.get('/musicians', async (req, res) => {
-  const rows = await hobbits.getAll();
+  const rows = await musicians.getAll();
 
   res.status(200).json(rows);
 });
@@ -20,7 +20,7 @@ server.post('/musicians', async (req, res) => {
   const musicianData = req.body;
 
   if (musicianData.name) {
-    const ids = await hobbits.insert(musicianData);
+    const ids = await musicians.insert(musicianData);
     res.status(201).json(ids);
   } else {
     res.status(400).json({ error: 'missing name' });
