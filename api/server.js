@@ -15,4 +15,14 @@ server.get('/users', async (req, res) => {
    res.status(200).json(rows);
  });
 
+ server.post("/users", async (req, res) => {
+   const userData = req.body;
+   if(userData.name){
+     const ids = await users.insert(userData);
+     res.status(201).json(ids);
+   } else {
+     res.status(400).json({error: "missing name in body"})
+   }
+ });
+
 module.exports = server;

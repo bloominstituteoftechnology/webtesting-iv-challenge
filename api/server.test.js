@@ -47,7 +47,7 @@ describe("the route handlers", () => {
          const body = {name: "mike"}
          const response = await request(server).post("/users").send(body);
 
-         expect(response.status).toBe(200);
+         expect(response.status).toBe(201);
       });
       it("responds with 400 when body is missing", async () => {
          const body = {}
