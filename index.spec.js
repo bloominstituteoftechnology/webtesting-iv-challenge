@@ -26,13 +26,13 @@ describe('GET /cars', ()=>{
     const response = await request(server).get('/cars');
     const expected = [
       {
-        "id": 0,
+        "id": "0",
         "make": "porshe", 
         "model": "911 carerra",
         "year": "2013"
       },
       {
-        "id": 1,
+        "id": "1",
         "make": "chevrolet", 
         "model": "corvette",
         "year": "2017"
@@ -48,7 +48,7 @@ describe('POST /cars', ()=>{
   it('should return the name of the newly created car', async ()=>{
     const response = await request(server).post('/cars')
           .send(  {
-            "id": 2,
+            "id": "2",
             "make": "Hyundai", 
             "model": "Elantra",
             "year": "2012"
@@ -57,10 +57,10 @@ describe('POST /cars', ()=>{
     expect(response.body).toEqual(expected);
   });
 
-  it('should return status code of 200', async ()=>{
+  it('should return status code of 201', async ()=>{
     const response = await request(server).post('/cars')
     .send(  {
-      "id": 3,
+      "id": "3",
       "make": "Subaru", 
       "model": "Forester",
       "year": "2015"
@@ -73,7 +73,19 @@ describe('POST /cars', ()=>{
 
 //DELETE Tests
 describe('DELETE /cars/:id', ()=>{
+  it('should returns status code 200', async ()=>{
+    const id = 3;
+    const response = await request(server).delete(`/cars/${id}`);
+    expect(response.status).toBe(200);
+  })
 
+  it('should return the id of the car deleted', async ()=>{
+    const id = 3;
+    const response = await request(server).delete(`/cars/${id}`);
+    const expected = {"id": "3"};
+
+    expect(response.body).toEqual(expected);
+  })
 })
 
 
