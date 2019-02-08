@@ -11,7 +11,7 @@ describe("the create route", () => {
         expect(response.status).toBe(400);
     });
 
-    it("returns an id on successful post", () => {
+    it("returns an id on successful post", async () => {
         const response = await request(server).post("/api/users").send({ username: "testing" });
         expect(response.body.length).toBe(1);
     });
@@ -27,7 +27,7 @@ describe("the delete route", () => {
         expect(response.status).toBe(404);
     });
 
-    it("returns 1 on a successful delete", () => {
+    it("returns 1 on a successful delete", async () => {
         const response = await request(server).delete("/api/users/1");
         expect(response.body).toBe(1);
     });
