@@ -10,7 +10,7 @@ server.get('/users', async (req, res) => {
   try {
     const rows = await users.fetch();
     res.status(200).json(rows);
-  } catch {
+  } catch(err) {
     res.status(500).json({error: "trouble getting users"})
   }
   
@@ -27,7 +27,7 @@ server.post('/users', async (req, res) => {
     else {
       res.status(400).json({error: "user requires name that is a string less than 255 characters"})
     }
-  } catch {
+  } catch(err) {
     res.status(500).json({error: "trouble adding user"})
   }
 })
@@ -36,16 +36,17 @@ server.delete('/users/:id', async (req, res) => {
   try {
     const {id} = req.params;
       const count = await users.remove(id);
-
       if(!count || count < 1){
           res.status(404).json({message: "User does not exist"})
       } else{
           res.status(200).json(count);
       }
     }
-    catch (err) {
+    catch(err) {
       res.status(500).json({message: "trouble deleting user"});
       }
 })
 
 module.exports = server;
+
+// knex seed:run --env testing

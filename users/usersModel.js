@@ -1,21 +1,17 @@
 const db = require("../data/dbConfig.js");
 
 module.exports = {
-  fetch,
-  insert,
-  remove
-};
-
-async function fetch() {
+fetch: () => {
   return db("users");
-}
-
-async function insert(user) {
+},
+insert: (user) => {
   return db("users").insert(user);
-}
-
-async function remove(id) {
+},
+remove: (id) => {
   return db("users")
     .where("id", id)
     .del();
 }
+};
+
+
