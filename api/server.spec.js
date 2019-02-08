@@ -2,8 +2,6 @@ const request = require('supertest');
 
 const server = require('./server.js');
 
-const db = require('../data/dbConfig.js');
-
 describe('The route handlers', () => {
     describe('get /users', () => {
         it('responds with status code 200', async () => {
