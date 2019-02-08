@@ -18,17 +18,13 @@ describe("the create route", () => {
 });
 
 describe("the delete route", () => {
-    it ("responds with 200 when user exists", async () => {
+    it ("responds with status 200 and body 1 when user exists", async () => {
         const response = await request(server).delete("/api/users/1");
         expect(response.status).toBe(200);
+        expect(response.body).toBe(1);
     });
     it ("responds with 404 when user does not exist", async () => {
         const response = await request(server).delete("/api/users/6");
         expect(response.status).toBe(404);
-    });
-
-    it("returns 1 on a successful delete", async () => {
-        const response = await request(server).delete("/api/users/1");
-        expect(response.body).toBe(1);
     });
 });
