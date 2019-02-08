@@ -1,5 +1,6 @@
 const request = require('supertest');
 const server = require('../api/server');
+const db = require('../data/dbConfig');
 
 describe('The route handlers', () => {
     describe('get /', () => {
@@ -17,17 +18,25 @@ describe('The route handlers', () => {
     });
 
     describe('post /character', () => {
+
+        afterEach(async () => {
+            await db('characters').truncate();
+        });
+
         it('responds with 201 if body is correct', async () => {
             const body = {name: 'David'}
             const response = await request(server).post('/character').send(body);
 
             expect(response.status).toBe(201);
+            db('characters').truncate();
         });
     });
 
-    it('responds with the id', async () => {
-        const response = await request(server).get('/character');
-
-        expect(response.body).toBeDeFined();
-    });
+    it('responds with 400 when body is missing data', async () => {
+        const body = { }
+        const response = await request(server).post('/character').send(body);
+       
+        expect(response.status).toBe(400)
+        db('character').truncate();
+    })
 });
