@@ -11,14 +11,7 @@
     "make": "chevrolet", 
     "model": "corvette",
     "year": "2017"
-  },
-  {
-    "id": 2,
-    "make": "ford", 
-    "model": "mustang",
-    "year": "2018"
   }
-
 
 ]
 
