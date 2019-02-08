@@ -51,4 +51,24 @@ describe("ROUTE HANDLERS", () => {
       expect(response.status).toBe(400);
     });
   });
+  describe("delete /", () => {
+    afterEach(async () => {
+      await db("users").truncate();
+    });
+
+    it("respond with 200 when deleted", async () => {
+      const user = { username: "james" };
+      const response = await request(server)
+        .delete("/")
+        .send(user);
+      expect(response.status).toBe(200);
+    });
+    it("respond with 400 when delete does not work", async () => {
+      const user = {};
+      const response = await request(server)
+        .delete("/")
+        .send(user);
+      expect(response.status).toBe(400);
+    });
+  });
 });

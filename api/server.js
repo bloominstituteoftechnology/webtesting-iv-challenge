@@ -20,4 +20,12 @@ server.post("/", async (req, res) => {
   }
 });
 
+server.delete("/", async (req, res) => {
+  const user = req.body;
+  if (user.username) {
+    const deleted = await helpers.deleteUser(user);
+    res.status(200).json({ deleted });
+  } else res.status(400).json({ user });
+});
+
 module.exports = server;
