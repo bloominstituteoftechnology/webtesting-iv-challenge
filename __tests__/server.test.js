@@ -59,6 +59,12 @@ describe('The route handlers', () => {
             }
         });
 
+        it('responds with 404 if character doesn\'t exist', async () => {
+            const body = {name: 'Richard'}
+            const response = await request(server).delete('/character').send(body);
 
+            expect(response.status).toBe(404);
+            db('characters').truncate();
+        });
     });
 });
