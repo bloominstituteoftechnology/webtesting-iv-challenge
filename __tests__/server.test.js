@@ -15,4 +15,12 @@ describe('The route handlers', () => {
             expect(response.type).toMatch(/json/i);
         });
     });
+
+    describe('post /character', () => {
+        it('responds with 201', async () => {
+            const reponse = await request(server).get('/character');
+
+            expect(response.status).toBe(201);
+        });
+    });
 });
