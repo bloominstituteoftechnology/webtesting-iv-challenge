@@ -2,7 +2,13 @@ const request = require('supertest');
 
 const server = require('./server.js');
 
+const database = require('../data/dbConfig.js');
+
 describe('The route handlers', () => {
+    afterEach(async () => {
+        await database('users').truncate();
+    });
+
     describe('get /users', () => {
         it('responds with status code 200', async () => {
             const response = await request(server).get('/users');
@@ -19,7 +25,7 @@ describe('The route handlers', () => {
         it('sends the correct response object', async () => {
             const response = await request(server).get('/users');
             
-            expect(response.body).toEqual({});
+            expect(response.body).toEqual([]);
         });
     });
 

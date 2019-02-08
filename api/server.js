@@ -13,4 +13,19 @@ server.get('/users', async (req, res) => {
         .json(rows);
 });
 
+server.post('/users', async (req, res) => {
+    const userData = req.body;
+    if (userData.username && userData.password) {
+        const ids = await db.addUser(userData);
+        res
+            .status(201)
+            .json(id);
+    } 
+    else {
+        res
+            .status(400)
+            .json({error: 'missing username or password'})
+    }
+});
+
 module.exports = server;
