@@ -6,7 +6,7 @@ module.exports = {
     },
 
     remove: function(character) {
-        return db('characters').del().where('name', character.name);
+        return db('characters').where('name', character.name).del();
     },
 
 }

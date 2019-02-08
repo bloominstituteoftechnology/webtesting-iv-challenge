@@ -22,4 +22,21 @@ server.post('/character', async(req, res) => {
     }
 });
 
+server.delete('/character', async(req, res) => {
+    const character = req.body;
+
+    if(character.name) {
+        const deleted = await characterDB.remove(character);
+
+        if(deleted > 0) {
+            res.status(200).json(deleted);
+        } else {
+            res.status(404).json({ message: 'Character doesn\'t exist' });
+        }
+
+    } else {
+        res.status(400).json({message: 'Especify which character is going to be deleted'});
+    }
+});
+
 module.exports = server;
