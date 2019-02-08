@@ -30,13 +30,35 @@ describe('The route handlers', () => {
             expect(response.status).toBe(201);
             db('characters').truncate();
         });
+
+        it('responds with 400 when body is missing data', async () => {
+            const body = { }
+            const response = await request(server).post('/character').send(body);
+           
+            expect(response.status).toBe(400)
+            db('character').truncate();
+        })
     });
 
-    it('responds with 400 when body is missing data', async () => {
-        const body = { }
-        const response = await request(server).post('/character').send(body);
-       
-        expect(response.status).toBe(400)
-        db('character').truncate();
-    })
+    describe('delete /character', () => {
+
+        afterEach(async () => {
+            await db('characters').truncate();
+        });
+
+        it('responds with 200 if body is correct and character is deleted', async () => {
+            const add = {name: 'Bob'}
+            const addResponse = await request(server).post('/character').send(add);
+
+            if(addResponse.status === 201) {
+                const body = {name: 'Bob'}
+                const response = await request(server).delete('/character').send(body);
+
+                expect(response.status).toBe(200);
+                db('characters').truncate();
+            }
+        });
+
+
+    });
 });
