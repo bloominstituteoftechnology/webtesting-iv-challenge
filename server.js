@@ -12,4 +12,12 @@ server.post('/movies', async (req, res) => {
   res.status(201).json(result);
 });
 
+server.delete('/movies/:id', async (req, res) => {
+   const { id } = req.params;
+   const numberDeleted = await db('movies')
+      .where({ id })
+      .del();
+   res.status(200).json(numberDeleted);
+});
+
 module.exports = server;
