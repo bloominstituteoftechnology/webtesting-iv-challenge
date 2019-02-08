@@ -2,7 +2,8 @@ const db = require("../dbConfig");
 
 module.exports = {
   getAll,
-  insert
+  insert,
+  deleteUser
 };
 
 async function getAll() {
@@ -11,4 +12,11 @@ async function getAll() {
 
 async function insert(user) {
   return db("users").insert(user);
+}
+
+async function deleteUser(user) {
+  const { username } = user;
+  return db("users")
+    .where("username", username)
+    .del();
 }

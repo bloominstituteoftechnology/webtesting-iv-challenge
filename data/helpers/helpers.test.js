@@ -12,4 +12,14 @@ describe("helper db methods", () => {
     expect(ids.length).toBe(1);
     expect(ids[0]).toBe(1);
   });
+
+  it("should delete a user", async () => {
+    const user = { username: "james" };
+
+    const addUser = helpers.insert(user);
+
+    const count = await helpers.deleteUser(user);
+
+    expect(count).toBe(1);
+  });
 });
