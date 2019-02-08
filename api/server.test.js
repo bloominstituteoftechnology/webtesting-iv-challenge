@@ -12,6 +12,10 @@ describe('The route handlers function...', () => {
             const response = await request(server).get('/');
             expect(response.type).toMatch(/json/i);
         });
+        it('Sends the correct response object', async () => {
+            const response = await request(server).get('/');
+            expect(response.body).toEqual({api: 'up'});
+        })
     });
 
     describe('Get requests to /api/notes', async () => {
