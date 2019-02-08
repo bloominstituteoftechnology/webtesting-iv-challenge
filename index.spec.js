@@ -38,8 +38,22 @@ describe('server.js', () => {
             request(server)
                 .post('/greet')
                 .then(response => {
-                    expect(response.type).toBe('application/json')    
+            expect(response.type).toBe('application/json')    
                 })    
         })
-    })    
+    })  
+
+    //TEST FOR DELETE ROUTE '/delete'
+    describe('DELETE /user/:id endpoint', () => {
+        it('should delete data for given id', async() => {
+            let response = await request(server)
+                .delete('/user/:id');                 
+            expect(response.status).toBe(202);
+        });
+
+        it("DELTE /user/:id endpoint should return JSON", async () => {
+            const response = await request(server).delete('/user/:id');
+            expect(response.type).toEqual('application/json');
+        });
+    })  
 })

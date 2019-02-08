@@ -15,6 +15,10 @@ server.post('/greet', (req, res) => {
     } else {
         res.status(400).json({message : "Bad request.."});
     }
+    server.delete('/user/:id', (req, res) => {
+        const id = req.params.id;
+        res.status(202).json({ message: "Post has been deleted" })     
+    })
 })
 
- module.exports = server; 
+module.exports = server; 
