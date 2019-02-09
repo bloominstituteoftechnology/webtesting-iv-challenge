@@ -52,7 +52,7 @@ describe('The route handlers', () => {
             const body = { username: 'bilbo', password: 'baggins' };
             const response = await request(server).post('/users').send(body);
 
-            expect(response.length).toBe(1);
+            expect(response.body).toEqual([1]);
         });
     })
 });
