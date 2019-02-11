@@ -2,8 +2,9 @@
 	"name": "testingserver",
 	"version": "1.0.0",
 	"description": "Server Testing Project",
-	"main": "server.js",
+	"main": "index.js",
 	"scripts": {
+		"start": "nodemon index.js",
 		"test": "jest --watch --verbose"
 	},
 	"jest": {
@@ -28,6 +29,8 @@
 	},
 	"dependencies": {
 		"cross-env": "^5.2.0",
+		"dot-env": "^0.0.1",
+		"dotenv": "^6.2.0",
 		"express": "^4.16.4",
 		"knex": "^0.16.3",
 		"sqlite3": "^4.0.6"
