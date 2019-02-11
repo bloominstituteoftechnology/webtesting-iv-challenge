@@ -29,5 +29,23 @@ describe(`The Route Handlers`, ()=> {
                 const response = await request(server).post('/users').send(user);
                 expect(response.status).toBe(201);
            });
+
+           test(`It should respond with a 422 error code where there is no name`, async () => {
+                 const user = { name: '', age:'38', married:true};
+                 const response = await request(server).post('/users').send(user);
+                 expect(response.status).toBe(422);
+           });
+
+           test(`It should respond with a 422 error code where there is no age details`, async () => {
+            const user = { name: 'sam', age:'', married: true};
+            const response = await request(server).post('/users').send(user);
+            expect(response.status).toBe(422);
+           });
+
+           test(`It should respond with a 422 error code where there is no marriage details`, async () => {
+            const user = { name: 'yaat', age:'32', married: ''};
+            const response = await request(server).post('/users').send(user);
+            expect(response.status).toBe(422);
+           });
       });
 });

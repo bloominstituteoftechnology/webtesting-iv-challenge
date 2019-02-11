@@ -13,6 +13,12 @@ server.get('/users', (req,res) => {
 
 server.post('/users', (req,res) => {
    const user = req.body;
+   const name = user.name;
+   const age = user.age;
+   const married = user.married;
+   if(!name) res.status(422).json({msg:`name is missing`});
+   if(!age) res.status(422).json({msg:`name is missing`});
+   if(!married) res.status(422).json({msg:`name is missing`});
    users.insert(user)
         .then( ids => {
            res.status(201).json(ids);
