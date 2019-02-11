@@ -22,4 +22,12 @@ describe(`The Route Handlers`, ()=> {
          });
 
       });
+
+      describe(`Post('/)`, () => {
+           test('It should response with a success code 201 when we create a user', async () => {
+                const user = {name:'venky', age:'30', married:true};
+                const response = await request(server).post('/users').send(user);
+                expect(response.status).toBe(201);
+           });
+      });
 });
