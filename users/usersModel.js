@@ -7,11 +7,14 @@ function getAll() {
 function insert(user) {
    return db('users').insert(user);
 }
-
+function findById(id) {
+   return db('users').where('id', id);
+}
 function remove(id) {
    return db('users').where('id', id).del();
 }
 
+
 module.exports = {
-   getAll, insert, remove
+   getAll, insert, remove, findById
 };
