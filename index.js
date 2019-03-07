@@ -11,13 +11,11 @@ server.get("/", (req, res) => {
 
 server.post("/users", (req, res) => {
   const name = req.body.name;
-
   res.status(201).json({ user: name });
 });
 
 server.delete("/users", (req, res) => {
   const name = req.body.name;
-
   res.status(200).json(true);
 });
 

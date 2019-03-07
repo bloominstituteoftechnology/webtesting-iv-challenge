@@ -20,3 +20,26 @@ describe("post user endpoint", () => {
     expect(response.type).toBe("application/json");
   });
 });
+
+describe("delete user endpoint", () => {
+  it("should return TRUE", async () => {
+    const name = "name";
+    const response = await request(server)
+      .delete("/users")
+      .send({ name });
+    expect(response.body).toEqual(true);
+  });
+
+  it("should return 200 status", async () => {
+    const name = "name";
+    const response = await request(server)
+      .delete("/users")
+      .send({ name });
+    expect(response.status).toBe(200);
+  });
+
+  it("should return JSON", async () => {
+    const response = await request(server).delete("/users");
+    expect(response.type).toBe("application/json");
+  });
+});
