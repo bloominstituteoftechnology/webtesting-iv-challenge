@@ -26,5 +26,6 @@
 	},
 	"dependencies": {
 		"express": "^4.16.4"
-	}
+	},
+	"test": "jest --watch --verbose"
 }
