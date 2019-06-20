@@ -4,6 +4,7 @@
 	"description": "Server Testing Project",
 	"main": "server.js",
 	"scripts": {
+		"server": "nodemon index.js",
 		"test": "jest --watch --verbose"
 	},
 	"jest": {
@@ -22,9 +23,11 @@
 	"homepage": "https://github.com/LambdaSchool/Server-Testing#readme",
 	"devDependencies": {
 		"jest": "^23.6.0",
+		"nodemon": "^1.19.1",
 		"supertest": "^3.3.0"
 	},
 	"dependencies": {
+		"dotenv": "^8.0.0",
 		"express": "^4.16.4"
 	}
 }
